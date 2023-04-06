@@ -659,11 +659,17 @@
               <div class="col wrap">
                 {{job.jobLocation}}
               </div>
-              <div class="col">
-                {{job.experienceFrom}} To {{job.experienceTo}}
+              <div class="col" *ngIf="job.experienceFrom == job.experienceTo">
+                {{job.experienceTo}} Year
               </div>
-              <div class="col">
-                {{job.salaryRangeFrom}} To {{(job.salaryRangeTo)}}
+              <div class="col" *ngIf="!(job.experienceFrom == job.experienceTo)">
+                {{job.experienceFrom}} - {{job.experienceTo}}
+              </div>
+              <div class="col" *ngIf="job.salaryRangeFrom == job.salaryRangeTo">
+                {{job.salaryRangeTo}} Lac
+              </div>
+              <div class="col" *ngIf="!(job.salaryRangeFrom == job.salaryRangeTo)">
+                {{job.salaryRangeFrom}} - {{job.salaryRangeTo}}
               </div>
               <div class="col">
                 {{job.date}}
@@ -1181,7 +1187,9 @@
                 <button style="border: none;" (click)="pagination(0)"><img src="../../assets/image/left-arrow.png"
                     alt="" style="margin-top: 17px;" class="p-left"></button>
                 <div class="pageination-number">{{page+1}}</div>
-                <button style="border: none;background: transparent;" (click)="pagination(1)"><img
+                <button style="border: none;background: transparent;" (click)="pagination(1)"
+                  [disabled]="page+1 > pagetotal"
+                  [ngClass]="{'pointer-events': page+1 > pagetotal ? 'none' : 'auto'}"><img
                     src="../../assets/image/right-arrow.png" style="margin-top: 17px;" alt="" class="p-right"></button>
               </div>
             </div>
@@ -1247,7 +1255,7 @@
                         <ellipse cx="4.99986" cy="4.80064" rx="1.24986" ry="1.20006" fill="white" />
                       </svg>
                     </i>
-                    <p>{{recent.location}}</p>
+                    <p>{{recent.Location}}</p>
                   </div>
                   <div class="years">
                     <p>{{recent.experience}} Year</p>
