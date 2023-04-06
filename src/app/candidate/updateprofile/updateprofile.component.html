@@ -1,0 +1,490 @@
+<div class="container-fluid register">
+  <div class="row">
+    <div class="col-2 ad-image">
+      <img src="../../assets/image/ad.png" alt="">
+    </div>
+    <div class="col-8  login-main">
+      <div class="row ">
+        <div class="col">
+          <img src="../../assets/image/hero.png" alt="" class="hero-image">
+        </div>
+      </div>
+      <div class="row register-content-row">
+        <form [formGroup]="profileForm" (ngSubmit)="updateprofile()">
+          <div class="col register-content">
+            <div class="row">
+              <div class="col"></div>
+              <div class="col">
+                <h3>Update Your Profile</h3>
+              </div>
+              <div class="col"></div>
+            </div>
+            <div class="row">
+
+              <div class="col">
+                <div class="register-form">
+
+                  <div class="single-row">
+                    <label for="">Add Profile Picture:</label>
+                    <div class="content-box">
+                      <div>
+                        <label for="select-logo" class="form-control logo-btn">+ Add Profile
+                          Picture</label>
+                        <input type="file" id="select-logo" class="form-control logo-btn" placeholder="+Add Logo"
+                          style="display: none;" formControlName="image" accept="image/gif, image/jpeg, image/png"
+                          (change)="selectedImg1($event)">
+                      </div>
+                      <div>
+                        <label for="select-logo" class="form-control logo-btn">+ Add Profile
+                          Picture</label>
+                        <input type="file" id="select-logo" class="form-control logo-btn" placeholder="+Add Logo"
+                          style="display: none;" formControlName="image" accept="image/gif, image/jpeg, image/png"
+                          (change)="selectedImg1($event)">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">DOB <span>*</span>:</label>
+                    <div class="content-box">
+                      <input type="Date" [max]="now" class="form-control" formControlName="dob"
+                        placeholder="Enter Key Skills">
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('dob')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('dob')?.invalid">
+                      <p>Date of birth is required!</p>
+                    </div>
+                  </div>
+
+                  <div class="single-row">
+                    <label for="" class="lable-data">Key Skills <span>*</span>:</label>
+                    <div class="content-box">
+                      <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Key Skills"
+                        formControlName="searchbox">
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                    <label></label>
+                    <div class="content-box drop-data">
+                      <ul>
+                        <li *ngFor="let skill of keySkill"  style="cursor:pointer"
+                          (click)="checkSkill($event,skill.Skill_Title)">
+                          <span>{{skill.Skill_Title}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('keyskill')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('keyskill')?.invalid">
+                      <p>Key Skills is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="keySkill_alreay">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="keySkill_alreay">
+                      <p>Key Skills Already exist!</p>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">Expreience <span>*</span>:</label>
+                    <div class="content-box">
+                      <select class="form-control select-type douple-input-first" formControlName="experienceYear"
+                        (change)="expreience($event)">
+                        <option value="option1" disabled selected>Year</option>
+                        <option value="0">Freshers</option>
+                        <option value="1">1 Year</option>
+                        <option value="2">2 Year</option>
+                        <option value="3">3 Year</option>
+                        <option value="4">4 Year</option>
+                        <option value="5">5 Year</option>
+                        <option value="6">6 Year</option>
+                        <option value="7">7 Year</option>
+                        <option value="8">8 Year</option>
+                        <option value="9">9 Year</option>
+                        <option value="10">10 Year</option>
+                        <option value="11">11 Year</option>
+                      </select>
+                      <select class="form-control select-type douple-input-second" formControlName="experienceMonth">
+                        <option value="option1" disabled selected>Month</option>
+                        <option value="0">0 Month</option>
+                        <option value="1">1 Month</option>
+                        <option value="2">2 Month</option>
+                        <option value="3">3 Month</option>
+                        <option value="4">4 Month</option>
+                        <option value="5">5 Month</option>
+                        <option value="6">6 Month</option>
+                        <option value="7">7 Month</option>
+                        <option value="8">8 Month</option>
+                        <option value="9">9 Month</option>
+                        <option value="10">10 Month</option>
+                        <option value="11">11 Month</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="d-flex" style="justify-content: end;">
+                    <div class="single-row" style="margin-right:50px"
+                      *ngIf="isSubmitted && this.profileForm.get('experienceYear')?.invalid">
+                      <label for=""></label>
+                      <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('experienceYear')?.invalid">
+                        <p>Year is required!</p>
+                      </div>
+                    </div>
+                    <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('experienceMonth')?.invalid">
+                      <label for=""></label>
+                      <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('experienceMonth')?.invalid">
+                        <p>Month is required!</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">Expected CTC <span>*</span>:</label>
+                    <div class="content-box">
+                      <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="expectedctc"> -->
+                      <select class="form-control select-type douple-input-first" formControlName="expectedctc">
+                        <option value="option1" disabled selected>Expected CTC</option>
+                        <option value="0-1">0 to 1 lac</option>
+                        <option value="1-2">1 to 2 lac</option>
+                        <option value="2-3">2 to 3 lac</option>
+                        <option value="2-4">3 to 4 lac</option>
+                        <option value="4-5">4 to 5 lac</option>
+                        <option value="5-8">5 to 8 lac</option>
+                        <option value="8-10">8 to 10 lac</option>
+                        <option value="10-13">10 to 13 lac</option>
+                        <option value="13-15">13 to 15 lac</option>
+                        <option value="15-20">15 to 20 lac</option>
+                        <option value="30-more">30 lac+</option>
+                      </select>
+
+                    </div>
+
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('expectedctc')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('expectedctc')?.invalid">
+                      <p>Expected CTC is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != 0">
+                    <label for="" class="lable-data">Current CTC <span>*</span>:</label>
+                    <div class="content-box">
+                      <select class="form-control select-type douple-input-first" formControlName="currentctc">
+                        <option value="option1" disabled selected></option>
+                        <option value="1">1 lac</option>
+                        <option value="2">2 lac</option>
+                        <option value="3">3 lac</option>
+                        <option value="4">4 lac</option>
+                        <option value="5">5 lac</option>
+                        <option value="6">6 lac</option>
+                        <option value="7">7 lac</option>
+                        <option value="8">8 lac</option>
+                        <option value="9">9 lac</option>
+                        <option value="10">10 lac</option>
+                        <option value="11">11 lac</option>
+                      </select>
+                      <select class="form-control select-type douple-input-second" formControlName="currentctc_th">
+                        <option value="option1" disabled selected></option>
+                        <option value="5000">5000</option>
+                        <option value="10000">10000</option>
+                        <option value="15000">15000</option>
+                        <option value="20000">20000</option>
+                        <option value="25000">25000</option>
+                        <option value="30000">30000</option>
+                        <option value="35000">35000</option>
+                        <option value="40000">40000</option>
+                        <option value="45000">45000</option>
+                        <option value="50000">50000</option>
+                        <option value="55000">55000</option>
+                        <option value="60000">60000</option>
+                      </select>
+                      <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="currentctc"> -->
+                    </div>
+
+                  </div>
+                  <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != 0">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('currentctc')?.invalid">
+                      <p>Current CTC is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">Native Address <span>*</span>:</label>
+                    <div class="content-box">
+                      <input type="text" class="form-control" placeholder="Enter Your Address"
+                        formControlName="locationNative">
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('locationNative')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('locationNative')?.invalid">
+                      <p>Native Address is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">Current Address <span>*</span>:</label>
+                    <div class="content-box">
+                      <input type="text" class="form-control" placeholder="Enter Contact Address"
+                        formControlName="locationCurrent">
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('locationCurrent')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('locationCurrent')?.invalid">
+                      <p>Current Address is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">Notice Period <span>*</span>:</label>
+                    <div class="content-box">
+                      <select class="form-control select-type" formControlName="noticeperiod">
+                        <option value="option1" disabled selected>Select</option>
+                        <option value="immediate">immediate</option>
+                        <option value="15">15 days</option>
+                        <option value="30">30 days</option>
+                        <option value="60">60 days</option>
+                        <option value="90">90 days</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('noticeperiod')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('noticeperiod')?.invalid">
+                      <p>Notice Period is required!</p>
+                    </div>
+                  </div>
+                  <!-- <div class="single-row">
+                    <label for="" class="lable-data">Current Skill Set <span>*</span>:</label>
+                    <div class="content-box">
+                      <input type="text" class="form-control" placeholder="Enter Skill Set"
+                        formControlName="currentSkill">
+                    </div>
+                  </div> -->
+                  <!-- <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('currentSkill')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('currentSkill')?.invalid">
+                      <p>Current Skill Set is required!</p>
+                    </div>
+                  </div> -->
+                  <div class="single-row">
+                    <label for="" class="lable-data">Current Skill Set<span>*</span>:</label>
+                    <div class="content-box">
+                      <input type="text" class="form-control" (keyup)="displaycurent($event)"
+                        placeholder="Enter Key Skills" formControlName="currentbox">
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="iscurrent">
+                    <label></label>
+                    <div class="content-box current-data">
+                      <ul style="max-width: 109px;">
+                        <li *ngFor="let skill of keySkill" style="cursor:pointer"
+                          (click)="checkcurrent($event,skill.Skill_Title)">
+                          <span>{{skill.Skill_Title}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('currentSkill')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('currentSkill')?.invalid">
+                      <p>Current Skill Set is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">Prefered skill <span>*</span>:</label>
+                    <div class="content-box">
+                      <input type="text" class="form-control" (keyup)="displayPrefered($event)"
+                        placeholder="Enter Prefered Skills" formControlName="prefredBox">
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isShow" style="margin-top:0px;">
+                    <label></label>
+                    <div class="content-box pre-data">
+                      <ul>
+                        <li *ngFor="let skill of keySkill" style="cursor:pointer;width: 101%;"
+                          (click)="checkPrefered($event,skill.Skill_Title)">
+                          <span>{{skill.Skill_Title}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('preferredSkill')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('preferredSkill')?.invalid">
+                      <p>Preferred Skill Set is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">Gender <span>*</span>:</label>
+                    <div class="content-box">
+                      <select class="form-control select-type" formControlName="gender">
+                        <option value="option1" disabled selected>Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Others">Others</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('gender')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('gender')?.invalid">
+                      <p>Gender is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">Marital Status <span>*</span>:</label>
+                    <div class="content-box">
+                      <select class="form-control select-type" formControlName="maritalStatus">
+                        <option [ngValue]="null" disabled selected>Select</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('maritalStatus')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('maritalStatus')?.invalid">
+                      <p>Marital Status is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for="" class="lable-data">Willing To Relocate <span>*</span>:</label>
+                    <div class="content-box">
+                      <select class="form-control select-type" formControlName="relocate"
+                        (change)="changeRelocate($event)">
+                        <option [ngValue]="null" disabled selected>Select</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isSubmitted && this.profileForm.get('relocate')?.invalid">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('relocate')?.invalid">
+                      <p>Willing To Relocate is required!</p>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">
+                    <label for="" class="lable-data">Prefered Location<span>*</span>:</label>
+                    <div class="content-box content-box-block">
+                      <ng-container *ngIf="profileForm.get('preferredLocation')?.value">
+                        <span class="badge bg-light badge1 mb-1 mx-1" style="cursor:pointer"
+                          (click)="remove_location(data)"
+                          *ngFor="let data of profileForm.get('preferredLocation')?.value">
+                          <span style="color: black;">{{get_maintext(data)}}</span>
+                          <span  style="color: black;" class="close-mark mx-1">x</span>
+                        </span>
+                      </ng-container>
+                      <input type="text" class="form-control" placeholder="Enter Key Skills"
+                        (keyup)="preferedLocation($event)" formControlName="location">
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="isLocation" style="margin-top:0px;">
+                    <label></label>
+                    <div class="content-box content-box-block locarea" style="background: white;">
+                      <ul style="padding-left: 0px;list-style: none;
+                        margin-left: 6px;">
+                        <li *ngFor="let pre of preferedLocations" class="mt-1 name"
+                          style="cursor:pointer;font-size: 13px;" (click)="choose(pre,pre.description)">
+                          <span><i>
+                              <svg width="15" height="15" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                  d="M10 19.3137L4.34311 13.6568C3.2243 12.538 2.46239 11.1125 2.15371 9.56068C1.84504 8.00884 2.00347 6.40031 2.60898 4.93851C3.21448 3.4767 4.23986 2.22728 5.55545 1.34824C6.87104 0.469189 8.41775 0 10 0C11.5822 0 13.129 0.469189 14.4445 1.34824C15.7601 2.22728 16.7855 3.4767 17.391 4.93851C17.9965 6.40031 18.155 8.00884 17.8463 9.56068C17.5376 11.1125 16.7757 12.538 15.6569 13.6568L10 19.3137ZM14.4 12.3999C15.2701 11.5297 15.8627 10.421 16.1027 9.21404C16.3427 8.00706 16.2195 6.75601 15.7485 5.61909C15.2776 4.48216 14.48 3.51042 13.4568 2.82675C12.4336 2.14307 11.2306 1.77816 10 1.77816C8.76939 1.77816 7.56641 2.14307 6.54319 2.82675C5.51996 3.51042 4.72244 4.48216 4.25148 5.61909C3.78052 6.75601 3.65726 8.00706 3.89729 9.21404C4.13733 10.421 4.72987 11.5297 5.6 12.3999L10 16.7999L14.4 12.3999V12.3999ZM10 9.7777C9.5285 9.7777 9.07632 9.5904 8.74292 9.257C8.40952 8.92361 8.22222 8.47142 8.22222 7.99993C8.22222 7.52843 8.40952 7.07625 8.74292 6.74285C9.07632 6.40945 9.5285 6.22215 10 6.22215C10.4715 6.22215 10.9237 6.40945 11.2571 6.74285C11.5905 7.07625 11.7778 7.52843 11.7778 7.99993C11.7778 8.47142 11.5905 8.92361 11.2571 9.257C10.9237 9.5904 10.4715 9.7777 10 9.7777Z"
+                                  fill="#0A2647" />
+                              </svg>
+                            </i></span>
+                          <span style="padding-left: 8px">{{pre?.description}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="single-row" *ngIf="this.profileForm.get('relocate')?.value =='Yes'">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('preferredLocation')?.invalid">
+                      <p>Prefered Location is required!</p>
+                    </div>
+                  </div>
+                  <div class="dropdown single-row">
+                    <label for="" class="lable-data">Language <span>*</span>:</label>
+                    <div class="content-box">
+                      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Language <span></span>
+                      </a>
+                      <ul class="dropdown-menu lang" style="width: 60%;padding: 3%;" aria-labelledby="dropdownMenuLink">
+                        <li *ngFor="let lan of lang">
+                          <input type="checkbox" value="{{lan.School_Medium}}" [checked]="checkeLang(lan.School_Medium)"
+                            (change)="insLang($event)" /><span style="margin: 9px;">{{lan.School_Medium}}</span>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="single-row">
+                    <label for=""></label>
+                    <div class="error-data" *ngIf="isSubmitted && this.profileForm.get('languages')?.invalid">
+                      <p>Languages is required!</p>
+                    </div>
+                  </div>
+                  <div class="" formArrayName="languages" style="margin-top: 13px;">
+                    <div for="" *ngFor="let lang of languages.controls;let i=index" [formGroupName]="i">
+                      <div class="content-box d-flex align-items-start w-100 justify-content-between"
+                        style="justify-content: space-between;">
+                        <div class="tamil d-flex align-items-start">
+                          <p>{{lang.get('lang')?.value}}</p>
+                        </div>
+                        <div class="content-box">
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="Speak"
+                              (change)="kownaction($event,i,lang)" [checked]="chekedKnown(i,'Speak',lang)">
+                            <label class="form-check-label" for="inlineCheckbox1">Speck</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="Read"
+                              (change)="kownaction($event,i,lang)" [checked]="chekedKnown(i,'Read',lang)">
+                            <label class="form-check-label" for="inlineCheckbox2">Read</label>
+                          </div>
+                          <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="Write"
+                              (change)="kownaction($event,i,lang)" [checked]="chekedKnown(i,'Write',lang)">
+                            <label class="form-check-label" for="inlineCheckbox3">Write</label>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="single-row" *ngIf="isSubmitted && languages.controls[i].get('know')?.invalid">
+                        <label for=""></label>
+                        <div class="error-data" *ngIf="isSubmitted && lang.get('know')?.invalid">
+                          <p>choose any one</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="row no-margin">
+              <div class="col">
+                <div class="register-form education-wrap">
+
+                  <div class="single-row single-row-final-btn">
+                    <label for=""> </label>
+
+                    <div class="content-box">
+                      <button type="submit" class="btn btn-brand-blue register-btn">Submit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="col-2 ad-image">
+      <img src="../../assets/image/ad.png" alt="">
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1013 @@
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+        <div class="col-8  login-main">
+            <div class="row ">
+                <div class="col">
+                    <img src="../../assets/image/hero.png" alt="" class="hero-image">
+                </div>
+            </div>
+            <div class="row register-content-row height-register-content">
+                <div class="col register-content">
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <h3>Post A Job</h3>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+
+
+                            <form [formGroup]="jobpostForm" (submit)="job_post()">
+                                <div class="register-form">
+                                    <div class="single-row">
+                                        <label for="">Job Title <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <input type="text" class="form-control" placeholder="Enter Job Title"
+                                                formControlName="jobTittle">
+                                                <div *ngIf="submitted && jobpostForm.get('jobTittle')?.invalid">
+                                                    <small class="text-danger">Jobtittle is required</small>
+                                                </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label for="">Job Description <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <div class="editor">
+                                              
+                                                <ngx-editor [editor]="editor" [placeholder]="'Enter Job description'" formControlName="jobDescription">
+                                                </ngx-editor>
+                                                <ngx-editor-menu [editor]="editor" [toolbar]="toolbar">
+                                                </ngx-editor-menu>
+                                                <div *ngIf="submitted && jobpostForm.get('jobDescription')?.invalid">
+                                                    <small class="text-danger">Job description is required</small>
+                                                </div>
+                                            </div>
+                                            <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="250"
+                                                placeholder="Enter Job Description"
+                                                formControlName="jobDescription"></textarea>
+                                                <div *ngIf="submitted && jobpostForm.get('jobDescription')?.invalid">
+                                                    <small *ngIf="jobpostForm.get('jobDescription').errors?.required" class="text-danger">Job description is required</small>
+                                                </div> -->
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label for="">Candidate Description <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <ngx-editor [editor]="editorcan" style="border:none !important;" [placeholder]="'Enter Candidate description'" formControlName="candidateDescription">
+                                            </ngx-editor>
+                                            <ngx-editor-menu [editor]="editorcan" [toolbar]="toolbar">
+                                            </ngx-editor-menu>
+                                            <div *ngIf="submitted && jobpostForm.get('candidateDescription')?.invalid">
+                                                <small class="text-danger">Candidate description is required</small>
+                                            </div>
+                                            <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="250"
+                                                placeholder="Enter Candidate Description"
+                                                formControlName="candidateDescription"></textarea> -->
+                                               
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label for="">Perks & Benefits :</label>
+                                        <div class="content-box content-box-block">
+                                            <ngx-editor [editor]="editorsal" style="border:none !important;" [placeholder]="'Enter Salary description'" formControlName="salaryDescription">
+                                            </ngx-editor>
+                                            <ngx-editor-menu [editor]="editorsal" [toolbar]="toolbar">
+                                            </ngx-editor-menu>
+                                            <!-- <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="100"
+                                                placeholder="Enter Perks & Benefits"
+                                                formControlName="salaryDescription"></textarea> -->
+                                        </div>
+                                    </div>
+                                    <div class="single-row mt-3">
+                                        <label for="">Job Location <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <ng-container *ngIf="jobpostForm.get('location')?.value">
+                                                <span class="badge bg-light badge1 mb-1 mx-1" style="cursor:pointer" (click)="remove_location(data)" *ngFor="let data of jobpostForm.get('jobLocation')?.value">
+                                                    <span>{{get_maintext(data)}}</span>
+                                                    <span class="close-mark mx-1">x</span>
+                                                </span>
+                                           </ng-container>
+                                            <input type="text" class="form-control" formControlName="loc" (keyup)="get_area_location($event)"
+                                                placeholder="Enter Job location">
+                                                <!-- <div *ngIf="submitted && jobpostForm.get('jobLocation')?.invalid" class="">
+                                                    <small class="text-danger reqloc">Joblocation is required</small>
+                                                </div> -->
+                                                <!-- <div class="" style="margin-left:19px;">
+                                                    <button type="submit" class="btn-brand-blue px-2 py-1" style="border-radius:6px">Add</button>
+                                                </div> -->
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="single-row" *ngIf="isLoc" style="margin-top:0px;">
+                                        <label></label>
+                                        <div class="content-box content-box-block locarea" style="background: white;">
+                                            <ul style="padding-left: 0px;list-style: none;
+                                            margin-left: 6px;">
+                                                <li *ngFor="let pre of predictions" class="mt-1 name" style="cursor:pointer;font-size: 13px;" (click)="choose(pre,pre?.description)">
+                                                    <span><i>
+                                                        <svg width="15" height="15" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M10 19.3137L4.34311 13.6568C3.2243 12.538 2.46239 11.1125 2.15371 9.56068C1.84504 8.00884 2.00347 6.40031 2.60898 4.93851C3.21448 3.4767 4.23986 2.22728 5.55545 1.34824C6.87104 0.469189 8.41775 0 10 0C11.5822 0 13.129 0.469189 14.4445 1.34824C15.7601 2.22728 16.7855 3.4767 17.391 4.93851C17.9965 6.40031 18.155 8.00884 17.8463 9.56068C17.5376 11.1125 16.7757 12.538 15.6569 13.6568L10 19.3137ZM14.4 12.3999C15.2701 11.5297 15.8627 10.421 16.1027 9.21404C16.3427 8.00706 16.2195 6.75601 15.7485 5.61909C15.2776 4.48216 14.48 3.51042 13.4568 2.82675C12.4336 2.14307 11.2306 1.77816 10 1.77816C8.76939 1.77816 7.56641 2.14307 6.54319 2.82675C5.51996 3.51042 4.72244 4.48216 4.25148 5.61909C3.78052 6.75601 3.65726 8.00706 3.89729 9.21404C4.13733 10.421 4.72987 11.5297 5.6 12.3999L10 16.7999L14.4 12.3999V12.3999ZM10 9.7777C9.5285 9.7777 9.07632 9.5904 8.74292 9.257C8.40952 8.92361 8.22222 8.47142 8.22222 7.99993C8.22222 7.52843 8.40952 7.07625 8.74292 6.74285C9.07632 6.40945 9.5285 6.22215 10 6.22215C10.4715 6.22215 10.9237 6.40945 11.2571 6.74285C11.5905 7.07625 11.7778 7.52843 11.7778 7.99993C11.7778 8.47142 11.5905 8.92361 11.2571 9.257C10.9237 9.5904 10.4715 9.7777 10 9.7777Z" fill="#0A2647"/>
+                                                            </svg>
+                                                            
+                                                    </i></span>
+                                                    <span style="padding-left: 8px">{{pre?.description}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label></label>
+                                        
+                                    </div>
+                                    <div class="single-row m-0">
+                                        <label for="">Key Skills <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <input type="text" class="form-control" (keyup)="dispalye($event)"
+                                                placeholder="Enter Key Skills" formControlName="searchbox">
+                                                <div *ngIf="submitted && jobpostForm.get('searchbox')?.invalid">
+                                                    <small class="text-danger">Keyskill is required</small>
+                                                </div>
+                                            </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                                        <label></label>
+                                        <div class="content-box content-box-block" style="background: white;">
+                                            <ul style="padding-left: 0px;list-style: none;
+                                            margin-left: 12px;">
+                                                <li *ngFor="let skill of keySkill" style="cursor:pointer"
+                                                    (click)="checkSkill($event,skill)">
+                                                    <span>{{skill?.Skill_Title}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="single-row" style="margin-top:5px">
+                                        <label for="">Education <sup>*</sup> :</label>
+                                       
+                                        <div class="content-box d-block" >
+                                            <ng-container >
+                                                <span class="badge bg-light badge1 mt-1" style="cursor:pointer" (click)="rem(data)" *ngFor="let data of educationArray">
+                                                    <span>{{data.coursename}}-{{data.spclname}}</span>
+                                                    <span class="close-mark mx-1">x</span>
+                                                </span>
+                                           </ng-container>
+                                            <!-- <div class="mt-2" *ngIf="educationArray.length">
+                                                <span (click)="rem(data)" *ngFor="let data of educationArray" class="badge1 mt-2">
+                                                    <span class="">{{data.coursename}}-{{data.spclname}}</span>
+                                                    <span class="remove close-mark mx-1">x</span>
+                                                </span>
+                                                
+                                            </div> -->
+                                            <div class="dropdown salarybtn" style="position: initial !important;">
+                                                
+                                                <!-- <button *ngIf="educationArray.length == 0" class="btn dropdown-toggle salarybtn refhead" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false" style="background: white;color: #B4B4B4">
+                                                     Select Qualification
+                                                </button> -->
+                                                <button class="btn dropdown-toggle salarybtn refhead" type="button"
+                                                    id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                                                    aria-expanded="false" style="background: white; color: #B4B4B4;"><span class="" style="padding-left: 13px;">Select Education</span>
+                                                </button>
+                                                <ul class="dropdown-menu p-3 data" aria-labelledby="dropdownMenuButton1">
+                                                    <li *ngFor="let data of qua_data"><input type="checkbox"    
+                                                        class="checkbox" value="{{data}}"
+                                                        (change)="selectqualificaion(data,$event)">
+                                                        <span class="fsize" style="margin-left:10px">{{data.qualification}}</span>
+                                                        <ul class="p-3 data" *ngIf="is_course && quaname==data.qualification">
+                                                            <li *ngFor="let data of coursedata"><input type="checkbox"
+                                                                    class="checkbox" value="{{data}}"
+                                                                    (change)="selectcourse(data,$event)">
+                                                                  <span class="fsize" style="margin-left:10px">{{data.Course}}</span>
+                                                                <ul class="subdata" *ngIf="is_open && coursename==data.Course">
+                                                                    <li *ngFor="let data of spcldata"><input
+                                                                            type="checkbox" class="checkbox"
+                                                                            value="{{data}}" [checked]="isChecke(data.Specialization)" (change)="selectspcl(data,$event)">
+                                                                <span class="fsize" style="margin-left:10px">{{data.Specialization}}</span></li>
+                                                                </ul>
+                                                            </li>
+        
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                               
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="single-row" style="margin-top: 4px;">
+                                        <label for="">Salary Range :</label>
+                                        <div class="content-box">
+                                            <!-- <input type="number" class="form-control douple-input-first"
+                                                placeholder="From" formControlName="salaryRangeFrom"> -->
+                                                <select class="form-control select-type douple-input-first" formControlName="salaryRangeFrom">
+                                                    <option value="option1" [ngValue]="null" disabled selected>From</option>
+                                                    <option value="1">1 lac</option>
+                                                    <option value="2">2 lac</option>
+                                                    <option value="3">3 lac</option>
+                                                    <option value="4">4 lac</option>
+                                                    <option value="5">5 lac</option>
+                                                    <option value="6">6 lac</option>
+                                                    <option value="7">7 lac</option>
+                                                    <option value="8">8 lac</option>
+                                                    <option value="9">9 lac</option>
+                                                    <option value="10">10 lac</option>
+                                                    <option value="11">11 lac</option>
+                                                </select>
+                                            <!-- <input type="number" class="form-control douple-input-second"
+                                                placeholder="To" formControlName="salaryRangeTo"> -->
+                                                <select class="form-control select-type douple-input-second" formControlName="salaryRangeTo">
+                                                    <option value="option1" [ngValue]="null" disabled selected>To</option>
+                                                    <option value="1">1 lac</option>
+                                                    <option value="2">2 lac</option>
+                                                    <option value="3">3 lac</option>
+                                                    <option value="4">4 lac</option>
+                                                    <option value="5">5 lac</option>
+                                                    <option value="6">6 lac</option>
+                                                    <option value="7">7 lac</option>
+                                                    <option value="8">8 lac</option>
+                                                    <option value="9">9 lac</option>
+                                                    <option value="10">10 lac</option>
+                                                    <option value="11">11 lac</option>
+                                                </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="single-row">
+                                        <label for="">Experience <sup>*</sup> :</label>
+                                        <div class="content-box">
+                                            <select class="form-control select-type douple-input-first"
+                                                formControlName="experienceFrom" [class.is-invalid]="submitted &&jobpostForm.get('experienceFrom')?.invalid">
+                                                <option value="option1" [ngValue]="null" disabled selected>From</option>
+                                                <option value="0">Fresher</option>
+                                                <option value="1">1 Year</option>
+                                                <option value="2">2 Year</option>
+                                                <option value="3">3 Year</option>
+                                                <option value="4">4 Year</option>
+                                                <option value="5">5 Year</option>
+                                                <option value="6">6 Year</option>
+                                                <option value="7">7 Year</option>
+                                                <option value="8">8 Year</option>
+                                                <option value="9">9 Year</option>
+                                                <option value="10">10 Year</option>
+                                                <option value="11">11 Year</option>
+                                                <option value="12">12 Year</option>
+                                                <option value="13">13 Year</option>
+                                                <option value="14">14 Year</option>
+                                                <option value="15">15 Year</option>
+                                                <option value="16">16 Year</option>
+                                                <option value="17">17 Year</option>
+                                                <option value="18">18 Year</option>
+                                                <option value="19">19 Year</option>
+                                                <option value="20">20 Year</option>
+                                                <option value="21">21 Year</option>
+                                                <option value="22">22 Year</option>
+                                                <option value="23">23 Year</option>
+                                                <option value="24">24 Year</option>
+                                                <option value="25">25 Year</option>
+                                                <option value="26">26 Year</option>
+                                                <option value="27">27 Year</option>
+                                                <option value="28">28 Year</option>
+                                                <option value="29">29 Year</option>
+                                                <option value="30">30 Year</option>
+                                            </select>
+
+
+                                            <select class="form-control select-type douple-input-second"
+                                                formControlName="experienceTo" [class.is-invalid]="submitted && jobpostForm.get('experienceTo')?.invalid">
+                                                <option value="option1" [ngValue]="null" disabled selected>To</option>
+                                                <option value="0">Fresher</option>
+                                                <option value="1">1 Year</option>
+                                                <option value="2">2 Year</option>
+                                                <option value="3">3 Year</option>
+                                                <option value="4">4 Year</option>
+                                                <option value="5">5 Year</option>
+                                                <option value="6">6 Year</option>
+                                                <option value="7">7 Year</option>
+                                                <option value="8">8 Year</option>
+                                                <option value="9">9 Year</option>
+                                                <option value="10">10 Year</option>
+                                                <option value="11">11 Year</option>
+                                                <option value="12">12 Year</option>
+                                                <option value="13">13 Year</option>
+                                                <option value="14">14 Year</option>
+                                                <option value="15">15 Year</option>
+                                                <option value="16">16 Year</option>
+                                                <option value="17">17 Year</option>
+                                                <option value="18">18 Year</option>
+                                                <option value="19">19 Year</option>
+                                                <option value="20">20 Year</option>
+                                                <option value="21">21 Year</option>
+                                                <option value="22">22 Year</option>
+                                                <option value="23">23 Year</option>
+                                                <option value="24">24 Year</option>
+                                                <option value="25">25 Year</option>
+                                                <option value="26">26 Year</option>
+                                                <option value="27">27 Year</option>
+                                                <option value="28">28 Year</option>
+                                                <option value="29">29 Year</option>
+                                                <option value="30">30 Year</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="single-row">
+                                        <label for="">Industry <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" formControlName="industry">
+                                                <option disabled [ngValue]="null" selected value="select">Select
+                                                </option>
+                                                <option value="{{industry.Industry}}"
+                                                    *ngFor="let industry of indus_data">{{industry.Industry}}</option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('industry')?.invalid">
+                                                <small class="text-danger">Industry is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label for="">Preferred Industry <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block" style="background: white">
+                                            <!-- <select class="form-control select-type" formControlName="preferedIndustry">
+                                        <option disabled [ngValue]="null" selected value="select">Select</option>
+                                        <option value="{{industry.Industry}}" *ngFor="let industry of indus_data">{{industry.Industry}}</option>
+                                    </select> -->
+                                            <ng-multiselect-dropdown id="courseInput" class="w-100"
+                                                style="background-color: white;" name='industry'
+                                                [settings]="dropdownSettings" [data]="indus_data"
+                                                (onSelect)="pushCourse($event)" (onDeSelect)="onDeSelect($event)">
+                                            </ng-multiselect-dropdown>
+                                            <div *ngIf="submitted && jobpostForm.get('preferedIndustry')?.invalid">
+                                                <small class="text-danger">Preferred industry is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- <div>
+                                <div>
+                                    <button class="drop-toggle btn flat">
+                                        <span>Select</span>
+                                        <span>{{checkedList.join(', ')}}</span>
+                                        <i class="fa fa-angle-down"></i>
+                                    </button>
+                                    <div class="drop-show" *ngIf="showDropDown">
+                                        <label *ngFor="let a of list">
+                                            <input type="checkbox" [(ngModel)]="a.checked" 
+                                                (change)="getSelectedValue(a.checked,a.name)" />
+                                            <span>{{a.name}}</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div> -->
+                                    <div class="single-row">
+                                        <label for="">Department <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" formControlName="department"
+                                                (change)="depart($event)">
+                                                <option value="option1" [ngValue]="null" disabled selected>Select
+                                                </option>
+                                                <option value="{{depart_list._id}}"
+                                                    *ngFor="let depart_list of depart_data">{{depart_list.Department}}
+                                                </option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('department')?.invalid">
+                                                <small class="text-danger">Department is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="jobpostForm.get('department')?.value">
+                                        <label for="">Role Category <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" formControlName="roleCategory"
+                                                (change)="cat($event)">
+                                                <option value="option1" [ngValue]="null" disabled selected>Select
+                                                </option>
+                                                <option value="{{cat_list._id}}" *ngFor="let cat_list of cat_data">
+                                                    {{cat_list.Role_Category}}</option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('roleCategory')?.invalid">
+                                                <small class="text-danger">Role category is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="jobpostForm.get('roleCategory')?.value">
+                                        <label for="">Role <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" formControlName="role">
+                                                <option value="option1" [ngValue]="null" disabled selected>Select
+                                                </option>
+                                                <option value="{{role_list._id}}" *ngFor="let role_list of role_data">
+                                                    {{role_list.Job_role}}</option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('role')?.invalid">
+                                                <small class="text-danger">Role is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label for="">Interview Type <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" formControlName="interviewType" (change)="checkerr_inter($event)">
+                                                <option value="option1" [ngValue]="null" disabled selected>Select
+                                                </option>
+                                                <option value="walk in">Walk In</option>
+                                                <option value="online">Online</option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('interviewType')?.invalid">
+                                                <small class="text-danger">Interview type is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row"
+                                        *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
+                                        <label for="">Date <sup>*</sup> :</label>
+                                        <div class="content-box">
+                                            <input type="date" class="form-control douple-input-first"
+                                                placeholder="From" formControlName="interviewstartDate" (change)="checkFrom()" [min]="now" [class.is-invalid]="jobpostForm.get('interviewstartDate')?.invalid && submitted">
+                                            
+                                            <input type="date" class="form-control douple-input-second" [min]="nowto" placeholder="To"
+                                            formControlName="interviewendDate" [class.is-invalid]="jobpostForm.get('interviewendDate')?.invalid && submitted">
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="single-row"
+                                        *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
+                                        <label for="">Time <sup>*</sup> :</label>
+                                        <div class="content-box">
+                                            <select class="form-control select-type" formControlName="startTime" [class.is-invalid]="jobpostForm.get('startTime')?.invalid && submitted">
+                                                <option value="option1" [ngValue]="null" disabled selected>From</option>
+                                                <option value="08.00 Am">08.00 Am</option>
+                                                <option value="08.30 Am">08.30 Am</option>
+                                                <option value="09.00 Am">09.00 Am</option>
+                                                <option value="09.30 Am">09.30 Am</option>
+                                                <option value="10.00 Am">10.00 Am</option>
+                                                <option value="10.30 Am">10.30 Am</option>
+                                                <option value="11.00 Am">11.00 Am</option>
+                                                <option value="1.30 Am">11.30 Am</option>
+                                                <option value="12.00 Pm">12.00 Pm</option>
+                                                <option value="12.30 Pm">12.30 Pm</option>
+                                                <option value="01.00 Pm">01.00 Pm</option>
+                                                <option value=">01.30 Pm">01.30 Pm</option>
+                                                <option value="02.00 Pm">02.00 Pm</option>
+                                                <option value="02.30 Pm">02.30 Pm</option>
+                                                <option value="03.00 Pm">03.00 Pm</option>
+                                                <option value="03.30 Pm">03.30 Pm</option>
+                                                <option value="04.00 Pm">04.00 Pm</option>
+                                                <option value="04.30 Pm">04.30 Pm</option>
+                                                <option value="05.00 Pm">05.00 Pm</option>
+                                                <option value="05.30 Pm">05.30 Pm</option>
+                                                <option value="06.00 Pm">06.00 Pm</option>
+                                            </select>
+                                            <select class="form-control select-type" formControlName="endTime" [class.is-invalid]="jobpostForm.get('endTime').invalid && submitted">
+                                                <option value="option1" [ngValue]="null" disabled selected>To</option>
+                                                <option value="08.00 Am">08.00 Am</option>
+                                                <option value="08.30 Am">08.30 Am</option>
+                                                <option value="09.00 Am">09.00 Am</option>
+                                                <option value="09.30 Am">09.30 Am</option>
+                                                <option value="10.00 Am">10.00 Am</option>
+                                                <option value="10.30 Am">10.30 Am</option>
+                                                <option value="11.00 Am">11.00 Am</option>
+                                                <option value="11.30 Am">11.30 Am</option>
+                                                <option value="12.00 Pm">12.00 Pm</option>
+                                                <option value="12.30 Pm">12.30 Pm</option>
+                                                <option value="01.00 Pm">01.00 Pm</option>
+                                                <option value="01.30 Pm">01.30 Pm</option>
+                                                <option value="02.00 Pm">02.00 Pm</option>
+                                                <option value="02.30 Pm">02.30 Pm</option>
+                                                <option value="03.00 Pm">03.00 Pm</option>
+                                                <option value="03.30 Pm">03.30 Pm</option>
+                                                <option value="04.00 Pm">04.00 Pm</option>
+                                                <option value="04.30 Pm">04.30 Pm</option>
+                                                <option value="05.00 Pm">05.00 Pm</option>
+                                                <option value="05.30 Pm">05.30 Pm</option>
+                                                <option value="06.00 Pm">06.00 Pm</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="single-row"
+                                        *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
+                                        <label for="">Venue <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="100"
+                                            placeholder="Enter Venue"
+                                            formControlName="venue"></textarea> 
+                                            <div *ngIf="submitted && jobpostForm.get('venue')?.invalid">
+                                                <small class="text-danger">Employent type is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label for="">Employment Type <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" formControlName="employmentType">
+                                                <option value="option1" [ngValue]="null" disabled selected>Select
+                                                </option>
+                                                <option value="fulltime">Full Time</option>
+                                                <option value="parttime">Part Time</option>
+                                                <option value="contract">Contract</option>
+                                                <option value="temporary">Temporary</option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('employmentType')?.invalid">
+                                                <small class="text-danger">Employent type is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label for="">No. Of. Openings :</label>
+                                        <div class="content-box">
+                                            <input type="number" class="form-control"
+                                                placeholder="Enter No. Of. Openings" formControlName="openings">
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label for="">Work Mode <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" formControlName="workplaceType">
+                                                <option value="option1" [ngValue]="null" disabled selected>Select
+                                                </option>
+                                                <option value="onsite">Onsite</option>
+                                                <option value="hybrid">Hybrid</option>
+                                                <option value="work from home">Work From Home</option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('workplaceType')?.invalid">
+                                                <small class="text-danger">Workmode is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row">
+                                        <label for="">URL to Apply :</label>
+                                        <div class="content-box">
+                                            <input type="url" class="form-control" placeholder="Enter URL"
+                                                formControlName="urltoApply">
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'online'">
+                                        <label for="">Apply Method <sup>*</sup> :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" (change)="choose_apply($event)" formControlName ="apply_method">
+                                                <option value="option1" disabled selected>Select</option>
+                                                <option value="email">Email</option>
+                                                <option value="telephone">Telephonic Applicant</option>
+                                                <option value="treatjobs">Apply via Treatjobs</option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('apply_method')?.invalid">
+                                                <small class="text-danger">Applymethod is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
+                                        <label for="">Recruiter Details <sup>*</sup> :</label>
+                                        <div class="content-box">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="list"
+                                                    (change)="recriterlist($event)" name="flexRadioDefault"
+                                                    id="flexRadioDefault1" formControlName="recruiterList">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Recruiter List
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-5">
+                                                <input class="form-check-input" type="radio" value="new"
+                                                    (change)="recriterlist($event)" name="flexRadioDefault"
+                                                    id="flexRadioDefault1" formControlName="recruiterList">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    New Recruiter
+                                                </label>
+                                            </div>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'walk in'">
+                                        <label for=""></label>
+                                         <div *ngIf="submitted && jobpostForm.get('recruiterList').invalid" style="margin-right: 249px;
+                                         font-weight: 500;">
+                                                <small class="text-danger">Choose any one</small>
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="is_list && jobpostForm.get('interviewType')?.value == 'walk in'" >
+                                        <label for="">Select Recruiter :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" (change)="changerecruiter($event)" formControlName="recruiterId">
+                                                <option value="option1" disabled selected>Select</option>
+                                                <option value="{{data.recruiterName}}" *ngFor="let data of list">{{data.recruiterName}}</option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterId')?.invalid">
+                                                <small class="text-danger">choose any one recruiter</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="is_new && jobpostForm.get('interviewType')?.value == 'walk in'">
+                                        <label for="">Recruiter Name :</label>
+                                        <div class="content-box content-box-block">
+                                            <input type="text" class="form-control" placeholder="Enter Name"
+                                                formControlName="recruiterName">
+                                                <div *ngIf="submitted && jobpostForm.get('recruiterName')?.invalid">
+                                                    <small class="text-danger">recruiter name is required</small>
+                                                </div>
+                                            </div>
+                                    </div>
+
+                                    <div class="single-row" *ngIf="is_new && jobpostForm.get('interviewType')?.value == 'walk in'">
+                                        <label for="">Recruiter Email Id :</label>
+                                        <div class="content-box content-box-block">
+                                            <input type="email" class="form-control" placeholder="Enter Email ID"
+                                                formControlName="recruiterEmail">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterEmail')?.invalid">
+                                                <small *ngIf="jobpostForm.get('recruiterEmail')?.errors?.required" class="text-danger">recruiter email is required</small>
+                                                <small class="text-danger" *ngIf="jobpostForm.get('email')?.errors?.email">Email address is invalid</small>
+                                            </div>    
+                                        </div>
+                                    </div>
+
+                                    <div class="single-row" *ngIf="is_new && jobpostForm.get('interviewType')?.value == 'walk in'">
+                                        <label for="">Recruiter Number :</label>
+                                        <div class="content-box content-box-block">
+                                            <input type="number" class="form-control" placeholder="Enter Number"
+                                                formControlName="recruiterNumber">
+                                            <div *ngIf="submitted &&  jobpostForm.get('recruiterNumber')?.invalid">
+                                                <small class="text-danger">recruiter number is required</small>
+                                            </div> 
+                                        </div>
+                                    </div>
+
+                                    <div class="single-row" *ngIf="jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'">
+                                        <label for="">Recruiter Details :</label>
+                                        <div class="content-box">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" value="list1"
+                                                    (change)="recriterlist1($event)" name="flexRadioDefault"
+                                                    id="flexRadioDefault1" formControlName="recruiterList1">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    Recruiter List
+                                                </label>
+                                            </div>
+                                            <div class="form-check ms-5">
+                                                <input class="form-check-input" type="radio" value="new1"
+                                                    (change)="recriterlist1($event)" name="flexRadioDefault"
+                                                    id="flexRadioDefault1" formControlName="recruiterList1">
+                                                <label class="form-check-label" for="flexRadioDefault1">
+                                                    New Recruiter
+                                                </label>
+                                            </div>
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterList')?.invalid">
+                                                <small class="text-danger">field is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="is_list1 && jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'" >
+                                        <label for="">Select Recruiter :</label>
+                                        <div class="content-box content-box-block">
+                                            <select class="form-control select-type" (change)="changerecruiter($event)" formControlName="recruiterName">
+                                                <option value="option1" disabled selected>Select</option>
+                                                <option value="{{data.recruiterName}}" *ngFor="let data of list">{{data.recruiterName}}</option>
+                                            </select>
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterName')?.invalid">
+                                                <small class="text-danger">choose any one recruiter</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-row" *ngIf="is_new1 && jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'">
+                                        <label for="">Recruiter Name :</label>
+                                        <div class="content-box content-box-block">
+                                            <input type="text" class="form-control" placeholder="Enter Name"
+                                                formControlName="recruiterName">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterName')?.invalid">
+                                                <small class="text-danger">recruiter name is required</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="single-row" *ngIf="is_new1 && jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'">
+                                        <label for="">Recruiter Email Id :</label>
+                                        <div class="content-box content-box-block">
+                                            <input type="email" class="form-control" placeholder="Enter Email ID"
+                                                formControlName="recruiterEmail">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterEmail')?.invalid">
+                                                <small *ngIf="jobpostForm.get('recruiterEmail').errors?.required" class="text-danger">recruiter email is required</small>
+                                                <small class="text-danger" *ngIf="jobpostForm.get('email')?.errors?.email">Email address is invalid</small>
+                                            </div>  
+                                        </div>
+                                    </div>
+
+                                    <div class="single-row" *ngIf="is_new1 && jobpostForm.get('interviewType')?.value == 'online' && apply_method == 'telephone'">
+                                        <label for="">Recruiter Number :</label>
+                                        <div class="content-box content-box-block">
+                                            <input type="number" class="form-control" placeholder="Enter Number"
+                                                formControlName="recruiterNumber">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterNumber')?.invalid">
+                                                <small class="text-danger">recruiter number is required</small>
+                                            </div> 
+                                        </div>
+                                    </div>
+
+
+                                    <div class="single-row" *ngIf="apply_method == 'email' && jobpostForm.get('interviewType')?.value == 'online'">
+                                        <label for="">Recruiter Email Id :</label>
+                                        <div class="content-box content-box-block">
+                                            <input type="email" class="form-control" placeholder="Enter Email ID"
+                                                formControlName="recruiterEmail">
+                                            <div *ngIf="submitted && jobpostForm.get('recruiterEmail')?.invalid">
+                                                <small *ngIf="jobpostForm.get('recruiterEmail').errors?.required" class="text-danger">recruiter email is required</small>
+                                                <small class="text-danger" *ngIf="jobpostForm.get('email')?.errors?.email">Email address is invalid</small>
+                                            </div> 
+                                            </div>
+                                    </div>
+                                    <div class="single-row douple-btn">
+                                        <div class="content-box">
+                                            <button type="submit"
+                                                class="btn btn-brand-grey mb-2 btn-custom"  (click)="pre(preview)">Preview</button>
+                                                <button type="button" style="display:none" #preview data-bs-toggle="modal" data-bs-target="#reports"></button>
+                                        </div>
+                                        <div class="content-box">
+                                            <button type="submit"
+                                                class="btn btn-brand-blue mb-2 btn-custom">Post</button>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+    </div>
+</div>
+
+
+<div class="modal" id="reports" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                
+                    <div class="col register-content">
+                      <div class="">
+                        <div class="">
+  
+                          <div class="">
+                              <div class="col-12  login-main" style="background-color: white;">
+                                  <div class="row ">
+                                  </div>
+                                  <div class="" >
+                                      <div class="" style=" overflow: hidden;">
+                                         <h2 style="margin: 20px 0;text-align: center;color: #FD841F;" >Job Post</h2>
+                                    
+                                          <div class="">
+                        
+                                            
+                                                  <div class="card-body row px-5" style="border-bottom: solid rgba(0, 0, 0, 0.25) 1px;">
+                        
+                                                    <div class="col-8">
+                                                      <div class="card-content card-job-content-heading mb-3 ">
+                        
+                        
+                                                          <div class="col-10">
+                                                              <div class="card-job-title">
+                                                                 {{ jobpostForm.get('jobTittle')?.value}}
+                                                              </div>
+                        
+                                                              <div class="card-job-sub-title">
+                                                                  {{ jobpostForm.get('jobTittle')?.value}}
+                                                              </div>
+                                                          </div>
+                        
+                        
+                        
+                        
+                                                      </div>
+                                                      <div class="col-12 card-job d-flex ">
+                                                        
+                                                              <div class="card-job-content-data col-6">
+                                                                  <div> <span class="icon-custom width-custom"><i><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M15.1969 3.68164H0.796875V7.52164H6.72454C6.61859 7.32109 6.55859 7.0925 6.55859 6.84991V6.75391H9.43859V6.84991C9.43859 7.0925 9.3786 7.32109 9.27264 7.52164H15.1969V3.68164Z" fill="#8493A3"/>
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12.3197 0.800781H3.67969V5.60078H6.20363C5.97385 5.25754 5.83984 4.84477 5.83984 4.4007V2.7207H10.1598V4.4007C10.1598 4.84477 10.0258 5.25754 9.79606 5.60078H12.3197V0.800781Z" fill="#8493A3"/>
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M6.64017 8.48047H0.796875V15.2005H15.1969V8.48047H9.35701C9.15962 9.04029 8.62596 9.44148 7.99859 9.44148C7.37123 9.44148 6.83757 9.04029 6.64017 8.48047Z" fill="#8493A3"/>
+                                                                    </svg>
+                                                                    </i></span>{{roledata}}</div>
+                                                                  <div class="name"> <span class="icon-custom width-custom"><i><svg width="16" height="19" viewBox="0 0 16 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M7.99687 18.5996C7.99687 18.5996 15.1969 11.7761 15.1969 7.79961C15.1969 3.82316 11.9733 0.599609 7.99687 0.599609C4.02042 0.599609 0.796875 3.82316 0.796875 7.79961C0.796875 11.7761 7.99687 18.5996 7.99687 18.5996ZM7.99531 9.6C8.98942 9.6 9.79531 8.79411 9.79531 7.8C9.79531 6.80589 8.98942 6 7.99531 6C7.0012 6 6.19531 6.80589 6.19531 7.8C6.19531 8.79411 7.0012 9.6 7.99531 9.6Z" fill="#8493A3"/>
+                                                                    </svg>
+                                                                    </i></span>{{ jobpostForm.get('jobLocation')?.value}}</div>
+                                                                  <div> <span class="icon-custom width-custom"><i><svg width="16" height="18" viewBox="0 0 16 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M9.51599 7.90035C10.9714 7.30205 11.9961 5.8703 11.9961 4.19922C11.9961 1.99008 10.2052 0.199219 7.99609 0.199219C5.78695 0.199219 3.99609 1.99008 3.99609 4.19922C3.99609 5.87045 5.02102 7.30231 6.47659 7.90051C3.23025 8.35175 0.796875 10.3197 0.796875 14.0978C0.796875 17.6273 2.92041 17.5022 5.8465 17.3299C6.52557 17.2899 7.24787 17.2473 7.99687 17.2473C8.74588 17.2473 9.46818 17.2899 10.1472 17.3299C13.0733 17.5022 15.1969 17.6273 15.1969 14.0978C15.1969 10.3192 12.7629 8.35127 9.51599 7.90035Z" fill="#8493A3"/>
+                                                                    </svg>
+                                                                    </i></span>Hiring {{ jobpostForm.get('openings')?.value}} candidate</div>
+                        
+                                                              </div>
+                                                    
+                                                              <div class="card-job-content-data col-6 mb-4">
+                                                                  <div>₹ {{ jobpostForm.get('salaryRangeFrom')?.value}} to {{ jobpostForm.get('salaryRangeTo')?.value}} lacs </div>
+                                                                  <div>{{ jobpostForm.get('experienceFrom')?.value}} to {{ jobpostForm.get('experienceTo')?.value}} Years </div>
+                                                                  <div>Posted 2 Day ago</div>
+                        
+                        
+                        
+                                                           
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                        
+                                                <div class="col-4 ">
+                                                <div class="d-flex align-items-start">
+                                                <img src="../../assets/image/Google-Icon.jpg" width="80px">
+                                                
+                                                </div>
+                                                
+                                                </div>
+                                                
+                                              </div>
+                                         
+                        
+                                          <div class="row">
+                                              <div class="col">
+                        
+                                              </div>
+                                          </div>
+                                          <div class="job-view ms-5">
+                                              <div class="single-rows d-flex">
+                                                  <label for="">Key Skills : </label>
+                                                  <div class="content-boxs">
+                                                      <div>
+                                                         {{ jobpostForm.get('searchbox')?.value}}
+                                                      </div>
+                                                  </div>
+                        
+                                              </div>
+                                              <div class="single-rows d-flex">
+                                                  <label for="">Qualification :</label>
+                                                  <div class="content-boxs">
+                                                      {{quadata}}
+                                                  </div>
+                        
+                                              </div>
+                        
+                                              <div class="single-rows d-flex">
+                                                  <label for="">Employment Type :</label>
+                                                  <div class="content-boxs">
+                                                     {{ jobpostForm.get('employmentType')?.value}}
+                                                  </div>
+                        
+                                              </div>
+                        
+                                              <div class="single-rows d-flex">
+                                                  <label for="">Work Mode :</label>
+                                                  <div class="content-boxs">
+                                                       {{ jobpostForm.get('workplaceType')?.value}}
+                                                  </div>
+                                              </div>
+                                              <div class="single-rows d-flex">
+                                                <label for="">Department :</label>
+                                                <div class="content-boxs">
+                                                  {{depdata}}
+                                                </div>
+                                            </div>
+                                            <div class="single-rows d-flex">
+                                              <label for="">Role :</label>
+                                              <div class="content-boxs">
+                                                  {{roledata}}
+                                              </div>
+                                          </div>
+                                              <div class="single-rows d-flex">
+                                                  <label for="">Job Description :</label>
+                                                  <div class="content-boxs">
+                                                      <ul>
+                                                          <li> {{jobpostForm.get('jobDescription')?.value}}</li>
+                                                      </ul>
+                                                  </div>
+                                              </div>
+                                              <div class="single-rows d-flex">
+                                                <label for="">Candidate Description :</label>
+                                                <div class="content-boxs">
+                                                    <ul>
+                                                        <li> {{jobpostForm.get('candidateDescription')?.value}}</li>
+                                                       
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="single-rows d-flex" *ngIf="jobpostForm.get('salaryDescription')?.value">
+                                              <label for="">Perks & Benefits :</label>
+                                              <div class="content-boxs">
+                                                  <ul>
+                                                      <li>{{jobpostForm.get('salaryDescription')?.value}}</li>
+                                                      
+                                                     
+                                                  </ul>
+                                              </div>
+                                          </div>
+                        
+                                              <div class="single-rows d-flex">
+                                                  <label for="">Industry :</label>
+                                                  <div class="content-boxs">
+                                                      {{jobpostForm.get('industry')?.value}}                           </div>
+                                              </div>
+                        
+                                              <div class="single-rows d-flex">
+                                                  <label for="">Preferred Industry :</label>
+                                                  <div class="content-boxs">
+                                                     {{inddata}} 
+                                                  </div>
+                                              </div>
+                        
+                                             
+                        
+                                             
+                        
+                        
+                        
+                        
+                                          </div>
+                        
+                        
+                                          <div class="job-view second-row ps-4 pt-3">
+                                            <div class="heading row">
+                                              <div class="col-7 ">
+                                                <h5 class="pb-2"></h5>
+                                                <p>{{jobpostForm.get('jobLocation')?.value}}</p>
+                                              </div>
+                                              <div class="col-4 d-flex align-items-start">
+                                                <img src="../../assets/image/Google-Icon.jpg" width="70px">
+                                                <a href="#" style="font-size: 14px; text-decoration: underline;" class="view ms-2">View Company Profile</a>
+                                              </div>
+                                            </div>
+                                            <div class="col-10 mt-2">
+                                              <div class="col-12 d-flex mb-2">
+                                              <label class="col-4" style="font-weight: 500;">Website :</label>
+                                              <a href="#" class="col-8">WebsiteLink.com</a>
+                                            </div>
+                                            <div class=" col-12 d-flex">
+                                              <label class="col-4 " style="font-weight: 500;" >About Company</label>
+                                              <ul style="list-style-type: none; padding-left: 0;" class="col-8">
+                                                <li>Required Skill set</li>
+                                                <li>Proficient in Node.js or Java</li>
+                                                <li>Hands on Angular2+/React.js</li>
+                                               
+                                            </ul>
+                        
+                                            </div>
+                                            </div>
+                                          </div>
+                        
+                                          <div class="job-view col-12 third-row ps-4">
+                                           
+                                            <div class="col-10"  *ngIf="jobpostForm.get('recruiterName')?.value">
+                                              <div class="col-12 d-flex mb-2">
+                                              <label class="col-4" style="font-weight: 500;">Recruiter Name :</label>
+                                              <a style="text-decoration: none;color: black;"  class="col-8">{{jobpostForm.get('recruiterName')?.value}}</a>
+                                            </div>
+                                            
+                                            </div>
+                                            <div class="col-10 " *ngIf="jobpostForm.get('recruiterNumber')?.value">
+                                              <div class="col-12 d-flex mb-2">
+                                              <label class="col-4" style="font-weight: 500;">Mobile Number :</label>
+                                              <a style="text-decoration: none;color: black;"  class="col-8">{{jobpostForm.get('recruiterNumber')?.value}}</a>
+                                            </div>
+                                            
+                                            </div>
+                                            <div class="col-10 "  *ngIf="jobpostForm.get('recruiterEmail')?.value">
+                                              <div class="col-12 d-flex mb-2">
+                                              <label class="col-4" style="font-weight: 500;">Email Id :</label>
+                                              <a style="text-decoration: none;color: black;" class="col-8">{{jobpostForm.get('recruiterEmail')?.value}}</a>
+                                            </div>
+                                            
+                                            </div>
+                                          </div>
+                        
+                                         
+                        
+                        
+                        
+                        
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="single-row col-6 m-auto my-4 justify-content-end">
+                                <div class="content-box">
+                                  <button type="submit" class="btn btn-brand-blue mb-2" data-bs-dismiss="modal">Back</button>
+                              </div>
+                        
+                             
+                            </div>
+                          </div>
+                          </div>
+                        </div>
+                        
+                        
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+  </div>

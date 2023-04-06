@@ -1,0 +1,737 @@
+<div class="container-fluid register">
+    <div class="row">
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+        <div class="col-8  login-main">
+            <div class="row ">
+                <div class="col  hero-col">
+                    <img src="../../assets/image/hero.png" alt="" class="hero-image">
+                </div>
+            </div>
+            <div class="row register-content-row ">
+                <div class="col register-content">
+                    <div class="row no-margin">
+                        <div class="col-2" routerLink="/emp-home" style="cursor: pointer;">
+                            <span class="arrow">&lt;</span> 
+                        </div>
+                        <div class="col">
+
+                        </div>
+
+                        <div class="col-2 pre-next-page">
+                            <img src="../../assets/image/prepage.png" alt="">
+
+                            <img src="../../assets/image/nextpage.png" alt="">
+                        </div>
+                    </div>
+                    <div class="row custom-row">
+
+                        <div class="card custom-card job-card border-remove">
+                            <div class="card-body card-main-content">
+
+                                <div class="heading-main-content-small">
+                                    <img src="../../assets/image/profile.png" alt="">
+
+                                </div>
+                                <div class="heading-main-content">
+
+                                    <div class="card-action-heading">
+                                        {{candidate_data?.name}}
+                                    </div>
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>{{candidate_data?.email}}</div>
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>{{candidate_data?.mobileNumber}}</div>
+
+
+                                    <div>
+                                        <div class="content-box">
+                                            <select class="form-control select-type send-drop"
+                                                (change)="send($event)">
+                                                <option value="option1" disabled selected> <span class="drop-icon"><img
+                                                            src="../../assets/image/message.png" alt=""></span> Send
+                                                </option>
+                                                <option value="send mail">Send a mail</option>
+                                                <option value="send job">Send a job</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button style="display:none" type="button" class="btn btn-primary" #popup
+                                        data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        Launch demo modal
+                                    </button>
+
+                                </div>
+                              
+                                <div class="heading-main-content">
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>{{candidate_data?.workStatus}}</div>
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>View Resume</div>
+
+
+                                    <div> <span class="icon-custom width-custom"><i
+                                                class='fas fa-archive'></i></span>{{candidate_data?.locationCurrent}}
+                                    </div>
+
+                                    <div>
+                                        <div class="content-box">
+                                            <select class="form-control select-type" formControlName="folderName" (change)="open_folder($event,createpopup,savepopup)">
+                                                <option value="option" [ngValue]="null" disabled selected
+                                                    style="background-image:url('../../assets/image/message.png');">
+                                                    <span class="drop-icon"></span> Save Folder
+                                                </option>
+                                                <option *ngFor="let data of folder_list" data-bs-toggle="modal"
+                                                data-bs-target="#savefolder" value="{{data.folderName}}">{{data.folderName}}</option>
+                                                <option value="add" data-bs-toggle="modal"
+                                                data-bs-target="#createfolder">+Add Folder</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <button style="display:none" type="button" class="btn btn-primary" #savepopup
+                                    data-bs-toggle="modal" data-bs-target="#savefolder">
+                                    Launch demo modal
+                                    </button>
+                                    <button style="display:none" type="button" class="btn btn-primary" #createpopup
+                                    data-bs-toggle="modal" data-bs-target="#createfolder">
+                                    Launch demo modal
+                                    </button>
+                                   
+                                </div>
+                                <div class="heading-icons heading-main-content-small">
+
+                                    <div class="heading-icons-alignment">
+                                        <div (click)="save_candidate()"> <span class="icon-custom width-custom"><i class="ms-5"><svg width="20"
+                                            height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                              d="M15 24.5439L5.73031 30L7.80032 19.0437L0 11.4594L10.5498 10.1437L15 0L19.4502 10.1437L30 11.4594L22.1997 19.0437L24.2697 30L15 24.5439ZM15 21.3765L20.5818 24.6614L19.3345 18.0652L24.0305 13.4978L17.6785 12.7059L15 6.59895L12.3215 12.7073L5.96951 13.4978L10.6655 18.0652L9.41821 24.6614L15 21.3765Z"
+                                              fill="#8493A3" />
+                                          </svg>
+                                        </i></span></div>
+
+                                        <div> <span class="icon-custom width-custom"><i
+                                                    class='fas fa-archive'></i></span></div>
+                                    </div>
+
+
+
+                                    <div class="heading-active">Active Today</div>
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row action-row-padding">
+                        <div class="col">
+                            <div class="register-form">
+                                <div class="single-row">
+                                    <label for="">Key Skill :</label>
+                                    <div class="content-box">
+                                        <div>
+                                            <span *ngFor="let ski of candidate_data.keyskill">{{ski}}</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="single-row" *ngIf="candidate_data.workStatus == 'Experience'">
+                                    <label for="">Salary Range :</label>
+                                    <div class="content-box">
+                                       {{candidate_data.currentctc}}
+                                    </div>
+                                </div>
+                                <div class="single-row" *ngIf="candidate_data.workStatus == 'Fresher'">
+                                    <label for="">Salary Range :</label>
+                                    <div class="content-box">
+                                       {{candidate_data.expectedctc}}
+                                    </div>
+                                </div>
+
+                                <div class="single-row" >
+                                    <label for="">Experience :</label>
+                                    <div class="content-box">
+                                        <div>
+                                            {{candidate_data.experienceYear}} Year
+                                        </div>
+                                        <div>
+                                            {{candidate_data.experienceMonth}} Month
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Native Address :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.locationNative}}
+                                    </div>
+                                </div>
+                                <div class="single-row">
+                                    <label for="">Current Address :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.locationCurrent}}
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Notice Period :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.noticeperiod}}
+
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Current Skill Set :</label>
+                                    <div class="content-box">
+                                        <span *ngFor="let ski of candidate_data.currentSkill">{{ski}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Preferred Skill Set :</label>
+                                    <div class="content-box">
+                                        <span *ngFor="let ski of candidate_data.preferredSkill">{{ski}}</span>
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Gender</label>
+                                    <div class="content-box">
+                                        {{candidate_data.gender}}
+                                    </div>
+                                </div>
+
+                                <div class="single-row">
+                                    <label for="">Marital Status :</label>
+                                    <div class="content-box">
+                                        {{candidate_data.maritalStatus}}
+                                    </div>
+                                </div>
+
+                                <div *ngIf="candidate_data.drQualification">
+                                    <div class="single-row eduction-skills">
+                                        <label for="">Dr Educational Details:</label>
+                                        <div class="content-box">
+                                        </div>
+                                    </div>
+    
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Qualification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drQualification}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">University :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drUniversity}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Specification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drSpecialization}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drCourse}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Grading System :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drGradingSystem}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Marks :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drMarks}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course Type :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drCourseType}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Passed Out Year :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.drCourseDurationFrom}} -  {{candidate_data.drCourseDurationTo}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="candidate_data.pgQualification">
+                                    <div class="single-row eduction-skills">
+                                        <label for="">PG Educational Details:</label>
+                                        <div class="content-box">
+                                        </div>
+                                    </div>
+    
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Qualification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgQualification}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">University :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgUniversity}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Specification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgSpecialization}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgCourse}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Grading System :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgGradingSystem}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Marks :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgMarks}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course Type :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgCourseType}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Passed Out Year :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.pgCourseDurationFrom}} -  {{candidate_data.pgCourseDurationTo}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="candidate_data.ugQualification">
+                                    <div class="single-row eduction-skills">
+                                        <label for="">UG Educational Details:</label>
+                                        <div class="content-box">
+                                        </div>
+                                    </div>
+    
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Qualification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugQualification}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">University :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugUniversity}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Specification :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugSpecialization}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugCourse}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Grading System :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugGradingSystem}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Marks :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugMarks}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Course Type :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugCourseType}}
+                                        </div>
+                                    </div>
+    
+    
+                                    <div class="single-row">
+                                        <label for="">Passed Out Year :</label>
+                                        <div class="content-box">
+                                            {{candidate_data.ugCourseDurationFrom}} -  {{candidate_data.ugCourseDurationTo}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2 ad-image">
+            <img src="../../assets/image/ad.png" alt="">
+        </div>
+    </div>
+    <!-- Modal -->
+</div>
+
+
+<div class="modal" id="exampleModal" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+            <div class="">
+                <div class="container col-8">
+                    <div class="col register-content">
+                        <div class="row">
+                          <div class="col-2"></div>
+                          <div class="col mt-4">
+                            <h3>Send a Job</h3>
+                          </div>
+                          <div class="col-2 mt-2 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        </div>
+                        <div class="row">
+                            <div class="table">
+                          <div class="register-form">
+                            <div class="row content-card-heading rounded no-margin padding10">
+                                <div class="col d-flex align-items-center">
+                                    <i class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="10" fill="white"/>
+                                        <path d="M13 5.2H15.4C15.5591 5.2 15.7117 5.26321 15.8243 5.37574C15.9368 5.48826 16 5.64087 16 5.8V15.4C16 15.5591 15.9368 15.7117 15.8243 15.8243C15.7117 15.9368 15.5591 16 15.4 16H4.6C4.44087 16 4.28826 15.9368 4.17574 15.8243C4.06321 15.7117 4 15.5591 4 15.4V5.8C4 5.64087 4.06321 5.48826 4.17574 5.37574C4.28826 5.26321 4.44087 5.2 4.6 5.2H7V4H8.2V5.2H11.8V4H13V5.2ZM5.2 8.8V14.8H14.8V8.8H5.2ZM6.4 10H7.6V11.2H6.4V10ZM6.4 12.4H7.6V13.6H6.4V12.4ZM8.8 10H13.6V11.2H8.8V10ZM8.8 12.4H11.8V13.6H8.8V12.4Z" fill="#0A2647"/>
+                                        </svg>
+                                        </i>
+                                        <p class="text">
+                                   Posted Date</p>
+            
+                                </div>
+                                <div class="col d-flex align-items-center">
+                                    <i class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect width="20" height="20" rx="10" fill="white"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M16 6.40039H4V9.60039H8.93792C8.84973 9.43334 8.7998 9.24297 8.7998 9.04094V8.96094H11.1998V9.04094C11.1998 9.24297 11.1499 9.43334 11.0617 9.60039H16V6.40039Z" fill="#0A2647"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M13.6004 4H6.40039V8H8.50357C8.31195 7.7139 8.2002 7.36981 8.2002 6.99961V5.59961H11.8002V6.99961C11.8002 7.36981 11.6884 7.7139 11.4968 8H13.6004V4Z" fill="#0A2647"/>
+                                        <path fill-rule="evenodd" clip-rule="evenodd" d="M8.86855 10.4004H4V16.0004H16V10.4004H11.1314C10.9665 10.8661 10.5222 11.1996 9.99999 11.1996C9.47779 11.1996 9.0335 10.8661 8.86855 10.4004Z" fill="#0A2647"/>
+                                        </svg>
+                                        </i>
+                                        <p class="text">
+                                           Job Title</p>
+            
+                                </div>
+            
+                                <div class="col d-flex align-items-center">
+                                    <i class="icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="10" r="10" fill="white"/>
+                                        <path d="M8 12L8 9L15.5 9C16.3284 9 17 9.67157 17 10.5V10.5C17 11.3284 16.3284 12 15.5 12L8 12Z" fill="#0A2647"/>
+                                        <path d="M11 12L8 12L8 6.5C8 5.67157 8.67157 5 9.5 5V5C10.3284 5 11 5.67157 11 6.5L11 12Z" fill="#0A2647"/>
+                                        </svg>
+                                        </i>
+                                        <p class="text">
+                                           Experience</p>
+            
+                                </div>
+            
+                                <div class="col d-flex align-items-center">
+                                    <i class="icon"><svg width="20" height="24" viewBox="0 0 20 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="10" cy="12" r="10" fill="white"/>
+                                        <path d="M12.648 8.384V9.6H14.264V11.072H12.552C12.3813 12.0853 11.96 12.8213 11.288 13.28C10.6267 13.7387 9.624 13.968 8.28 13.968V14.816C8.28 15.3173 8.38133 15.712 8.584 16C8.79733 16.288 9.15467 16.432 9.656 16.432C10.136 16.432 10.4827 16.2987 10.696 16.032C10.9093 15.7547 11.016 15.3547 11.016 14.832H13.096C13.0747 15.9093 12.7707 16.736 12.184 17.312C11.5973 17.8773 10.76 18.16 9.672 18.16C8.54133 18.16 7.67733 17.856 7.08 17.248C6.48267 16.64 6.184 15.7547 6.184 14.592V12.464C7.32533 12.464 8.168 12.4373 8.712 12.384C9.256 12.32 9.66133 12.192 9.928 12C10.1947 11.808 10.3707 11.4987 10.456 11.072H5.672V9.6H10.536V8.384H5.672V6.816H14.264V8.384H12.648Z" fill="#0A2647"/>
+                                        </svg>
+                                        </i>
+                                        <p class="text">
+                                            Salary</p>
+            
+                                </div>
+            
+                               
+            
+                            </div>
+                         <div class="scroll" style="cursor:pointer">
+                            <div class="row content-card no-margin" *ngFor="let list of data" style="cursor: pointer;" data-bs-dismiss="modal" (click)="redirectto_job(list)">
+                              
+            
+                                <div class="col">
+            
+                                   {{list.createdAt |  date: 'yyyy-MM-dd'}}
+            
+                                </div>
+            
+                                <div class="col">
+                                    {{list.jobTittle}}
+            
+                                </div>
+            
+                                <div class="col">
+                                   {{list.experienceFrom}} to {{list.experienceTo}} Years
+                                </div>
+            
+                                <div class="col">
+                                    {{list.salaryRangeFrom}} to {{list.salaryRangeTo}} lacs
+            
+                                </div>
+            
+                               
+            
+                            </div>
+                        </div>
+                        </div>
+                        </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+</div>
+</div>
+
+<div class="modal" id="savefolder" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="folderForm">
+<div class="modal-dialog">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+                <div class="container" style="width:800px">
+                    <div class="col register-content py-2 pb-5">
+                        <div class="row px-4">
+                          <div class="col-2"></div>
+                          <div class="col">
+                            <h3>Save Folder</h3>
+                          </div>
+                          <div class="col-2 mt-2 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="is_old">
+                          <div class="register-form">
+                            <div class="single-row">
+                                <label for="">Saved Folder :</label>
+                                <div class="content-box">
+                                    <select class="form-control" formControlName="folderName">
+                                        <option>Select</option>
+                                        <option *ngFor="let data of folder_list" value="{{data.folderName}}">{{data.folderName}}</option>
+                                        </select>
+                                </div>
+                
+                            </div>
+                            <div class="single-row  col-8 m-auto mt-4" *ngIf="folderForm.get('folderName')?.value">
+                      
+                                <div class="content-box back-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal">Back</button>
+                                </div>
+                                <div class="content-box submit-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="create_new_folder(clk)">Save</button>
+                                    <button type="button" data-bs-dismiss="modal" style="display:none;" #clk></button>
+                                </div>
+                            </div>
+                            <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="save_folder()" style="cursor:pointer">
+                                <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </i></span>
+                                    <p class="mt-4">Create New Folder</p>
+                            </div>
+                
+                           
+                
+                
+                        </div>
+                        </div>
+                        <div class="row" *ngIf="is_new">
+                            <div class="register-form">
+                              <div class="single-row">
+                                  <label for="">Create Folder :</label>
+                                  <div class="content-box">
+                                      <input class="form-control" placeholder="Enter Folder Name" formControlName="folderName">
+                                      </div>
+                              </div>
+                              <div class="single-row  col-8 m-auto mt-4">
+                      
+                                  <div class="content-box back-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                  </div>
+                                  <div class="content-box submit-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="create_new_folder(clk)">Save</button>
+                                      <button type="button" data-bs-dismiss="modal" style="display:none;" #clk></button>
+                                  </div>
+                              </div>
+                             
+                              <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="exis_fold()" style="cursor:pointer">
+                                  <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                      </i></span>
+                                      <p class="mt-4">Use Existing Folder</p>
+                              </div>
+                          </div>
+                          </div>
+                
+                
+                
+                
+                      </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal" id="createfolder" tabindex="-1"
+aria-labelledby="exampleModalLabel" aria-hidden="true" [formGroup]="folderForm">
+<div class="modal-dialog">
+    <div class="modal-content popup-parent">
+        <div class="modal-body">
+                <div class="container" style="width:800px">
+                    <div class="col register-content py-2 pb-5">
+                        <div class="row px-4">
+                          <div class="col-2"></div>
+                          <div class="col">
+                            <h3>Save Folder</h3>
+                          </div>
+                          <div class="col-2 mt-2 d-flex justify-content-end">
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                        </div>
+                        <div class="row" *ngIf="is_old">
+                          <div class="register-form">
+                            <div class="single-row">
+                                <label for="">Saved Folder :</label>
+                                <div class="content-box">
+                                    <select class="form-control" formControlName="folderName">
+                                        <option>Select</option>
+                                        <option *ngFor="let data of folder_list" value="{{data.folderName}}">{{data.folderName}}</option>
+                                        </select>
+                                </div>
+                
+                            </div>
+                            <div class="single-row  col-8 m-auto mt-4" *ngIf="folderForm.get('folderName')?.value">
+                      
+                                <div class="content-box back-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5">Back</button>
+                                </div>
+                                <div class="content-box submit-btn">
+                                    <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="create_new_folder(clk)">Save</button>
+                                    <button type="button" data-bs-dismiss="modal" style="display:none;" #clk></button>
+                                </div>
+                            </div>
+                            <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="save_folder()" style="cursor:pointer">
+                                <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    </i></span>
+                                    <p class="mt-4">Create New Folder</p>
+                            </div>
+                
+                           
+                
+                
+                        </div>
+                        </div>
+                        <div class="row" *ngIf="is_new">
+                            <div class="register-form">
+                              <div class="single-row">
+                                  <label for="">Create Folder :</label>
+                                  <div class="content-box" style="display:block;">
+                                      <input class="form-control" placeholder="Enter Folder Name" formControlName="folderName">
+                                     
+                                      </div>
+                              </div>
+                              <div class="single-row  col-8 m-auto mt-4">
+                      
+                                  <div class="content-box back-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" data-bs-dismiss="modal">Back</button>
+                                  </div>
+                                  <div class="content-box submit-btn">
+                                      <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="create_new_folder(clk)">Save</button>
+                                      <button type="button" data-bs-dismiss="modal" style="display:none;" #clk></button>
+                                  </div>
+                              </div>
+                             
+                              <div class="create-folder col-5 m-auto mt-4 d-flex align-items-center" (click)="exis_fold()" style="cursor:pointer">
+                                  <span class="me-2"><i><svg width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                      <path d="M1 11.2454V10.4727C1 9.85784 1.24313 9.2682 1.67591 8.83345C2.10868 8.39871 2.69565 8.15447 3.30769 8.15447H18.6923C19.3043 8.15447 19.8913 8.39871 20.3241 8.83345C20.7569 9.2682 21 9.85784 21 10.4727V11.2454M12.0872 4.61023L9.91282 2.42599C9.76998 2.28232 9.60035 2.16833 9.41363 2.09054C9.22691 2.01276 9.02676 1.9727 8.82462 1.97266H3.30769C2.69565 1.97266 2.10868 2.21689 1.67591 2.65164C1.24313 3.08638 1 3.67602 1 4.29084V16.6545C1 17.2693 1.24313 17.8589 1.67591 18.2937C2.10868 18.7284 2.69565 18.9727 3.30769 18.9727H18.6923C19.3043 18.9727 19.8913 18.7284 20.3241 18.2937C20.7569 17.8589 21 17.2693 21 16.6545V7.38175C21 6.76693 20.7569 6.17729 20.3241 5.74255C19.8913 5.3078 19.3043 5.06357 18.6923 5.06357H13.1754C12.7675 5.0632 12.3754 4.90014 12.0872 4.61023Z" stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                      </i></span>
+                                      <p class="mt-4">Use Existing Folder</p>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+

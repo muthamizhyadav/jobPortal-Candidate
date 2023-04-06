@@ -1,0 +1,1339 @@
+<div class="container-fluid register" [formGroup]="searchForm">
+  <div class="row">
+    <div class="col-2 ad-image">
+      <div class="row">
+        <div class="col">
+          <img src="../../assets/image/myaccountimg1.png" alt="">
+        </div>
+      </div>
+    </div>
+    <div class="col-8  login-main">
+      <div class="row ">
+        <div class="col search-box-wrap">
+          <div class="advanced-search-wrap ">
+            <div class="search-boxs">
+              <div class="search-box first-search-box">
+                <input type="text" class="form-control keyskill" placeholder="Enter Designation / Key skills"
+                  (keyup)="dispalye($event)" formControlName="searchbox">
+                <div class="" *ngIf="isDisplay" style="margin-top:0px;">
+                  <label></label>
+                  <div class="content-box keylist" style="background: white;">
+                    <ul class="ulkeylist" style="padding-left: 0px;" class="">
+                      <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
+                        (click)="checkSkill($event,skill.Skill_Title)">
+                        <span>{{skill.Skill_Title}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="search-box second-search-box">
+                <input type="text" class="form-control location" placeholder="Enter Location" style="width: 101%;"
+                  formControlName="Location">
+              </div>
+              <div class="search-box">
+                <select class="form-control select-type douple-input-first" formControlName="experience">
+                  <option [ngValue]="null" selected disabled>YEAR</option>
+                  <option value="0">Freshers</option>
+                  <option value="1">1 Year</option>
+                  <option value="2">2 Year</option>
+                  <option value="3">3 Year</option>
+                  <option value="4">4 Year</option>
+                  <option value="5">5 Year</option>
+                  <option value="6">6 Year</option>
+                  <option value="7">7 Year</option>
+                  <option value="8">8 Year</option>
+                  <option value="9">9 Year</option>
+                  <option value="10">10 Year</option>
+                  <option value="11">11 Year</option>
+                  <option value="12">12 Year</option>
+                  <option value="13">13 Year</option>
+                  <option value="14">14 Year</option>
+                  <option value="15">15 Year</option>
+                  <option value="16">16 Year</option>
+                  <option value="17">17 Year</option>
+                  <option value="18">18 Year</option>
+                  <option value="19">19 Year</option>
+                  <option value="20">20 Year</option>
+                  <option value="21">21 Year</option>
+                  <option value="22">22 Year</option>
+                  <option value="23">23 Year</option>
+                  <option value="24">24 Year</option>
+                  <option value="25">25 Year</option>
+                  <option value="26">26 Year</option>
+                  <option value="27">27 Year</option>
+                  <option value="28">28 Year</option>
+                  <option value="29">29 Year</option>
+                  <option value="30">30 Year</option>
+                </select>
+              </div>
+
+              <div class="search-box">
+                <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png" alt=""
+                    class="search-icon" (click)="search()"></button>
+              </div>
+            </div>
+            <div class="advanced-search">
+              <button class="btn btn-brand-trans" data-bs-toggle="modal" data-bs-target="#exampleModal"><a style="color: white;text-decoration: underline;">Advanced
+                  Search</a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 ad-image">
+      <div class="row">
+        <div class="col">
+          <img src="../../assets/image/myaccountimg2.png" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <div class="row refine-container no-margin">
+        <div class="col">
+          <div class="row refine-container no-margin">
+            <div class="col">
+              <div class="sidebarmenu myprofile refine-sidebar">
+                <ul>
+                  <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span
+                      class="icon-text">All Filters</span>
+                  </li>
+
+                  <!-- 1 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Work Mode<i class="fa fa-angle-down" style="margin-left: 59px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li><input type="checkbox" value="onsite" (change)="changeWorkmode($event)"
+                             >Onsite</li>
+                          <li><input type="checkbox" value="work from home"
+                              (change)="changeWorkmode($event)">Work form home</li>
+                          <li><input type="checkbox" value="hybrid"
+                              (change)="changeWorkmode($event)">Hybrid</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 2 -->
+
+                  <li class="refine-content">
+
+                    <button class="btn btn1 collapsebtn" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample" aria-expanded="false" style="
+                        font-weight: 500;
+                        font-size: 14px;padding-left: 0px;" aria-controls="collapseExample">Experience</button><i class="fa fa-angle-down"
+                      style="margin-left: 45px;"></i>
+                    <div class="collapse" id="collapseExample">
+                      <div class="card card-body" style="padding: 0px;">
+                        <div style="display:flex">
+                          <select class="form-control select-type" formControlName="experienceAnotherfrom"
+                            (change)="experienceFrom($event)">
+                            <option [value]="null">From</option>
+                            <option value="0">Freshers</option>
+                            <option value="1">1 Year</option>
+                            <option value="2">2 Year</option>
+                            <option value="3">3 Year</option>
+                            <option value="4">4 Year</option>
+                            <option value="5">5 Year</option>
+                            <option value="6">6 Year</option>
+                            <option value="7">7 Year</option>
+                            <option value="8">8 Year</option>
+                            <option value="9">9 Year</option>
+                            <option value="10">10 Year</option>
+                            <option value="11">11 Year</option>
+                            <option value="12">12 Year</option>
+                            <option value="13">13 Year</option>
+                            <option value="14">14 Year</option>
+                            <option value="15">15 Year</option>
+                            <option value="16">16 Year</option>
+                            <option value="17">17 Year</option>
+                            <option value="18">18 Year</option>
+                            <option value="19">19 Year</option>
+                            <option value="20">20 Year</option>
+                            <option value="21">21 Year</option>
+                            <option value="22">22 Year</option>
+                            <option value="23">23 Year</option>
+                            <option value="24">24 Year</option>
+                            <option value="25">25 Year</option>
+                            <option value="26">26 Year</option>
+                            <option value="27">27 Year</option>
+                            <option value="28">28 Year</option>
+                            <option value="29">29 Year</option>
+                            <option value="30">30 Year</option>
+
+                          </select>
+                          <select class="form-control select-type" formControlName="experienceAnotherto"
+                            (change)="experienceTo($event)">
+                            <option [value]="null">To</option>
+                            <option value="0">Freshers</option>
+                            <option value="1">1 Year</option>
+                            <option value="2">2 Year</option>
+                            <option value="3">3 Year</option>
+                            <option value="4">4 Year</option>
+                            <option value="5">5 Year</option>
+                            <option value="6">6 Year</option>
+                            <option value="7">7 Year</option>
+                            <option value="8">8 Year</option>
+                            <option value="9">9 Year</option>
+                            <option value="10">10 Year</option>
+                            <option value="11">11 Year</option>
+                            <option value="12">12 Year</option>
+                            <option value="13">13 Year</option>
+                            <option value="14">14 Year</option>
+                            <option value="15">15 Year</option>
+                            <option value="16">16 Year</option>
+                            <option value="17">17 Year</option>
+                            <option value="18">18 Year</option>
+                            <option value="19">19 Year</option>
+                            <option value="20">20 Year</option>
+                            <option value="21">21 Year</option>
+                            <option value="22">22 Year</option>
+                            <option value="23">23 Year</option>
+                            <option value="24">24 Year</option>
+                            <option value="25">25 Year</option>
+                            <option value="26">26 Year</option>
+                            <option value="27">27 Year</option>
+                            <option value="28">28 Year</option>
+                            <option value="29">29 Year</option>
+                            <option value="30">30 Year</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 3 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button"
+                          style="font-weight: 500;font-size: 14px;padding-left: 4px;width: 163px;" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Deparment<i class="fa fa-angle-down" style="margin-left: 59px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Start up" *ngFor="let dep of currentDepartment">
+                            <input type="checkbox" (change)="depatmentFilter($event)" value="{{dep._id}}">
+                            {{dep.Department}}
+                          </li>
+                          <div style="margin-top: 7px;margin-left: 99px;">
+                            <a style="text-decoration: underline;" (click)="getDeparment('null')">View all</a>
+                          </div>
+                        </ul>
+
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 4 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width:160px"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Location<i class="fa fa-angle-down" style="margin-left: 77px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li *ngFor="let loc of getLocation"><input type="checkbox" value="{{loc.district}}"
+                              (change)="addLocation($event)">{{loc.district}}</li>
+
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 5 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" style="width: 100px;" type="button"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Salary<i class="fa fa-angle-down" style="margin-left: 92px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li><input type="checkbox" value="0-1" (change)="salaryrange($event)">0 to 1 lac</li>
+                          <li><input type="checkbox" value="1-2" (change)="salaryrange($event)">1 to 2 lac</li>
+                          <li><input type="checkbox" value="2-3" (change)="salaryrange($event)">2 to 3 lac</li>
+                          <li><input type="checkbox" value="2-4" (change)="salaryrange($event)">3 to 4 lac</li>
+                          <li><input type="checkbox" value="4-5" (change)="salaryrange($event)">4 to 5 lac</li>
+                          <li><input type="checkbox" value="5-8" (change)="salaryrange($event)">5 to 8 lac</li>
+                          <li><input type="checkbox" value="8-10" (change)="salaryrange($event)">8 to 10 lac</li>
+                          <li><input type="checkbox" value="10-13" (change)="salaryrange($event)">10 to 13 lac</li>
+                          <li><input type="checkbox" value="13-15" (change)="salaryrange($event)">13 to 15 lac</li>
+                          <li><input type="checkbox" value="15-20" (change)="salaryrange($event)">15 to 20 lac</li>
+                          <li><input type="checkbox" value="30-more" (change)="salaryrange($event)">30 lac+</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                  </li>
+                  <!-- 6 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" style="width: 100px;" type="button"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          Company Type<i class="fa fa-angle-down" style="margin-left: 28px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Start up"><input type="checkbox" (change)="companyType($event)" value="start up">Start
+                            up</li>
+                          <li value="1 to 2 lac"><input type="checkbox" (change)="companyType($event)"
+                              value="indian mnc">MNC</li>
+                          <li value="Corparate"><input type="checkbox" (change)="companyType($event)"
+                              value="corporate">Corparate</li>
+                          <li value="Foregin MNC"><input type="checkbox" (change)="companyType($event)"
+                              value="foreign-mnc">Foregin MNC</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 7 -->
+                  <li class="refine-content">
+                    <div class="dropdown search-box1">
+                      <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                        Role<i class="fa fa-angle-down" style="margin-left: 104px;"></i>
+                      </button>
+                      <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                        <li value="Last 30 days" *ngFor="let role of roles"><input type="checkbox" value="{{role._id}}"
+                            (change)="roleChange($event)">{{role.Job_role}}</li>
+                            <div style="margin-top: 7px;margin-left: 99px;">
+                              <a style="text-decoration: underline;" (click)="role('null')">View all</a>
+                            </div>
+                      </ul>
+
+                    </div>
+                  </li>
+                  <!-- 9 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                          data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                          Education<i class="fa fa-angle-down" style="margin-left: 65px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Last 30 days" *ngFor="let cou of course"><input type="checkbox"
+                              (change)="EductionDetails($event)" value="{{cou._id}}">{{cou.Course}}</li>
+                          <div style="margin-top: 7px;margin-left: 99px;">
+                            <a style="text-decoration: underline;" (click)="getEducation('null')">View all</a>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 10 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width: 100px"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                          Posed by<i class="fa fa-angle-down" style="margin-left: 73px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Last 30 days"><input type="checkbox" (change)="postedBy($event)" value="">Consultancy
+                          </li>
+                          <li value="Last 15 days"><input type="checkbox" (change)="postedBy($event)" value="">Company</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 11 -->
+                  <li class="refine-content">
+                    <div class="search-box search-box1">
+                      <div class="dropdown">
+                        <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width: 100px"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                          Industry<i class="fa fa-angle-down" style="margin-left: 80px;"></i>
+                        </button>
+                        <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                          <li value="Last 30 days" *ngFor="let ind of industry"><input type="checkbox"
+                              (change)="industryBy($event)" value="{{ind._id}}">{{ind.Industry}}</li>
+                          <div style="margin-top: 7px;margin-left: 99px;">
+                            <a style="text-decoration: underline;" (click)="getIndustry('null')">View all</a>
+                          </div>
+                        </ul>
+                      </div>
+                    </div>
+                  </li>
+                  <!-- 12 -->
+                  <li class="refine-content">
+                    <div class="dropdown">
+                      <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
+                        data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                        Freshness<i class="fa fa-angle-down" style="margin-left: 66px;"></i>
+                      </button>
+                      <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
+                        <li value="Last 30 days"><input type="checkbox" (change)="freshness($event)" value="30">Last 30 days
+                        </li>
+                        <li value="Last 15 days"><input type="checkbox" (change)="freshness($event)" value="15">Last 15 days
+                        </li>
+                        <li value="Last 7 days"><input type="checkbox" (change)="freshness($event)" value="7">Last 7 days
+                        </li>
+                        <li value="Last 5 days"><input type="checkbox" (change)="freshness($event)" value="5">Last 5 days
+                        </li>
+                        <li value="Last 3 days"><input type="checkbox" (change)="freshness($event)" value="3">Last 3 days
+                        </li>
+                        <li value="Last 1 days"><input type="checkbox" (change)="freshness($event)" value="1">Last 1 days
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-8">
+
+      <div class="row register-content-row no-padding">
+        <div ngClass="{{tab==4?'alerJob':'register-content'}}" class="col register-content no-margin-all">
+          <div class="row no-margin filter-bar">
+
+            <!-- <div class="filter-bar"> -->
+            <div class="sort col col-1">
+              <i class='fas fa-sort-amount-down'></i>
+            </div>
+
+            <div class="col postedjob" (click)="onClickJop()" ngClass="{{tab == 0?'jobs':''}}">
+              <i>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <mask id="path-1-inside-1_2073_878" fill="white">
+                    <rect y="4" width="19.2308" height="6.00024" rx="1" />
+                  </mask>
+                  <rect y="4" width="19.2308" height="6.00024" rx="1" stroke="#0A2647" stroke-width="4"
+                    mask="url(#path-1-inside-1_2073_878)" />
+                  <path fill-rule="evenodd" clip-rule="evenodd"
+                    d="M15.3851 1C15.3851 0.447715 14.9374 0 14.3851 0H4.84668C4.29439 0 3.84668 0.447715 3.84668 1V5.03782C3.84668 5.56922 4.27746 6 4.80886 6C5.59332 6 6.10772 5.04359 6.02841 4.26316C6.01608 4.14186 6.00977 4.01878 6.00977 3.89423V3.5C6.00977 2.94771 6.45748 2.5 7.00977 2.5H12.2213C12.7736 2.5 13.2213 2.94772 13.2213 3.5V3.89423C13.2213 4.01861 13.215 4.14152 13.2027 4.26266C13.1235 5.04331 13.638 6 14.4227 6C14.9542 6 15.3851 5.5691 15.3851 5.03756V1Z"
+                    fill="#0A2647" />
+                  <mask id="path-3-inside-2_2073_878" fill="white">
+                    <rect y="7.5" width="19.2308" height="12.5" rx="1" />
+                  </mask>
+                  <rect y="7.5" width="19.2308" height="12.5" rx="1" stroke="#0A2647" stroke-width="4"
+                    mask="url(#path-3-inside-2_2073_878)" />
+                  <rect x="7.71191" y="8" width="3.80769" height="2.75" rx="0.5" fill="#0A2647" stroke="#0A2647" />
+                </svg>
+              </i>
+              Jobs
+            </div>
+
+            <div class="applied-jobs col" (click)="onClickApplied()" ngClass="{{tab == 2?'jobs':''}}">
+              <i *ngIf="tab == 2">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M7.66667 11.8333L10.1667 14.3333L14.3333 8.5M21 11C21 12.3132 20.7413 13.6136 20.2388 14.8268C19.7362 16.0401 18.9997 17.1425 18.0711 18.0711C17.1425 18.9997 16.0401 19.7362 14.8268 20.2388C13.6136 20.7413 12.3132 21 11 21C9.68678 21 8.38642 20.7413 7.17317 20.2388C5.95991 19.7362 4.85752 18.9997 3.92893 18.0711C3.00035 17.1425 2.26375 16.0401 1.7612 14.8268C1.25866 13.6136 1 12.3132 1 11C1 8.34784 2.05357 5.8043 3.92893 3.92893C5.8043 2.05357 8.34783 1 11 1C13.6522 1 16.1957 2.05357 18.0711 3.92893C19.9464 5.8043 21 8.34784 21 11Z"
+                    stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </i>
+              <i *ngIf="tab != 2"><svg width="22" height="22" viewBox="0 0 22 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M7.66667 11.8333L10.1667 14.3333L14.3333 8.5M21 11C21 12.3132 20.7413 13.6136 20.2388 14.8268C19.7362 16.0401 18.9997 17.1425 18.0711 18.0711C17.1425 18.9997 16.0401 19.7362 14.8268 20.2388C13.6136 20.7413 12.3132 21 11 21C9.68678 21 8.38642 20.7413 7.17317 20.2388C5.95991 19.7362 4.85752 18.9997 3.92893 18.0711C3.00035 17.1425 2.26375 16.0401 1.7612 14.8268C1.25866 13.6136 1 12.3132 1 11C1 8.34784 2.05357 5.8043 3.92893 3.92893C5.8043 2.05357 8.34783 1 11 1C13.6522 1 16.1957 2.05357 18.0711 3.92893C19.9464 5.8043 21 8.34784 21 11Z"
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </i>
+              Applied Jobs
+            </div>
+
+            <div class="saved-jobs col" (click)="savedJobs()" ngClass="{{tab == 3?'jobs':''}}">
+              <i *ngIf="tab == 3">
+                <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10.4312 1.839C10.4774 1.72632 10.5561 1.62992 10.6572 1.56208C10.7584 1.49423 10.8774 1.45801 10.9992 1.45801C11.121 1.45801 11.24 1.49423 11.3411 1.56208C11.4423 1.62992 11.5209 1.72632 11.5671 1.839L13.8881 7.42133C13.9316 7.52578 14.003 7.61623 14.0945 7.68271C14.186 7.74919 14.2941 7.78914 14.4069 7.79814L20.4338 8.2809C20.9788 8.32459 21.1994 9.00504 20.7844 9.36002L16.1927 13.2942C16.1069 13.3676 16.043 13.4632 16.0079 13.5705C15.9728 13.6778 15.968 13.7927 15.9939 13.9026L17.3974 19.7841C17.4256 19.9021 17.4182 20.0259 17.3762 20.1397C17.3341 20.2535 17.2593 20.3523 17.1611 20.4235C17.0629 20.4948 16.9458 20.5354 16.8246 20.5402C16.7034 20.545 16.5834 20.5137 16.4799 20.4504L11.3192 17.2994C11.2228 17.2406 11.1121 17.2095 10.9992 17.2095C10.8863 17.2095 10.7756 17.2406 10.6792 17.2994L5.51844 20.4515C5.41496 20.5148 5.29503 20.5461 5.1738 20.5413C5.05256 20.5365 4.93547 20.4959 4.83729 20.4246C4.73912 20.3533 4.66428 20.2546 4.62222 20.1408C4.58016 20.027 4.57277 19.9032 4.60097 19.7852L6.00447 13.9026C6.0305 13.7927 6.02572 13.6777 5.99065 13.5704C5.95558 13.4631 5.89158 13.3675 5.80569 13.2942L1.214 9.36002C1.12205 9.28095 1.05553 9.17646 1.02281 9.05969C0.990088 8.94292 0.992621 8.81909 1.03009 8.70375C1.06756 8.58842 1.1383 8.48674 1.23341 8.4115C1.32852 8.33626 1.44375 8.29083 1.56461 8.2809L7.59147 7.79814C7.70424 7.78914 7.81234 7.74919 7.90387 7.68271C7.99541 7.61623 8.06682 7.52578 8.11027 7.42133L10.4312 1.839Z"
+                    stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+              </i>
+              <i *ngIf="tab != 3"><svg width="23" height="22" viewBox="0 0 23 22" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10.4312 1.839C10.4774 1.72632 10.5561 1.62992 10.6572 1.56208C10.7584 1.49423 10.8774 1.45801 10.9992 1.45801C11.121 1.45801 11.24 1.49423 11.3411 1.56208C11.4423 1.62992 11.5209 1.72632 11.5671 1.839L13.8881 7.42133C13.9316 7.52578 14.003 7.61623 14.0945 7.68271C14.186 7.74919 14.2941 7.78914 14.4069 7.79814L20.4338 8.2809C20.9788 8.32459 21.1994 9.00504 20.7844 9.36002L16.1927 13.2942C16.1069 13.3676 16.043 13.4632 16.0079 13.5705C15.9728 13.6778 15.968 13.7927 15.9939 13.9026L17.3974 19.7841C17.4256 19.9021 17.4182 20.0259 17.3762 20.1397C17.3341 20.2535 17.2593 20.3523 17.1611 20.4235C17.0629 20.4948 16.9458 20.5354 16.8246 20.5402C16.7034 20.545 16.5834 20.5137 16.4799 20.4504L11.3192 17.2994C11.2228 17.2406 11.1121 17.2095 10.9992 17.2095C10.8863 17.2095 10.7756 17.2406 10.6792 17.2994L5.51844 20.4515C5.41496 20.5148 5.29503 20.5461 5.1738 20.5413C5.05256 20.5365 4.93547 20.4959 4.83729 20.4246C4.73912 20.3533 4.66428 20.2546 4.62222 20.1408C4.58016 20.027 4.57277 19.9032 4.60097 19.7852L6.00447 13.9026C6.0305 13.7927 6.02572 13.6777 5.99065 13.5704C5.95558 13.4631 5.89158 13.3675 5.80569 13.2942L1.214 9.36002C1.12205 9.28095 1.05553 9.17646 1.02281 9.05969C0.990088 8.94292 0.992621 8.81909 1.03009 8.70375C1.06756 8.58842 1.1383 8.48674 1.23341 8.4115C1.32852 8.33626 1.44375 8.29083 1.56461 8.2809L7.59147 7.79814C7.70424 7.78914 7.81234 7.74919 7.90387 7.68271C7.99541 7.61623 8.06682 7.52578 8.11027 7.42133L10.4312 1.839Z"
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+              </i>
+              Saved Jobs
+            </div>
+            <div class="job-alert col" (click)="jobAlert()" ngClass="{{tab == 4?'jobs':''}}">
+              <i *ngIf="tab == 4"><svg width="24" height="20" viewBox="0 0 24 20" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12.0003 8.0466V11.9498M2.31718 15.4638C1.4158 17.025 2.54305 18.9756 4.34477 18.9756H19.6558C21.4565 18.9756 22.5837 17.025 21.6834 15.4638L14.0289 2.19489C13.1275 0.633604 10.873 0.633604 9.97165 2.19489L2.31718 15.4638ZM12.0003 15.0724H12.0076V15.0807H12.0003V15.0724Z"
+                    stroke="#0A2647" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </i>
+              <i *ngIf="tab != 4"><svg width="24" height="20" viewBox="0 0 24 20" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M12.0003 8.0466V11.9498M2.31718 15.4638C1.4158 17.025 2.54305 18.9756 4.34477 18.9756H19.6558C21.4565 18.9756 22.5837 17.025 21.6834 15.4638L14.0289 2.19489C13.1275 0.633604 10.873 0.633604 9.97165 2.19489L2.31718 15.4638ZM12.0003 15.0724H12.0076V15.0807H12.0003V15.0724Z"
+                    stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+
+              </i>
+              Job Alert
+            </div>
+            <div class="job-notification col-1" (click)="notification()" ngClass="{{tab == 5?'jobs':''}}">
+              <i *ngIf="tab == 5"><svg width="24" height="25" viewBox="0 0 24 25" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M21.6 17.8571H24V20.2381H0V17.8571H2.4V9.52381C2.4 6.99794 3.41143 4.57552 5.21178 2.78946C7.01212 1.0034 9.45392 0 12 0C14.5461 0 16.9879 1.0034 18.7882 2.78946C20.5886 4.57552 21.6 6.99794 21.6 9.52381V17.8571ZM19.2 17.8571V9.52381C19.2 7.62941 18.4414 5.81259 17.0912 4.47305C15.7409 3.1335 13.9096 2.38095 12 2.38095C10.0904 2.38095 8.25909 3.1335 6.90883 4.47305C5.55857 5.81259 4.8 7.62941 4.8 9.52381V17.8571H19.2ZM8.4 22.619H15.6V25H8.4V22.619Z"
+                    fill="#0A2647" />
+                </svg>
+              </i>
+              <i *ngIf="tab != 5"><svg width="24" height="25" viewBox="0 0 24 25" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M21.6 17.8571H24V20.2381H0V17.8571H2.4V9.52381C2.4 6.99794 3.41143 4.57552 5.21178 2.78946C7.01212 1.0034 9.45392 0 12 0C14.5461 0 16.9879 1.0034 18.7882 2.78946C20.5886 4.57552 21.6 6.99794 21.6 9.52381V17.8571ZM19.2 17.8571V9.52381C19.2 7.62941 18.4414 5.81259 17.0912 4.47305C15.7409 3.1335 13.9096 2.38095 12 2.38095C10.0904 2.38095 8.25909 3.1335 6.90883 4.47305C5.55857 5.81259 4.8 7.62941 4.8 9.52381V17.8571H19.2ZM8.4 22.619H15.6V25H8.4V22.619Z"
+                    fill="white" />
+                </svg>
+              </i>
+            </div>
+          </div>
+          <div class="row no-margin bg-grey " *ngIf="tab ==0">
+            <div class="col">
+              <div class="filter-label">
+                <ng-container *ngIf="searchForm.get('search')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('search')?.value">
+                    <span>{{find_value(item,'keyskill')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'keyskill')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('experience')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark">
+                    <span>{{find_value_exp(searchForm.get('experience')?.value)}}</span>
+                    <span class="close-mark" (click)="remove_filter_exp(searchForm.get('experience')?.value)">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('workmode')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('workmode')?.value">
+                    <span>{{find_value(item,'workMode')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'workMode')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('department')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('department')?.value">
+                    <span>{{find_value(item,'department')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'department')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('Salary')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('Salary')?.value">
+                    <span>{{find_value(item,'Salary')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'Salary')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('companytype')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('companytype')?.value">
+                    <span>{{find_value(item,'companytype')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'companytype')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('role')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('role')?.value">
+                    <span>{{find_value(item,'role')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'role')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('education')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('education')?.value">
+                    <span>{{find_value(item,'education')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'education')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('postedby')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('postedby')?.value">
+                    <span>{{find_value(item,'postedby')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'postedby')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('preferredIndustry')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('preferredIndustry')?.value">
+                    <span>{{find_value(item,'preferredIndustry')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'preferredIndustry')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('freshness')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('freshness')?.value">
+                    <span>{{find_value(item,'freshness')}}</span>
+                    <span class="close-mark" (click)="remove_filter(item,'freshness')">x</span>
+                  </span>
+                </ng-container>
+                <ng-container *ngIf="searchForm.get('experienceAnotherfrom')?.value != null && searchForm.get('experienceAnotherto')?.value != null">
+                  <span class="badge searchlabel bg-light text-dark">
+                    <span>{{find_expfromTo(searchForm.get('experienceAnotherfrom')?.value ,searchForm.get('experienceAnotherto')?.value)}}</span>
+                    <span class="close-mark" (click)="remove_filterexpFromto(searchForm.get('experienceAnotherfrom')?.value,searchForm.get('experienceAnotherto')?.value)">x</span>
+                  </span>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+          <!-- get all jobs -->
+          <div *ngIf="tab == 0">
+            <div class="row content-card-heading no-margin padding10">
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Company
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Designation
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                City
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Experience
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Salary
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Posted
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Status
+              </div>
+            </div>
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let job of jobs">
+              <div class="col">
+                {{job.name}}
+              </div>
+              <div class="col wrap">
+                {{job.role}}
+              </div>
+              <div class="col wrap">
+                {{job.jobLocation}}
+              </div>
+              <div class="col">
+                {{job.experienceFrom}} To {{job.experienceTo}}
+              </div>
+              <div class="col">
+                {{job.salaryRangeFrom}} To {{(job.salaryRangeTo)}}
+              </div>
+              <div class="col">
+                {{job.date}}
+              </div>
+              <div class="col applied">
+                <div class="col" *ngIf="!job.appliedStatus">
+                  <a (click)="apply(job._id,tab)">Apply Now </a>
+                </div>
+                <a (click)="apply(job._id,tab)"> <i *ngIf="job.appliedStatus == 'Applied'">
+                    <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
+                        fill="white" />
+                    </svg></i>
+                  <i> <svg *ngIf="job.appliedStatus == 'shortlisted'" width="24" height="24" viewBox="0 0 24 24"
+                      fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_871_2584)">
+                        <path
+                          d="M20.8889 23.2222H3.11111C2.81643 23.2222 2.53381 23.1052 2.32544 22.8968C2.11706 22.6884 2 22.4058 2 22.1111V2.11111C2 1.81643 2.11706 1.53381 2.32544 1.32544C2.53381 1.11706 2.81643 1 3.11111 1H20.8889C21.1836 1 21.4662 1.11706 21.6746 1.32544C21.8829 1.53381 22 1.81643 22 2.11111V22.1111C22 22.4058 21.8829 22.6884 21.6746 22.8968C21.4662 23.1052 21.1836 23.2222 20.8889 23.2222ZM19.7778 21V3.22222H4.22222V21H19.7778ZM7.55556 6.55556H16.4444V8.77778H7.55556V6.55556ZM7.55556 11H16.4444V13.2222H7.55556V11ZM7.55556 15.4444H13.1111V17.6667H7.55556V15.4444Z"
+                          fill="#1877F2" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_871_2584">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                  </i>
+                  <i *ngIf="job.appliedStatus == 'rejected'">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_871_2590)">
+                        <path
+                          d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
+                          fill="#FF0000" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_871_2590">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                  </i><span style="margin-left: 2px;">{{job.appliedStatus}}</span></a>
+              </div>
+
+            </div>
+          </div>
+          <!-- Applied jobs -->
+          <div *ngIf="tab == 2">
+            <div class="row content-card-heading  padding10">
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Company
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Designation
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                City
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Experience
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Salary
+              </div>
+              <div class="col">
+                Applied
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                <div class="dropdown" style="text-align: center;">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style="background: transparent;padding:unset;border: none;font-size: 12px;text-align: center;">
+                    Sortby<i class="ms-1"><svg width="10" height="5" viewBox="0 0 10 5" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M4.9106 3.4494L1.2895 0.343127C0.994494 0.0900649 0.516198 0.0900649 0.221195 0.343127C-0.0738086 0.596188 -0.0738086 1.00648 0.221195 1.25954L4.35454 4.80523C4.47775 4.91093 4.63293 4.97247 4.79337 4.98988C5.02833 5.02584 5.27931 4.96595 5.46087 4.8102L9.77875 1.10621C10.0738 0.853151 10.0738 0.442857 9.77875 0.189795C9.48374 -0.0632663 9.00545 -0.0632658 8.71045 0.189795L4.9106 3.4494Z"
+                          fill="white" />
+                      </svg>
+                    </i>
+                  </button>
+                  <ul class="dropdown-menu" id="mydiv" style="cursor: pointer;">
+                    <li (click)="filter('null')">select</li>
+                    <li (click)="filter('viewed')">Viewed</li>
+                    <li (click)="filter('shortlisted')">Shortlisted</li>
+                    <li (click)="filter('rejected')">Rejected</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let appli of appliedJobs">
+              <div class="col">
+                {{appli.companyName}}
+              </div>
+              <div class="col wrap">
+                {{appli.role}}
+              </div>
+              <div class="col wrap">
+                {{appli.jobLocation}}
+              </div>
+              <div class="col">
+                {{appli.experienceFrom}} to {{appli.experienceTo}}
+              </div>
+              <div class="col">
+                {{appli.salaryRangeFrom}} to {{appli.salaryRangeTo}}
+
+              </div>
+              <div class="col">
+                {{appli.appliedDate | date:'dd-MM-yyyy'}}
+              </div>
+
+              <div class="col applied">
+                <a style="cursor: pointer;" (click)="apply(appli.jodId,tab)"><i><svg
+                      *ngIf="appli.approvedStatus == 'Applied'" width="12" height="13" viewBox="0 0 12 13" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
+                        fill="white" />
+                    </svg>
+                  </i><i> <svg *ngIf="appli.approvedStatus == 'shortlisted'" width="24" height="24" viewBox="0 0 24 24"
+                      fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_871_2584)">
+                        <path
+                          d="M20.8889 23.2222H3.11111C2.81643 23.2222 2.53381 23.1052 2.32544 22.8968C2.11706 22.6884 2 22.4058 2 22.1111V2.11111C2 1.81643 2.11706 1.53381 2.32544 1.32544C2.53381 1.11706 2.81643 1 3.11111 1H20.8889C21.1836 1 21.4662 1.11706 21.6746 1.32544C21.8829 1.53381 22 1.81643 22 2.11111V22.1111C22 22.4058 21.8829 22.6884 21.6746 22.8968C21.4662 23.1052 21.1836 23.2222 20.8889 23.2222ZM19.7778 21V3.22222H4.22222V21H19.7778ZM7.55556 6.55556H16.4444V8.77778H7.55556V6.55556ZM7.55556 11H16.4444V13.2222H7.55556V11ZM7.55556 15.4444H13.1111V17.6667H7.55556V15.4444Z"
+                          fill="#1877F2" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_871_2584">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                  </i>
+                  <i *ngIf="appli.approvedStatus == 'rejected'">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_871_2590)">
+                        <path
+                          d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
+                          fill="#FF0000" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_871_2590">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                  </i> {{appli.approvedStatus}}</a>
+              </div>
+            </div>
+          </div>
+          <!-- saved jobs -->
+          <div *ngIf="tab == 3">
+            <div class="row content-card-heading padding10">
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Company
+              </div>
+              <div class="col warp">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Designation
+              </div>
+              <div class="col warp">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                City
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Experience
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Salary
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Posted
+              </div>
+              <div class="col">
+                <!-- <i class='fas fa-sort-amount-down'></i> -->
+                Status
+              </div>
+            </div>
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let save of saveJobs">
+              <div class="col">
+                {{save.companyName}}
+              </div>
+              <div class="col">
+                {{save.role}}
+              </div>
+              <div class="col">
+                {{save.jobLocation}}
+              </div>
+              <div class="col">
+                {{save.experienceFrom}} To {{save.experienceTo}}
+              </div>
+              <div class="col">
+                {{save.salaryRangeFrom}} To {{save.salaryRangeTo}}
+
+              </div>
+              <div class="col">
+                {{save.date}}
+              </div>
+              <div class="col applied">
+                <a (click)="apply(save.jobId,tab)"><i><svg *ngIf="save.approvedStatus == 'Applied'" width="12"
+                      height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
+                        fill="white" />
+                    </svg>
+                  </i><i> <svg *ngIf="save.approvedStatus == 'shortlisted'" width="24" height="24" viewBox="0 0 24 24"
+                      fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_871_2584)">
+                        <path
+                          d="M20.8889 23.2222H3.11111C2.81643 23.2222 2.53381 23.1052 2.32544 22.8968C2.11706 22.6884 2 22.4058 2 22.1111V2.11111C2 1.81643 2.11706 1.53381 2.32544 1.32544C2.53381 1.11706 2.81643 1 3.11111 1H20.8889C21.1836 1 21.4662 1.11706 21.6746 1.32544C21.8829 1.53381 22 1.81643 22 2.11111V22.1111C22 22.4058 21.8829 22.6884 21.6746 22.8968C21.4662 23.1052 21.1836 23.2222 20.8889 23.2222ZM19.7778 21V3.22222H4.22222V21H19.7778ZM7.55556 6.55556H16.4444V8.77778H7.55556V6.55556ZM7.55556 11H16.4444V13.2222H7.55556V11ZM7.55556 15.4444H13.1111V17.6667H7.55556V15.4444Z"
+                          fill="#1877F2" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_871_2584">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                  </i>
+                  <i *ngIf="save.approvedStatus == 'rejected'">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <g clip-path="url(#clip0_871_2590)">
+                        <path
+                          d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
+                          fill="#FF0000" />
+                      </g>
+                      <defs>
+                        <clipPath id="clip0_871_2590">
+                          <rect width="24" height="24" fill="white" />
+                        </clipPath>
+                      </defs>
+                    </svg>
+
+                  </i>
+                  {{save.approvedStatus}}</a>
+              </div>
+            </div>
+          </div>
+          <!-- Job alert -->
+          <div *ngIf="tab == 4">
+            <div class="jobalert col-8" [formGroup]="setAlertForm" *ngIf="alert">
+              <h1>Create Job Alert</h1>
+              <div class="form col-9">
+                <div class="keyskill">
+                  <label>Key word :</label>
+                  <input class="alertField" type="text" name="keyskill" placeholder="Enter Key Skill"
+                    formControlName="searchalert" (keyup)="dispalyedData($event)">
+                </div>
+                <div class="" *ngIf="isshow" style="margin-top:0px;">
+                  <label></label>
+                  <div class="content-box alertkeylist" style="background: white;">
+                    <ul class="alertskill" style="padding-left: 0px;" class="">
+                      <li class="ilkeylist" style="cursor: pointer;" *ngFor="let skill of keySkill"
+                        (click)="alretcheckSkill($event,skill.Skill_Title)">
+                        <span>{{skill.Skill_Title}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label>Experience :</label>
+                  <div class="content-box">
+                    <select id="select" class="form-control" formControlName="experienceYearSet">
+                      <option value="option1" disabled selected>Year</option>
+                      <option value="0">Freshers</option>
+                      <option value="1">1 Year</option>
+                      <option value="2">2 Year</option>
+                      <option value="3">3 Year</option>
+                      <option value="4">4 Year</option>
+                      <option value="5">5 Year</option>
+                      <option value="6">6 Year</option>
+                      <option value="7">7 Year</option>
+                      <option value="8">8 Year</option>
+                      <option value="9">9 Year</option>
+                      <option value="10">10 Year</option>
+                      <option value="11">11 Year</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label>Salary :</label>
+                  <div class="content-box">
+                    <select id="select" class="form-control" formControlName="salaryFrom">
+                      <option [ngValue]="null">From</option>
+                      <option value="1-2">1 to 2 lac</option>
+                      <option value="2-3">2 to 3 lac</option>
+                      <option value="2-4">2 to 4 lac</option>
+                      <option value="4-5">4 to 5 lac</option>
+                      <option value="5-8">5 to 8 lac</option>
+                      <option value="8-10">8 to 10 lac</option>
+                      <option value="10-13">10 to 13 lac</option>
+                      <option value="13-15">13 to 15 lac</option>
+                      <option value="15-20">15 to 20 lac</option>
+                      <option value="30-more">30 to morelac</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="job-location">
+                  <label>Job Location :</label>
+                  <input class="alertField" type="text" ngx-google-places-autocomplete [options]="options"
+                    (onAddressChange)="handleAddressChange($event)" name="location" placeholder="Enter Job location"
+                    formControlName="locationSet">
+                </div>
+                <div class="single-row">
+                  <label for="">Current Industry :</label>
+                  <div class="content-box">
+                    <select id="select" class="form-control" formControlName="currentIndustry">
+                      <option [ngValue]="null" disabled selected>Select</option>
+                      <option value="{{ind._id}}" *ngFor="let ind of industry">{{ind.Industry}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Current Department :</label>
+                  <div class="content-box">
+                    <select id="select" class="form-control" formControlName="currentDepartment"
+                      (change)="changeDeparment($event)">
+                      <option [ngValue]="null" disabled selected>Select</option>
+                      <option *ngFor="let dep of currentDepartment" value="{{dep._id}}">{{dep.Department}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Role Category :</label>
+                  <div class="content-box">
+                    <select id="select" class="form-control" (change)="getRole($event)" formControlName="role_Category">
+                      <option [ngValue]="null" disabled selected>Select</option>
+                      <option *ngFor="let cat of currentCategory" value="{{cat._id}}">{{cat.Role_Category}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="single-row">
+                  <label for="">Job Role :</label>
+                  <div class="content-box">
+                    <select id="select" class="form-control" formControlName="designationSet">
+                      <option [ngValue]="null" disabled selected>Select</option>
+                      <option *ngFor="let role of getroles" value="{{role._id}}">{{role.Job_role}}</option>
+                    </select>
+                  </div>
+                </div>
+
+
+
+              </div>
+              <button class="btn alert" (click)="setalert()">Set Alert</button>
+            </div>
+            <div *ngIf="alert==false">
+              <div style="display: flex;justify-content: end;">
+                <button class="btn btn-sm albtn" (click)="edit()"><i class="fa fa-pencil"></i>
+                  Edit</button>
+              </div>
+              <div class="row content-card-heading no-margin padding10">
+                <div class="col">
+                  <!-- <i class='fas fa-sort-amount-down'></i> -->
+                  Company
+                </div>
+                <div class="col">
+                  <!-- <i class='fas fa-sort-amount-down'></i> -->
+                  Designation
+                </div>
+                <div class="col">
+                  <!-- <i class='fas fa-sort-amount-down'></i> -->
+                  City
+                </div>
+                <div class="col">
+                  <!-- <i class='fas fa-sort-amount-down'></i> -->
+                  Experience
+                </div>
+                <div class="col">
+                  <!-- <i class='fas fa-sort-amount-down'></i> -->
+                  Salary
+                </div>
+                <div class="col">
+                  <!-- <i class='fas fa-sort-amount-down'></i> -->
+                  Posted
+                </div>
+                <div class="col">
+                  <!-- <i class='fas fa-sort-amount-down'></i> -->
+                  Status
+                </div>
+              </div>
+              <div class="row content-card padding10 main-content" *ngFor="let alert of getAllalerts">
+                <div class="col">
+                  {{alert.name}}
+                </div>
+                <div class="col">
+                  <p class="wrap">{{alert.role}}</p>
+                </div>
+                <div class="col wrap">
+                  {{alert.jobLocation}}
+                </div>
+                <div class="col">
+                  {{alert.experienceFrom}} To {{alert.experienceTo}}
+                </div>
+                <div class="col">
+                  {{alert.salaryRangeFrom}} To {{alert.salaryRangeTo}}
+                </div>
+                <div class="col">
+                  {{alert.date}}
+                </div>
+                <div class="col">
+                  <a (click)="apply(alert._id,tab)"> <i *ngIf="alert.appliedStatus == 'Applied'">
+                      <svg width="12" height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
+                          fill="white" />
+                      </svg></i>
+                    <i> <svg *ngIf="alert.appliedStatus == 'shortlisted'" width="24" height="24" viewBox="0 0 24 24"
+                        fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_871_2584)">
+                          <path
+                            d="M20.8889 23.2222H3.11111C2.81643 23.2222 2.53381 23.1052 2.32544 22.8968C2.11706 22.6884 2 22.4058 2 22.1111V2.11111C2 1.81643 2.11706 1.53381 2.32544 1.32544C2.53381 1.11706 2.81643 1 3.11111 1H20.8889C21.1836 1 21.4662 1.11706 21.6746 1.32544C21.8829 1.53381 22 1.81643 22 2.11111V22.1111C22 22.4058 21.8829 22.6884 21.6746 22.8968C21.4662 23.1052 21.1836 23.2222 20.8889 23.2222ZM19.7778 21V3.22222H4.22222V21H19.7778ZM7.55556 6.55556H16.4444V8.77778H7.55556V6.55556ZM7.55556 11H16.4444V13.2222H7.55556V11ZM7.55556 15.4444H13.1111V17.6667H7.55556V15.4444Z"
+                            fill="#1877F2" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_871_2584">
+                            <rect width="24" height="24" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+
+                    </i>
+                    <i *ngIf="alert.appliedStatus == 'rejected'">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_871_2590)">
+                          <path
+                            d="M12 22C6.477 22 2 17.523 2 12C2 6.477 6.477 2 12 2C17.523 2 22 6.477 22 12C22 17.523 17.523 22 12 22ZM12 20C14.1217 20 16.1566 19.1571 17.6569 17.6569C19.1571 16.1566 20 14.1217 20 12C20 9.87827 19.1571 7.84344 17.6569 6.34315C16.1566 4.84285 14.1217 4 12 4C9.87827 4 7.84344 4.84285 6.34315 6.34315C4.84285 7.84344 4 9.87827 4 12C4 14.1217 4.84285 16.1566 6.34315 17.6569C7.84344 19.1571 9.87827 20 12 20ZM12 10.586L14.828 7.757L16.243 9.172L13.414 12L16.243 14.828L14.828 16.243L12 13.414L9.172 16.243L7.757 14.828L10.586 12L7.757 9.172L9.172 7.757L12 10.586Z"
+                            fill="#FF0000" />
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_871_2590">
+                            <rect width="24" height="24" fill="white" />
+                          </clipPath>
+                        </defs>
+                      </svg>
+
+                    </i><span style="margin-left: 2px;">{{alert.appliedStatus}}</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- notification -->
+          <div *ngIf="tab == 5">
+
+            <div class="row content-card-heading padding10">
+              <div class="col">
+                Company
+              </div>
+              <div class="col">
+                Designation
+              </div>
+              <div class="col">
+                City
+              </div>
+              <div class="col">
+                Experience
+              </div>
+              <div class="col">
+                Salary
+              </div>
+              <div class="col">
+                Recived
+              </div>
+              <div class="col">
+                Status
+              </div>
+            </div>
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let job of getAllNotification">
+              <div class="col">
+                {{job.employerregistrations.name}}
+              </div>
+              <div class="col warp">
+                {{job.role}}
+              </div>
+              <div class="col warp">
+                {{job.jobLocation}}
+              </div>
+              <div class="col">
+                {{job.experienceFrom}} To {{job.experienceTo}}
+              </div>
+              <div class="col">
+                {{job.salaryRangeFrom}} To {{job.salaryRangeTo}}
+              </div>
+              <div class="col">
+                {{job.date}}
+              </div>
+              <div class="col">
+                <a (click)="applynotification(job._id)">{{job.appliedStatus=='Applied'?job.appliedStatus:"Apply now"}}
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="row content-card-footer no-margin padding10" style="background: #82C3EC;" *ngIf="tab != 4">
+            <div class="col">
+            </div>
+            <div class="col">
+            </div>
+            <div class="col">
+              <div class="pageination-logo">
+                <button style="border: none;" (click)="pagination(0)"><img src="../../assets/image/left-arrow.png"
+                    alt="" style="margin-top: 17px;" class="p-left"></button>
+                <div class="pageination-number">{{page+1}}</div>
+                <button style="border: none;background: transparent;" (click)="pagination(1)"><img src="../../assets/image/right-arrow.png"
+                    style="margin-top: 17px;" alt="" class="p-right"></button>
+              </div>
+            </div>
+            <div class="col">
+            </div>
+            <div class="col" style="color: black;">
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle range" type="button" data-bs-toggle="dropdown"
+                  aria-expanded="false">
+                  <i class='fas fa-sort-amount-down'></i> Range
+                </button>
+                <ul style="cursor: pointer;" class="dropdown-menu">
+                  <li (click)="changeRange(10)">10</li>
+                  <li (click)="changeRange(20)">20</li>
+                  <li (click)="changeRange(40)">40</li>
+                  <li (click)="changeRange(60)">60</li>
+                  <li (click)="changeRange(80)">80</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-2 ">
+      <div class="col-11  m-auto bg-grey rounded over">
+        <div class="recent-search col-12">
+          <header>
+            <i><svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M10 0.864746C15.523 0.864746 20 5.30812 20 10.7896C20 16.2711 15.523 20.7145 10 20.7145C4.477 20.7145 0 16.2711 0 10.7896H2C2 15.1744 5.582 18.7295 10 18.7295C14.418 18.7295 18 15.1744 18 10.7896C18 6.40482 14.418 2.84972 10 2.84972C7.25 2.84972 4.824 4.22631 3.385 6.32343H6V8.30841H0V2.35348H2V4.8347C3.824 2.42295 6.729 0.864746 10 0.864746ZM11 5.82719V10.3777L14.243 13.5964L12.828 15.0008L9 11.1995V5.82719H11Z"
+                  fill="white" />
+              </svg>
+            </i> Recent Search
+          </header>
+          <div class="tabs" style="overflow: scroll;height:307px;">
+            <div class="tab d-flex flex-wrap bg-grey" style="cursor: pointer;"
+              *ngFor="let recent of recentData;let i=index">
+
+              <a (click)="searchdata(recent._id)">
+                <div class="course col-12 d-flex">
+                  <i><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M12 2.3999H0V5.5999H4.9384C4.85003 5.43273 4.8 5.24216 4.8 5.03991V4.95991H7.2V5.03991C7.2 5.24216 7.14996 5.43273 7.06159 5.5999H12V2.3999Z"
+                        fill="#79879A" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M9.60039 0H2.40039V4H4.5035C4.31204 3.71398 4.20039 3.37003 4.20039 3V1.6H7.80039V3C7.80039 3.37003 7.68874 3.71398 7.49728 4H9.60039V0Z"
+                        fill="#79879A" />
+                      <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M4.86828 6.3999H0V11.9999H12V6.3999H7.13172C6.96698 6.86598 6.52249 7.1999 6 7.1999C5.47751 7.1999 5.03302 6.86598 4.86828 6.3999Z"
+                        fill="#79879A" />
+                    </svg>
+                  </i>
+                  <p>{{recent.search}}</p>
+                </div>
+                <div class="display">
+                  <div class="location col-8 d-flex">
+                    <i><svg width="10" height="12" viewBox="0 0 10 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                          d="M9.99986 4.80022C9.99986 7.45131 5.00042 12.0006 5.00042 12.0006C5.00042 12.0006 0.000976562 7.45131 0.000976562 4.80022C0.000976562 2.14913 2.2393 0 5.00042 0C7.76153 0 9.99986 2.14913 9.99986 4.80022Z"
+                          fill="#79879A" />
+                        <ellipse cx="4.99986" cy="4.80064" rx="1.24986" ry="1.20006" fill="white" />
+                      </svg>
+                    </i>
+                    <p>{{recent.location}}</p>
+                  </div>
+                  <div class="years">
+                    <p>{{recent.experience}} Year</p>
+                  </div>
+                </div>
+                <div class="time">
+                  <p>{{recent.time}}</p>
+                </div>
+              </a>
+            </div>
+            <div class="nodata" *ngIf="recentData.length==0">
+              <p style="margin-bottom: 0px;">No recent search</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content" style="background-color: #EEEEEE; ">
+      <div class="modal-header" style="justify-content: center;">
+        <h3 class="modal-title">Search Job</h3>
+      </div>
+      <div class="modal-body ">
+        <div>
+          <div class="row">
+            <div class="register-form" [formGroup]="searchForm">
+              <div class="single-row">
+                <label for="">Key Skills :</label>
+                <div class="content-box">
+                  <input type="text" class="form-control" (keyup)="dispalye($event)" placeholder="Enter Key Skills"
+                    formControlName="searchbox">
+                </div>
+              </div>
+              <div class="single-row" *ngIf="isDisplay" style="margin-top:0px;">
+                <label></label>
+                <div class="content-box" style="background: white;">
+                  <ul style="padding-left: 0px;">
+                    <li *ngFor="let skill of keySkill" style="cursor:pointer"
+                      (click)="checkSkill($event,skill.Skill_Title)">
+                      <span>{{skill.Skill_Title}}</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Salary Range:</label>
+                <div class="content-box">
+                  <select id="select" class="form-control" (change)="salaryrange($event)">
+                    <option [ngValue]="null">From</option>
+                    <option value="1-2">1 to 2 lac</option>
+                    <option value="2-3">2 to 3 lac</option>
+                    <option value="2-4">2 to 4 lac</option>
+                    <option value="4-5">4 to 5 lac</option>
+                    <option value="5-8">5 to 8 lac</option>
+                    <option value="8-10">8 to 10 lac</option>
+                    <option value="10-13">10 to 13 lac</option>
+                    <option value="13-15">13 to 15 lac</option>
+                    <option value="15-20">15 to 20 lac</option>
+                    <option value="30-more">30 to morelac</option>
+                  </select>
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Experience:</label>
+                <div class="content-box">
+                  <select id="select" class="form-control" formControlName="experienceAnotherfrom">
+                    <option [ngValue]="null">From</option>
+                    <option value="0">Freshers</option>
+                    <option value="1">1 Year</option>
+                    <option value="2">2 Year</option>
+                    <option value="3">3 Year</option>
+                    <option value="4">4 Year</option>
+                    <option value="5">5 Year</option>
+                    <option value="6">6 Year</option>
+                    <option value="7">7 Year</option>
+                    <option value="8">8 Year</option>
+                    <option value="9">9 Year</option>
+                    <option value="10">10 Year</option>
+                    <option value="11">11 Year</option>
+                  </select>
+                  <select id="select" class="form-control" formControlName="experienceAnotherto">
+                    <option [ngValue]="null">To</option>
+                    <option value="0">Freshers</option>
+                    <option value="1">1 Year</option>
+                    <option value="2">2 Year</option>
+                    <option value="3">3 Year</option>
+                    <option value="4">4 Year</option>
+                    <option value="5">5 Year</option>
+                    <option value="6">6 Year</option>
+                    <option value="7">7 Year</option>
+                    <option value="8">8 Year</option>
+                    <option value="9">9 Year</option>
+                    <option value="10">10 Year</option>
+                    <option value="11">11 Year</option>
+                  </select>
+                </div>
+              </div>
+              <div class="single-row">
+                <label for="">Job Location:</label>
+                <div class="content-box">
+                  <input type="text" class="form-control" placeholder="Enter  Job Location" formControlName="Location">
+                </div>
+              </div>
+
+              <div class="single-row">
+                <label for="">Course :</label>
+                <div class="content-box">
+                    <ng-multiselect-dropdown id="courseInput" class="w-100"
+                        style="background-color: white;" name='courses'
+                        [settings]="dropdownSettings" [data]="allIndustry"
+                        (onSelect)="pushCourse($event)"  (onDeSelect)="onDeSelect($event)">
+                    </ng-multiselect-dropdown>
+                </div>
+            </div>
+              <div class="single-row  mt-5">
+                <label for=""> </label>
+                <div class="content-box">
+                  <button type="submit" class="btn btn-brand-blue mb-2 ps-5 pe-5" (click)="advanceSearch()"
+                    data-bs-dismiss="modal">Search</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

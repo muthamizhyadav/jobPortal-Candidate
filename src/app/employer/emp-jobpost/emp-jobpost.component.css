@@ -1,0 +1,207 @@
+.register-content-row{
+    height: fit-content;
+    padding-bottom: 20px;
+}
+.data{
+    max-height: 500px;
+    overflow: auto;
+    width: 360px;
+    max-width: 360px;
+    list-style: none;
+}
+.subdata{
+    max-height: 300px;
+    overflow: auto;
+    list-style: none;
+    max-width: 500px;
+    text-transform: capitalize;
+}
+.single-row button{
+    background-color: white;
+    /* padding: 6px 225px 6px 14px; */
+    border: 1px solid #ced4da;
+}
+.dropdown-toggle::after{
+    margin-left: 293px !important;
+    display: none;
+}
+.fsize{
+    font-size: 14px;
+}
+.badge1{
+    /* border: 1px solid #ced4da; */
+    font-weight: 600;
+    color: #000;
+  }
+
+.remove{
+    font-size: 14px;
+    
+}
+.salarybtn{
+    /* width: 360px; */
+    max-width: 360px;
+    padding: 5px 322px 8px 0px
+}
+.content-box-block{
+    display: block !important;
+}
+.close-mark{
+    color: #D9D9D9;
+}
+.locarea{
+    background: white;
+    /* position: absolute; */
+    top: 747px;
+    width: 360px;
+    left: 614px;
+    max-width: 362px;
+    /* height: 265px; */
+    max-height: 270px;
+    overflow: auto;
+    border-radius: 6px;
+}
+.name{
+    /* width:120px;
+    height: 2em; 
+    line-height: 1em; 
+    font-weight: 400; */
+    text-overflow: ellipsis;
+    margin-bottom: 9px;
+    cursor: pointer;
+    word-break: break-all;
+    /* overflow:hidden; */
+    white-space: nowrap;
+}
+
+
+
+.submit{
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    padding: 0 15px !important;
+}
+
+
+.card-job-content-heading{
+    display: flex;
+    justify-content: space-between;
+    max-width: 85%;
+}
+.job-card{
+    color: #0A2647;
+    font-weight: 400;
+    margin: 0 5px;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  
+
+}
+
+.job-card i{
+   color:#D9D9D9 ; 
+}
+
+.border-remove{
+    border:none;
+}
+.card-job-title{
+    font-size: 26px;
+    font-weight: 500;
+
+}
+
+.card-job-sub-title{
+    font-size:16px;
+}
+
+.card-job-content{
+    display: flex;
+    justify-content: space-between;
+    max-width: 40%;
+    font-size: 14px;
+}
+
+.job-post-view-logo{
+    width: 70px;
+}
+
+.width-custom{
+    width: 25px;
+    text-align: left;
+}
+.card-job-content-data div{
+    margin-top: 5px;
+}
+.job-view{
+    margin: 16px;
+}
+.single-rows{
+    align-items: normal;
+    justify-content: flex-start;
+    font-size: 16px;
+    margin-top:10px;
+}
+
+.single-rows label{
+    min-width: 30%;
+    font-weight: 500;
+    color: #0A2647;
+}
+
+.call{
+    width: 15px;
+}
+.content-boxs{
+    font-weight: 400;
+}
+.arrow{
+    font-size: 32px;
+}
+
+.no-margin{
+    margin: 0;
+}
+.subject{
+    background-color: #E7E9ED;
+}
+.register-content-rows{
+    padding-top: 0 !important;
+    box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+}
+h5{
+    margin-bottom: 0 !important;
+}
+
+.subject-content p{
+    margin-bottom: 8px;
+}
+.second-row{
+    border-top: solid  rgba(0, 0, 0, 0.25) 1px ;
+    border-bottom: solid  rgba(0, 0, 0, 0.25) 1px ;
+
+}
+.second-row p{
+    margin-bottom: 8px;
+}
+.third-row{
+    margin: 8px 16px !important;
+}
+.fourth-row{
+    padding: 16px 0;
+}
+.single-rows .content-boxs button{
+    padding: 8px 66px;
+    font-weight: 500;
+}
+.reqloc{
+    margin-right: 195px;
+    font-weight: 500;
+}
+.NgxEditor{
+    border:none !important;
+}
+.single-row sup{
+    color: red;
+}

@@ -1,0 +1,305 @@
+.register-content {
+  background-color: #fff;
+}
+
+.register-content-row {
+  background-color: #E7E9ED;
+  margin-top: 10px;
+
+}
+
+.hero-col {
+  padding: 0;
+}
+
+.custom-row {
+  margin-top: 0px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+}
+
+.job-card {
+  color: #0A2647;
+  font-weight: 400;
+
+}
+
+.job-card i {
+  color: #D9D9D9;
+}
+
+.border-remove {
+  border: none;
+}
+
+.card-job-title {
+  font-size: 26px;
+  font-weight: 500;
+
+}
+
+.card-job-sub-title {
+  font-size: 16px;
+}
+
+
+.job-post-view-logo {
+  width: 70px;
+}
+
+.width-custom {
+  width: 25px;
+  text-align: left;
+}
+
+.card-job-content-data div {
+  margin-top: 5px;
+}
+
+.job-view {
+  margin: 16px;
+}
+
+.single-row {
+  align-items: normal;
+  justify-content: flex-start;
+  font-size: 14px;
+}
+
+.single-row label {
+  min-width: 30%;
+}
+
+.call {
+  width: 15px;
+}
+
+.content-box {
+  font-weight: 400;
+}
+
+.arrow {
+  font-size: 32px;
+}
+
+.no-margin {
+  margin: 0;
+}
+
+.pre-next-page {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pre-next-page img {
+  width: 20px;
+}
+
+
+/* card-header */
+
+.card-wrap {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.card-image-section {
+  min-width: 30%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-content-data {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.card-job-content-heading {
+  width: 45%;
+}
+
+.apply-now button {
+  width: 50%;
+}
+
+.g-image-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-header-heading {
+  margin-bottom: 20px;
+}
+
+/* card-header */
+
+.subject {
+  background-color: #E7E9ED;
+}
+
+.register-content-row {
+  padding-top: 0 !important;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+}
+
+h5 {
+  margin-bottom: 0 !important;
+}
+
+.subject-content p {
+  margin-bottom: 8px;
+}
+
+.second-row {
+  border-top: solid rgba(0, 0, 0, 0.25) 1px;
+  border-bottom: solid rgba(0, 0, 0, 0.25) 1px;
+
+}
+
+.second-row p {
+  margin-bottom: 8px;
+}
+
+.third-row {
+  margin: 8px 16px !important;
+}
+
+.fourth-row {
+  padding: 16px 0;
+}
+
+.single-row .content-box button {
+  padding: 8px 66px;
+  font-weight: 500;
+}
+
+.register-content-row {
+  border-radius: 5px !important;
+  background-color: #E7E9ED;
+}
+
+.job-post-register-content {
+  margin-top: 10px !important;
+}
+
+.card-body {
+  padding: 16px !important;
+  width: 95% !important;
+  margin: auto;
+  margin-top: 20px;
+  border-top: none !important;
+  box-shadow: none !important;
+
+}
+
+.job-card {
+
+  border-bottom: solid #E7E9ED 4px;
+}
+
+.applied {
+  background: white;
+  color: green;
+  border: none;
+}
+
+.home {
+  border: none;
+  background: transparent
+}
+
+.awebsite {
+  color: blue;
+  text-decoration: underline;
+}
+
+.wrap {
+  width: 100px;
+  height: 2em;
+  line-height: 1em;
+  font-size: 14px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  margin-bottom: 12px;
+  cursor: pointer;
+  word-break: break-all;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.wrap:hover {
+  overflow: visible;
+  white-space: normal;
+  height: auto;
+  /* just added this line */
+}
+
+
+.report-popup{
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.404);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.report-popup .popup{
+  width: 37vw;
+  height: fit-content;
+  padding: 4vh 0;
+  background-color: #EEEEEE;
+  box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+}
+.report-popup .popup-container{
+  width: 50%;
+  margin: auto;
+}
+.report-popup h1{
+  text-align: center;
+  color: #FD841F;
+}
+.report-popup h3{
+  margin-top: 20px;
+  font-size: 25px;
+  font-weight: 500;
+}
+.report-popup h5{
+  margin-bottom: 20px;
+}
+.report-popup .popup-container div{
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+.report-popup .popup-container input{
+  margin-right: 10px;
+  cursor: pointer;
+}
+.report-popup textarea{
+  width: 90%;
+  min-height: 150px;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.25);
+border-radius: 10px;
+border: none;
+}
+.report-popup .submit-btn{
+  display: flex;
+  justify-content: center;
+}
+.report-popup .submit-btn button{
+  background-color: #0A2647;
+  color: white;
+  padding: 6px 25px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
