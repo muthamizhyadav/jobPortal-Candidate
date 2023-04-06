@@ -132,7 +132,6 @@ export class GetallcandidateProfileComponent implements OnInit {
   }
   isDisplay = false;
   dispalye(data: any) {
-    console.log("lusu")
     let value = data.target.value.split(",");
 
     if (data.target.value) {

@@ -28,7 +28,7 @@ export class CanGetComponent implements OnInit {
     experience: new FormControl(null),
     experienceAnotherfrom: new FormControl(null),
     experienceAnotherto: new FormControl(null),
-    Location: new FormControl([]),
+    Location: new FormControl(''),
     workmode: new FormControl([]),
     department: new FormControl([]),
     education: new FormControl([]),
@@ -97,7 +97,7 @@ export class CanGetComponent implements OnInit {
     this.getEducation(this.range);
     this.getIndustry(this.range);
     this.location();
-    this.getAll_industry()
+    this.getAll_industry();
   }
   get_allJobs() {
     this.searchForm.patchValue({
@@ -105,12 +105,14 @@ export class CanGetComponent implements OnInit {
     })
     this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res: any) => {
       this.jobs = res.data;
+      console.log(res)
       this.displaycount = this.page;
       this.totalcount = res.count;
       this.pagetotal = Math.ceil(res.count / this.searchForm.get('range')?.value);
       console.log(this.displaycount)
       console.log(this.pagetotal - 1 == this.displaycount, "page")
       this.recentSearch();
+
     })
   }
   // get department
@@ -226,7 +228,6 @@ export class CanGetComponent implements OnInit {
   // get skills
   isDisplay = false;
   dispalye(data: any) {
-    console.log("lusu")
     let value = data.target.value.split(",");
 
     if (data.target.value) {
@@ -259,11 +260,43 @@ export class CanGetComponent implements OnInit {
       this.searchForm.get('searchbox')?.setValue(search);
     }
   }
-  // location
-  // displayPlace($event:any){
+  isShow: any = false;
+  viewLocation: any;
+  changeLoction(e: any) {
+    let value = e.target.value.split(",");
 
-  // }
-  // recent Search
+    if (e.target.value) {
+      this.isShow = true;
+    } else {
+      this.isShow = false
+    }
+    if (value.length != 0) {
+      if (value[value.length - 1] != null && value[value.length - 1] != '') {
+        this.getLocated(value[value.length - 1])
+      }
+    }
+    this.searchForm.get('Location')?.setValue(value)
+  }
+
+  checkLocation(e: any, loc: any) {
+    this.isShow = false;
+    let index: any = this.searchForm.get('Location')?.value;
+    console.log(index, "location")
+    if (index.length != 0) {
+      let value = index.splice([index.length - 1], 1);
+      index.push(loc)
+      this.searchForm.get('Location')?.setValue(index)
+      let search: any = index.toString() + ","
+      // this.searchForm.get('searchbox')?.setValue(search);
+    }
+  }
+
+  getLocated(value: any) {
+    this.canditSarvice.get_allLocation(value).subscribe((res: any) => {
+      this.viewLocation = res.predictions;
+      console.log(res)
+    })
+  }
   recentSearch() {
     this.canditSarvice.getRecentsearch().subscribe((res: any) => {
       this.recentData = res;
@@ -279,7 +312,7 @@ export class CanGetComponent implements OnInit {
         searchbox: res.search,
         search: res.search,
       })
-      console.log(res.experience,"search")
+      console.log(res.experience, "search")
       // this.datavalues = res.search
     })
   }
@@ -745,15 +778,15 @@ export class CanGetComponent implements OnInit {
     this.searchForm.get('experience')?.setValue('')
 
   }
-  find_expfromTo(expfrom: any,expto: any){
-    if(expfrom && expto){
-      return expfrom+'to'+expto
+  find_expfromTo(expfrom: any, expto: any) {
+    if (expfrom && expto) {
+      return expfrom + 'to' + expto
     }
     else {
       return '';
     }
   }
-  remove_filterexpFromto(expfrom:any,expTo:any){
+  remove_filterexpFromto(expfrom: any, expTo: any) {
     this.searchForm.get('experienceAnotherfrom')?.setValue(null)
     this.searchForm.get('experienceAnotherto')?.setValue(null)
   }
@@ -793,8 +826,8 @@ export class CanGetComponent implements OnInit {
       }
     }
   }
-convertsalary(value:any){
-  return value/100000
-}
+  convertsalary(value: any) {
+    return value / 100000
+  }
 }
 
