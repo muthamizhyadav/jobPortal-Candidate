@@ -79,7 +79,7 @@ export class CanGetComponent implements OnInit {
 
 
   ngOnInit() {
-    this.recentSearch();
+    // this.recentSearch();
     this.activateroute.queryParams.subscribe((res: any) => {
       if (res.tab) {
         this.tab = res.tab;
@@ -87,7 +87,7 @@ export class CanGetComponent implements OnInit {
       }
       this.searchForm.patchValue({
         searchbox: res.search,
-        location: res.location,
+        Location: res.Location,
         experience: res.experience
       })
     })
@@ -97,20 +97,23 @@ export class CanGetComponent implements OnInit {
     this.getEducation(this.range);
     this.getIndustry(this.range);
     this.location();
-    this.getAll_industry()
+    this.getAll_industry();
   }
   get_allJobs() {
     this.searchForm.patchValue({
       page: this.page
     })
     this.canditSarvice.getAlldetails(this.searchForm.value).subscribe((res: any) => {
+      console.log(res)
       this.jobs = res.data;
+      console.log(res)
       this.displaycount = this.page;
       this.totalcount = res.count;
       this.pagetotal = Math.ceil(res.count / this.searchForm.get('range')?.value);
       console.log(this.displaycount)
       console.log(this.pagetotal - 1 == this.displaycount, "page")
       this.recentSearch();
+
     })
   }
   // get department
@@ -215,18 +218,18 @@ export class CanGetComponent implements OnInit {
   // search
   search() {
     console.log(this.searchForm.get('search')?.value)
-    console.log(this.searchForm.get('location')?.valid)
+    console.log(this.searchForm.get('Location')?.valid)
     console.log(this.searchForm.get('experience')?.value)
-    console.log(this.searchForm.get('searchbox')?.value, "value")
+    // console.log(this.searchForm.get('searchbox')?.value, "value")
     // this.searchForm.get('search')?.setValue(this.searchForm.get('searchbox')?.value)
-    // if (this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid) {
-    this.get_allJobs();
-    // }
+    if (this.searchForm.get('search')?.valid && this.searchForm.get('Location')?.valid && this.searchForm.get('experience')?.valid) {
+      this.get_allJobs();
+      this.recentSearch();
+    }
   }
   // get skills
   isDisplay = false;
   dispalye(data: any) {
-    console.log("lusu")
     let value = data.target.value.split(",");
 
     if (data.target.value) {
@@ -259,11 +262,43 @@ export class CanGetComponent implements OnInit {
       this.searchForm.get('searchbox')?.setValue(search);
     }
   }
-  // location
-  // displayPlace($event:any){
+  isShow: any = false;
+  viewLocation: any;
+  changeLoction(e: any) {
+    let value = e.target.value.split(",");
 
-  // }
-  // recent Search
+    if (e.target.value) {
+      this.isShow = true;
+    } else {
+      this.isShow = false
+    }
+    if (value.length != 0) {
+      if (value[value.length - 1] != null && value[value.length - 1] != '') {
+        this.getLocated(value[value.length - 1])
+      }
+    }
+    this.searchForm.get('Location')?.setValue(value)
+  }
+
+  checkLocation(e: any, loc: any) {
+    this.isShow = false;
+    let index: any = this.searchForm.get('Location')?.value;
+    console.log(index, "location")
+    if (index.length != 0) {
+      let value = index.splice([index.length - 1], 1);
+      index.push(loc)
+      this.searchForm.get('Location')?.setValue(index)
+      // let search: any = index.toString() + ","
+      // this.searchForm.get('searchbox')?.setValue(search);
+    }
+  }
+
+  getLocated(value: any) {
+    this.canditSarvice.get_allLocation(value).subscribe((res: any) => {
+      this.viewLocation = res.predictions;
+      console.log(res)
+    })
+  }
   recentSearch() {
     this.canditSarvice.getRecentsearch().subscribe((res: any) => {
       this.recentData = res;
@@ -274,12 +309,14 @@ export class CanGetComponent implements OnInit {
     // this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid&& this.searchForm.get('experience')?.valid
     this.canditSarvice.getReacent_data(value).subscribe((res: any) => {
       this.searchForm.patchValue({
-        location: res.location,
+        Location: res.Location,
         experience: res.experience,
         searchbox: res.search,
         search: res.search,
       })
-      console.log(res.experience,"search")
+      console.log(res.search, "search")
+      console.log(res.Location, "location")
+      console.log(res.experience, "experience")
       // this.datavalues = res.search
     })
   }
@@ -301,7 +338,7 @@ export class CanGetComponent implements OnInit {
   savedSearchData(id: any) {
     this.canditSarvice.saveddata(id).subscribe((res: any) => {
       this.searchForm.patchValue({
-        location: res.location,
+        Location: res.Location,
         experience: res.experience
       })
       this.datavalues = res.search
@@ -745,22 +782,20 @@ export class CanGetComponent implements OnInit {
     this.searchForm.get('experience')?.setValue('')
 
   }
-  find_expfromTo(expfrom: any,expto: any){
-    if(expfrom && expto){
-      return expfrom+'to'+expto
+  find_expfromTo(expfrom: any, expto: any) {
+    if (expfrom && expto) {
+      return expfrom + 'to' + expto
     }
     else {
       return '';
     }
   }
-  remove_filterexpFromto(expfrom:any,expTo:any){
+  remove_filterexpFromto(expfrom: any, expTo: any) {
     this.searchForm.get('experienceAnotherfrom')?.setValue(null)
     this.searchForm.get('experienceAnotherto')?.setValue(null)
   }
   pagination(val: any) {
-    console.log("sdbsjhdj")
     if (val == 1) {
-      console.log("sdbsjhdj")
       this.page = this.page + 1;
       console.log(this.page)
       if (this.tab == 0) {
@@ -793,8 +828,8 @@ export class CanGetComponent implements OnInit {
       }
     }
   }
-convertsalary(value:any){
-  return value/100000
-}
+  convertsalary(value: any) {
+    return value / 100000
+  }
 }
 

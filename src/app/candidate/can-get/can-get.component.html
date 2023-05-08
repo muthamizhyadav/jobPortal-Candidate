@@ -27,10 +27,25 @@
                   </div>
                 </div>
               </div>
-              <div class="search-box second-search-box">
-                <input type="text" class="form-control location" placeholder="Enter Location" style="width: 101%;"
-                  formControlName="Location">
+
+
+              <div class="search-box first-search-box">
+                <input type="text" class="form-control keyskill" placeholder="Enter Location"
+                  (keyup)="changeLoction($event)" formControlName="Location">
+                <div class="" *ngIf="isShow" style="margin-top:0px;">
+                  <label></label>
+                  <div class="content-box keylist" style="background: white;">
+                    <ul class="ulkeylist" style="padding-left: 0px;" class="">
+                      <li class="ilkeylist" style="cursor:pointer" *ngFor="let item of viewLocation"
+                        (click)="checkLocation($event,item.description)">
+                        <span>{{item.description}}</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
               </div>
+
+
               <div class="search-box">
                 <select class="form-control select-type douple-input-first" formControlName="experience">
                   <option [ngValue]="null" selected disabled>YEAR</option>
@@ -74,7 +89,8 @@
               </div>
             </div>
             <div class="advanced-search">
-              <button class="btn btn-brand-trans" data-bs-toggle="modal" data-bs-target="#exampleModal"><a style="color: white;text-decoration: underline;">Advanced
+              <button class="btn btn-brand-trans" data-bs-toggle="modal" data-bs-target="#exampleModal"><a
+                  style="color: white;text-decoration: underline;">Advanced
                   Search</a></button>
             </div>
           </div>
@@ -106,16 +122,14 @@
                     <div class="search-box search-box1">
                       <div class="dropdown">
                         <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                          data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
                           Work Mode<i class="fa fa-angle-down" style="margin-left: 59px;"></i>
                         </button>
                         <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
-                          <li><input type="checkbox" value="onsite" (change)="changeWorkmode($event)"
-                             >Onsite</li>
-                          <li><input type="checkbox" value="work from home"
-                              (change)="changeWorkmode($event)">Work form home</li>
-                          <li><input type="checkbox" value="hybrid"
-                              (change)="changeWorkmode($event)">Hybrid</li>
+                          <li><input type="checkbox" value="onsite" (change)="changeWorkmode($event)">Onsite</li>
+                          <li><input type="checkbox" value="work from home" (change)="changeWorkmode($event)">Work form
+                            home</li>
+                          <li><input type="checkbox" value="hybrid" (change)="changeWorkmode($event)">Hybrid</li>
                         </ul>
                       </div>
                     </div>
@@ -127,8 +141,8 @@
                     <button class="btn btn1 collapsebtn" type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapseExample" aria-expanded="false" style="
                         font-weight: 500;
-                        font-size: 14px;padding-left: 0px;" aria-controls="collapseExample">Experience</button><i class="fa fa-angle-down"
-                      style="margin-left: 45px;"></i>
+                        font-size: 14px;padding-left: 0px;" aria-controls="collapseExample">Experience</button><i
+                      class="fa fa-angle-down" style="margin-left: 45px;"></i>
                     <div class="collapse" id="collapseExample">
                       <div class="card card-body" style="padding: 0px;">
                         <div style="display:flex">
@@ -212,8 +226,9 @@
                     <div class="search-box search-box1">
                       <div class="dropdown">
                         <button class="btn btn1 dropdown-toggle salarybtn" type="button"
-                          style="font-weight: 500;font-size: 14px;padding-left: 4px;width: 163px;" id="dropdownMenuButton1"
-                          data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          style="font-weight: 500;font-size: 14px;padding-left: 4px;width: 163px;"
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                          data-bs-auto-close="outside">
                           Deparment<i class="fa fa-angle-down" style="margin-left: 59px;"></i>
                         </button>
                         <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -234,7 +249,8 @@
                     <div class="search-box search-box1">
                       <div class="dropdown">
                         <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width:160px"
-                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                          data-bs-auto-close="outside">
                           Location<i class="fa fa-angle-down" style="margin-left: 77px;"></i>
                         </button>
                         <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -250,7 +266,8 @@
                     <div class="search-box search-box1">
                       <div class="dropdown">
                         <button class="btn btn1 dropdown-toggle salarybtn" style="width: 100px;" type="button"
-                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                          data-bs-auto-close="outside">
                           Salary<i class="fa fa-angle-down" style="margin-left: 92px;"></i>
                         </button>
                         <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -275,11 +292,13 @@
                     <div class="search-box search-box1">
                       <div class="dropdown">
                         <button class="btn btn1 dropdown-toggle salarybtn" style="width: 100px;" type="button"
-                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"  data-bs-auto-close="outside">
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                          data-bs-auto-close="outside">
                           Company Type<i class="fa fa-angle-down" style="margin-left: 28px;"></i>
                         </button>
                         <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
-                          <li value="Start up"><input type="checkbox" (change)="companyType($event)" value="start up">Start
+                          <li value="Start up"><input type="checkbox" (change)="companyType($event)"
+                              value="start up">Start
                             up</li>
                           <li value="1 to 2 lac"><input type="checkbox" (change)="companyType($event)"
                               value="indian mnc">MNC</li>
@@ -295,15 +314,16 @@
                   <li class="refine-content">
                     <div class="dropdown search-box1">
                       <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                        data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;"
+                        data-bs-auto-close="outside">
                         Role<i class="fa fa-angle-down" style="margin-left: 104px;"></i>
                       </button>
                       <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
                         <li value="Last 30 days" *ngFor="let role of roles"><input type="checkbox" value="{{role._id}}"
                             (change)="roleChange($event)">{{role.Job_role}}</li>
-                            <div style="margin-top: 7px;margin-left: 99px;">
-                              <a style="text-decoration: underline;" (click)="role('null')">View all</a>
-                            </div>
+                        <div style="margin-top: 7px;margin-left: 99px;">
+                          <a style="text-decoration: underline;" (click)="role('null')">View all</a>
+                        </div>
                       </ul>
 
                     </div>
@@ -313,7 +333,8 @@
                     <div class="search-box search-box1">
                       <div class="dropdown">
                         <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                          data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                          data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;"
+                          data-bs-auto-close="outside">
                           Education<i class="fa fa-angle-down" style="margin-left: 65px;"></i>
                         </button>
                         <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -331,13 +352,16 @@
                     <div class="search-box search-box1">
                       <div class="dropdown">
                         <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width: 100px"
-                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                          data-bs-auto-close="outside">
                           Posed by<i class="fa fa-angle-down" style="margin-left: 73px;"></i>
                         </button>
                         <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
-                          <li value="Last 30 days"><input type="checkbox" (change)="postedBy($event)" value="">Consultancy
+                          <li value="Last 30 days"><input type="checkbox" (change)="postedBy($event)"
+                              value="">Consultancy
                           </li>
-                          <li value="Last 15 days"><input type="checkbox" (change)="postedBy($event)" value="">Company</li>
+                          <li value="Last 15 days"><input type="checkbox" (change)="postedBy($event)" value="">Company
+                          </li>
                         </ul>
                       </div>
                     </div>
@@ -347,7 +371,8 @@
                     <div class="search-box search-box1">
                       <div class="dropdown">
                         <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width: 100px"
-                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
+                          id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                          data-bs-auto-close="outside">
                           Industry<i class="fa fa-angle-down" style="margin-left: 80px;"></i>
                         </button>
                         <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
@@ -364,21 +389,28 @@
                   <li class="refine-content">
                     <div class="dropdown">
                       <button class="btn btn1 dropdown-toggle salarybtn" type="button" id="dropdownMenuButton1"
-                        data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;" data-bs-auto-close="outside">
+                        data-bs-toggle="dropdown" aria-expanded="false" style="width: 100px;"
+                        data-bs-auto-close="outside">
                         Freshness<i class="fa fa-angle-down" style="margin-left: 66px;"></i>
                       </button>
                       <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
-                        <li value="Last 30 days"><input type="checkbox" (change)="freshness($event)" value="30">Last 30 days
+                        <li value="Last 30 days"><input type="checkbox" (change)="freshness($event)" value="30">Last 30
+                          days
                         </li>
-                        <li value="Last 15 days"><input type="checkbox" (change)="freshness($event)" value="15">Last 15 days
+                        <li value="Last 15 days"><input type="checkbox" (change)="freshness($event)" value="15">Last 15
+                          days
                         </li>
-                        <li value="Last 7 days"><input type="checkbox" (change)="freshness($event)" value="7">Last 7 days
+                        <li value="Last 7 days"><input type="checkbox" (change)="freshness($event)" value="7">Last 7
+                          days
                         </li>
-                        <li value="Last 5 days"><input type="checkbox" (change)="freshness($event)" value="5">Last 5 days
+                        <li value="Last 5 days"><input type="checkbox" (change)="freshness($event)" value="5">Last 5
+                          days
                         </li>
-                        <li value="Last 3 days"><input type="checkbox" (change)="freshness($event)" value="3">Last 3 days
+                        <li value="Last 3 days"><input type="checkbox" (change)="freshness($event)" value="3">Last 3
+                          days
                         </li>
-                        <li value="Last 1 days"><input type="checkbox" (change)="freshness($event)" value="1">Last 1 days
+                        <li value="Last 1 days"><input type="checkbox" (change)="freshness($event)" value="1">Last 1
+                          days
                         </li>
                       </ul>
                     </div>
@@ -499,7 +531,8 @@
             <div class="col">
               <div class="filter-label">
                 <ng-container *ngIf="searchForm.get('search')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('search')?.value">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('search')?.value">
                     <span>{{find_value(item,'keyskill')}}</span>
                     <span class="close-mark" (click)="remove_filter(item,'keyskill')">x</span>
                   </span>
@@ -511,25 +544,29 @@
                   </span>
                 </ng-container>
                 <ng-container *ngIf="searchForm.get('workmode')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('workmode')?.value">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('workmode')?.value">
                     <span>{{find_value(item,'workMode')}}</span>
                     <span class="close-mark" (click)="remove_filter(item,'workMode')">x</span>
                   </span>
                 </ng-container>
                 <ng-container *ngIf="searchForm.get('department')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('department')?.value">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('department')?.value">
                     <span>{{find_value(item,'department')}}</span>
                     <span class="close-mark" (click)="remove_filter(item,'department')">x</span>
                   </span>
                 </ng-container>
                 <ng-container *ngIf="searchForm.get('Salary')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('Salary')?.value">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('Salary')?.value">
                     <span>{{find_value(item,'Salary')}}</span>
                     <span class="close-mark" (click)="remove_filter(item,'Salary')">x</span>
                   </span>
                 </ng-container>
                 <ng-container *ngIf="searchForm.get('companytype')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('companytype')?.value">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('companytype')?.value">
                     <span>{{find_value(item,'companytype')}}</span>
                     <span class="close-mark" (click)="remove_filter(item,'companytype')">x</span>
                   </span>
@@ -541,33 +578,40 @@
                   </span>
                 </ng-container>
                 <ng-container *ngIf="searchForm.get('education')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('education')?.value">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('education')?.value">
                     <span>{{find_value(item,'education')}}</span>
                     <span class="close-mark" (click)="remove_filter(item,'education')">x</span>
                   </span>
                 </ng-container>
                 <ng-container *ngIf="searchForm.get('postedby')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('postedby')?.value">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('postedby')?.value">
                     <span>{{find_value(item,'postedby')}}</span>
                     <span class="close-mark" (click)="remove_filter(item,'postedby')">x</span>
                   </span>
                 </ng-container>
                 <ng-container *ngIf="searchForm.get('preferredIndustry')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('preferredIndustry')?.value">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('preferredIndustry')?.value">
                     <span>{{find_value(item,'preferredIndustry')}}</span>
                     <span class="close-mark" (click)="remove_filter(item,'preferredIndustry')">x</span>
                   </span>
                 </ng-container>
                 <ng-container *ngIf="searchForm.get('freshness')?.value != null">
-                  <span class="badge searchlabel bg-light text-dark" *ngFor="let item of searchForm.get('freshness')?.value">
+                  <span class="badge searchlabel bg-light text-dark"
+                    *ngFor="let item of searchForm.get('freshness')?.value">
                     <span>{{find_value(item,'freshness')}}</span>
                     <span class="close-mark" (click)="remove_filter(item,'freshness')">x</span>
                   </span>
                 </ng-container>
-                <ng-container *ngIf="searchForm.get('experienceAnotherfrom')?.value != null && searchForm.get('experienceAnotherto')?.value != null">
+                <ng-container
+                  *ngIf="searchForm.get('experienceAnotherfrom')?.value != null && searchForm.get('experienceAnotherto')?.value != null">
                   <span class="badge searchlabel bg-light text-dark">
-                    <span>{{find_expfromTo(searchForm.get('experienceAnotherfrom')?.value ,searchForm.get('experienceAnotherto')?.value)}}</span>
-                    <span class="close-mark" (click)="remove_filterexpFromto(searchForm.get('experienceAnotherfrom')?.value,searchForm.get('experienceAnotherto')?.value)">x</span>
+                    <span>{{find_expfromTo(searchForm.get('experienceAnotherfrom')?.value
+                      ,searchForm.get('experienceAnotherto')?.value)}}</span>
+                    <span class="close-mark"
+                      (click)="remove_filterexpFromto(searchForm.get('experienceAnotherfrom')?.value,searchForm.get('experienceAnotherto')?.value)">x</span>
                   </span>
                 </ng-container>
               </div>
@@ -615,11 +659,17 @@
               <div class="col wrap">
                 {{job.jobLocation}}
               </div>
-              <div class="col">
-                {{job.experienceFrom}} To {{job.experienceTo}}
+              <div class="col" *ngIf="job.experienceFrom == job.experienceTo">
+                {{job.experienceTo}} Year
               </div>
-              <div class="col">
-                {{job.salaryRangeFrom}} To {{(job.salaryRangeTo)}}
+              <div class="col" *ngIf="!(job.experienceFrom == job.experienceTo)">
+                {{job.experienceFrom}} - {{job.experienceTo}}
+              </div>
+              <div class="col" *ngIf="job.salaryRangeFrom == job.salaryRangeTo">
+                {{job.salaryRangeTo}} Lac
+              </div>
+              <div class="col" *ngIf="!(job.salaryRangeFrom == job.salaryRangeTo)">
+                {{job.salaryRangeFrom}} - {{job.salaryRangeTo}}
               </div>
               <div class="col">
                 {{job.date}}
@@ -1137,8 +1187,10 @@
                 <button style="border: none;" (click)="pagination(0)"><img src="../../assets/image/left-arrow.png"
                     alt="" style="margin-top: 17px;" class="p-left"></button>
                 <div class="pageination-number">{{page+1}}</div>
-                <button style="border: none;background: transparent;" (click)="pagination(1)"><img src="../../assets/image/right-arrow.png"
-                    style="margin-top: 17px;" alt="" class="p-right"></button>
+                <button style="border: none;background: transparent;" (click)="pagination(1)"
+                  [disabled]="page+1 > pagetotal"
+                  [ngClass]="{'pointer-events': page+1 > pagetotal ? 'none' : 'auto'}"><img
+                    src="../../assets/image/right-arrow.png" style="margin-top: 17px;" alt="" class="p-right"></button>
               </div>
             </div>
             <div class="col">
@@ -1203,7 +1255,7 @@
                         <ellipse cx="4.99986" cy="4.80064" rx="1.24986" ry="1.20006" fill="white" />
                       </svg>
                     </i>
-                    <p>{{recent.location}}</p>
+                    <p>{{recent.Location}}</p>
                   </div>
                   <div class="years">
                     <p>{{recent.experience}} Year</p>
@@ -1316,13 +1368,12 @@
               <div class="single-row">
                 <label for="">Course :</label>
                 <div class="content-box">
-                    <ng-multiselect-dropdown id="courseInput" class="w-100"
-                        style="background-color: white;" name='courses'
-                        [settings]="dropdownSettings" [data]="allIndustry"
-                        (onSelect)="pushCourse($event)"  (onDeSelect)="onDeSelect($event)">
-                    </ng-multiselect-dropdown>
+                  <ng-multiselect-dropdown id="courseInput" class="w-100" style="background-color: white;"
+                    name='courses' [settings]="dropdownSettings" [data]="allIndustry" (onSelect)="pushCourse($event)"
+                    (onDeSelect)="onDeSelect($event)">
+                  </ng-multiselect-dropdown>
                 </div>
-            </div>
+              </div>
               <div class="single-row  mt-5">
                 <label for=""> </label>
                 <div class="content-box">

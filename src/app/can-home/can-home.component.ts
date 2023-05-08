@@ -58,16 +58,19 @@ export class CanHomeComponent implements OnInit {
 
   getjobS() {
     this.canditSarvice.jobs(this.searchForm.value).subscribe((res: any) => {
+      console.log(res)
       this.displaycount = this.page;
-      this.totalcount = res.count;
-      this.pagetotal = Math.ceil(res.count / this.searchForm.get('range')?.value);
+      console.log(this.displaycount)        
+      this.totalcount = res.user.count;
+      console.log(this.totalcount)
+      this.pagetotal = Math.ceil(this.totalcount / this.searchForm.get('range')?.value);
+      console.log(this.pagetotal)
       this.jobs = res.user.data;
     })
   }
   // get skills
   isDisplay = false;
-  dispalye(data: any) {
-    console.log("lusu")
+  dispalye(data: any) { 
     let value = data.target.value.split(",");
 
     if (data.target.value) {
@@ -353,15 +356,14 @@ export class CanHomeComponent implements OnInit {
     this.getjobS();
   }
   pagination(val: any) {
-    console.log("sdbsjhdj")
     if (val == 1) {
-      console.log("sdbsjhdj")
+      console.log("nxt")
       this.page = this.page + 1;
       this.getjobS();
-
     }
     if (val == 0) {
       if (this.page != 0) {
+        console.log("previous")
         this.page = this.page - 1;
         this.getjobS();
       }

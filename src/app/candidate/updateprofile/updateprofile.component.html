@@ -34,7 +34,10 @@
                           style="display: none;" formControlName="image" accept="image/gif, image/jpeg, image/png"
                           (change)="selectedImg1($event)">
                       </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2413ab7153eb9179148ce20d74eab7859beb3caf
                     </div>
                   </div>
 
@@ -137,22 +140,7 @@
                   <div class="single-row">
                     <label for="" class="lable-data">Expected CTC <span>*</span>:</label>
                     <div class="content-box">
-                      <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="expectedctc"> -->
-                      <select class="form-control select-type douple-input-first" formControlName="expectedctc">
-                        <option value="option1" disabled selected>Expected CTC</option>
-                        <option value="0-1">0 to 1 lac</option>
-                        <option value="1-2">1 to 2 lac</option>
-                        <option value="2-3">2 to 3 lac</option>
-                        <option value="2-4">3 to 4 lac</option>
-                        <option value="4-5">4 to 5 lac</option>
-                        <option value="5-8">5 to 8 lac</option>
-                        <option value="8-10">8 to 10 lac</option>
-                        <option value="10-13">10 to 13 lac</option>
-                        <option value="13-15">13 to 15 lac</option>
-                        <option value="15-20">15 to 20 lac</option>
-                        <option value="30-more">30 lac+</option>
-                      </select>
-
+                      <input type="number" class="form-control" placeholder="Enter CTC" formControlName="expectedctc" min="0">
                     </div>
 
                   </div>
@@ -162,9 +150,10 @@
                       <p>Expected CTC is required!</p>
                     </div>
                   </div>
-                  <div class="single-row" *ngIf="profileForm.get('experienceYear')?.value != 0">
+                  <div class="single-row">
                     <label for="" class="lable-data">Current CTC <span>*</span>:</label>
                     <div class="content-box">
+<<<<<<< HEAD
                       <select class="form-control select-type douple-input-first" formControlName="currentctc" [(ngModel)]="currentCtc">
                         <option value="option1" disabled selected></option>
                         <option value=1>1 lac</option>
@@ -195,6 +184,9 @@
                         <option value=60000>60000</option>
                       </select>
                       <!-- <input type="text" class="form-control" placeholder="Enter CTC" formControlName="currentctc"> -->
+=======
+                      <input type="number" class="form-control" placeholder="Enter CTC" formControlName="currentctc" min="0">
+>>>>>>> 2413ab7153eb9179148ce20d74eab7859beb3caf
                     </div>
 
                   </div>
