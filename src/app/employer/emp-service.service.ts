@@ -43,6 +43,9 @@ export class EmpServiceService {
   getdataAdvanceEmployeeDetails(){
     return this.http.get(this.baseurl+ '/v1/employerdetail/getEmpDetails',{headers:{auth:Cookie.get('emptoken')}})
   }
+  getEmployerDetails(){
+    return this.http.get(this.baseurl+ '/v1/employerRegistration/userDetails',{headers:{auth:Cookie.get('emptoken')}})
+  }
   myjobPost(){
     return this.http.get(this.baseurl+'/v1/employerdetail/getEmpDetails',{headers:{auth:Cookie.get('emptoken')}})
   }
@@ -73,6 +76,7 @@ get_department_search(count:any){
   return this.http.get(this.baseurl+'/v1/educationDetails/get_Department_all/'+count)
 }
 get_category(id:any){
+
   return this.http.get(this.baseurl+'/v1/educationDetails/get_Rolecategory/' + id)
 }
 get_role(id:any){

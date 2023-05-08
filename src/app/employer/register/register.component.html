@@ -24,10 +24,11 @@
                                 <label for="">Company Logo :</label>
                                 <div class="content-box">
                                     <div>
-                                        <label for="select-logo" class="form-control logo-btn">+Add Logo</label>
+                                        <label  *ngIf="input" for="select-logo" class="form-control logo-btn">+Add Logo</label>
                                         <input type="file" id="select-logo" class="form-control logo-btn"
                                             placeholder="+Add Logo" style="display: none;" formControlName="logo" (change)="selectedImg1($event)" accept="image/gif, image/jpeg, image/png">
-                                    </div>
+                                   <img *ngIf="imageSrc" class="company-logo-img" [src]="imageSrc">
+                                        </div>
                                 </div>
 
                             </div>

@@ -102,9 +102,22 @@ export class RegisterComponent implements OnInit {
     
 
   }
+  input=true
+  imageSrc: string | ArrayBuffer | null = '';
   selectedImg1(event: any) {
     this.selectImg1 = event.target.files[0];
-
+    const file: File = event.target.files[0];
+    if (file) {
+     
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+   
+        this.imageSrc = reader.result;
+      this.input=!this.input
+      };
+    }
+    console.log(this.RegisterForm.get('logo')?.value)
   }
   addresume(file:any){
     this.file = null;

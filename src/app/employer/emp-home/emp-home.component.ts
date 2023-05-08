@@ -5,7 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { EmpServiceService } from '../emp-service.service';
 
@@ -35,7 +35,7 @@ export class EmpHomeComponent implements OnInit {
     comment: new FormControl('', Validators.required),
   });
   searchForm: any = this.fb.group({
-    keyskills: new FormControl([],Validators.required),
+    keyskills: new FormControl([], Validators.required),
     Location: new FormControl([]),
     experience: new FormControl(null),
     qualification: new FormControl(null),
@@ -44,7 +44,7 @@ export class EmpHomeComponent implements OnInit {
     gender: new FormControl(null),
     displayDetails: new FormControl(null),
     searchTittle: new FormControl(null),
-    searchbox: new FormControl(null,Validators.required),
+    searchbox: new FormControl(null, Validators.required),
     experiencefrom: new FormControl(null),
     experienceto: new FormControl(null),
     salary: this.fb.array([]),
@@ -54,7 +54,7 @@ export class EmpHomeComponent implements OnInit {
     noticeperiod: this.fb.array([]),
     range: new FormControl(10),
     page: new FormControl(0),
-    getlocation:new FormControl(null)
+    getlocation: new FormControl(null)
   });
   folderForm: any = this.fb.group({
     folderName: new FormControl(null),
@@ -112,9 +112,9 @@ export class EmpHomeComponent implements OnInit {
       return '';
     }
   }
-  find_value_exp(expfrom: any,expto: any){
-    if(expfrom && expto){
-      return expfrom +'to'+ expto
+  find_value_exp(expfrom: any, expto: any) {
+    if (expfrom && expto) {
+      return expfrom + 'to' + expto
     }
     else {
       return '';
@@ -127,7 +127,7 @@ export class EmpHomeComponent implements OnInit {
       let index = department.findIndex((a: any) => a == value);
       if (index != -1) {
         this.searchForm.get('department')?.value.splice(index, 1);
-        this.is_check=true
+        this.is_check = true
       }
     }
     if (type == 'role') {
@@ -176,8 +176,8 @@ export class EmpHomeComponent implements OnInit {
     }
     this.get_can()
   }
-  remove_filter_exp(expfrom: any,expto: any){
-     this.searchForm.get('experiencefrom')?.setValue('')
+  remove_filter_exp(expfrom: any, expto: any) {
+    this.searchForm.get('experiencefrom')?.setValue('')
     this.searchForm.get('experienceto')?.setValue('')
   }
   // getcheck(type:any,id:any){
@@ -194,8 +194,8 @@ export class EmpHomeComponent implements OnInit {
   //    }
 
   // } 
-  addlocation(data:any){
-   
+  addlocation(data: any) {
+
   }
   activeform: any = this.fb.group({
     active: new FormControl(true),
@@ -236,13 +236,16 @@ export class EmpHomeComponent implements OnInit {
   constructor(
     private empservice: EmpServiceService,
     private fb: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private aroute: ActivatedRoute,
+  ) { }
   is_viewpost: boolean = false;
   is_viewapplies: boolean = false;
   is_viewcan: boolean = true;
   is_icon1 = false;
   indus_count: any = 5;
+
+  id: any
   ngOnInit(): void {
     this.getJobpostDetails();
     this.get_can();
@@ -254,11 +257,28 @@ export class EmpHomeComponent implements OnInit {
     this.cat();
     this.getall_indus();
     this.get_city();
+    this.aroute.queryParams.subscribe((params) => {
+      this.id = params['id']
+    })
+    this.getjobPostById()
+    console.log("sdfsdfsf")
   }
+
+
+  getjobPostById() {
+    console.log("sadfkjhasjkdfh")
+    if (this.id) {
+      this.empservice.get_job_detail(this.id).subscribe((e: any) => {
+        console.log(e, "edite job post")
+      })
+    }
+  }
+
+
   getJobpostDetails() {
     this.empservice.myjobPost().subscribe((res: any) => {
       this.data = res.user;
-      console.log(res.user);
+      console.log(res);
     });
   }
   current_link() {
@@ -281,7 +301,7 @@ export class EmpHomeComponent implements OnInit {
       console.log(this.applied_data);
     });
   }
-  view_post_details() {}
+  view_post_details() { }
   can_list() {
     this.Tab = 0;
     this.is_viewcan = true;
@@ -303,14 +323,14 @@ export class EmpHomeComponent implements OnInit {
   search() {
     console.log('search', this.searchForm.value);
     // if(this.searchForm.get('keyskills')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid){
-    if(this.searchForm.get('keyskills')?.valid){
+    if (this.searchForm.get('keyskills')?.valid) {
       this.empservice.view_can(this.searchForm.value).subscribe((res: any) => {
         console.log(res);
         this.can_data = res.user.data;
         this.recent_search();
       });
     }
-    else{
+    else {
       this.err = 'Please choose any key skill to search';
       // alert(this.err)
     }
@@ -346,7 +366,7 @@ export class EmpHomeComponent implements OnInit {
       this.isDisplayad = false;
     }
   }
-  
+
   recent_search() {
     this.empservice.rcnt_search().subscribe((res: any) => {
       this.rcnt_data = res;
@@ -421,11 +441,11 @@ export class EmpHomeComponent implements OnInit {
   }
   advanced_search() {
     console.log("fsfds")
-    
-      this.empservice.view_can(this.searchForm.value).subscribe((res: any) => {
-        console.log(res);
-        this.search();
-      });
+
+    this.empservice.view_can(this.searchForm.value).subscribe((res: any) => {
+      console.log(res);
+      this.search();
+    });
   }
   pushCourse(e: any) {
     const data: FormArray = this.searchForm.get('course') as FormArray;
@@ -627,7 +647,7 @@ export class EmpHomeComponent implements OnInit {
       this.indus_data = res;
     });
   }
-  viewall_city(count: any) {}
+  viewall_city(count: any) { }
   filterrole(e: any) {
     const data = this.searchForm.get('role')?.value;
     if (e.target.checked) {
@@ -767,34 +787,34 @@ export class EmpHomeComponent implements OnInit {
     e.target.style.height = '0px';
     e.target.style.height = e.target.scrollHeight + 25 + 'px';
   }
-  getcanid_notes(id: any,comment_id:any) {
+  getcanid_notes(id: any, comment_id: any) {
     console.log("dgsgsdg")
     this.notes_can_id = id;
     this.comment_id = comment_id;
-    console.log(this.notes_can_id,comment_id);
-    if( this.comment_id != null && this.comment_id != undefined && this.comment_id != ''){
+    console.log(this.notes_can_id, comment_id);
+    if (this.comment_id != null && this.comment_id != undefined && this.comment_id != '') {
       this.empservice.get_notes(comment_id).subscribe((res: any) => {
         console.log(res);
         this.notesForm.patchValue({
-          comment:res.comment
+          comment: res.comment
         })
       });
     }
 
   }
   submitNotes() {
-    if( this.comment_id != null && this.comment_id != undefined && this.comment_id != ''){
-      console.log(this.comment_id,this.notesForm.get('comment')?.value)
+    if (this.comment_id != null && this.comment_id != undefined && this.comment_id != '') {
+      console.log(this.comment_id, this.notesForm.get('comment')?.value)
       var datas = {
         comment: this.notesForm.get('comment')?.value
       }
-      this.empservice.edit_notes(this.comment_id,datas).subscribe((res: any) => {
+      this.empservice.edit_notes(this.comment_id, datas).subscribe((res: any) => {
         console.log(res);
         this.notesForm.reset();
         this.notify();
       });
     }
-    else{
+    else {
       var data = {
         candidateId: this.notes_can_id,
         comment: this.notesForm.get('comment')?.value,
@@ -811,16 +831,16 @@ export class EmpHomeComponent implements OnInit {
     this.get_can()
   }
   checklocation(event: any, location: any) {
-      console.log('checkSkill', location);
-      let index: any = this.searchForm.get('Location')?.value;
-      index.push(location);
-      console.log(this.searchForm.get('Location')?.value)
-      let search: any = index.toString();
-      this.searchForm.get('getlocation')?.setValue(search);
-      console.log(this.searchForm.get('getlocation')?.value)
-      this.islocation = false
+    console.log('checkSkill', location);
+    let index: any = this.searchForm.get('Location')?.value;
+    index.push(location);
+    console.log(this.searchForm.get('Location')?.value)
+    let search: any = index.toString();
+    this.searchForm.get('getlocation')?.setValue(search);
+    console.log(this.searchForm.get('getlocation')?.value)
+    this.islocation = false
   }
-  get_location_search(e:any){
+  get_location_search(e: any) {
     let value = e.target.value;
     if (e.target.value) {
       this.islocation = true;
@@ -829,11 +849,11 @@ export class EmpHomeComponent implements OnInit {
     }
     this.searchedLocation(value);
   }
-  searchedLocation(value:any){
+  searchedLocation(value: any) {
     this.empservice.get_location_search(value).subscribe((res: any) => {
       console.log(res);
       this.islocation = true
-      this.searchLocation =res
+      this.searchLocation = res
     });
   }
 }

@@ -49,7 +49,7 @@ const routes: Routes = [
    {path: 'add-recruiter',loadChildren: () => import('./employer/add-recruiter/add-recruiter.module').then(m => m.AddRecruiterModule) },
    {path: 'manage-recruiter',loadChildren: () => import('./employer/manage-recruiter/manage-recruiter.module').then(m => m.ManageRecruiterModule) },
    {path: 'edit-recruiter',loadChildren: () => import('./employer/edit-recruiter/edit-recruiter.module').then(m => m.EditRecruiterModule) },
-   {path: 'edit-jobpost',loadChildren: () => import('./employer/edit-jobpost/edit-jobpost.module').then(m => m.EditJobpostModule) },
+   {path: 'edit-jobpost',loadChildren: () => import('./employer/emp-jobpost/emp-jobpost.module').then(m => m.EmpJobpostModule) },
    {path: 'view-jobpost',loadChildren: () => import('./employer/jobpost-view/jobpost-view.module').then(m => m.JobpostViewModule) },
 
 

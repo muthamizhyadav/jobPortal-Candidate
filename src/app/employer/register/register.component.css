@@ -44,3 +44,13 @@
 .content-box-block{
     display: block !important;
 }
+.company-logo-img{
+    height: 80px;
+    width: 80px;
+    border-radius: 3px;
+    overflow: hidden;
+
+}
+.company-logo-img img{
+    width: 100%;
+}

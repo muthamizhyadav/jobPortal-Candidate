@@ -33,15 +33,22 @@ export class VerifyOtpComponent implements OnInit {
     this.empservice.verifyMobile(a).subscribe((res:any)=>{
     })
   }
-
+  verifyPopup=false
   verify_now() {
+
     this.verify.patchValue({
       mobilenumber: this.mobile,
     });
     this.lengthcheck = this.verify.get('otp')?.valid ? this.verify.get('otp')?.value : 0;
       this.empservice.verify_otp(this.verify.value).subscribe((res: any) => {
-          this.router.navigate(['login']);
+          // this.router.navigate(['login']);
+          this.verifyPopup=true
         }
       );
   }
+
+  gotoLogin(){
+      this.router.navigate(['login']);
+  }
+
 }

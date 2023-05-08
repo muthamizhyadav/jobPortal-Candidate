@@ -9,14 +9,12 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployerModule } from './employer/employer.module';
-import { NgxEditorModule } from "ngx-editor";
+import { NgxEditorModule } from 'ngx-editor';
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 import { RedirectComponent } from './redirect/redirect.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AgmCoreModule } from '@agm/core';
-
-
-
+import { EditJobpostModule } from './employer/edit-jobpost/edit-jobpost.module';
 
 @NgModule({
   declarations: [
@@ -25,7 +23,6 @@ import { AgmCoreModule } from '@agm/core';
     HeaderComponent,
     FooterComponent,
     RedirectComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -40,9 +37,9 @@ import { AgmCoreModule } from '@agm/core';
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDoYhbYhtl9HpilAZSy8F_JHmzvwVDoeHI',
     }),
-
+    EditJobpostModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,4 +1,4 @@
-<p>verify-otp works!</p>
+
 <div class="container-fluid login">
     <div class="row">
       <div class="col-2 ad-image">
@@ -66,5 +66,13 @@
       <div class="col-2 ad-image">
         <img src="../../assets/image/ad.png" alt="">
       </div>
+    </div>
+  </div>
+
+
+  <div class="popup" *ngIf="verifyPopup">
+    <div class="popup-container">
+      <h3>You Are Successfully Verified</h3>
+      <button (click)="gotoLogin()">Ok</button>
     </div>
   </div>

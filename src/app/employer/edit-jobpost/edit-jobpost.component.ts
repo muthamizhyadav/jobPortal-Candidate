@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormArray, FormBuilder,AbstractControl, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { EmpServiceService } from '../emp-service.service';
+import { Editor, Toolbar } from 'ngx-editor';
 
 @Component({
   selector: 'app-edit-jobpost',
@@ -11,6 +12,32 @@ import { EmpServiceService } from '../emp-service.service';
   styleUrls: ['./edit-jobpost.component.css']
 })
 export class EditJobpostComponent implements OnInit {
+
+  editordoc = '';
+  editor!: Editor;
+  editorcan!: Editor;
+  editorsal!: Editor;
+  toolbar: Toolbar = [
+    ['bold', 'italic'],
+    ['underline'],
+    ['ordered_list', 'bullet_list'],
+    ['link'],
+    ['align_left', 'align_center', 'align_right', 'align_justify'],
+  ];
+
+  get doc(): AbstractControl {
+    return this.jobpostForm.get('jobDescription')?.value;
+  }
+  get docs(): AbstractControl {
+    return this.jobpostForm.get('candidateDescription')?.value;
+  }
+  get docsa(): AbstractControl {
+    return this.jobpostForm.get('salaryDescription')?.value;
+  }
+  ngOnDestroy(): void {
+    this.editor.destroy();
+  }
+
   isDisplay = false
   checkedList : any=[];
   jobpostForm:any = this.formBuilder.group({
@@ -47,7 +74,7 @@ export class EditJobpostComponent implements OnInit {
     course:this.formBuilder.array([], Validators.required),
     specialization:this.formBuilder.array([], Validators.required),
     searchbox: new FormControl(null),
-    
+
   });
   keySkill: any;
   latitude:any;
@@ -58,7 +85,7 @@ export class EditJobpostComponent implements OnInit {
   role_data: any;
   is_new: boolean =false;
   is_list: boolean=false;
- 
+
   dropdownSettings: IDropdownSettings = {
     singleSelection: false,
     idField: '_id',
@@ -106,7 +133,7 @@ export class EditJobpostComponent implements OnInit {
   is_course: boolean = false;
   quaname: any;
   educationArray:any=[
-   
+
   ];
   spclname: any;
   pushdata1:any;
@@ -124,9 +151,12 @@ export class EditJobpostComponent implements OnInit {
   constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.editor = new Editor();
+    this.editorcan = new Editor();
+    this.editorsal = new Editor();
     this.route.queryParams
     .subscribe(params => {
-      console.log(params['id']); 
+      console.log(params['id']);
       this.postid=params['id'];
     }
   );
@@ -138,12 +168,27 @@ export class EditJobpostComponent implements OnInit {
     this.get()
     this.get_jobpost_detail(this.postid)
   }
+recruiter:any=true
+
   get_jobpost_detail(postid: any){
     this.empservice.get_job_detail(postid).subscribe((res:any)=>{
       console.log(res);
       this.jobdetails = res.user[0]
+      // this.jobdetails.jobDescription= this.jobdetails.jobDescription.replace(/<\/?p>/g, '');
+      // this.jobdetails.candidateDescription=this.jobdetails.candidateDescription.replace(/<\/?p>/g, '');
+      // this.jobdetails.salaryDescription=this.jobdetails.salaryDescription.replace(/<\/?p>/g, '');
+      console.log(this.jobdetails)
+  if(this.jobdetails.recruiterId){
+    this.recruiter=false
+  }
+
+//   if(this.jobdetails.jobTittle){
+// this.jobpostForm.patchValue({jobTittle:this.jobdetails.jobTittle})  }
+
+
+
       this.jobpostForm.patchValue({
-        jobTittle : this.jobdetails.jobTittle,
+        // jobTittle : this.jobdetails.jobTittle,
         contactNumber : this.jobdetails.contactNumber,
         jobDescription : this.jobdetails.jobDescription,
         keySkill :  this.jobdetails.keySkill,
@@ -175,10 +220,11 @@ export class EditJobpostComponent implements OnInit {
         course:this.jobdetails.course,
         specialization:this.jobdetails.specialization,
         searchbox:this.jobdetails.keySkill,
-        apply_method:new FormControl(null,Validators.required),
-        recruiterList:new FormControl(null,Validators.required),
-        recruiterList1:new FormControl(null,Validators.required),
+        // apply_method:this.jobdetails.apply_method,
+        // recruiterList:new FormControl(null,Validators.required),
+        // recruiterList1:new FormControl(null,Validators.required),
       });
+
       if(this.jobdetails.recruiterName && this.jobdetails.recruiterEmail && this.jobdetails.recruiterNumber){
         this.is_new = true
       }
@@ -186,7 +232,7 @@ export class EditJobpostComponent implements OnInit {
         this.rolecategorybind()
       }
     })
-    
+
   }
   checkradio(data:any){
 
@@ -207,22 +253,38 @@ export class EditJobpostComponent implements OnInit {
       }
     }
   }
+
+  tele:any=false
+
   choose_apply(e:any){
     this.apply_method = e.target.value
+    if(this.apply_method = 'telephone'){
+      this.tele=true
+
+    this.jobpostForm.removeControl('recruiterName')
+
+    this.jobpostForm.removeControl('recruiterEmail')
+
+    this.jobpostForm.removeControl('recruiterNumber')
     console.log(this.apply_method)
+    }
+    else{
+      this.tele=false
+    }
 }
   job_post(){
     this.empservice.updatePostAJob(this.postid,this.jobpostForm.value).subscribe((res:any)=>{
       console.log(res);
       this.jobpostForm.reset();
       if(res){
+
       }
     })
   }
   search_skills(data:any){
     if (data.target.value) {
       this.isDisplay = true;
-    } 
+    }
     else {
       this.isDisplay = false
     }
@@ -336,7 +398,7 @@ export class EditJobpostComponent implements OnInit {
       this.qua_data = res
     })
   }
-  
+
   DeSelect_putcourse(e:any){
     console.log(e)
     let i: number = 0;
@@ -391,7 +453,7 @@ export class EditJobpostComponent implements OnInit {
         i++;
       });
     }
-    
+
   }
   selectcourse(e:any,event:any){
     console.log(e)
@@ -427,11 +489,11 @@ export class EditJobpostComponent implements OnInit {
       });
     }
     console.log(this.educationArray)
-   
+
   }
   selectspcl(e:any,event:any){
     this.spclname = e.Specialization
-    
+
     if(event.target.checked){
       this.educationArray.push(
         {
@@ -458,7 +520,7 @@ export class EditJobpostComponent implements OnInit {
         i++;
       });
     }
-    
+
   }
   rem(data:any){
     console.log(data)
@@ -505,4 +567,18 @@ export class EditJobpostComponent implements OnInit {
     let index3 = this.indus_data.findIndex((r: any) => r._id === this.jobpostForm.get('preferedIndustry')?.value)
     this.inddata = this.indus_data[index3].Industry
   }
+
+  onDeSelect(id: any) {
+    const data = this.jobpostForm.get('preferedIndustry')?.value;
+    let i: number = 0;
+    data.forEach((item: any) => {
+      if (item == id._id) {
+        data.splice(i, 1);
+        console.log(data, "data------------>")
+        return;
+      }
+      i++;
+    })
+  }
+
 }
