@@ -703,6 +703,9 @@
                             <div class="col">
                                 Action
                             </div>
+                            <!-- <div class="col">
+                                Edit
+                            </div> -->
                         </div>
                         <div class="row content-card no-margin padding10" *ngFor="let list of data"
                             style="cursor:pointer" [formGroup]="activeform">
@@ -727,12 +730,14 @@
                                 <span class="">{{list.jobLocation}}</span>
                             </div>
                             <div class="col d-flex">
-                                <a routerLink="/emp-postjob" [queryParams]="{id:list._id}"><i
-                                        class='fas fa-pencil-alt'></i></a>
+                              
                                 <div class="form-check form-switch" style="padding-left: 4.5em !important">
                                     <input class="form-check-input" type="checkbox" role="switch"
                                         id="flexSwitchCheckChecked" formControlName="active"
                                         (change)="change_status(list._id,$event)" [checked]="list.active" />
+                                        <button  routerLink="/emp-postjob" [queryParams]="{id:list._id}">Edit</button>
+                                        <!-- <a routerLink="/emp-postjob" [queryParams]="{id:list._id}"><i
+                                            class='fas fa-pencil-alt'></i></a> -->
                                 </div>
 
                             </div>
@@ -891,6 +896,7 @@
                                     </svg>
                                 </i>
                             </div>
+
                         </div>
                     </div>
                     <div *ngIf="Tab == 3">

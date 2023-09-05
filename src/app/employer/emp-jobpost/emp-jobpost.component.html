@@ -1003,16 +1003,13 @@
                     <div class="row">
                         <div class="col"></div>
                         <div class="col">
-                            <h3>Edit Job Post</h3>
+                            <h3 *ngIf="id !=null">Edit Job Post</h3>
+                            <h3 *ngIf="id ==null">Add Job Post</h3>
                         </div>
                         <div class="col"></div>
                     </div>
-
                     <div class="row">
                         <div class="col">
-
-
-
                             <div class="register-form" [formGroup]="jobpostForm">
                                 <div class="single-row">
                                     <label for="">Job Title :</label>
@@ -1059,10 +1056,6 @@
                                 </div>
                                 <p class="error" *ngIf="jobpostForm.get('salaryDescription')?.invalid && submitted">
                                     Enter Perks & Benefits</p>
-
-
-
-
                                 <div class="single-row" style="margin-top: 30px;">
                                     <label for="">Job Location :</label>
                                     <div class="content-box" style="flex-direction: column;">
@@ -1080,15 +1073,10 @@
                                                     {{datas.description}}</p>
                                             </div>
                                         </ng-container>
-
                                     </div>
                                 </div>
                                 <p class="error" *ngIf="jobpostForm.get('jobLocation')?.invalid && submitted">Enter Job
                                     Location</p>
-
-
-
-
                                 <div class="single-row">
                                     <label for="">Key Skills :</label>
                                     <div class="content-box" style="flex-direction: column;">

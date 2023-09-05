@@ -35,7 +35,7 @@ import { EditJobpostModule } from './employer/edit-jobpost/edit-jobpost.module';
     NgxExtendedPdfViewerModule,
     NgMultiSelectDropDownModule.forRoot(),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyDoYhbYhtl9HpilAZSy8F_JHmzvwVDoeHI',
+      apiKey: 'AIzaSyARM6-Qr_hsR53GExv9Gmu9EtFTV5ZuDX4',
     }),
     EditJobpostModule,
   ],
