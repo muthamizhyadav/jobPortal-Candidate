@@ -198,11 +198,12 @@ export class CanGetComponent implements OnInit {
   onClickApplied() {
     console.log('bfhdfhdfb');
     this.tab = 2;
-    this.canditSarvice.getAppliedJobs(this.status).subscribe((res: any) => {
-      this.appliedJobs = res;
-    });
+    // this.canditSarvice.getAppliedJobs(0).subscribe((res: any) => {
+    //   this.appliedJobs = res;
+    // });
   }
   savedJobs() {
+    console.log("Saved jobs")
     this.tab = 3;
     this.canditSarvice.getSavedJob().subscribe((res: any) => {
       this.saveJobs = res;

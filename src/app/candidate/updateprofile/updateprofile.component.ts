@@ -1,6 +1,13 @@
 import { formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
@@ -8,31 +15,32 @@ import { CanditateService } from '../canditate.service';
 @Component({
   selector: 'app-updateprofile',
   templateUrl: './updateprofile.component.html',
-  styleUrls: ['./updateprofile.component.css']
+  styleUrls: ['./updateprofile.component.css'],
 })
-
 export class UpdateprofileComponent implements OnInit {
   qualification: any;
   isSubmitted: any = false;
-  profileForm:any
+  profileForm: any;
   viewAll: any = [];
   keySkill: any;
   lang: any = [];
   userId: any;
   now: any;
-  getLang: any = []
-  constructor(private fb: FormBuilder, private candidateService: CanditateService, private router: Router, private activateRoute: ActivatedRoute) {
-
-
-
-    this.profileForm= this.fb.group({
+  getLang: any = [];
+  constructor(
+    private fb: FormBuilder,
+    private candidateService: CanditateService,
+    private router: Router,
+    private activateRoute: ActivatedRoute
+  ) {
+    this.profileForm = this.fb.group({
       // image: new FormControl('',[Validators.required]),
       keyskill: new FormControl(null, [Validators.required]),
       dob: new FormControl('', Validators.required),
       experienceYear: new FormControl(0, Validators.required),
       experienceMonth: new FormControl(0),
       expectedctc: new FormControl('', Validators.required),
-      currentctc: new FormControl(0, Validators.required),   //display only experience
+      currentctc: new FormControl(0, Validators.required), //display only experience
       locationCurrent: new FormControl('', Validators.required),
       locationNative: new FormControl('', Validators.required),
       noticeperiod: new FormControl('', Validators.required),
@@ -48,42 +56,37 @@ export class UpdateprofileComponent implements OnInit {
       searchbox: new FormControl(null),
       currentctc_th: new FormControl(0),
       update: new FormControl(),
-      location: new FormControl()
-    })
-   }
+      location: new FormControl(),
+    });
+  }
 
   ngOnInit() {
-
-    this.candidateService.getKeyskill().subscribe((res: any) => {
-    })
+    this.candidateService.getKeyskill().subscribe((res: any) => {});
     this.candidateService.getLanguages().subscribe((res: any) => {
       this.lang = res;
-    })
+    });
     this.activateRoute.queryParams.subscribe((res: any) => {
       this.userId = res;
-      console.log(res)
-      if (this.userId.tab == "0" || this.userId.id) {
-        this.getAlldata()
+      console.log(res);
+      if (this.userId.tab == '0' || this.userId.id) {
+        this.getAlldata();
       }
-
-    })
-    const datePipe = formatDate(new Date(), 'yyyy-MM-dd', 'en-IN')
-    const time = formatDate(new Date(), 'hh:mm', 'en-IN')
-    this.now = datePipe
-    console.log(this.profileForm.get('languages')?.valid, "validators")
-
+    });
+    const datePipe = formatDate(new Date(), 'yyyy-MM-dd', 'en-IN');
+    const time = formatDate(new Date(), 'hh:mm', 'en-IN');
+    this.now = datePipe;
+    console.log(this.profileForm.get('languages')?.valid, 'validators');
   }
   getKeyskills(value: any) {
     this.candidateService.getSkill(value).subscribe((res: any) => {
       this.keySkill = res;
-    })
+    });
   }
 
   getAlldata() {
-
     this.candidateService.viewDetails().subscribe((res: any) => {
       this.viewAll = res.user;
-      console.log(this.viewAll[0].keyskill, "key skill")
+      console.log(this.viewAll[0].keyskill, 'key skill');
       this.profileForm.patchValue({
         // image: this.viewAll.image,
         keyskill: this.viewAll[0].keyskill,
@@ -91,7 +94,7 @@ export class UpdateprofileComponent implements OnInit {
         experienceYear: this.viewAll[0].experienceYear,
         experienceMonth: this.viewAll[0].experienceMonth,
         expectedctc: this.viewAll[0].expectedctc,
-        currentctc: this.viewAll[0].currentctc,   //display only experience
+        currentctc: this.viewAll[0].currentctc, //display only experience
         locationCurrent: this.viewAll[0].locationCurrent,
         locationNative: this.viewAll[0].locationNative,
         noticeperiod: this.viewAll[0].noticeperiod,
@@ -104,16 +107,16 @@ export class UpdateprofileComponent implements OnInit {
         relocate: this.viewAll[0].relocate,
         searchbox: this.viewAll[0].keyskill,
         preferredLocation: this.viewAll[0].preferredLocation,
-        update: new FormControl('advance details')
+        update: new FormControl('advance details'),
 
         // languages: this.viewAll[0].keyskill
-      })
-      console.log(this.profileForm.get('currentSkill')?.value, "sdksfjnfjnjn")
+      });
+      console.log(this.profileForm.get('currentSkill')?.value, 'sdksfjnfjnjn');
       this.getLang = this.viewAll[0].languages;
       if (this.viewAll[0].experienceYear) {
-        this.profileForm.get('currentctc').setErrors({ 'incorrect': true })
+        this.profileForm.get('currentctc').setErrors({ incorrect: true });
       } else {
-        this.profileForm.get('currentctc').setErrors(null)
+        this.profileForm.get('currentctc').setErrors(null);
       }
 
       // if (this.viewAll[0].relocate == 'Yes') {
@@ -124,80 +127,94 @@ export class UpdateprofileComponent implements OnInit {
       // }
 
       this.viewAll[0].languages.forEach((element: any) => {
-        const data = this.profileForm.get('languages').push(this.fb.group({
-          lang: new FormControl(element.lang),
-          know: this.fb.array(element.know)
-        }));
+        const data = this.profileForm.get('languages').push(
+          this.fb.group({
+            lang: new FormControl(element.lang),
+            know: this.fb.array(element.know),
+          })
+        );
       });
-    })
+    });
   }
   selectImg1: any;
   selectImg2: any;
+  imagesrc: any = '';
   selectedImg1(event: any) {
-     // get the selected file
-  const file = event.target.files[0];
-this.selectImg1=file
+    // get the selected file
+    const file = event.target.files[0];
+    this.selectImg1 = file;
 
-    //   var reader = new FileReader();
-    //   reader.readAsDataURL(this.selectImg1);
-    //   reader.onload = (event) => {
-    //     this.selectImg2.push((<FileReader>event.target).result);
-
-    // }
+    // var reader = new FileReader();
+    // reader.readAsDataURL(this.selectImg1);
+    // reader.onload = (event) => {
+    //   this.selectImg2.push((<FileReader>event.target).result);
+    // };
+    this.displayImage();
   }
+
+  displayImage() {
+    const reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imagesrc = event.target.result;
+    };
+    reader.readAsDataURL(this.selectImg1 as Blob);
+  }
+
   getQualified() {
-    return (<FormArray>this.profileForm.get('qualify')).controls
+    return (<FormArray>this.profileForm.get('qualify')).controls;
   }
   addQualification() {
     (this.profileForm.get('qualify') as FormArray).push(this.fb.control(null));
   }
   isDisplay = false;
   dispalye(data: any) {
-    let value = data.target.value.split(",");
+    let value = data.target.value.split(',');
 
     if (data.target.value) {
       this.isDisplay = true;
     } else {
-      this.isDisplay = false
+      this.isDisplay = false;
     }
     if (value.length != 0) {
       if (value[value.length - 1] != null && value[value.length - 1] != '') {
-        this.getKeyskills(value[value.length - 1])
+        this.getKeyskills(value[value.length - 1]);
       } else {
-        console.log(this.profileForm.get('keyskill')?.setErrors({ 'incorrect': true }), "bjdfjdbfjdfb")
+        console.log(
+          this.profileForm.get('keyskill')?.setErrors({ incorrect: true }),
+          'bjdfjdbfjdfb'
+        );
       }
     }
-    this.profileForm.get('keyskill')?.setValue(value)
-
+    this.profileForm.get('keyskill')?.setValue(value);
   }
   isShow = false;
   displayPrefered(data: any) {
-    let val = data.target.value.split(",");
+    let val = data.target.value.split(',');
     if (data.target.value) {
-      this.isShow = true
-      console.log(this.isShow, "isndj")
+      this.isShow = true;
+      console.log(this.isShow, 'isndj');
     } else {
-      this.isShow = false
-      console.log(this.isShow, "isndjsbjkbjbjkb")
+      this.isShow = false;
+      console.log(this.isShow, 'isndjsbjkbjbjkb');
     }
     if (val.length != 0) {
       if (val[val.length - 1] != null && val[val.length - 1] != '') {
-        this.getKeyskills(val[val.length - 1])
+        this.getKeyskills(val[val.length - 1]);
       } else {
         // console.log("working")
         // console.log(this.profileForm.get('prefredBox')?.setErrors({'incorrect':true}),"bjdfjdbfjdfb")
       }
     }
-    this.profileForm.get('preferredSkill')?.setValue(val)
+    this.profileForm.get('preferredSkill')?.setValue(val);
   }
   checkPrefered(data: any, preSkill: any) {
     this.isShow = false;
     let index: any = this.profileForm.get('preferredSkill')?.value;
     if (index.length != 0) {
       let value = index.splice([index.length - 1], 1);
-      index.push(preSkill)
-      this.profileForm.get('preferredSkill')?.setValue(index)
-      let search: any = index.toString() + ","
+      index.push(preSkill);
+      this.profileForm.get('preferredSkill')?.setValue(index);
+      let search: any = index.toString() + ',';
       this.profileForm.get('prefredBox')?.setValue(search);
     }
   }
@@ -205,25 +222,24 @@ this.selectImg1=file
   getAllpreferd(value: any) {
     this.candidateService.get_prefered(value).subscribe((res: any) => {
       this.prferedSkill = res;
-      console.log(this.prferedSkill, 'dfjdngjdgn')
-    })
+      console.log(this.prferedSkill, 'dfjdngjdgn');
+    });
   }
   displaycurent(val: any) {
-    console.log("working")
-    let value = val.target.value.split(",");
+    console.log('working');
+    let value = val.target.value.split(',');
     if (val.target.value) {
-      this.iscurrent = true
+      this.iscurrent = true;
     } else {
-      this.iscurrent = false
+      this.iscurrent = false;
     }
     if (value.length != 0) {
       if (value[value.length - 1] != null && value[value.length - 1] != '') {
-        this.getKeyskills(value[value.length - 1])
+        this.getKeyskills(value[value.length - 1]);
       } else {
-
       }
     }
-    this.profileForm.get('currentSkill')?.setValue(value)
+    this.profileForm.get('currentSkill')?.setValue(value);
   }
   iscurrent = false;
   checkcurrent(val: any, currentskill: any) {
@@ -231,9 +247,9 @@ this.selectImg1=file
     let index: any = this.profileForm.get('currentSkill')?.value;
     if (index.length != 0) {
       let value = index.splice([index.length - 1], 1);
-      index.push(currentskill)
-      this.profileForm.get('currentSkill')?.setValue(index)
-      let search: any = index.toString() + ","
+      index.push(currentskill);
+      this.profileForm.get('currentSkill')?.setValue(index);
+      let search: any = index.toString() + ',';
       this.profileForm.get('currentbox')?.setValue(search);
     }
   }
@@ -244,9 +260,9 @@ this.selectImg1=file
     let index: any = this.profileForm.get('keyskill')?.value;
     if (index.length != 0) {
       let value = index.splice([index.length - 1], 1);
-      index.push(skill)
-      this.profileForm.get('keyskill')?.setValue(index)
-      let search: any = index.toString() + ","
+      index.push(skill);
+      this.profileForm.get('keyskill')?.setValue(index);
+      let search: any = index.toString() + ',';
       this.profileForm.get('searchbox')?.setValue(search);
       this.profileForm.get('searchbox')?.setValue(search);
     }
@@ -268,57 +284,64 @@ this.selectImg1=file
   selectlanguages: any = [];
   insLang(val: any) {
     if (val.target.checked) {
-      const data = this.profileForm.get('languages').push(this.fb.group({
-        lang: new FormControl(val.target.value),
-        know: this.fb.array([])
-      }));
+      const data = this.profileForm.get('languages').push(
+        this.fb.group({
+          lang: new FormControl(val.target.value),
+          know: this.fb.array([]),
+        })
+      );
     } else {
-      let index = this.languages.value.findIndex((i: any) => i.lang == val.target.value);
+      let index = this.languages.value.findIndex(
+        (i: any) => i.lang == val.target.value
+      );
       if (index != -1) {
-        this.languages?.removeAt(index)
+        this.languages?.removeAt(index);
       }
     }
-
   }
   get languages() {
     return this.profileForm.get('languages') as FormArray;
   }
-  Known: any = []
+  Known: any = [];
   kownaction(val: any, i: any, language: any) {
     this.Known = language.get('know')?.value;
     let value = val.target.value;
-    let index = this.Known.findIndex((item: any) => item == value)
+    let index = this.Known.findIndex((item: any) => item == value);
     if (val.target.checked) {
       this.Known.push(value);
-
     } else {
       this.Known.splice(index, 1);
     }
-    language.get('kown')?.setValue(this.Known)
+    language.get('kown')?.setValue(this.Known);
   }
   changeRelocate(data: any) {
     if (data.target.value == 'Yes') {
-      this.profileForm.get('preferredLocation').setErrors({ 'incorrect': true })
+      this.profileForm.get('preferredLocation').setErrors({ incorrect: true });
     } else {
-      this.profileForm.get('preferredLocation').setErrors(null)
+      this.profileForm.get('preferredLocation').setErrors(null);
     }
   }
-  experienceYear:any
-  experienceMonth:any
-  currentCtc:any
-  currentTh:any
+  experienceYear: any;
+  experienceMonth: any;
+  currentCtc: any;
+  currentTh: any;
   updateprofile() {
-    this.isSubmitted = true
-    let expYear=Number(this.experienceYear)
-    let expMonth=Number(this.experienceMonth)
-    let curCtc=Number(this.currentCtc)
-    let curTh=Number(this.currentTh)
-    this.profileForm.patchValue({experienceYear:expYear,experienceMonth:expMonth, currentctc:curCtc, currentctc_th:curTh})
-    console.log(this.profileForm.value)
+    this.isSubmitted = true;
+    let expYear = Number(this.experienceYear);
+    let expMonth = Number(this.experienceMonth);
+    let curCtc = Number(this.currentCtc);
+    let curTh = Number(this.currentTh);
+    this.profileForm.patchValue({
+      experienceYear: expYear,
+      experienceMonth: expMonth,
+      currentctc: curCtc,
+      currentctc_th: curTh,
+    });
+    console.log(this.profileForm.value);
     let formData = new FormData();
 
     formData.append('image', this.selectImg1);
-    console.log(formData)
+    console.log(formData);
     // console.log(this.profileForm.get('dob')?.valid, "values")
     // console.log(this.profileForm.get('experienceYear')?.valid, "experienceYear")
     // console.log(this.profileForm.get('experienceMonth')?.valid, "experienceMonth")
@@ -333,28 +356,33 @@ this.selectImg1=file
     // console.log(this.profileForm.get('maritalStatus')?.valid, "maritalStatus")
     // console.log(this.profileForm.get('languages')?.valid, "languages")
     // console.log(this.profileForm.get('relocate')?.valid, "relocate")
-    console.log(this.profileForm.value)
+    console.log(this.profileForm.value);
     if (this.profileForm.valid) {
-
-      if (this.userId.tab == "0" || this.userId.id) {
-        console.log(this.userId)
-        this.candidateService.educationDetail(this.profileForm.value).subscribe((res: any) => {
-          if (this.userId.id) {
-            this.router.navigate(['/viewprofile'])
-          } else {
-            this.router.navigate(['/getAllprofile'])
-          }
-          this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
-          })
-        })
+      if (this.userId.tab == '0' || this.userId.id) {
+        console.log(this.userId);
+        this.candidateService
+          .educationDetail(this.profileForm.value)
+          .subscribe((res: any) => {
+            if (this.userId.id) {
+              this.router.navigate(['/viewprofile']);
+            } else {
+              this.router.navigate(['/getAllprofile']);
+            }
+            this.candidateService
+              .imageUpload(res.user._id, formData)
+              .subscribe((res: any) => {});
+          });
       } else {
-        console.log(this.userId)
+        console.log(this.userId);
 
-        this.candidateService.updateProfile(this.profileForm.value).subscribe((res: any) => {
-          this.candidateService.imageUpload(res.user._id, formData).subscribe((res: any) => {
-          })
-          this.router.navigate(['/can-edu'])
-        })
+        this.candidateService
+          .updateProfile(this.profileForm.value)
+          .subscribe((res: any) => {
+            this.candidateService
+              .imageUpload(res.user._id, formData)
+              .subscribe((res: any) => {});
+            this.router.navigate(['/can-edu']);
+          });
       }
 
       // this.router.navigate(['/can-edu'])
@@ -366,56 +394,62 @@ this.selectImg1=file
       //   console.log(res)
       // })
 
-
       //     })
-
-
-
     }
   }
-  updateProfile:any
+  updateProfile: any;
 
   checkeLang(val: any) {
     if (this.getLang.find((a: any) => a.lang == val)) {
       return true;
-
     } else {
-      return false
+      return false;
     }
   }
   chekedKnown(index: any, lang: any, value: any) {
-    let knowIndex = value.value.know.findIndex((a: any) => (a == lang))
+    let knowIndex = value.value.know.findIndex((a: any) => a == lang);
     if (knowIndex != -1) {
-      return true
+      return true;
     } else {
-      return false
+      return false;
     }
-
   }
+
+  showcctc: any = false;
+
   expreience(val: any) {
+    console.log(val, 'expfres');
     if (val.target.value == 0) {
-      this.profileForm.get('currentctc').setErrors(null)
-      console.log(this.profileForm.get('experienceYear')?.value, this.profileForm.get('currentctc').setErrors(null))
+      this.showcctc = false;
+      this.profileForm.get('currentctc').setErrors(null);
+      console.log(
+        this.profileForm.get('experienceYear')?.value,
+        this.profileForm.get('currentctc').setErrors(null)
+      );
     } else {
-      console.log(this.profileForm.get('experienceYear')?.value, this.profileForm.get('currentctc').setErrors({ 'incorrect': true }))
-      this.profileForm.get('currentctc').setErrors({ 'incorrect': true })
+      this.showcctc = true;
+      console.log(
+        this.profileForm.get('experienceYear')?.value,
+        this.profileForm.get('currentctc').setErrors({ incorrect: true })
+      );
+      this.profileForm.get('currentctc').setErrors({ incorrect: true });
     }
   }
   preferedLocations: any;
   isLocation: any = false;
   preferedLocation(data: any) {
-    let value = data.target.value
+    let value = data.target.value;
     if (data.target.value) {
       this.isLocation = true;
     } else {
-      this.isLocation = false
+      this.isLocation = false;
     }
-    this.getLocation(data.target.value)
+    this.getLocation(data.target.value);
   }
   getLocation(value: any) {
     this.candidateService.get_allLocation(value).subscribe((res: any) => {
       this.preferedLocations = res.predictions;
-    })
+    });
   }
   val: any;
   datas: any = [];
@@ -424,11 +458,11 @@ this.selectImg1=file
     if (location) {
       this.datas.push(location);
       this.profileForm.patchValue({
-        location: ''
-      })
+        location: '',
+      });
     }
-    this.profileForm.get('preferredLocation')?.setValue(this.datas)
-    console.log(this.profileForm.get('preferredLocation')?.valid, "value")
+    this.profileForm.get('preferredLocation')?.setValue(this.datas);
+    console.log(this.profileForm.get('preferredLocation')?.valid, 'value');
   }
   remove_location(data: any) {
     let array = this.profileForm.get('preferredLocation')?.value;
@@ -443,12 +477,12 @@ this.selectImg1=file
     if (array.length == 0) {
       // this.isLoc = false
     }
-    console.log(array.length)
+    console.log(array.length);
   }
   get_maintext(data: any) {
-    console.log(data)
-    let text = data.split(',')
-    console.log(text[0])
-    return text[0]
+    console.log(data);
+    let text = data.split(',');
+    console.log(text[0]);
+    return text[0];
   }
 }

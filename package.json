@@ -25,6 +25,8 @@
     "ng2-cookies": "^1.0.12",
     "ngx-bootstrap": "^10.2.0",
     "ngx-bootstrap-modal": "^1.0.13",
+    "ngx-cookie": "^6.0.1",
+    "ngx-cookie-service": "^16.0.1",
     "ngx-editor": "^14.2.0",
     "ngx-extended-pdf-viewer": "^16.0.2",
     "ngx-google-places-autocomplete": "^2.0.5",

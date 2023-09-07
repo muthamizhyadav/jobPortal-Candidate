@@ -15,6 +15,7 @@ import { RedirectComponent } from './redirect/redirect.component';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AgmCoreModule } from '@agm/core';
 import { EditJobpostModule } from './employer/edit-jobpost/edit-jobpost.module';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { EditJobpostModule } from './employer/edit-jobpost/edit-jobpost.module';
     NgxEditorModule,
     NgxExtendedPdfViewerModule,
     NgMultiSelectDropDownModule.forRoot(),
+    CookieModule.withOptions(),
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyARM6-Qr_hsR53GExv9Gmu9EtFTV5ZuDX4',
     }),

@@ -28,13 +28,17 @@
                     <label for="">Add Profile Picture:</label>
                     <div class="content-box">
                       <div>
-                        <label for="select-logo" class="form-control logo-btn">+ Add Profile
+                        <label for="select-logo" class="form-control logo-btn" style="margin-left: 15px;">+ Add Profile
                           Picture</label>
                         <input type="file" id="select-logo" class="form-control logo-btn" placeholder="+Add Logo"
                           style="display: none;" formControlName="image" accept="image/gif, image/jpeg, image/png"
                           (change)="selectedImg1($event)">
                       </div>
+                      <div class="view-image" *ngIf="imagesrc != '' ">
+                        <img [src]="imagesrc" alt="">
+                      </div>
                     </div>
+                  
                   </div>
 
 
@@ -63,7 +67,7 @@
                     <label></label>
                     <div class="content-box drop-data">
                       <ul>
-                        <li *ngFor="let skill of keySkill"  style="cursor:pointer"
+                        <li *ngFor="let skill of keySkill" style="cursor:pointer"
                           (click)="checkSkill($event,skill.Skill_Title)">
                           <span>{{skill.Skill_Title}}</span>
                         </li>
@@ -101,8 +105,9 @@
                         <option value=10>10 Year</option>
                         <option value=11>11 Year</option>
                       </select>
-                      <select class="form-control select-type douple-input-second" formControlName="experienceMonth"  [(ngModel)]="experienceMonth">
-                        <option  value="option1" disabled selected>Month</option>
+                      <select class="form-control select-type douple-input-second" formControlName="experienceMonth"
+                        [(ngModel)]="experienceMonth">
+                        <option value="option1" disabled selected>Month</option>
                         <option value=0>0 Month</option>
                         <option value=1>1 Month</option>
                         <option value=2>2 Month</option>
@@ -136,7 +141,8 @@
                   <div class="single-row">
                     <label for="" class="lable-data">Expected CTC <span>*</span>:</label>
                     <div class="content-box">
-                      <input type="number" class="form-control" placeholder="Enter CTC" formControlName="expectedctc" min="0">
+                      <input type="number" class="form-control" placeholder="Enter CTC" formControlName="expectedctc"
+                        min="0">
                     </div>
 
                   </div>
@@ -146,10 +152,11 @@
                       <p>Expected CTC is required!</p>
                     </div>
                   </div>
-                  <div class="single-row">
+                  <div class="single-row" *ngIf="showcctc">
                     <label for="" class="lable-data">Current CTC <span>*</span>:</label>
                     <div class="content-box">
-                      <input type="number" class="form-control" placeholder="Enter CTC" formControlName="currentctc" min="0">
+                      <input type="number" class="form-control" placeholder="Enter CTC" formControlName="currentctc"
+                        min="0">
                     </div>
 
                   </div>
@@ -323,7 +330,7 @@
                           (click)="remove_location(data)"
                           *ngFor="let data of profileForm.get('preferredLocation')?.value">
                           <span style="color: black;">{{get_maintext(data)}}</span>
-                          <span  style="color: black;" class="close-mark mx-1">x</span>
+                          <span style="color: black;" class="close-mark mx-1">x</span>
                         </span>
                       </ng-container>
                       <input type="text" class="form-control" placeholder="Enter Key Skills"

@@ -21,28 +21,36 @@
           <div class="row" [formGroup]="otpForm">
             <div class="register-form">
               <div class="single-row">
-                  <label for="">OTP :</label>
-                  <div class="content-box">
-                      <input type="number" class="form-control"  maxlength="6" placeholder="Enter OTP" formControlName="otp">
-                  </div>
+                <label for="">OTP :</label>
+                <div class="content-box">
+                  <input type="number" class="form-control" maxlength="6" placeholder="Enter OTP" formControlName="otp">
+                </div>
               </div>
-              <div class="single-row error-data" *ngIf="issubmit && !otpForm.get('otp')?.valid">
+              <div class="single-row error-data" *ngIf="issubmit">
                 <label for=""></label>
                 <div class="content-box">
-                   <p>OTP is required!</p>
+                  <p>{{errmsg}}</p>
                 </div>
-            </div>
-              <div class="resend-otp">
-                <a href="#">Resend OTP</a>
+              </div>
+              <div *ngIf="!recentShow">
+                <p style="color: #0A2647;
+                text-align: end;
+                padding: 10px;">
+                  {{remainingTime}}
+                </p>
+              </div>
+
+              <div class="resend-otp" *ngIf="recentShow">
+                <a (click)="resendOTP()" style="cursor: pointer;">Resend OTP</a>
               </div>
               <div class="single-row">
-                  <label for=""> </label>
+                <label for=""> </label>
 
-                  <div class="content-box final-btn-wrap">
-                      <button type="submit" class="btn btn-brand-blue mb-2 " (click)="verifyOtp()">Verify OTP</button>
-                  </div>
+                <div class="content-box final-btn-wrap">
+                  <button type="submit" class="btn btn-brand-blue mb-2 " (click)="verifyOtp()">Verify OTP</button>
+                </div>
               </div>
-          </div>
+            </div>
           </div>
         </div>
       </div>
