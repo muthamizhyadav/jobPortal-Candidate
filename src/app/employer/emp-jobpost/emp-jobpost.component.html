@@ -1003,8 +1003,8 @@
                     <div class="row">
                         <div class="col"></div>
                         <div class="col">
-                            <h3 *ngIf="id !=null">Edit Job Post</h3>
-                            <h3 *ngIf="id ==null">Add Job Post</h3>
+                            <h3 *ngIf="id != '' ">Edit Job Post</h3>
+                            <h3 *ngIf="id == '' ">Add Job Post</h3>
                         </div>
                         <div class="col"></div>
                     </div>
@@ -1238,7 +1238,7 @@
                                     <div class="content-box preferred">
                                         <div class="preferred-selected">
                                             <span
-                                                *ngFor="let data of jobpostForm.get('preferedIndustry')?.value,let i=index">{{data}}
+                                                *ngFor="let data of jobpostForm.get('preferrefIndustryfrond')?.value,let i=index">{{data}}
                                                 <p (click)="deletedPref(data)">x</p>
                                             </span>
                                         </div>
@@ -1247,7 +1247,8 @@
                                         <div *ngIf="preferrefIndustry" class="preferred-option">
                                             <ul *ngFor="let items of indus_data">
                                                 <li><input type="checkbox" [checked]="isChecked(items.Industry)"
-                                                        (click)="prefInd(items.Industry,$event)">{{items.Industry}}</li>
+                                                        (click)="prefInd(items.Industry,$event,items._id)">{{items.Industry}}
+                                                </li>
                                             </ul>
                                         </div>
 

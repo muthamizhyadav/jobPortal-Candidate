@@ -8,7 +8,7 @@ import { EmpServiceService } from '../emp-service.service';
 @Component({
   selector: 'app-emp-myaccount',
   templateUrl: './emp-myaccount.component.html',
-  styleUrls: ['./emp-myaccount.component.css']
+  styleUrls: ['./emp-myaccount.component.css'],
 })
 export class EmpMyaccountComponent implements OnInit {
   data: any;
@@ -17,23 +17,32 @@ export class EmpMyaccountComponent implements OnInit {
   lat: any;
   long: any;
   zoom = 17;
-  constructor(private formBuilder:FormBuilder,private router: Router,private empservice: EmpServiceService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private empservice: EmpServiceService
+  ) {}
   // transform(url: any) {
   //   return this.sanitizer.bypassSecurityTrustResourceUrl(url);
   // }
   ngOnInit(): void {
-    this.getBasicDetailsView()
+    this.getBasicDetailsView();
   }
-  getBasicDetailsView(){
+  getBasicDetailsView() {
     console.log('gbh');
-    this.empservice.viewBasicDetailsEmployee().subscribe((res:any)=>{
-      this.data = res.user
-      this.lat = Number(this.data.lat)
-      this.long = Number(this.data.long)
-      console.log(this.lat, this.long)
-      console.log(this.data,"this.data")
-    })
+    this.empservice.viewBasicDetailsEmployee().subscribe((res: any) => {
+      this.data = res.user;
+      this.lat = Number(this.data.lat);
+      this.long = Number(this.data.long);
+      console.log(this.lat, this.long);
+      console.log(this.data, 'this.data');
+    });
   }
+
+  EditPageRoute() {
+    this.router.navigateByUrl(`/register?id=${this.data._id}`);
+  }
+
   baseurl = Env.baseAPi;
   // viewproduct_details(item: any,name:any) {
   //   this.viewproduct = item;

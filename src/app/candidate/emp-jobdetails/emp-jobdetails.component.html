@@ -103,11 +103,19 @@
                   <div class="d-flex align-items-start">
                     <img src="../../assets/image/Google-Icon.jpg" width="80px">
                     <button style="border: none;background-color: transparent;cursor: pointer;"
-                      (click)="saveJob(job._id)" [disabled]="job.saveButton == true"><i class="ms-5"><svg width="20"
+                      (click)="saveJob(job._id)" *ngIf="!job.saveButton == true"><i class="ms-5"><svg width="20"
                           height="20" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M15 24.5439L5.73031 30L7.80032 19.0437L0 11.4594L10.5498 10.1437L15 0L19.4502 10.1437L30 11.4594L22.1997 19.0437L24.2697 30L15 24.5439ZM15 21.3765L20.5818 24.6614L19.3345 18.0652L24.0305 13.4978L17.6785 12.7059L15 6.59895L12.3215 12.7073L5.96951 13.4978L10.6655 18.0652L9.41821 24.6614L15 21.3765Z"
                             fill="#8493A3" />
+                        </svg>
+                      </i></button>
+                    <button style="border: none;background-color: transparent;cursor: pointer;"
+                      (click)="saveJob(job._id)" *ngIf="job.saveButton == true"><i class="ms-5">
+                        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" clip-rule="evenodd"
+                            d="M5.73031 30L15 24.5439L24.2697 30L22.1997 19.0437L30 11.4594L19.4502 10.1437L15 0L10.5498 10.1437L0 11.4594L7.80032 19.0437L5.73031 30Z"
+                            fill="#0A2647" />
                         </svg>
                       </i></button>
                     <i class="ms-4"><svg width="20" height="21" viewBox="0 0 30 31" fill="none"
@@ -202,7 +210,8 @@
               <div class="single-row">
                 <label for="">Industry :</label>
                 <div class="content-box">
-                 <p *ngFor="let industry of job.preferredIndustrys"> {{industry.Industry}}</p> </div>
+                  <p *ngFor="let industry of job.preferredIndustrys"> {{industry.Industry}}</p>
+                </div>
               </div>
               <div class="single-row">
                 <label for="">Preferred Industry :</label>
@@ -331,9 +340,9 @@
                     <button (click)="submit_report()">Submit</button>
                   </div>
                 </div>
+              </div>
             </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>

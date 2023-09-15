@@ -12,7 +12,7 @@ export class CanditService {
 
 
   jobs(data:any){
-    return this.http.post(this.baseUrl+'/v1/candidateDetail/candidateSearch',data,{headers:{auth:Cookie.get('tokens')}})
+    return this.http.post(this.baseUrl+'/v1/candidateDetail/candidateSearch',data,{headers:{auth:Cookie.get('candtokens')}})
   }
   @Output() get_token: EventEmitter<String> = new EventEmitter();
   @Output() name: EventEmitter<String> = new EventEmitter();

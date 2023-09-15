@@ -5,7 +5,7 @@
             <img src="../../assets/image/myaccountimg1.png" alt="">
 
 
-           
+
         </div>
         <div class="col-8  login-main">
             <div class="row ">
@@ -13,44 +13,44 @@
 
                     <div class="advanced-search-warap">
 
-                  
 
-                    <div class="search-boxs">
 
-                        <div class="search-box first-search-box">
-                            <input type="text" class="form-control" placeholder="Enter Designation / Key skills">
+                        <div class="search-boxs">
+
+                            <div class="search-box first-search-box">
+                                <input type="text" class="form-control" placeholder="Enter Designation / Key skills">
+                            </div>
+
+
+
+                            <div class="search-box second-search-box">
+                                <input type="text" class="form-control location" placeholder="Enter Location">
+                            </div>
+
+                            <div class="search-box">
+                                <select class="form-control select-type">
+                                    <option value="option1" disabled selected>Select Type</option>
+                                    <option value="option2">Option 2</option>
+                                    <option value="option3">Option 3</option>
+                                </select>
+                            </div>
+
+                            <div class="search-box">
+                                <button type="submit" class="btn btn-brand-orange"><img
+                                        src="../../assets/image/search.png" alt="" class="search-icon"></button>
+                            </div>
+
                         </div>
 
+                        <div class="advanced-search">
+                            <button type="submit" class="btn btn-brand-trans"><a href="#">Advanced Search</a></button>
 
-
-                        <div class="search-box second-search-box">
-                            <input type="text" class="form-control location" placeholder="Enter Location">
                         </div>
-
-                        <div class="search-box">
-                            <select class="form-control select-type">
-                                <option value="option1" disabled selected>Select Type</option>
-                                <option value="option2">Option 2</option>
-                                <option value="option3">Option 3</option>
-                            </select>
-                        </div>
-
-                        <div class="search-box">
-                            <button type="submit" class="btn btn-brand-orange"><img src="../../assets/image/search.png"
-                                    alt="" class="search-icon"></button>
-                        </div>
-
                     </div>
-
-                    <div class="advanced-search">
-                        <button type="submit" class="btn btn-brand-trans"><a href="#">Advanced Search</a></button>
-
-                    </div>
-                </div>
 
                 </div>
             </div>
-          
+
         </div>
         <div class="col-2 ad-image">
             <img src="../../assets/image/myaccountimg2.png" alt="">
@@ -68,9 +68,10 @@
                 <div class="col">
                     <div class="sidebarmenu myprofile">
                         <ul>
-                            <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span class="icon-text">My Profile</span></li>
+                            <li class="sidebarmenu-heading"> <span class="icon-custom"><i
+                                        class='far fa-user'></i></span> <span class="icon-text">My Profile</span></li>
                             <li>
-                               <span class="icon-custom"><i class='far fa-address-card'></i></span>
+                                <span class="icon-custom"><i class='far fa-address-card'></i></span>
                                 <span class="icon-text">Basic Details</span>
                             </li>
                             <li>
@@ -78,9 +79,9 @@
                                 <span class="icon-text">Job Post</span>
                             </li>
                             <li>
-                                <span class="icon-custom"><i class="fa fa-star-o">                        </i></span>
-        
-                                <span  class="icon-text">Saved Candidates</span>
+                                <span class="icon-custom"><i class="fa fa-star-o"> </i></span>
+
+                                <span class="icon-text">Saved Candidates</span>
                             </li>
                             <li>
                                 <span class="icon-custom"><i class="fa fa-download"></i></span>
@@ -117,8 +118,15 @@
                         <div class="col">
                             <h3>My Account</h3>
                         </div>
-                        <div class="col"> 
-                            <button>Edit</button>
+                        <div class="col">
+                            <button (click)="EditPageRoute()" style="background-color: rgba(255, 255, 255, 0.1);border-radius: 5px;"><svg width="30" height="30" viewBox="0 0 30 30"
+                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <rect width="30" height="30" rx="5" fill="white" fill-opacity="0.1" />
+                                    <path
+                                        d="M15.8143 10.4089L19.5911 14.1866L10.7768 23H7V19.2223L15.8143 10.408V10.4089ZM17.0732 9.14997L18.9616 7.26068C19.1286 7.09377 19.355 7 19.5911 7C19.8272 7 20.0536 7.09377 20.2206 7.26068L22.7393 9.77943C22.9062 9.94639 23 10.1728 23 10.4089C23 10.645 22.9062 10.8714 22.7393 11.0384L20.85 12.9268L17.0732 9.14997Z"
+                                        fill="#0A2647" />
+                                </svg>
+                            </button>
 
                         </div>
                     </div>
@@ -142,7 +150,7 @@
                         <div class="single-row">
                             <label for="">Company Email :</label>
                             <div class="content-box">
-                               {{data.email}}
+                                {{data.email}}
                             </div>
 
                         </div>
@@ -157,60 +165,60 @@
                         <div class="single-row">
                             <label for="">Mobile Number :</label>
                             <div class="content-box">
-                               {{data.mobileNumber}}
+                                {{data.mobileNumber}}
                             </div>
                         </div>
                         <div class="single-row">
                             <label for="">Registration Type :</label>
                             <div class="content-box">
-                               {{data.registrationType}}
+                                {{data.registrationType}}
                             </div>
                         </div>
                         <div class="single-row">
                             <label for="">Industry Type :</label>
                             <div class="content-box">
-                               {{data.industryType}}
+                                {{data.industryType}}
                             </div>
                         </div>
                         <div class="single-row">
                             <label for="">Company Type :</label>
                             <div class="content-box">
-                               {{data.companyType}}
+                                {{data.companyType}}
                             </div>
                         </div>
                         <div class="single-row" *ngIf="data.companyWebsite">
                             <label for="">Company Website :</label>
                             <div class="content-box">
-                               {{data.companyWebsite}}
+                                {{data.companyWebsite}}
                             </div>
                         </div>
                         <div class="single-row">
                             <label for="">Hiring For :</label>
                             <div class="content-box">
-                               {{data.postedBy}}
+                                {{data.postedBy}}
                             </div>
                         </div>
                         <div class="single-row">
                             <label for="">Company Description :</label>
                             <div class="content-box">
-                               {{data.companyDescription}}
+                                {{data.companyDescription}}
                             </div>
                         </div>
                         <div class="single-row">
                             <label for="">Corporate Address :</label>
                             <div class="content-box">
-                               {{data.companyAddress}}
+                                {{data.companyAddress}}
                             </div>
                         </div>
                         <div class="single-row">
                             <label for="">Pin Code :</label>
                             <div class="content-box">
-                               {{data.pincode}}
+                                {{data.pincode}}
                             </div>
                         </div>
-                     
 
-                       
+
+
                         <!-- <div class="single-row about-company-content">
                             <label for="">Location :</label>
                             <div class="content-box about-company">
@@ -245,23 +253,24 @@
                             <label for="">Location :</label>
                             <div class="content-box about-company" style="display:block !important">
                                 <div>
-                                <span>{{data.location}}</span>
+                                    <span>{{data.location}}</span>
                                 </div>
-                                <div >
-                                    <agm-map [latitude]="lat" [longitude]="long" [zoom]="zoom" zoomControl="true" class="map">
+                                <div>
+                                    <agm-map [latitude]="lat" [longitude]="long" [zoom]="zoom" zoomControl="true"
+                                        class="map">
                                         <agm-marker [latitude]="lat" [longitude]="long">
                                         </agm-marker>
-                                       </agm-map>
+                                    </agm-map>
                                 </div>
-                                   
+
                             </div>
                         </div>
 
 
-      
 
 
-                
+
+
 
 
                     </div>
@@ -280,121 +289,181 @@
                     <div class="right-sidebar">
                         <div class="sidebarmenu recent-search">
                             <ul>
-                                <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span class="icon-text">Recent Search</span></li>
-                                <li>
-                                   <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                    <span class="icon-text">UI/UX Designer</span></div>
-            
-                                    <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                        <span class="icon-text">Chennai</span></div>
-                                        <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                            <span class="icon-text">1 Years</span></div></div>
-                                   
+                                <li class="sidebarmenu-heading"> <span class="icon-custom"><i
+                                            class='far fa-user'></i></span> <span class="icon-text">Recent Search</span>
                                 </li>
-            
                                 <li>
-                                    <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                     <span class="icon-text">UI/UX Designer</span></div>
-             
-                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                         <span class="icon-text">Chennai</span></div>
-                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                             <span class="icon-text">1 Years</span></div></div>
-                                    
-                                 </li>
-            
-                                 <li>
-                                    <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                     <span class="icon-text">UI/UX Designer</span></div>
-             
-                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                         <span class="icon-text">Chennai</span></div>
-                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                             <span class="icon-text">1 Years</span></div></div>
-                                    
-                                 </li>
-                
+                                    <div><span class="icon-custom icon-custom-recent"><i
+                                                class='far fa-address-card'></i></span>
+                                        <span class="icon-text">UI/UX Designer</span>
+                                    </div>
+
+                                    <div class="job-listing-bottom">
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">Chennai</span>
+                                        </div>
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">1 Years</span>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li>
+                                    <div><span class="icon-custom icon-custom-recent"><i
+                                                class='far fa-address-card'></i></span>
+                                        <span class="icon-text">UI/UX Designer</span>
+                                    </div>
+
+                                    <div class="job-listing-bottom">
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">Chennai</span>
+                                        </div>
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">1 Years</span>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                                <li>
+                                    <div><span class="icon-custom icon-custom-recent"><i
+                                                class='far fa-address-card'></i></span>
+                                        <span class="icon-text">UI/UX Designer</span>
+                                    </div>
+
+                                    <div class="job-listing-bottom">
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">Chennai</span>
+                                        </div>
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">1 Years</span>
+                                        </div>
+                                    </div>
+
+                                </li>
+
                             </ul>
                         </div>
-            
+
                         <div class="sidebarmenu recent-search">
                             <ul>
-                                <li class="sidebarmenu-heading"> <span class="icon-custom"><i class='far fa-user'></i></span> <span class="icon-text">Saved Search</span></li>
-                              
+                                <li class="sidebarmenu-heading"> <span class="icon-custom"><i
+                                            class='far fa-user'></i></span> <span class="icon-text">Saved Search</span>
+                                </li>
+
                                 <li>
                                     <div class="job-listing-bottom">
-                                        <div class="div"><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                            <span class="icon-text">UI/UX Designer</span></div>
-            
-                                            <div><i class='fas fa-bookmark saved-job-icon'></i>
-                                            </div>
-                                        
-                                    
+                                        <div class="div"><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">UI/UX Designer</span>
+                                        </div>
+
+                                        <div><i class='fas fa-bookmark saved-job-icon'></i>
+                                        </div>
+
+
                                     </div>
-             
-                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                         <span class="icon-text">Chennai</span></div>
-                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                             <span class="icon-text">1 Years</span></div></div>
-                                    
-                                 </li>
-                                 <li>
+
                                     <div class="job-listing-bottom">
-                                        <div class="div"><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                            <span class="icon-text">UI/UX Designer</span></div>
-            
-                                            <div><i class='fas fa-bookmark saved-job-icon'></i>
-                                            </div>
-                                        
-                                    
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">Chennai</span>
+                                        </div>
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">1 Years</span>
+                                        </div>
                                     </div>
-             
-                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                         <span class="icon-text">Chennai</span></div>
-                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                             <span class="icon-text">1 Years</span></div></div>
-                                    
-                                 </li>
-                                 <li>
+
+                                </li>
+                                <li>
                                     <div class="job-listing-bottom">
-                                        <div class="div"><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                            <span class="icon-text">UI/UX Designer</span></div>
-            
-                                            <div><i class='fas fa-bookmark saved-job-icon'></i>
-                                            </div>
-                                        
-                                    
+                                        <div class="div"><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">UI/UX Designer</span>
+                                        </div>
+
+                                        <div><i class='fas fa-bookmark saved-job-icon'></i>
+                                        </div>
+
+
                                     </div>
-             
-                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                         <span class="icon-text">Chennai</span></div>
-                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                             <span class="icon-text">1 Years</span></div></div>
-                                    
-                                 </li>
-                                 <li>
+
                                     <div class="job-listing-bottom">
-                                        <div class="div"><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                            <span class="icon-text">UI/UX Designer</span></div>
-            
-                                            <div><i class='fas fa-bookmark saved-job-icon'></i>
-                                            </div>
-                                        
-                                    
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">Chennai</span>
+                                        </div>
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">1 Years</span>
+                                        </div>
                                     </div>
-             
-                                     <div class="job-listing-bottom"> <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                         <span class="icon-text">Chennai</span></div>
-                                         <div><span class="icon-custom icon-custom-recent"><i class='far fa-address-card'></i></span>
-                                             <span class="icon-text">1 Years</span></div></div>
-                                    
-                                 </li>
-            
-                                 
-             
+
+                                </li>
+                                <li>
+                                    <div class="job-listing-bottom">
+                                        <div class="div"><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">UI/UX Designer</span>
+                                        </div>
+
+                                        <div><i class='fas fa-bookmark saved-job-icon'></i>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="job-listing-bottom">
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">Chennai</span>
+                                        </div>
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">1 Years</span>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li>
+                                    <div class="job-listing-bottom">
+                                        <div class="div"><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">UI/UX Designer</span>
+                                        </div>
+
+                                        <div><i class='fas fa-bookmark saved-job-icon'></i>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="job-listing-bottom">
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">Chennai</span>
+                                        </div>
+                                        <div><span class="icon-custom icon-custom-recent"><i
+                                                    class='far fa-address-card'></i></span>
+                                            <span class="icon-text">1 Years</span>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+
+
                             </ul>
                         </div>
-            
+
                     </div>
                 </div>
             </div>

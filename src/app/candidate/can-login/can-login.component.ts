@@ -64,13 +64,14 @@ export class CanLoginComponent implements OnInit {
       );
     }
   }
+  forgotRoute() {
+    this.router.navigateByUrl('/forgotpassword');
+  }
   setCookie(token: any) {
     let d: Date = new Date();
     d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
     let expires: string = `expires=${d.toUTCString()}`;
-    document.cookie = `tokens=${token}; ${expires}`;
+    document.cookie = `candtokens=${token}; ${expires}`;
   }
-  for() {
-    this.router.navigateByUrl('/forgotpassword');
-  }
+
 }

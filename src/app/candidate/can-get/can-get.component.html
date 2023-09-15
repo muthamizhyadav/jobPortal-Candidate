@@ -12,12 +12,12 @@
         <div class="col search-box-wrap">
           <div class="advanced-search-wrap ">
             <div class="search-boxs">
-              <div class="search-box first-search-box">
+              <div class="search-box first-search-box" style="position: relative;">
                 <input type="text" class="form-control keyskill" placeholder="Enter Designation / Key skills"
                   (keyup)="dispalye($event)" formControlName="searchbox">
-                <div class="" *ngIf="isDisplay" style="margin-top:0px;">
+                <div class="" *ngIf="isDisplay" style="margin-top:0px; position: absolute;">
                   <label></label>
-                  <div class="content-box keylist" style="background: white;">
+                  <div class="content-box keylist" style="background: white; width: 358px;">
                     <ul class="ulkeylist" style="padding-left: 0px;" class="">
                       <li class="ilkeylist" style="cursor:pointer" *ngFor="let skill of keySkill"
                         (click)="checkSkill($event,skill.Skill_Title)">
@@ -141,8 +141,9 @@
                     <button class="btn btn1 collapsebtn" type="button" data-bs-toggle="collapse"
                       data-bs-target="#collapseExample" aria-expanded="false" style="
                         font-weight: 500;
-                        font-size: 14px;padding-left: 0px;" aria-controls="collapseExample">Experience</button><i
-                      class="fa fa-angle-down" style="margin-left: 45px;"></i>
+                        font-size: 14px;padding-left: 0px;" aria-controls="collapseExample">Experience</button>
+                    <i class="fa fa-angle-down" style="margin-left: 45px; cursor: pointer;" data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample"></i>
                     <div class="collapse" id="collapseExample">
                       <div class="card card-body" style="padding: 0px;">
                         <div style="display:flex">
@@ -354,13 +355,14 @@
                         <button class="btn btn1 dropdown-toggle salarybtn" type="button" style="width: 100px"
                           id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
                           data-bs-auto-close="outside">
-                          Posed by<i class="fa fa-angle-down" style="margin-left: 73px;"></i>
+                          Posted by<i class="fa fa-angle-down" style="margin-left: 73px;"></i>
                         </button>
                         <ul class="dropdown-menu p-3 filter" id="mydiv" aria-labelledby="dropdownMenuButton1">
                           <li value="Last 30 days"><input type="checkbox" (change)="postedBy($event)"
-                              value="">Consultancy
+                              value="Consultancy">Consultancy
                           </li>
-                          <li value="Last 15 days"><input type="checkbox" (change)="postedBy($event)" value="">Company
+                          <li value="Last 15 days"><input type="checkbox" (change)="postedBy($event)"
+                              value="Company">Company
                           </li>
                         </ul>
                       </div>
@@ -473,7 +475,7 @@
               Applied Jobs
             </div>
 
-            <div class="saved-jobs col" (click)="savedJobs()" ngClass="{{tab == 3?'jobs':''}}">
+            <div class="saved-jobs col" (click)="getSaveData()" ngClass="{{tab == 3?'jobs':''}}">
               <i *ngIf="tab == 3">
                 <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path
@@ -654,7 +656,7 @@
                 {{job.name}}
               </div>
               <div class="col wrap">
-                {{job.role}}
+                {{job.roleCategory}}
               </div>
               <div class="col wrap">
                 {{job.jobLocation}}
@@ -721,31 +723,81 @@
           <!-- Applied jobs -->
           <div *ngIf="tab == 2">
             <div class="row content-card-heading  padding10">
-              <div class="col">
-                <!-- <i class='fas fa-sort-amount-down'></i> -->
+              <div class="col th">
+                <i><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="20" height="20" rx="10" fill="white" />
+                    <path
+                      d="M14.9091 14.8H16V16H4V14.8H5.09091V4.6C5.09091 4.44087 5.14838 4.28826 5.25067 4.17574C5.35296 4.06321 5.4917 4 5.63636 4H14.3636C14.5083 4 14.647 4.06321 14.7493 4.17574C14.8516 4.28826 14.9091 4.44087 14.9091 4.6V14.8ZM7.81818 9.4V10.6H9.45455V9.4H7.81818ZM7.81818 7V8.2H9.45455V7H7.81818ZM7.81818 11.8V13H9.45455V11.8H7.81818ZM10.5455 11.8V13H12.1818V11.8H10.5455ZM10.5455 9.4V10.6H12.1818V9.4H10.5455ZM10.5455 7V8.2H12.1818V7H10.5455Z"
+                      fill="#0A2647" />
+                  </svg>
+                </i>
                 Company
               </div>
-              <div class="col">
-                <!-- <i class='fas fa-sort-amount-down'></i> -->
+              <div class="col th">
+                <i><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="20" height="20" rx="10" fill="white" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M16 6.3999H4V9.5999H8.9384C8.85003 9.43273 8.8 9.24216 8.8 9.03991V8.95991H11.2V9.03991C11.2 9.24216 11.15 9.43273 11.0616 9.5999H16V6.3999Z"
+                      fill="#0A2647" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M13.6004 4H6.40039V8H8.5035C8.31204 7.71398 8.20039 7.37003 8.20039 7V5.6H11.8004V7C11.8004 7.37003 11.6887 7.71398 11.4973 8H13.6004V4Z"
+                      fill="#0A2647" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M8.86828 10.3999H4V15.9999H16V10.3999H11.1317C10.967 10.866 10.5225 11.1999 10 11.1999C9.47751 11.1999 9.03302 10.866 8.86828 10.3999Z"
+                      fill="#0A2647" />
+                  </svg>
+                </i>
                 Designation
               </div>
-              <div class="col">
-                <!-- <i class='fas fa-sort-amount-down'></i> -->
+              <div class="col th">
+                <i><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="20" height="20" rx="10" fill="white" />
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                      d="M10 18C10 18 16 12.3137 16 9C16 5.68629 13.3137 3 10 3C6.68629 3 4 5.68629 4 9C4 12.3137 10 18 10 18ZM10 10.5C10.8284 10.5 11.5 9.82843 11.5 9C11.5 8.17157 10.8284 7.5 10 7.5C9.17157 7.5 8.5 8.17157 8.5 9C8.5 9.82843 9.17157 10.5 10 10.5Z"
+                      fill="#0A2647" />
+                  </svg>
+                </i>
                 City
               </div>
-              <div class="col">
-                <!-- <i class='fas fa-sort-amount-down'></i> -->
+              <div class="col th">
+                <i><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="white" />
+                    <path d="M8 12L8 9L15.5 9C16.3284 9 17 9.67157 17 10.5C17 11.3284 16.3284 12 15.5 12L8 12Z"
+                      fill="#0A2647" />
+                    <path d="M11 12L8 12L8 6.5C8 5.67157 8.67157 5 9.5 5C10.3284 5 11 5.67157 11 6.5L11 12Z"
+                      fill="#0A2647" />
+                  </svg>
+                </i>
                 Experience
               </div>
-              <div class="col">
-                <!-- <i class='fas fa-sort-amount-down'></i> -->
+              <div class="col th">
+                <i><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="white" />
+                    <path
+                      d="M12.6479 6.38392V7.59992H14.2639V9.07192H12.5519C12.3812 10.0853 11.9599 10.8213 11.2879 11.2799C10.6265 11.7386 9.62388 11.9679 8.27988 11.9679V12.8159C8.27988 13.3173 8.38121 13.7119 8.58388 13.9999C8.79721 14.2879 9.15454 14.4319 9.65588 14.4319C10.1359 14.4319 10.4825 14.2986 10.6959 14.0319C10.9092 13.7546 11.0159 13.3546 11.0159 12.8319H13.0959C13.0745 13.9093 12.7705 14.7359 12.1839 15.3119C11.5972 15.8773 10.7599 16.1599 9.67188 16.1599C8.54121 16.1599 7.67721 15.8559 7.07988 15.2479C6.48254 14.6399 6.18387 13.7546 6.18387 12.5919V10.4639C7.32521 10.4639 8.16788 10.4373 8.71187 10.3839C9.25588 10.3199 9.66121 10.1919 9.92788 9.99992C10.1945 9.80792 10.3705 9.49859 10.4559 9.07192H5.67188V7.59992H10.5359V6.38392H5.67188V4.81592H14.2639V6.38392H12.6479Z"
+                      fill="#0A2647" />
+                  </svg>
+                </i>
                 Salary
               </div>
-              <div class="col">
+              <div class="col th">
+                <i><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="white" />
+                    <path
+                      d="M8.2 4V5.2H11.8V4H13V5.2H15.4C15.5591 5.2 15.7117 5.26321 15.8243 5.37574C15.9368 5.48826 16 5.64087 16 5.8V15.4C16 15.5591 15.9368 15.7117 15.8243 15.8243C15.7117 15.9368 15.5591 16 15.4 16H4.6C4.44087 16 4.28826 15.9368 4.17574 15.8243C4.06321 15.7117 4 15.5591 4 15.4V5.8C4 5.64087 4.06321 5.48826 4.17574 5.37574C4.28826 5.26321 4.44087 5.2 4.6 5.2H7V4H8.2ZM14.8 8.2H5.2V14.8H14.8V8.2ZM11.8216 9.4816L12.67 10.33L9.7 13.3L7.5784 11.1784L8.428 10.33L9.7006 11.6032L11.8222 9.4816H11.8216Z"
+                      fill="#0A2647" />
+                  </svg>
+                </i>
                 Applied
               </div>
-              <div class="col">
-                <!-- <i class='fas fa-sort-amount-down'></i> -->
+              <div class="col th">
+                <i><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10" cy="10" r="10" fill="white" />
+                    <path
+                      d="M14.2 5V12.0588H16L13.6 15L11.2 12.0588H13V5H14.2ZM9.4 13.2353V14.4118H4V13.2353H9.4ZM10.6 9.11765V10.2941H4V9.11765H10.6ZM10.6 5V6.17647H4V5H10.6Z"
+                      fill="#0A2647" />
+                  </svg>
+                </i>
                 <div class="dropdown" style="text-align: center;">
                   <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -759,7 +811,6 @@
                     </i>
                   </button>
                   <ul class="dropdown-menu" id="mydiv" style="cursor: pointer;">
-                    <li (click)="filter('null')">select</li>
                     <li (click)="filter('viewed')">Viewed</li>
                     <li (click)="filter('shortlisted')">Shortlisted</li>
                     <li (click)="filter('rejected')">Rejected</li>
@@ -769,23 +820,23 @@
             </div>
             <div class="row content-card no-margin padding10 main-content" *ngFor="let appli of appliedJobs">
               <div class="col">
-                {{appli.companyName}}
+                {{appli.jobs.employer.name}}
               </div>
               <div class="col wrap">
-                {{appli.role}}
+                {{appli.jobs.roleCategory}}
               </div>
               <div class="col wrap">
-                {{appli.jobLocation}}
+                {{appli.jobs.employer.location}}
               </div>
               <div class="col">
-                {{appli.experienceFrom}} to {{appli.experienceTo}}
+                {{appli.jobs.experienceFrom}} to {{appli.jobs.experienceTo}} Years
               </div>
               <div class="col">
-                {{appli.salaryRangeFrom}} to {{appli.salaryRangeTo}}
+                {{appli.jobs.salaryRangeFrom}} to {{appli.jobs.salaryRangeTo}} Lacs
 
               </div>
               <div class="col">
-                {{appli.appliedDate | date:'dd-MM-yyyy'}}
+                {{appli.createdAt | date:'dd-MM-yyyy'}}
               </div>
 
               <div class="col applied">
@@ -861,35 +912,35 @@
                 Status
               </div>
             </div>
-            <div class="row content-card no-margin padding10 main-content" *ngFor="let save of saveJobs">
+            <div class="row content-card no-margin padding10 main-content" *ngFor="let save of save">
               <div class="col">
                 {{save.companyName}}
               </div>
               <div class="col">
-                {{save.role}}
+                {{save.designation}}
               </div>
               <div class="col">
-                {{save.jobLocation}}
+                {{save.city}}
               </div>
               <div class="col">
-                {{save.experienceFrom}} To {{save.experienceTo}}
+                {{save.expFrom}} To {{save.expTo}} Years
               </div>
               <div class="col">
-                {{save.salaryRangeFrom}} To {{save.salaryRangeTo}}
-
+                {{save.salFrom}} To {{save.salTo}} LPA
               </div>
               <div class="col">
-                {{save.date}}
+                {{save.posted}}
               </div>
               <div class="col applied">
-                <a (click)="apply(save.jobId,tab)"><i><svg *ngIf="save.approvedStatus == 'Applied'" width="12"
-                      height="13" viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <a (click)="apply(save.jobId,tab)"><i><svg *ngIf="save.status == 'Applied'" width="12" height="13"
+                      viewBox="0 0 12 13" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path
                         d="M6 12.5C2.6862 12.5 0 9.8138 0 6.5C0 3.1862 2.6862 0.5 6 0.5C9.3138 0.5 12 3.1862 12 6.5C12 9.8138 9.3138 12.5 6 12.5ZM6 11.3C7.27304 11.3 8.49394 10.7943 9.39411 9.89411C10.2943 8.99394 10.8 7.77304 10.8 6.5C10.8 5.22696 10.2943 4.00606 9.39411 3.10589C8.49394 2.20571 7.27304 1.7 6 1.7C4.72696 1.7 3.50606 2.20571 2.60589 3.10589C1.70571 4.00606 1.2 5.22696 1.2 6.5C1.2 7.77304 1.70571 8.99394 2.60589 9.89411C3.50606 10.7943 4.72696 11.3 6 11.3ZM5.4018 8.9L2.856 6.3542L3.7044 5.5058L5.4018 7.2032L8.7954 3.809L9.6444 4.6574L5.4018 8.9Z"
                         fill="white" />
                     </svg>
-                  </i><i> <svg *ngIf="save.approvedStatus == 'shortlisted'" width="24" height="24" viewBox="0 0 24 24"
-                      fill="none" xmlns="http://www.w3.org/2000/svg">
+                  </i>
+                  <i> <svg *ngIf="save.status == 'shortlisted'" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                      xmlns="http://www.w3.org/2000/svg">
                       <g clip-path="url(#clip0_871_2584)">
                         <path
                           d="M20.8889 23.2222H3.11111C2.81643 23.2222 2.53381 23.1052 2.32544 22.8968C2.11706 22.6884 2 22.4058 2 22.1111V2.11111C2 1.81643 2.11706 1.53381 2.32544 1.32544C2.53381 1.11706 2.81643 1 3.11111 1H20.8889C21.1836 1 21.4662 1.11706 21.6746 1.32544C21.8829 1.53381 22 1.81643 22 2.11111V22.1111C22 22.4058 21.8829 22.6884 21.6746 22.8968C21.4662 23.1052 21.1836 23.2222 20.8889 23.2222ZM19.7778 21V3.22222H4.22222V21H19.7778ZM7.55556 6.55556H16.4444V8.77778H7.55556V6.55556ZM7.55556 11H16.4444V13.2222H7.55556V11ZM7.55556 15.4444H13.1111V17.6667H7.55556V15.4444Z"
@@ -901,9 +952,8 @@
                         </clipPath>
                       </defs>
                     </svg>
-
                   </i>
-                  <i *ngIf="save.approvedStatus == 'rejected'">
+                  <i *ngIf="save.status == 'rejected'">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <g clip-path="url(#clip0_871_2590)">
                         <path
@@ -916,9 +966,8 @@
                         </clipPath>
                       </defs>
                     </svg>
-
                   </i>
-                  {{save.approvedStatus}}</a>
+                  {{save.status}}</a>
               </div>
             </div>
           </div>
@@ -931,6 +980,9 @@
                   <label>Key word :</label>
                   <input class="alertField" type="text" name="keyskill" placeholder="Enter Key Skill"
                     formControlName="searchalert" (keyup)="dispalyedData($event)">
+                </div>
+                <div class="alertErr" *ngIf="alertSbumit && setAlertForm.get('searchalert')?.invalid">
+                  <p>Enter Key Skills</p>
                 </div>
                 <div class="" *ngIf="isshow" style="margin-top:0px;">
                   <label></label>
@@ -963,11 +1015,14 @@
                     </select>
                   </div>
                 </div>
+                <div class="alertErr" *ngIf="alertSbumit && setAlertForm.get('experienceYearSet')?.invalid">
+                  <p>Select Experience</p>
+                </div>
                 <div class="single-row">
                   <label>Salary :</label>
                   <div class="content-box">
                     <select id="select" class="form-control" formControlName="salaryFrom">
-                      <option [ngValue]="null">From</option>
+                      <option [ngValue]="null">Select Salary</option>
                       <option value="1-2">1 to 2 lac</option>
                       <option value="2-3">2 to 3 lac</option>
                       <option value="2-4">2 to 4 lac</option>
@@ -981,60 +1036,83 @@
                     </select>
                   </div>
                 </div>
+                <div class="alertErr" *ngIf="alertSbumit && setAlertForm.get('salaryFrom')?.invalid">
+                  <p>Select Salary Range</p>
+                </div>
                 <div class="job-location">
                   <label>Job Location :</label>
                   <input class="alertField" type="text" ngx-google-places-autocomplete [options]="options"
                     (onAddressChange)="handleAddressChange($event)" name="location" placeholder="Enter Job location"
                     formControlName="locationSet">
                 </div>
+                <div class="alertErr" *ngIf="alertSbumit && setAlertForm.get('locationSet')?.invalid">
+                  <p>Enter Job Location</p>
+                </div>
                 <div class="single-row">
                   <label for="">Current Industry :</label>
                   <div class="content-box">
                     <select id="select" class="form-control" formControlName="currentIndustry">
-                      <option [ngValue]="null" disabled selected>Select</option>
+                      <option [ngValue]="null" disabled selected>Select Industry</option>
                       <option value="{{ind._id}}" *ngFor="let ind of industry">{{ind.Industry}}</option>
                     </select>
                   </div>
+                </div>
+                <div class="alertErr" *ngIf="alertSbumit && setAlertForm.get('currentIndustry')?.invalid">
+                  <p>Enter Current Industry</p>
                 </div>
                 <div class="single-row">
                   <label for="">Current Department :</label>
                   <div class="content-box">
                     <select id="select" class="form-control" formControlName="currentDepartment"
                       (change)="changeDeparment($event)">
-                      <option [ngValue]="null" disabled selected>Select</option>
+                      <option [ngValue]="null" disabled selected>Select Department</option>
                       <option *ngFor="let dep of currentDepartment" value="{{dep._id}}">{{dep.Department}}</option>
                     </select>
                   </div>
+                </div>
+                <div class="alertErr" *ngIf="alertSbumit && setAlertForm.get('currentDepartment')?.invalid">
+                  <p>Enter Current Department</p>
                 </div>
                 <div class="single-row">
                   <label for="">Role Category :</label>
                   <div class="content-box">
                     <select id="select" class="form-control" (change)="getRole($event)" formControlName="role_Category">
-                      <option [ngValue]="null" disabled selected>Select</option>
+                      <option [ngValue]="null" disabled selected>Select Role Category</option>
                       <option *ngFor="let cat of currentCategory" value="{{cat._id}}">{{cat.Role_Category}}
                       </option>
                     </select>
                   </div>
                 </div>
+                <div class="alertErr" *ngIf="alertSbumit && setAlertForm.get('role_Category')?.invalid">
+                  <p>Enter Role Category</p>
+                </div>
                 <div class="single-row">
                   <label for="">Job Role :</label>
                   <div class="content-box">
                     <select id="select" class="form-control" formControlName="designationSet">
-                      <option [ngValue]="null" disabled selected>Select</option>
+                      <option [ngValue]="null" disabled selected>Select Job Role</option>
                       <option *ngFor="let role of getroles" value="{{role._id}}">{{role.Job_role}}</option>
                     </select>
                   </div>
                 </div>
-
-
-
+                <div class="alertErr" *ngIf="alertSbumit && setAlertForm.get('designationSet')?.invalid">
+                  <p>Enter Job Role</p>
+                </div>
               </div>
               <button class="btn alert" (click)="setalert()">Set Alert</button>
             </div>
             <div *ngIf="alert==false">
               <div style="display: flex;justify-content: end;">
-                <button class="btn btn-sm albtn" (click)="edit()"><i class="fa fa-pencil"></i>
-                  Edit</button>
+                <!-- <button class="btn btn-sm albtn" (click)="edit()"><i class="fa fa-pencil"></i>Edit</button> -->
+                <button
+                  style="margin: 5px; display: flex; justify-content: space-between; border: none; border-radius: 4px; background-color: #0A2647; color: #ffff; height: 30px; align-items: center;"
+                  (click)="edit()"> <i style="padding-right: 5px;"><svg width="12" height="12" viewBox="0 0 12 12"
+                      fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M6.61073 2.55667L9.44333 5.38994L2.8326 12H0V9.16674L6.61073 2.55667ZM7.55493 1.61247L8.97123 0.195508C9.09645 0.0703245 9.26626 0 9.44333 0C9.62039 0 9.79021 0.0703245 9.91543 0.195508L11.8045 2.08457C11.9297 2.2098 12 2.37961 12 2.55667C12 2.73374 11.9297 2.90355 11.8045 3.02877L10.3875 4.44507L7.55493 1.61247Z"
+                        fill="white" />
+                    </svg>
+                  </i>Edit Alert</button>
               </div>
               <div class="row content-card-heading no-margin padding10">
                 <div class="col">
@@ -1216,7 +1294,7 @@
       </div>
     </div>
     <div class="col-2 ">
-      <div class="col-11  m-auto bg-grey rounded over">
+      <div class="col-11  m-auto bg-grey rounded over" style="width: 100%;">
         <div class="recent-search col-12">
           <header>
             <i><svg width="20" height="21" viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1226,7 +1304,7 @@
               </svg>
             </i> Recent Search
           </header>
-          <div class="tabs" style="overflow: scroll;height:307px;">
+          <div class="tabs" style="height:442px;overflow-y: scroll">
             <div class="tab d-flex flex-wrap bg-grey" style="cursor: pointer;"
               *ngFor="let recent of recentData;let i=index">
 
@@ -1257,7 +1335,14 @@
                     </i>
                     <p>{{recent.Location}}</p>
                   </div>
-                  <div class="years">
+                  <div class="years" style="display: flex">
+                    <i>
+                      <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                          d="M6 12C2.68629 12 0 9.31371 0 6C0 2.68629 2.68629 0 6 0C9.31371 0 12 2.68629 12 6C12 9.31371 9.31371 12 6 12ZM10.2857 7.71428H6.85714H5.14286V6V3.42857C5.14286 2.95518 5.52661 2.57143 6 2.57143C6.47339 2.57143 6.85714 2.95518 6.85714 3.42857L6.85714 6L10.2857 6C10.7591 6 11.1429 6.38376 11.1429 6.85714C11.1429 7.33053 10.7591 7.71428 10.2857 7.71428Z"
+                          fill="#79879A" />
+                      </svg>
+                    </i>
                     <p>{{recent.experience}} Year</p>
                   </div>
                 </div>

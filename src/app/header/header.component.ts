@@ -23,7 +23,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
    this.userNAme =  localStorage.getItem('name')
    this.empusername =  localStorage.getItem('empname')
-   if(!Cookie.get('tokens')){
+   if(!Cookie.get('candtokens')){
     this.idShow=false;
     }else{
     this.idShow=true

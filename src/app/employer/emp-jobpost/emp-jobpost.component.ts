@@ -752,37 +752,36 @@ export class EmpJobpostComponent implements OnInit {
   //   });
   // }
 
-
-
-
-  constructor(private fb: FormBuilder, private router: Router,
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
     private aroute: ActivatedRoute,
-    private empservice: EmpServiceService,) { }
-  id: any
-  data: any
+    private empservice: EmpServiceService
+  ) {}
+  id: any = '';
+  data: any;
   ngOnInit(): void {
     this.get_industry_list();
     this.get();
-    this.getEducation()
-    this.get_depart()
+    this.getEducation();
+    this.get_depart();
     this.aroute.queryParams.subscribe((e: any) => {
-      this.id = e['id']
-    })
-    this.getJobPostbyId()
-    this.empreg()
-
+      if (e['id']) {
+        this.id = e['id'];
+      }
+    });
+    this.getJobPostbyId();
+    this.empreg();
   }
 
   getJobPostbyId() {
     if (this.id) {
-     
       this.empservice.get_job_detail(this.id).subscribe((e: any) => {
-
-        this.data = e
-        this.selectedEducation = this.data.specialization
-        this.recEmail=this.data.recruiterEmail
-        console.log(this.selectedEducation)
-        console.log(this.data)
+        this.data = e;
+        this.selectedEducation = this.data.specialization;
+        this.recEmail = this.data.recruiterEmail;
+        console.log(this.selectedEducation);
+        console.log(this.data);
         this.jobpostForm.patchValue({
           jobTittle: this.data.jobTittle,
           jobDescription: this.data.jobDescription,
@@ -815,16 +814,14 @@ export class EmpJobpostComponent implements OnInit {
           department: this.data.department,
           roleCategory: this.data.roleCategory,
           jobLocation: this.data.jobLocation,
-          specialization:this.data.specialization
-        })
-        console.log(this.jobpostForm.value)
-        this.recriList=true
-        this.recruiterNumberr=this.data.recruiterNumber;
-        this.recruiterNamee=this.data.recruiterName
-      })
+          specialization: this.data.specialization,
+        });
+        console.log(this.jobpostForm.value);
+        this.recriList = true;
+        this.recruiterNumberr = this.data.recruiterNumber;
+        this.recruiterNamee = this.data.recruiterName;
+      });
     }
-
-
   }
 
   jobpostForm: any = this.fb.group({
@@ -833,35 +830,36 @@ export class EmpJobpostComponent implements OnInit {
     candidateDescription: new FormControl('', Validators.required),
     salaryDescription: new FormControl('', Validators.required),
     keySkill: new FormControl([], Validators.required),
-    salaryRangeFrom: new FormControl("", Validators.required),
-    salaryRangeTo: new FormControl("",[ Validators.required]),
-    industry: new FormControl("", Validators.required),
-    experienceFrom: new FormControl("", Validators.required),
-    experienceTo: new FormControl("", Validators.required),
+    salaryRangeFrom: new FormControl('', Validators.required),
+    salaryRangeTo: new FormControl('', [Validators.required]),
+    industry: new FormControl('', Validators.required),
+    experienceFrom: new FormControl('', Validators.required),
+    experienceTo: new FormControl('', Validators.required),
     qualification: new FormControl([]),
     preferedIndustry: new FormControl([], Validators.required),
-    interviewType: new FormControl("", Validators.required),
-    interviewstartDate: new FormControl(""),
-    interviewendDate: new FormControl(""),
-    startTime: new FormControl(""),
-    endTime: new FormControl(""),
-    venue: new FormControl(""),
-    employmentType: new FormControl("", Validators.required),
+    preferrefIndustryfrond: new FormControl([], Validators.required),
+    interviewType: new FormControl('', Validators.required),
+    interviewstartDate: new FormControl(''),
+    interviewendDate: new FormControl(''),
+    startTime: new FormControl(''),
+    endTime: new FormControl(''),
+    venue: new FormControl(''),
+    employmentType: new FormControl('', Validators.required),
     openings: new FormControl('', Validators.required),
-    workplaceType: new FormControl("", Validators.required),
+    workplaceType: new FormControl('', Validators.required),
     urltoApply: new FormControl('', Validators.required),
-    apply_method: new FormControl(""),
+    apply_method: new FormControl(''),
     recruiterId: new FormControl(''),
-    recruiterName: new FormControl(""),
-    recruiterEmail: new FormControl(""),
+    recruiterName: new FormControl(''),
+    recruiterEmail: new FormControl(''),
 
     recruiterNumber: new FormControl(0),
-    recruiterList: new FormControl(""),
-    department: new FormControl("", Validators.required),
+    recruiterList: new FormControl(''),
+    department: new FormControl('', Validators.required),
     roleCategory: new FormControl(null),
     specialization: new FormControl([], Validators.required),
     jobLocation: new FormControl([], Validators.required),
-    // course: new FormControl([]),
+    course: new FormControl([]),
     // jobLocations: new FormControl([]),
 
     // location: new FormControl([]),
@@ -869,38 +867,31 @@ export class EmpJobpostComponent implements OnInit {
     // roleCategory: new FormControl(null),
     // role: new FormControl(null),
 
-
-
-
-
     // searchbox: new FormControl(null, Validators.required),
     // recruiterList1: new FormControl(null, Validators.required),
     // loc: new FormControl(null),
   });
-  companyLogo: any
-  RegcompanyName:any
+  companyLogo: any;
+  RegcompanyName: any;
   empreg() {
     this.empservice.getEmployerDetails().subscribe((res: any) => {
-      console.log(res, "emp")
-      const empRegisterdetails = res
-      this.companyLogo = `https://livebroadcast.click/${res.user.logo}`
-      console.log(this.companyLogo)
-      this.RegcompanyName=res.user.name
-    })
+      console.log(res, 'emp');
+      const empRegisterdetails = res;
+      this.companyLogo = `https://livebroadcast.click/${res.user.logo}`;
+      console.log(this.companyLogo);
+      this.RegcompanyName = res.user.name;
+    });
   }
 
-
-
-  popup = false
+  popup = false;
   preview() {
-    this.submitted=true
+    this.submitted = true;
     if (this.jobpostForm.valid) {
-      this.popup = true
+      this.popup = true;
     }
-
   }
 
-  indus_data: any
+  indus_data: any;
 
   get_industry_list() {
     this.empservice.get_industry().subscribe((res: any) => {
@@ -909,156 +900,157 @@ export class EmpJobpostComponent implements OnInit {
     });
   }
 
-
-  preferrefIndustry: any = false
+  preferrefIndustry: any = false;
   showPrefferedOption() {
-    this.preferrefIndustry = !this.preferrefIndustry
+    this.preferrefIndustry = !this.preferrefIndustry;
   }
-  prefIndarr: any[] = []
-  prefInd(items: any, e: any) {
-
-
-    this.preferrefIndustry = false
+  prefIndarr: any[] = [];
+  prefIndarrid: any[] = [];
+  prefInd(items: any, e: any, id: any) {
+    console.log(id);
+    this.preferrefIndustry = false;
     let index = this.prefIndarr.findIndex((a: any) => a == items);
+    let index2 = this.prefIndarrid.findIndex((a2: any) => a2 == id);
     if (index == -1) {
       if (this.prefIndarr.length <= 2) {
-        this.prefIndarr.push(items)
-        this.jobpostForm.get('preferedIndustry').setValue(this.prefIndarr)
+        this.prefIndarr.push(items);
+        this.jobpostForm
+          .get('preferrefIndustryfrond')
+          .setValue(this.prefIndarr);
       }
-
+    } else {
+      this.prefIndarr.splice(index, 1);
+      this.jobpostForm.get('preferrefIndustryfrond').setValue(this.prefIndarr);
     }
-    else {
-      this.prefIndarr.splice(index, 1)
-      this.jobpostForm.get('preferedIndustry').setValue(this.prefIndarr)
-
-
+    if (index2 == -1) {
+      this.prefIndarrid.push(id);
+      console.log(this.prefIndarrid);
+      this.jobpostForm.get('preferedIndustry').setValue(this.prefIndarrid);
+      console.log(this.jobpostForm.get('preferedIndustry')?.value, 'id');
+    } else {
+      this.prefIndarr.splice(index2, 1);
+      this.jobpostForm.get('preferrefIndustry').setValue(this.prefIndarrid);
+      console.log(this.jobpostForm.get('preferedIndustry')?.value, 'else');
     }
-
   }
   deletedPref(data: any) {
-    console.log(data)
+    console.log(data);
     let index = this.prefIndarr.findIndex((a: any) => a == data);
-    this.prefIndarr.splice(index, 1)
-    this.jobpostForm.get('preferedIndustry')?.value.splice(index, 1)
-
-
+    this.prefIndarr.splice(index, 1);
+    this.jobpostForm.get('preferedIndustry')?.value.splice(index, 1);
+    this.prefIndarrid.splice(index, 1);
   }
-
 
   isChecked(item: any) {
     let index = this.prefIndarr.findIndex((a: any) => a == item);
 
     if (index == -1) {
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   }
 
-  predictions: any[] = []
-  selectedLocation: any[] = []
-  locationSearch: any
+  predictions: any[] = [];
+  selectedLocation: any[] = [];
+  locationSearch: any;
 
   get_area_location(e: any) {
-    this.isLoc = true
+    this.isLoc = true;
 
-    console.log(e)
+    console.log(e);
     var data = {
-      input: e.target.value
-    }
+      input: e.target.value,
+    };
 
     this.empservice.get_area_location(data).subscribe((data: any) => {
       console.log(data);
       this.predictions = data.predictions;
     });
-
   }
 
-  isLoc = true
+  isLoc = true;
   selectLoc(data: any) {
-    this.locationSearch = ''
-    this.isLoc = false
-    this.selectedLocation.push(data)
+    this.locationSearch = '';
+    this.isLoc = false;
+    this.selectedLocation.push(data);
 
-    this.jobpostForm.get('jobLocation').setValue(this.selectedLocation)
+    this.jobpostForm.get('jobLocation').setValue(this.selectedLocation);
   }
   delLoc(data: any) {
-    console.log(data)
+    console.log(data);
     let index = this.selectedLocation.findIndex((a: any) => a == data);
-    this.selectedLocation.splice(index, 1)
-    this.jobpostForm.get('jobLocation').setValue(this.selectedLocation)
-
+    this.selectedLocation.splice(index, 1);
+    this.jobpostForm.get('jobLocation').setValue(this.selectedLocation);
   }
 
   delkeyskill(data: any) {
     let index = this.selectedkeyskills.findIndex((a: any) => a == data);
-    this.selectedkeyskills.splice(index, 1)
-    this.keySkillInp = ""
-    this.jobpostForm.get('keySkill').setValue(this.selectedkeyskills)
+    this.selectedkeyskills.splice(index, 1);
+    this.keySkillInp = '';
+    this.jobpostForm.get('keySkill').setValue(this.selectedkeyskills);
   }
 
-  keySkill: any = []
+  keySkill: any = [];
 
   getKeyskills(value: any) {
-    const inp = value.target.value
-    this.showKeyskills = true
+    const inp = value.target.value;
+    this.showKeyskills = true;
     this.empservice.getSkill(inp).subscribe((res: any) => {
       this.keySkill = res;
     });
   }
 
-
-  showKeyskills = true
-  selectedkeyskills: any = []
-  keySkillInp: any
+  showKeyskills = true;
+  selectedkeyskills: any = [];
+  keySkillInp: any;
 
   selectKeySkill(data: any) {
-    this.showKeyskills = false
-    this.selectedkeyskills.push(data)
-    this.jobpostForm.get('keySkill').setValue(this.selectedkeyskills)
+    this.showKeyskills = false;
+    this.selectedkeyskills.push(data);
+    this.jobpostForm.get('keySkill').setValue(this.selectedkeyskills);
 
-    this.keySkillInp=''
-console.log(  this.jobpostForm.get('keySkill')?.value)
-
+    this.keySkillInp = '';
+    console.log(this.jobpostForm.get('keySkill')?.value);
   }
 
   selectIntType(value: any) {
-    console.log(value.target.value)
+    console.log(value.target.value);
     if (value.target.value == 'walkin') {
-      this.jobpostForm.controls['interviewstartDate'].setValidators(Validators.required)
-      this.jobpostForm.controls['interviewstartDate'].updateValueAndValidity()
-      this.jobpostForm.controls['interviewendDate'].setValidators(Validators.required)
-      this.jobpostForm.controls['interviewendDate'].updateValueAndValidity()
+      this.jobpostForm.controls['interviewstartDate'].setValidators(
+        Validators.required
+      );
+      this.jobpostForm.controls['interviewstartDate'].updateValueAndValidity();
+      this.jobpostForm.controls['interviewendDate'].setValidators(
+        Validators.required
+      );
+      this.jobpostForm.controls['interviewendDate'].updateValueAndValidity();
 
-      this.jobpostForm.controls['startTime'].setValidators(Validators.required)
-      this.jobpostForm.controls['startTime'].updateValueAndValidity()
+      this.jobpostForm.controls['startTime'].setValidators(Validators.required);
+      this.jobpostForm.controls['startTime'].updateValueAndValidity();
 
-      this.jobpostForm.controls['endTime'].setValidators(Validators.required)
-      this.jobpostForm.controls['endTime'].updateValueAndValidity()
+      this.jobpostForm.controls['endTime'].setValidators(Validators.required);
+      this.jobpostForm.controls['endTime'].updateValueAndValidity();
 
-      this.jobpostForm.controls['venue'].setValidators(Validators.required)
-      this.jobpostForm.controls['venue'].updateValueAndValidity()
+      this.jobpostForm.controls['venue'].setValidators(Validators.required);
+      this.jobpostForm.controls['venue'].updateValueAndValidity();
 
       // this.jobpostForm.controls['apply_method'].setValidators(null)
       // this.jobpostForm.controls['apply_method'].updateValueAndValidity()
+    } else {
+      this.jobpostForm.controls['interviewstartDate'].setValidators(null);
+      this.jobpostForm.controls['interviewstartDate'].updateValueAndValidity();
+      this.jobpostForm.controls['interviewendDate'].setValidators(null);
+      this.jobpostForm.controls['interviewendDate'].updateValueAndValidity();
 
+      this.jobpostForm.controls['startTime'].setValidators(null);
+      this.jobpostForm.controls['startTime'].updateValueAndValidity();
 
-    }
-    else {
-      this.jobpostForm.controls['interviewstartDate'].setValidators(null)
-      this.jobpostForm.controls['interviewstartDate'].updateValueAndValidity()
-      this.jobpostForm.controls['interviewendDate'].setValidators(null)
-      this.jobpostForm.controls['interviewendDate'].updateValueAndValidity()
+      this.jobpostForm.controls['endTime'].setValidators(null);
+      this.jobpostForm.controls['endTime'].updateValueAndValidity();
 
-      this.jobpostForm.controls['startTime'].setValidators(null)
-      this.jobpostForm.controls['startTime'].updateValueAndValidity()
-
-      this.jobpostForm.controls['endTime'].setValidators(null)
-      this.jobpostForm.controls['endTime'].updateValueAndValidity()
-
-      this.jobpostForm.controls['venue'].setValidators(null)
-      this.jobpostForm.controls['venue'].updateValueAndValidity()
+      this.jobpostForm.controls['venue'].setValidators(null);
+      this.jobpostForm.controls['venue'].updateValueAndValidity();
 
       // this.jobpostForm.controls['apply_method'].setValidators(Validators.required)
       // this.jobpostForm.controls['apply_method'].updateValueAndValidity()
@@ -1066,122 +1058,115 @@ console.log(  this.jobpostForm.get('keySkill')?.value)
   }
 
   getApplymethod(e: any) {
-    console.log(e.target.value)
+    console.log(e.target.value);
     if (e.target.value == 'telephonicApplicant') {
-      this.jobpostForm.controls['recruiterList'].setValidators(Validators.required)
-      this.jobpostForm.controls['recruiterList'].updateValueAndValidity()
-    }
-    else {
-      this.jobpostForm.controls['recruiterList'].setValidators(null)
-      this.jobpostForm.controls['recruiterList'].updateValueAndValidity()
+      this.jobpostForm.controls['recruiterList'].setValidators(
+        Validators.required
+      );
+      this.jobpostForm.controls['recruiterList'].updateValueAndValidity();
+    } else {
+      this.jobpostForm.controls['recruiterList'].setValidators(null);
+      this.jobpostForm.controls['recruiterList'].updateValueAndValidity();
     }
     if (e.target.value == 'email') {
-      this.jobpostForm.controls['recruiterEmail'].setValidators([Validators.required,Validators.email])
-      this.jobpostForm.controls['recruiterEmail'].updateValueAndValidity()
-    }
-    else {
-      this.jobpostForm.controls['recruiterEmail'].setValidators(null)
-      this.jobpostForm.controls['recruiterEmail'].updateValueAndValidity()
+      this.jobpostForm.controls['recruiterEmail'].setValidators([
+        Validators.required,
+        Validators.email,
+      ]);
+      this.jobpostForm.controls['recruiterEmail'].updateValueAndValidity();
+    } else {
+      this.jobpostForm.controls['recruiterEmail'].setValidators(null);
+      this.jobpostForm.controls['recruiterEmail'].updateValueAndValidity();
     }
   }
-recName:any
-recEmail:any
-recNumber:any
+  recName: any;
+  recEmail: any;
+  recNumber: any;
 
-recriList=false
+  recriList = false;
   selectRecmethod(e: any) {
-    console.log(e.target.value)
-    if(e.target.value=="new" && this.id){
-      this.recEmail=""
-      this.jobpostForm.patchValue({recruiterEmail:this.recEmail})
+    console.log(e.target.value);
+    if (e.target.value == 'new' && this.id) {
+      this.recEmail = '';
+      this.jobpostForm.patchValue({ recruiterEmail: this.recEmail });
     }
     if (e.target.value == 'list') {
-      this.recriList=true
-      this.jobpostForm.controls['recruiterId'].setValidators(Validators.required)
-      this.jobpostForm.controls['recruiterId'].updateValueAndValidity()
+      this.recriList = true;
+      this.jobpostForm.controls['recruiterId'].setValidators(
+        Validators.required
+      );
+      this.jobpostForm.controls['recruiterId'].updateValueAndValidity();
       this.jobpostForm.addControl('recruiterId');
 
-      this.jobpostForm.controls['recruiterName'].setValidators(null)
-      this.jobpostForm.controls['recruiterName'].updateValueAndValidity()
-      this.jobpostForm.controls['recruiterEmail'].setValidators(null)
-      this.jobpostForm.controls['recruiterEmail'].updateValueAndValidity()
-      this.jobpostForm.controls['recruiterNumber'].setValidators(null)
-      this.jobpostForm.controls['recruiterNumber'].updateValueAndValidity()
+      this.jobpostForm.controls['recruiterName'].setValidators(null);
+      this.jobpostForm.controls['recruiterName'].updateValueAndValidity();
+      this.jobpostForm.controls['recruiterEmail'].setValidators(null);
+      this.jobpostForm.controls['recruiterEmail'].updateValueAndValidity();
+      this.jobpostForm.controls['recruiterNumber'].setValidators(null);
+      this.jobpostForm.controls['recruiterNumber'].updateValueAndValidity();
     }
-    if (e.target.value == 'new')  {
-      this.recriList=false
-      this.jobpostForm.controls['recruiterId'].setValidators(null)
+    if (e.target.value == 'new') {
+      this.recriList = false;
+      this.jobpostForm.controls['recruiterId'].setValidators(null);
       this.jobpostForm.removeControl('recruiterId');
-      this.jobpostForm.controls['recruiterId'].updateValueAndValidity()
+      this.jobpostForm.controls['recruiterId'].updateValueAndValidity();
 
-      this.jobpostForm.controls['recruiterName'].setValidators(Validators.required)
-      this.jobpostForm.controls['recruiterName'].updateValueAndValidity()
-      this.jobpostForm.patchValue({recruiterName:this.recName})
-      this.jobpostForm.controls['recruiterEmail'].setValidators([Validators.required,Validators.email])
-      this.jobpostForm.controls['recruiterEmail'].updateValueAndValidity()
-      this.jobpostForm.patchValue({recruiterEmail:this.recEmail})
+      this.jobpostForm.controls['recruiterName'].setValidators(
+        Validators.required
+      );
+      this.jobpostForm.controls['recruiterName'].updateValueAndValidity();
+      this.jobpostForm.patchValue({ recruiterName: this.recName });
+      this.jobpostForm.controls['recruiterEmail'].setValidators([
+        Validators.required,
+        Validators.email,
+      ]);
+      this.jobpostForm.controls['recruiterEmail'].updateValueAndValidity();
+      this.jobpostForm.patchValue({ recruiterEmail: this.recEmail });
 
-      this.jobpostForm.controls['recruiterNumber'].setValidators(Validators.required)
-      this.jobpostForm.controls['recruiterNumber'].updateValueAndValidity()
-      this.jobpostForm.patchValue({recruiterNumber:this.recNumber})
-
+      this.jobpostForm.controls['recruiterNumber'].setValidators(
+        Validators.required
+      );
+      this.jobpostForm.controls['recruiterNumber'].updateValueAndValidity();
+      this.jobpostForm.patchValue({ recruiterNumber: this.recNumber });
     }
   }
 
-  recruiterNamee: any
-  recruiterNumberr: Number | undefined
-  recruiterEmaill: any
-  list: any
+  recruiterNamee: any;
+  recruiterNumberr: Number | undefined;
+  recruiterEmaill: any;
+  list: any;
   get() {
     this.empservice.get_recruiter().subscribe((data) => {
-      console.log(data, "recruiter");
+      console.log(data, 'recruiter');
       this.list = data;
-
     });
   }
 
-
   getRecruiter(e: any) {
-    console.log(this.list)
+    console.log(this.list);
     let rec = this.list.filter((a: any) => a._id == e.target.value);
     if (rec.length != 0) {
-      this.jobpostForm.patchValue({ recruiterName: rec[0].recruiterName, recruiterEmail: rec[0].email, recruiterNumber: rec[0].mobileNumber })
-      this.recruiterNamee = rec[0].recruiterName
+      this.jobpostForm.patchValue({
+        recruiterName: rec[0].recruiterName,
+        recruiterEmail: rec[0].email,
+        recruiterNumber: rec[0].mobileNumber,
+      });
+      this.recruiterNamee = rec[0].recruiterName;
       this.recruiterNumberr = rec[0].mobileNumber;
-      this.recruiterEmaill = rec[0].email
+      this.recruiterEmaill = rec[0].email;
     }
-
-   
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  submitted = false
+  submitted = false;
   submit() {
-    console.log(this.jobpostForm.value)
+    console.log(this.jobpostForm.value);
     console.log(this.jobpostForm.valid);
-    console.log(this.jobpostForm)
+    console.log(this.jobpostForm);
 
-    this.submitted = true
+    this.submitted = true;
 
-
-    if (this.jobpostForm.valid) {
+    if (this.jobpostForm.valid && this.id == '') {
       console.log(this.jobpostForm.value);
-
 
       this.empservice
         .submitPostAJob(this.jobpostForm.value)
@@ -1191,207 +1176,191 @@ recriList=false
 
           this.jobpostForm.reset();
         });
+    } else {
+      this.empservice
+        .updatePostAJob(this.id, this.jobpostForm.value)
+        .subscribe((e: any) => {
+          console.log(e);
+          this.router.navigateByUrl('/emp-home');
+        });
     }
-
   }
 
-
-  educationList: any
+  educationList: any;
 
   // education
   getEducation() {
     this.empservice.get_qualification().subscribe((res) => {
-      console.log(res)
-      this.educationList = res
-    })
+      console.log(res);
+      this.educationList = res;
+    });
   }
-  idd: any
-  courseId: any
-  arr: any = []
-  course: any
+  idd: any;
+  courseId: any;
+  arr: any = [];
+  course: any;
   educhecked(e: any) {
-    console.log(e._id)
-    this.arr.push(e._id)
-    this.idd = e._id
-    console.log(this.arr)
+    console.log(e._id);
+    this.arr.push(e._id);
+    this.idd = e._id;
+    console.log(this.arr);
     let data = {
-      arr: this.arr
-    }
+      arr: this.arr,
+    };
     this.empservice.get_courses(data).subscribe((res: any) => {
-      this.course = res.allCourses
-      this.courseShow = !this.courseShow
-    })
+      this.course = res.allCourses;
+      this.courseShow = !this.courseShow;
+    });
   }
 
-
-
-  courseCheck(e: any) {
-
-  }
+  courseCheck(e: any) {}
   ischeckedd(item: any) {
-    const data = item.target.value
+    const data = item.target.value;
     let index = this.arr.findIndex((a: any) => a == data._id);
     if (item.target.checked) {
-
-      this.arr.push(item)
-      this.courseShow = false
-      console.log("checked")
-
-    }
-
-    else {
-      this.arr.splice(index, 1)
-      this.courseShow = true
-      console.log("unchecked")
-
+      this.arr.push(item);
+      this.jobpostForm.get('qualification').setValue(this.arr[0]);
+      this.courseShow = false;
+      console.log('checked');
+    } else {
+      this.arr.splice(index, 1);
+      this.courseShow = true;
+      console.log('unchecked');
     }
   }
 
-  specShow = false
+  specShow = false;
   specChecked(item: any) {
-    const data = item.target.value
+    const data = item.target.value;
     let index = this.arr.findIndex((a: any) => a == data._id);
     if (item.target.checked) {
-
-      this.arr.push(item)
-      this.specShow = true
-      console.log("checked")
-
-    }
-
-    else {
-      this.arr.splice(index, 1)
-      this.specShow = false
-      console.log("unchecked")
-
+      this.arr.push(item);
+      this.specShow = true;
+      this.jobpostForm.get('course').setValue(this.arr[0]);
+      console.log('checked');
+    } else {
+      this.arr.splice(index, 1);
+      this.specShow = false;
+      console.log('unchecked');
     }
   }
 
-
-  educationShow = false
-  specialization: any
+  educationShow = false;
+  specialization: any;
 
   courseShow = false;
   getCourse(e: any) {
-    this.arr = []
-    this.arr.push(e._id)
-    this.courseId = e._id
+    this.arr = [];
+    this.arr.push(e._id);
+    this.courseId = e._id;
     let data = {
-      arr: this.arr
-    }
+      arr: this.arr,
+    };
     this.empservice.get_specialization(data).subscribe((res: any) => {
-      this.specialization = res
-    })
+      this.specialization = res;
+    });
   }
 
-  selectedEducation: any = []
-specs:any=[]
+  selectedEducation: any = [];
+  specs: any = [];
   selectEd(data: any) {
-    console.log(data)
-    this.educationShow = false
+    console.log(data);
+    this.educationShow = false;
     if (this.id) {
-      this.selectedEducation.push({ Specialization: data.Specialization })
+      this.selectedEducation.push({ Specialization: data.Specialization });
     } else {
-      this.selectedEducation.push(data.Specialization)
-      this.specs.push(data._id)
+      this.selectedEducation.push(data.Specialization);
+      this.specs.push(data._id);
     }
 
-    console.log(this.selectedEducation)
-    console.log(this.specs)
-    this.jobpostForm.get('specialization').setValue(this.specs)
-    console.log(this.jobpostForm.get('specialization')?.value)
+    console.log(this.selectedEducation);
+    console.log(this.specs);
+    this.jobpostForm.get('specialization').setValue(data._id);
+    console.log(this.jobpostForm.get('specialization')?.value);
     // this.specialization = null
-    this.course = null
-
+    this.course = null;
   }
-
-
 
   remEdu(data: any, i: any) {
-    console.log(data, "dataaaaaa")
-    this.selectedEducation.splice(i, 1)
+    console.log(data, 'dataaaaaa');
+    this.selectedEducation.splice(i, 1);
   }
 
   // department
-  depart_data: any
+  depart_data: any;
   get_depart() {
     this.empservice.get_department().subscribe((res: any) => {
-      console.log(res, "dep");
+      console.log(res, 'dep');
       this.depart_data = res;
     });
   }
 
-  role_data: any
-  showRole = false
+  role_data: any;
+  showRole = false;
 
   selectDepart(e: any) {
-    this.showRole = true
-    console.log(e.target.value)
-    this.jobpostForm.controls['roleCategory'].setValidators(Validators.required)
-    this.jobpostForm.controls['roleCategory'].updateValueAndValidity()
-    let Id = e.target.value
-    console.log(e.target.options[e.target.selectedIndex].dataset.messageId, 2)
+    this.showRole = true;
+    console.log(e.target.value);
+    this.jobpostForm.controls['roleCategory'].setValidators(
+      Validators.required
+    );
+    this.jobpostForm.controls['roleCategory'].updateValueAndValidity();
+    let Id = e.target.value;
+    console.log(e.target.options[e.target.selectedIndex].dataset.messageId, 2);
     // this.jobpostForm.patchValue({ department: e.target.options[e.target.selectedIndex].dataset.messageId })
     this.empservice.get_category(Id).subscribe((res: any) => {
-      this.role_data = res
+      this.role_data = res;
     });
   }
 
   selectRole(e: any) {
-    console.log(e.target.value)
-    this.jobpostForm.patchValue({ roleCategory: e.target.value })
-
+    console.log(e.target.value);
+    this.jobpostForm.patchValue({ roleCategory: e.target.value });
   }
 
-
-  salaryError=false
-  salaryTO(e:any){
-    this.jobpostForm.patchValue({salaryRangeTo:e.target.value})
-    console.log(this.jobpostForm.get('salaryRangeTo')?.value)
+  salaryError = false;
+  salaryTO(e: any) {
+    this.jobpostForm.patchValue({ salaryRangeTo: e.target.value });
+    console.log(this.jobpostForm.get('salaryRangeTo')?.value);
   }
 
-num:any=[1,2,3,4,5,6,7,8,9]
-exp:any=[1,2,3,4,5,6,7,8,9]
-  salaryToarr:any=[]
-  exptooarr:any=[]
-  salaryTOO:any=[]
-  expTOO:any=[]
-  salaryFROM(e:any){
-    console.log(e.target.value)
-    const val=Number(e.target.value)
-    for(let i=val+1 ;i<10  ;  i++){
-this.salaryToarr.push(i)
+  num: any = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  exp: any = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  salaryToarr: any = [];
+  exptooarr: any = [];
+  salaryTOO: any = [];
+  expTOO: any = [];
+  salaryFROM(e: any) {
+    console.log(e.target.value);
+    const val = Number(e.target.value);
+    for (let i = val + 1; i < 10; i++) {
+      this.salaryToarr.push(i);
     }
-this.salaryTOO=this.num.filter((number:any) => number > val);
-console.log(this.salaryTOO);
-
-
-
+    this.salaryTOO = this.num.filter((number: any) => number > val);
+    console.log(this.salaryTOO);
   }
 
-  experienceTOO(e:any){
-    console.log(e.target.value)
-    const val=Number(e.target.value)
-    for(let i=val+1 ;i<10  ;  i++){
-this.exptooarr.push(i)
+  experienceTOO(e: any) {
+    console.log(e.target.value);
+    const val = Number(e.target.value);
+    for (let i = val + 1; i < 10; i++) {
+      this.exptooarr.push(i);
     }
-this.expTOO=this.num.filter((number:any) => number > val);
-console.log(this.expTOO);
-if(e.target.value==9){
-  this.expTOO=[9]
-}
-
+    this.expTOO = this.num.filter((number: any) => number > val);
+    console.log(this.expTOO);
+    if (e.target.value == 9) {
+      this.expTOO = [9];
+    }
   }
 
-
-  getexpto(e:any){
-    console.log(e.target.value)
-    this.jobpostForm.patchValue({experienceTo:e.target.value})
+  getexpto(e: any) {
+    console.log(e.target.value);
+    this.jobpostForm.patchValue({ experienceTo: e.target.value });
   }
 
-  walkinFromdate:any
-  getfromdate(e:any){
-console.log(e.target.value)
-this.walkinFromdate=e.target.value
+  walkinFromdate: any;
+  getfromdate(e: any) {
+    console.log(e.target.value);
+    this.walkinFromdate = e.target.value;
   }
 }

@@ -33,7 +33,7 @@ export class CanGetComponent implements OnInit {
     experience: new FormControl(null),
     experienceAnotherfrom: new FormControl(null),
     experienceAnotherto: new FormControl(null),
-    Location: new FormControl([]),
+    Location: new FormControl(null),
     workmode: new FormControl([]),
     department: new FormControl([]),
     education: new FormControl([]),
@@ -56,11 +56,11 @@ export class CanGetComponent implements OnInit {
     designationSet: new FormControl(null, [Validators.required]),
     keyskillSet: new FormControl(null, [Validators.required]),
     experienceYearSet: new FormControl(null, [Validators.required]),
-    experienceMonthSet: new FormControl(null, [Validators.required]),
+    // experienceMonthSet: new FormControl(null, [Validators.required]),
     salaryFrom: new FormControl(null, [Validators.required]),
-    SalaryTo: new FormControl(null, [Validators.required]),
+    // SalaryTo: new FormControl(null, [Validators.required]),
     locationSet: new FormControl(null, [Validators.required]),
-    searchalert: new FormControl(null),
+    searchalert: new FormControl(null, [Validators.required]),
     update: new FormControl('advance details'),
   });
   datavalues: any;
@@ -162,7 +162,7 @@ export class CanGetComponent implements OnInit {
   pushCourse(e: any) {
     const data = this.searchForm.get('preferredIndustry')?.value;
     console.log(e);
-    data.push(e._id);
+    data.push(e.Industry);
   }
   onDeSelect(id: any) {
     const data = this.searchForm.get('preferredIndustry')?.value;
@@ -170,7 +170,6 @@ export class CanGetComponent implements OnInit {
     data.forEach((item: any) => {
       if (item == id._id) {
         data.splice(i, 1);
-        console.log(data, 'data------------>');
         return;
       }
       i++;
@@ -198,12 +197,13 @@ export class CanGetComponent implements OnInit {
   onClickApplied() {
     console.log('bfhdfhdfb');
     this.tab = 2;
-    // this.canditSarvice.getAppliedJobs(0).subscribe((res: any) => {
-    //   this.appliedJobs = res;
-    // });
+    this.canditSarvice.getAppliedJobsByCandidate().subscribe((res: any) => {
+      this.appliedJobs = res;
+      console.log(this.appliedJobs);
+    });
   }
   savedJobs() {
-    console.log("Saved jobs")
+    console.log('Saved jobs');
     this.tab = 3;
     this.canditSarvice.getSavedJob().subscribe((res: any) => {
       this.saveJobs = res;
@@ -217,6 +217,11 @@ export class CanGetComponent implements OnInit {
     this.canditSarvice.getAlerts().subscribe(
       (res: any) => {
         this.getAllalerts = res;
+        if (this.getAllalerts.length > 0) {
+          this.alert = false;
+        } else {
+          this.alert = true;
+        }
       },
       (error) => {
         if (error.error.message == 'job alert data not found') {
@@ -235,13 +240,18 @@ export class CanGetComponent implements OnInit {
       console.log(this.getAllNotification);
     });
   }
+
+  recentSearchApi(data: any) {
+    this.canditSarvice.recentSearch(data).subscribe((e: any) => {
+      console.log(e);
+    });
+  }
+
   // search
   search() {
-    console.log(this.searchForm.get('search')?.value);
-    console.log(this.searchForm.get('Location')?.valid);
-    console.log(this.searchForm.get('experience')?.value);
-    // console.log(this.searchForm.get('searchbox')?.value, "value")
-    // this.searchForm.get('search')?.setValue(this.searchForm.get('searchbox')?.value)
+    this.searchForm
+      .get('search')
+      ?.setValue(this.searchForm.get('search')?.value);
     if (
       this.searchForm.get('search')?.valid &&
       this.searchForm.get('Location')?.valid &&
@@ -250,6 +260,15 @@ export class CanGetComponent implements OnInit {
       this.get_allJobs();
       this.recentSearch();
     }
+    let loc = this.searchForm.get('Location').value.join(',').split(',');
+    let exp = this.searchForm.get('experience').value;
+    let data = {
+      Location: loc[0],
+      experience: parseInt(exp),
+      search: this.searchForm.get('search').value,
+    };
+    this.recentSearchApi(data);
+    console.log(data, 'sdf', loc);
   }
   // get skills
   isDisplay = false;
@@ -332,7 +351,7 @@ export class CanGetComponent implements OnInit {
     // this.searchForm.get('search')?.valid && this.searchForm.get('location')?.valid&& this.searchForm.get('experience')?.valid
     this.canditSarvice.getReacent_data(value).subscribe((res: any) => {
       this.searchForm.patchValue({
-        Location: res.Location,
+        Location: [res.Location],
         experience: res.experience,
         searchbox: res.search,
         search: res.search,
@@ -357,9 +376,10 @@ export class CanGetComponent implements OnInit {
   // get
   save: any = [];
   getSaveData() {
-    this.canditSarvice.getSave().subscribe((res: any) => {
-      console.log(res, 'working fine');
-      this.save = res;
+    console.log('Saved jobs');
+    this.tab = 3;
+    this.canditSarvice.getSavedJobs().subscribe((e: any) => {
+      this.save = e;
     });
   }
   // saved search data
@@ -400,13 +420,19 @@ export class CanGetComponent implements OnInit {
       this.setAlertForm.get('searchalert')?.setValue(search);
     }
   }
+  alertSbumit: any = false;
+
   setalert() {
-    console.log(this.setAlertForm.value, 'gggggg');
-    this.canditSarvice
-      .eduction(this.setAlertForm.value)
-      .subscribe((res: any) => {
-        this.alert = false;
-      });
+    this.alertSbumit = true;
+    if (this.setAlertForm.valid) {
+      this.alertSbumit = false;
+      this.canditSarvice
+        .setJobAlert(this.setAlertForm.value)
+        .subscribe((e: any) => {
+          console.log(e);
+          this.setAlertForm.reset();
+        });
+    }
   }
   // advance search
   advanceSearch() {
@@ -649,21 +675,24 @@ export class CanGetComponent implements OnInit {
     }
     this.get_allJobs();
   }
+  data: any = [];
+
   addLocation(e: any) {
-    const data: any = this.searchForm.get('Location')?.value;
+    console.log(this.data);
     if (e.target.checked) {
-      data.push(e.target.value);
-      console.log(data, 'values');
+      this.data.push(e.target.value);
+      console.log(this.data, 'values');
     } else {
       let i: number = 0;
-      data.forEach((item: any) => {
+      this.data.forEach((item: any) => {
         if (item == e.target.value) {
-          data.splice(i, 1);
+          this.data.splice(i, 1);
           return;
         }
         i++;
       });
     }
+    this.searchForm.get('Location').setValue(this.data);
     this.get_allJobs();
   }
 

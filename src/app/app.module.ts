@@ -16,6 +16,9 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { AgmCoreModule } from '@agm/core';
 import { EditJobpostModule } from './employer/edit-jobpost/edit-jobpost.module';
 import { CookieModule } from 'ngx-cookie';
+import { LoaderComponent } from './loader/loader.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { ExampleInterceptor } from './interceptor';
 
 @NgModule({
   declarations: [
@@ -24,6 +27,7 @@ import { CookieModule } from 'ngx-cookie';
     HeaderComponent,
     FooterComponent,
     RedirectComponent,
+    LoaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +37,7 @@ import { CookieModule } from 'ngx-cookie';
     EmployerModule,
     GooglePlaceModule,
     NgxEditorModule,
+    HttpClientModule,
     NgxExtendedPdfViewerModule,
     NgMultiSelectDropDownModule.forRoot(),
     CookieModule.withOptions(),
@@ -41,7 +46,9 @@ import { CookieModule } from 'ngx-cookie';
     }),
     EditJobpostModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ExampleInterceptor, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
