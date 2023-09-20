@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { CanditateService } from '../candidate/canditate.service';
 import { CanditService } from '../candit.service';
+import { Cookie } from 'ng2-cookies';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-can-home',
@@ -45,9 +47,14 @@ export class CanHomeComponent implements OnInit {
     enableCheckAll: false,
   };
   yearArray: any = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21', '22', '23', '24', '25', '26', '27', '28', '29', '30']
-  constructor(private canditSarvice: CanditService, private fb: FormBuilder, private candidateService: CanditateService) { }
+  constructor(private canditSarvice: CanditService, private fb: FormBuilder, private candidateService: CanditateService,private route:Router) { }
 
   ngOnInit() {
+    console.log(Cookie.get('candtokens'))
+    let token = Cookie.get('candtokens');
+    if(token !=null){
+      this.route.navigateByUrl('/canJobs')
+    }
     this.getjobS();
     this.role(this.range);
     this.getDeparment(this.range);

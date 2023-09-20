@@ -54,7 +54,8 @@ export class EmpHomeComponent implements OnInit {
     noticeperiod: this.fb.array([]),
     range: new FormControl(10),
     page: new FormControl(0),
-    getlocation: new FormControl(null)
+    getlocation: new FormControl(null),
+    advkeyskills: new FormControl([]),
   });
   folderForm: any = this.fb.group({
     folderName: new FormControl(null),
@@ -323,17 +324,17 @@ export class EmpHomeComponent implements OnInit {
   search() {
     console.log('search', this.searchForm.value);
     // if(this.searchForm.get('keyskills')?.valid && this.searchForm.get('location')?.valid && this.searchForm.get('experience')?.valid){
-    if (this.searchForm.get('keyskills')?.valid) {
+    // if (this.searchForm.get('keyskills')?.valid) {
       this.empservice.view_can(this.searchForm.value).subscribe((res: any) => {
         console.log(res);
         this.can_data = res.user.data;
         this.recent_search();
       });
-    }
-    else {
-      this.err = 'Please choose any key skill to search';
+    // }
+    // else {
+      // this.err = 'Please choose any key skill to search';
       // alert(this.err)
-    }
+    // }
   }
 
   search_skills(data: any) {
