@@ -14,7 +14,7 @@ import { EmpServiceService } from '../emp-service.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  submitted = false
+  submitted = false;
 
   loginForm = this.formBuilder.group({
     email: new FormControl('', [
@@ -34,16 +34,16 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   login_submit() {
-    this.submitted = true
+    this.submitted = true;
     console.log(this.loginForm.value);
-    if(this.loginForm.valid){
+    if (this.loginForm.valid) {
       this.empservice.loginFormEmployee(this.loginForm.value).subscribe(
         (res: any) => {
           console.log(res.user.name);
-          localStorage.setItem('empname',res.user.name)
+          localStorage.setItem('empname', res.user.name);
           this.access = res.tokens.refresh.token;
           this.empservice.set_current_token(res.tokens.refresh.token);
-          this.empservice.get_usename(res.user.name)
+          this.empservice.get_usename(res.user.name);
           this.setCookie(res.tokens.refresh.token);
           this.router.navigateByUrl('emp-home');
         },
@@ -52,12 +52,15 @@ export class LoginComponent implements OnInit {
         }
       );
     }
-   
   }
   setCookie(token: any) {
     let d: Date = new Date();
     d.setTime(d.getTime() + 24 * 60 * 60 * 1000);
     let expires: string = `expires=${d.toUTCString()}`;
     document.cookie = `emptoken=${token}; ${expires}`;
+  }
+
+  forgotClilck() {
+    this.router.navigateByUrl('/forgotpassword');
   }
 }

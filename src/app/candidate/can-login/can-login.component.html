@@ -83,7 +83,7 @@
                 <div class="single-row error-massage">
                   <label for=""></label>
                   <div class="content-box" >
-                    <p *ngIf="login.get('password')?.valid&&passwordStatus">Password doesn't match</p>
+                    <p *ngIf="serverErr !=null ">{{serverErr}}</p>
                   </div>
                 </div>
                 <div class="forgot-pass">

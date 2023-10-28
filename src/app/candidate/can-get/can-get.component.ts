@@ -9,6 +9,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
+import { Cookie } from 'ng2-cookies';
+
 
 @Component({
   selector: 'app-can-get',
@@ -183,10 +185,14 @@ export class CanGetComponent implements OnInit {
   }
   // redirect to employer details
   apply(id: any, tab: any) {
-    console.log('workinf');
-    this.router.navigate(['/can-employ'], {
-      queryParams: { id: id, tab: tab },
-    });
+    if(!Cookie.get('candtokens')){
+      this.router.navigateByUrl('/')
+    }else{
+      this.router.navigate(['/can-employ'], {
+        queryParams: { id: id, tab: tab },
+      });
+    }
+   
   }
   // get all jobs
   onClickJop() {

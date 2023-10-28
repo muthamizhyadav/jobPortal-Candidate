@@ -1,12 +1,7 @@
 .register-content-row {
-  background-color: #E7E9ED;
+  background-color: #e7e9ed;
   border-radius: 5px;
 }
-
-
-
-
-
 
 .myprofile {
   height: 100%;
@@ -19,9 +14,6 @@
 
 .sidebarmenu ul {
   padding: 0px 0px;
-
-
-
 }
 
 .sidebarmenu div ul li {
@@ -42,19 +34,16 @@
 }
 
 .sidebarmenu-heading {
-  background-color: #FD841F;
+  background-color: #fd841f;
   padding: 10px 0px;
   border: none !important;
 }
-
-
 
 .job-listing-bottom {
   display: flex;
   justify-content: space-between;
   margin-right: 5%;
 }
-
 
 .recent-search ul li {
   border-bottom: 1px solid rgba(10, 38, 71, 0.5);
@@ -65,7 +54,7 @@
 }
 
 .right-sidebar {
-  background-color: #E7E9ED;
+  background-color: #e7e9ed;
   height: 100%;
 }
 
@@ -78,7 +67,7 @@
 }
 
 .saved-job-icon {
-  color: #0A2647 !important;
+  color: #0a2647 !important;
 }
 
 .company-logo {
@@ -98,7 +87,7 @@
 }
 
 .right-sidebar {
-  background-color: #E7E9ED;
+  background-color: #e7e9ed;
   height: 100%;
 }
 
@@ -112,7 +101,6 @@
   display: flex;
   margin: auto;
   width: 70%;
-
 }
 
 .myaccount-candidate {
@@ -137,9 +125,8 @@
 .card-content {
   display: flex;
   justify-content: space-between;
-  color: #0A2647;
+  color: #0a2647;
 }
-
 
 .icon-custom-card {
   width: 25px;
@@ -149,7 +136,8 @@
 
 /* custom card */
 
-li {}
+li {
+}
 
 .register-content-row {
   /* height: fit-content; */
@@ -180,9 +168,8 @@ li {
 
 .recent {
   height: 261px;
-  overflow: scroll;
+  overflow: auto;
   border-radius: 5px;
-
 }
 
 ul {
@@ -190,15 +177,12 @@ ul {
 }
 
 .ulkeylist {
-
-
   margin: 17px;
 }
 
 .ilkeylist {
   display: flex;
   padding: 2px 16px 0px 13px;
-
 }
 
 keyskill {
@@ -210,11 +194,10 @@ keyskill {
   position: relative;
   width: 100%;
   border-radius: 5px;
-
 }
 
 .edit-icon {
-  background-color: #0A2647;
+  background-color: #0a2647;
   margin-right: 100px;
   height: 30px;
   width: 30px;
@@ -263,16 +246,20 @@ keyskill {
 
 .phone {
   margin-top: 18px;
-
 }
-.know{
-  margin-left: 67px
+.know {
+  margin-left: 67px;
 }
-.type{
+.type {
   font-style: italic;
   font-size: 13px;
 }
-.know11{
+.know11 {
   align-items: baseline;
+}
 
+.title-advance {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }

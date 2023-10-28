@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CanditService } from 'src/app/candit.service';
 import { CanditateService } from '../canditate.service';
+import { Cookie } from 'ng2-cookies';
 
 @Component({
   selector: 'app-can-login',
@@ -27,12 +28,21 @@ export class CanLoginComponent implements OnInit {
     private activate: ActivatedRoute
   ) {}
   ngOnInit() {
+    this.LoginCheck()
     this.activate.queryParams.subscribe((res: any) => {
       this.id = res.id;
     });
   }
+
+LoginCheck(){
+  if(Cookie.get('candtokens'))
+  this.router.navigateByUrl('/canJobs')
+}
+
+
   // login api
   passwordStatus = false;
+  serverErr: any = null;
   login_now() {
     this.isSubmmitted = true;
     if (this.login.valid) {
@@ -42,6 +52,7 @@ export class CanLoginComponent implements OnInit {
           localStorage.setItem('name', res.user.name);
           this.CanditService.set_current_token(res.tokens.refresh.token);
           this.CanditService.get_usename(res.user.name);
+          this.serverErr = null
           if (!this.id) {
             if (res.Boolean == false) {
               this.router.navigate(['/updateProfile']);
@@ -55,11 +66,7 @@ export class CanLoginComponent implements OnInit {
           }
         },
         (error) => {
-          if (error.error.message == "Passwoed Doesn't Match") {
-            this.passwordStatus = true;
-          } else {
-            this.passwordStatus = false;
-          }
+         this.serverErr = error.error.message
         }
       );
     }
@@ -73,5 +80,4 @@ export class CanLoginComponent implements OnInit {
     let expires: string = `expires=${d.toUTCString()}`;
     document.cookie = `candtokens=${token}; ${expires}`;
   }
-
 }

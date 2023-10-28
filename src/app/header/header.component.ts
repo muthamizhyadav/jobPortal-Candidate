@@ -27,12 +27,13 @@ export class HeaderComponent implements OnInit {
     this.idShow=false;
     }else{
     this.idShow=true
+    // this.router.navigateByUrl('/canJobs')
     }
-   if(!Cookie.get('emptoken')){
-    this.empshow=false;
-   }else{
-    this.empshow=true
-   }
+  //  if(!Cookie.get('emptoken')){
+  //   this.empshow=false;
+  //  }else{
+  //   this.empshow=true
+  //  }
     this.canditService.get_token.subscribe((res:any) => {
       if(res){
         this.idShow=true

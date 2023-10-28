@@ -31,7 +31,10 @@ export class ForgotpasswordComponent implements OnInit {
           this.router.navigate(['/sendOtp'], {
             queryParams: { mobile: this.sendOtpFom.get('mobilenumber')?.value },
           });
-          this.Cookie.put('mobilenumber', this.sendOtpFom.get('mobilenumber')?.value);
+          this.Cookie.put(
+            'mobilenumber',
+            this.sendOtpFom.get('mobilenumber')?.value
+          );
           this.isSubmitted = false;
         },
         (error) => {

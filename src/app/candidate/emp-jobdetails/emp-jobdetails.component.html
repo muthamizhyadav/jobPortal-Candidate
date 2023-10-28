@@ -270,8 +270,14 @@
                 </div>
               </div>
               <div>
-                <button data-bs-toggle="modal" data-bs-target="#reports">
-                  reports
+                <button style="float: right; margin-right: 5px; border: none; background-color: white;"
+                  (click)="Report(job)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M10 20C4.477 20 0 15.523 0 10C0 4.477 4.477 0 10 0C15.523 0 20 4.477 20 10C20 15.523 15.523 20 10 20ZM10 18C12.1217 18 14.1566 17.1571 15.6569 15.6569C17.1571 14.1566 18 12.1217 18 10C18 7.87827 17.1571 5.84344 15.6569 4.34315C14.1566 2.84285 12.1217 2 10 2C7.87827 2 5.84344 2.84285 4.34315 4.34315C2.84285 5.84344 2 7.87827 2 10C2 12.1217 2.84285 14.1566 4.34315 15.6569C5.84344 17.1571 7.87827 18 10 18ZM9 13H11V15H9V13ZM9 5H11V11H9V5Z"
+                      fill="#0A2647" />
+                  </svg>
+                  report
                 </button>
               </div>
             </div>
@@ -285,64 +291,46 @@
   </div>
 </div>
 
-<div class="modal" id="reports" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content popup-parent">
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
       <div class="modal-body">
-        <div class="container" style="width:800px">
-          <div class="col register-content">
-            <div class="report-popup" [formGroup]="reportForm">
-              <div class="popup">
-                <div class="popup-container">
-                  <h1>Report</h1>
-                  <h3>UI UX Designer</h3>
-                  <h5>JP Morgan</h5>
-                  <div class="form-check" (change)="report($event)">
-                    <input class="form-check-input" formControlName="report" type="radio"
-                      value="It's offensive or harassing" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      It's offensive or harassing
-                    </label>
-                  </div>
-                  <div class="form-check" (change)="report($event)">
-                    <input class="form-check-input" type="radio" formControlName="report"
-                      value="Asking for money or seems like a fake job" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      Asking for money or seems like a fake job
-                    </label>
-                  </div>
-                  <div class="form-check" (change)="report($event)">
-                    <input class="form-check-input" type="radio" formControlName="report"
-                      value="Incorrect company, location or job details" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      Incorrect company, location or job details
-                    </label>
-                  </div>
-                  <div class="form-check" (change)="report($event)">
-                    <input class="form-check-input" type="radio" formControlName="report"
-                      value="I think it's NOT a Job, but selling something" id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      I think it's NOT a Job, but selling something
-                    </label>
-                  </div>
-                  <div class="form-check" (change)="report($event)">
-                    <input class="form-check-input" value="Others" formControlName="report" type="radio"
-                      id="flexRadioDefault1">
-                    <label class="form-check-label" for="flexRadioDefault1">
-                      Others
-                    </label>
-                  </div>
-                  <div *ngIf="reportForm.get('report')?.value == 'Others'">
-                    <textarea class="form-control" formControlName="reportothers"
-                      placeholder="Type hre....."></textarea>
-                  </div>
-                  <div class="submit-btn">
-                    <button (click)="submit_report()">Submit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <div class="body-title">
+          <h3>Report</h3>
+          <p>{{modelData.jobTittle}}</p>
+        </div>
+        <div class="body-content">
+          <div>
+            <input type="radio" id="test1" name="radio-group" (change)="reportChange('Its offensive or harassing')">
+            <label for="test1">It's offensive or harassing</label>
           </div>
+          <div>
+            <input type="radio" id="test2" name="radio-group"  (change)="reportChange('Asking for money or seems like a fake job')">
+            <label for="test2">Asking for money or seems like a fake job</label>
+          </div>
+          <div>
+            <input type="radio" id="test3" name="radio-group" (change)="reportChange('Incorrect company, location or job details')">
+            <label for="test3">Incorrect company, location or job details</label>
+          </div>
+          <div>
+            <input type="radio" id="test4" name="radio-group" (change)="reportChange('I think its not a job, but selling something')">
+            <label for="test4">I think it's not a job, but selling something</label>
+          </div>
+          <div>
+            <input type="radio" id="test5" name="radio-group" (change)="reportChange('Others')">
+            <label for="test5">Others</label>
+          </div>
+          <div *ngIf="reportData == 'Others' ">
+            <textarea placeholder="Type Here....!" (keyup)="otherValue($event)"></textarea>
+          </div>
+        </div>
+       
+        <div class="btn-model">
+          <button (click)="reportSubmit()" data-bs-dismiss="modal" aria-label="Close">submit</button>
         </div>
       </div>
     </div>
+  </div>
+
+</div>
