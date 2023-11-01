@@ -263,3 +263,16 @@ keyskill {
   width: 100%;
   justify-content: center;
 }
+.title-edu .tit{
+  color: #0a2647;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.title-edu .Details div{
+  display: flex;
+}
+
+.title-edu .Details div label{
+  width: 50%;
+}

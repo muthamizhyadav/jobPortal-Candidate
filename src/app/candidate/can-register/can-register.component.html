@@ -65,7 +65,8 @@
                   <div class="single-row">
                     <label for="">Email ID:</label>
                     <div class="content-box">
-                      <input type="email" class="form-control" placeholder="Enter Your Email ID"  formControlName="email">
+                      <input type="email" class="form-control" placeholder="Enter Your Email ID"
+                        formControlName="email">
                     </div>
                   </div>
                   <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('email')?.invalid">
@@ -77,7 +78,8 @@
                   <div class="single-row">
                     <label for="">Mobile Number :</label>
                     <div class="content-box">
-                      <input type="number"  maxlength="10" pattern="[6789][0-9]{9}" class="form-control" placeholder="Enter Your Mobile Number"  formControlName="mobileNumber">
+                      <input type="number" maxlength="10" pattern="[6789][0-9]{9}" class="form-control"
+                        placeholder="Enter Your Mobile Number" formControlName="mobileNumber">
                     </div>
                   </div>
                   <div class="single-row error-data" *ngIf="isSubmitted && Candidateform.get('mobileNumber')?.invalid">
@@ -89,7 +91,8 @@
                   <div class="single-row">
                     <label for="">Work Status :</label>
                     <div class="content-box">
-                      <select class="form-control select-type" formControlName="workStatus">
+                      <select class="form-control select-type" formControlName="workStatus"
+                        (change)="workChange($event)">
                         <option value="option1" disabled selected>Select Type</option>
                         <option value="Experience">Experience</option>
                         <option value="Fresher">Fresher</option>
@@ -99,39 +102,73 @@
                   <div class="single-row error-data" *ngIf="isSubmitted && Candidateform.get('workStatus')?.invalid">
                     <label for=""></label>
                     <div class="content-box">
-                      <p>Work Status  required!</p>
+                      <p>Work Status required!</p>
                     </div>
                   </div>
+
+                  <div class="single-row" *ngIf="workExp == 'Experience'">
+                    <label for="">Previous Company :</label>
+                    <div class="content-box">
+                      <input type="text" formControlName="prevCompany" class="form-control"
+                        placeholder="Previous Company Name">
+                    </div>
+                  </div>
+
+                  <div class="single-row error-data" *ngIf="isSubmitted && Candidateform.get('prevCompany')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>Previous Company Name required!</p>
+                    </div>
+                  </div>
+
+                  <div class="single-row" *ngIf="workExp == 'Experience'  ">
+                    <label for=""> Role In Previous Company :</label>
+                    <div class="content-box">
+                      <input type="text" formControlName="prevCompanyRole" class="form-control"
+                        placeholder="Previous Company Role">
+                    </div>
+                  </div>
+                  <div class="single-row error-data"
+                    *ngIf="isSubmitted && Candidateform.get('prevCompanyRole')?.invalid">
+                    <label for=""></label>
+                    <div class="content-box">
+                      <p>Previous Company Name required!</p>
+                    </div>
+                  </div>
+
                   <div class="single-row">
                     <label for="">Password :</label>
                     <div class="content-box">
-                      <input type="password" formControlName="password" class="form-control" placeholder="Enter Your Password">
+                      <input type="password" formControlName="password" class="form-control"
+                        placeholder="Enter Your Password">
                     </div>
                   </div>
                   <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('password')?.invalid">
                     <label for=""></label>
                     <div class="content-box">
-                      <p>Password  required!</p>
+                      <p>Password required!</p>
                     </div>
                   </div>
                   <div class="single-row">
                     <label for="">Confirm Password :</label>
                     <div class="content-box">
-                      <input type="password" class="form-control" formControlName="confirmpassword" placeholder="Confirm Your Password">
+                      <input type="password" class="form-control" formControlName="confirmpassword"
+                        placeholder="Confirm Your Password">
                     </div>
                   </div>
                   <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('confirmpassword')?.invalid">
                     <label for=""></label>
                     <div class="content-box">
-                      <p>Confirm Password   required!</p>
+                      <p>Confirm Password required!</p>
                     </div>
                   </div>
                   <div class="single-row">
                     <label for="">Resume :</label>
                     <div class="content-box choose-file-wrap">
                       <label for="select-logo" class="form-control choose-file">Choose File</label>
-                      <div> <input type="file"  formControlName="resume" accept="application/pdf,.doc,.docx,application/msword"
-                        (change)="addresume($event)" id="select-logo" class="form-control choose-file" placeholder="+Add Logo"
+                      <div> <input type="file" formControlName="resume"
+                          accept="application/pdf,.doc,.docx,application/msword" (change)="addresume($event)"
+                          id="select-logo" class="form-control choose-file" placeholder="+Add Logo"
                           style="display: none;">
                       </div>
                       <div *ngIf="!file_name" class="resume-content-type">.docx, .doc, .pdf</div>
@@ -141,19 +178,21 @@
                   <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('resume')?.invalid">
                     <label for=""></label>
                     <div class="content-box">
-                      <p>Resume  required!</p>
+                      <p>Resume required!</p>
                     </div>
                   </div>
                   <div class="single-row">
                     <label for="">Current Location :</label>
                     <div class="content-box">
-                      <input type="text" class="form-control" ngx-google-places-autocomplete [options]="options"  (onAddressChange)="handleAddressChange($event)" placeholder="Enter Your Location" formControlName="location">
+                      <input type="text" class="form-control" ngx-google-places-autocomplete [options]="options"
+                        (onAddressChange)="handleAddressChange($event)" placeholder="Enter Your Location"
+                        formControlName="location">
                     </div>
                   </div>
                   <div class="single-row error-data" *ngIf="isSubmitted&&Candidateform.get('location')?.invalid">
                     <label for=""></label>
                     <div class="content-box">
-                      <p>Current Location  required!</p>
+                      <p>Current Location required!</p>
                     </div>
                   </div>
                   <div class="single-row single-row-final-btn">

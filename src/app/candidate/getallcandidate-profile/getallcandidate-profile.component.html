@@ -624,6 +624,7 @@
                 Profile</button>
             </div>
           </div>
+
           <div class="content m-auto col-8 mt-5 " *ngFor="let details of getAlldetails">
             <div class="content m-auto col-8 mt-5 ">
               <div *ngIf="details.drQualification">
@@ -1077,16 +1078,148 @@
             </div>
           </div>
         </div>
-        <div class=" pt-5 pb-5 row register-content-row height-register-content" style="height: fit-content;">
+        <div class=" pt-5 pb-5 row register-content-row height-register-content" style="height: fit-content;margin: 0;">
           <div class="col">
           </div>
           <div class="col">
             <h3 style="text-align:center;color: #FD841F;font-weight: 700;">Education Details</h3>
           </div>
-          <div class="col"></div>
-          <div class="content m-auto" *ngFor="let details of getAlldetails">
-            <div class="content m-auto col-8 mt-5 " *ngIf="details.drQualification">
-              <div>
+          <div class="col">
+            <div class="col-4 add-pan-btn">
+              <span class="row" *ngFor="let details of getAlldetails" class="edit-icon"
+                style="cursor: pointer;padding: 10px;" (click)="eduroute()"><i><svg width="16" height="16"
+                    viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M8.81431 3.4089L12.5911 7.18659L3.7768 16H0V12.2223L8.81431 3.4089ZM10.0732 2.14997L11.9616 0.260678C12.1286 0.093766 12.355 0 12.5911 0C12.8272 0 13.0536 0.093766 13.2206 0.260678L15.7393 2.77943C15.9062 2.94639 16 3.17281 16 3.4089C16 3.64498 15.9062 3.8714 15.7393 4.03836L13.85 5.92676L10.0732 2.14997Z"
+                      fill="white" />
+                  </svg>
+                </i></span>
+            </div>
+          </div>
+          <div class="content m-auto" *ngFor="let details of educations">
+            <div class="content m-auto col-8 mt-5 ">
+
+              <div class="title-edu">
+                <p class="tit">{{details.Type}}</p>
+                <div class="dr" *ngIf="details.Type == 'Doctorate/Mphil' ">
+                  <div>
+                    <label>Course</label>
+                    <p>{{details.CourseName}}</p>
+                  </div>
+                  <div>
+                    <label>Specialization:</label>
+                    <p>{{details.SpecializationName}}</p>
+                  </div>
+                  <div>
+                    <label>Course Type:</label>
+                    <p>{{details.drCourseType}}</p>
+                  </div>
+                  <div>
+                    <label>Course Duration:</label>
+                    <p>{{details.drCourseDurationFrom +'-'+ details.drCourseDurationTo }}</p>
+                  </div>
+                  <div>
+                    <label>University:</label>
+                    <p>{{details.drUniversity }}</p>
+                  </div>
+                  <div>
+                    <label>Grade:</label>
+                    <p>{{details.drMarks + " " +details.drGradingSystem }}</p>
+                  </div>
+                </div>
+                <div class="Details" *ngIf=" details.Type == 'Graduation/Diploma' ">
+                  <div>
+                    <label>Course:</label>
+                    <p>{{details.CourseName}}</p>
+                  </div>
+                  <div>
+                    <label>Specialization:</label>
+                    <p>{{details.SpecializationName}}</p>
+                  </div>
+                  <div>
+                    <label>Course Type:</label>
+                    <p>{{details.ugCourseType}}</p>
+                  </div>
+                  <div>
+                    <label>Course Duration:</label>
+                    <p>{{details.ugCourseDurationFrom +'-'+ details.ugCourseDurationTo }}</p>
+                  </div>
+                  <div>
+                    <label>University:</label>
+                    <p>{{details.ugUniversity }}</p>
+                  </div>
+                  <div>
+                    <label>Grade:</label>
+                    <p>{{details.ugMarks + " " +details.ugGradingSystem }}</p>
+                  </div>
+                </div>
+                <div class="Details" *ngIf=" details.Type == 'Masters/Post-Graduation' ">
+                  <div>
+                    <label>Course:</label>
+                    <p>{{details.CourseName}}</p>
+                  </div>
+                  <div>
+                    <label>Specialization:</label>
+                    <p>{{details.SpecializationName}}</p>
+                  </div>
+                  <div>
+                    <label>Course Type:</label>
+                    <p>{{details.pgCourseType}}</p>
+                  </div>
+                  <div>
+                    <label>Course Duration:</label>
+                    <p>{{details.pgCourseDurationFrom +'-'+ details.ugCourseDurationTo }}</p>
+                  </div>
+                  <div>
+                    <label>University:</label>
+                    <p>{{details.pgUniversity }}</p>
+                  </div>
+                  <div>
+                    <label>Grade:</label>
+                    <p>{{details.pgMarks + " " +details.pgGradingSystem }}</p>
+                  </div>
+                </div>
+                <div class="Details" *ngIf=" details.Type == 'SSLC' ">
+                  <div>
+                    <label>Board:</label>
+                    <p>{{details.sslcBoard}}</p>
+                  </div>
+                  <div>
+                    <label>Medium:</label>
+                    <p>{{details.sslcMedium}}</p>
+                  </div>
+                  <div>
+                    <label>PassedYear</label>
+                    <p>{{details.sslcPassedYear}}</p>
+                  </div>
+                  <div>
+                    <label>Marks:</label>
+                    <p>{{details.sslcctotalmarks }}</p>
+                  </div>
+                </div>
+                <div class="Details" *ngIf=" details.Type == 'HSC' ">
+                  <div>
+                    <label>Board:</label>
+                    <p>{{details.hsBoard}}</p>
+                  </div>
+                  <div>
+                    <label>Medium:</label>
+                    <p>{{details.hsMedium}}</p>
+                  </div>
+                  <div>
+                    <label>PassedYear</label>
+                    <p>{{details.hsPassedYear}}</p>
+                  </div>
+                  <div>
+                    <label>Marks:</label>
+                    <p>{{details.hslctotalmarks }}</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- <div *ngIf="details.Type == 'Doctorate/Mphil' ">
+                <p>{{details.Type}}</p>
                 <h5 class="col-12 mb-4">Doctorate/Mphil :</h5>
                 <div class="col-12 d-flex">
                   <label class="col-5">Qualification : </label>
@@ -1127,8 +1260,8 @@
                   <label class="col-5">Passed Out Year :</label>
                   <p class="col-7">{{details.drCourseDurationFrom}} To {{details.drCourseDurationTo}}</p>
                 </div>
-              </div>
-              <div *ngIf="details.pgQualification">
+              </div> -->
+              <!-- <div *ngIf="details.pgQualification == 'Master/PG courses' ">
                 <h5 class="col-12 mt-4 mb-4">Master/PG courses</h5>
                 <div class="col-12 d-flex">
                   <label class="col-5">Qualification : </label>
@@ -1169,8 +1302,8 @@
                   <label class="col-5">Passed Out Year :</label>
                   <p class="col-7">{{details.pgCourseDurationFrom}} To {{details.pgCourseDurationTo}}</p>
                 </div>
-              </div>
-              <h5 class="col-12 mt-4 mb-4">
+              </div> -->
+              <!-- <h5 class="col-12 mt-4 mb-4">
                 Detail 3</h5>
               <div class="col-12 d-flex">
                 <label class="col-5">Qualification : </label>
@@ -1260,7 +1393,7 @@
               <div class="col-12 d-flex">
                 <label class="col-5">Passed out year: </label>
                 <p class="col-7">{{details.sslcPassedYear}}</p>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>

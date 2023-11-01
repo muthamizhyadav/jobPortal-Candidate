@@ -3,27 +3,25 @@
   text-decoration: none;
 }
 
-
 .button {
   margin-top: 10px;
   width: 180px;
 }
 
 .btn-bg-brand-blue {
-  background-color: #0A2647;
+  background-color: #0a2647;
   color: #fff;
 }
 
 .forgot-pass {
   text-align: right;
   font-size: 10px;
-  color: #0A2647;
+  color: #0a2647;
 }
 
 .ad-image img {
   width: 100%;
 }
-
 
 .btn-brand-blue {
   min-width: 150px;
@@ -31,7 +29,6 @@
 
 .login-main .col-2 img {
   width: 100%;
-
 }
 
 select {
@@ -39,7 +36,7 @@ select {
 }
 
 .edit-icon {
-  background-color: #0A2647;
+  background-color: #0a2647;
   margin-right: 100px;
   height: 30px;
   width: 30px;
@@ -47,12 +44,150 @@ select {
   place-content: center;
   border-radius: 5px;
 }
-.alertexperience{
+.alertexperience {
   width: 50%;
 }
 .height-register-content {
   height: fit-content;
+  min-height: 700px;
 }
-.errorCondent1{
+.errorCondent1 {
   display: block;
+}
+.register-form {
+  width: 100%;
+}
+.add-btn {
+  background-color: #ffff;
+  border: none;
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px 0px #00000040;
+  color: #0a2647;
+}
+
+.popup-1 {
+  height: 100%;
+  z-index: 100000000000000;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+}
+
+.popup-container-1 {
+  z-index: 1;
+  background-color: #e7e9ed !important;
+  min-width: 50%;
+  max-width: 50%;
+  height: 600px;
+  overflow: auto;
+  border-radius: 25px;
+}
+
+.popup-container-1::-webkit-scrollbar {
+  display: none;
+}
+
+.popup-close-1 {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  z-index: 0.5;
+}
+.content-title {
+  background: #ffff;
+  position: sticky;
+  top: 0px;
+}
+.content-title p {
+  font-weight: 500;
+  color: #fd841f;
+  text-align: center;
+  font-size: 30px;
+  padding-top: 10px;
+}
+.single-row {
+  width: 70%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.btn {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn button {
+  width: 130px;
+  height: 35px;
+  border: #0a2647;
+  border-radius: 4px;
+  background-color: #0a2647;
+  color: #fff;
+}
+
+.err {
+  width: 70%;
+  margin: auto;
+  display: flex;
+  justify-content: end;
+}
+
+.err p {
+  color: red;
+}
+/* #0A2647 */
+.edu-Detials .edu-title {
+  display: flex;
+  justify-content: space-between;
+  color: #0a2647;
+  font-size: 20px;
+  font-weight: 700;
+  align-items: center;
+}
+
+.edu-Detials .edu-title button {
+  background-color: #0a2647;
+  border: none;
+  border-radius: 5px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.edu-Detials .Details div {
+  width: 100%;
+  margin: auto;
+  display: flex;
+}
+.edu-Detials .Details div label {
+  width: 55%;
+}
+.mt-5{
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.mt-5 .content-box{
+  display: flex;
+  justify-content: space-between;
+}
+
+.mt-5 .content-box .sub-btn{
+  width: 130px;
+  height: 35px;
+  border: #0a2647;
+  border-radius: 4px;
+  background-color: #0a2647;
+  color: #fff;
 }

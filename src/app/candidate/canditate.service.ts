@@ -141,6 +141,7 @@ export class CanditateService {
       this.baseUrl + `/v1/educationDetails/get_Rolecategory/${id}`
     );
   }
+
   // getRole
   getRole(id: any) {
     return this.http.get(this.baseUrl + `/v1/educationDetails/get_Role/${id}`);
@@ -433,6 +434,15 @@ export class CanditateService {
     return this.http.get(
       this.baseUrl + '/v1/candidateDetail/get/SavedJobs/Candidate',
       { headers: { auth: Cookie.get('candtokens') } }
+    );
+  }
+
+  getCoursesByQualification(id: any) {
+    return this.http.get(this.baseUrl + '/v1/educationDetails/Courses/' + id);
+  }
+  getSpecByQualification(id: any) {
+    return this.http.get(
+      this.baseUrl + '/v1/educationDetails/specializations/' + id
     );
   }
 }

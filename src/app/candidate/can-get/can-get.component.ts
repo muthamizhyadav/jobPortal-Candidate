@@ -11,7 +11,6 @@ import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
 import { Cookie } from 'ng2-cookies';
 
-
 @Component({
   selector: 'app-can-get',
   templateUrl: './can-get.component.html',
@@ -185,14 +184,13 @@ export class CanGetComponent implements OnInit {
   }
   // redirect to employer details
   apply(id: any, tab: any) {
-    if(!Cookie.get('candtokens')){
-      this.router.navigateByUrl('/')
-    }else{
+    if (!Cookie.get('candtokens')) {
+      this.router.navigateByUrl('/');
+    } else {
       this.router.navigate(['/can-employ'], {
         queryParams: { id: id, tab: tab },
       });
     }
-   
   }
   // get all jobs
   onClickJop() {
