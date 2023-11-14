@@ -1,0 +1,31 @@
+<div class="page-container">
+    <div class="page-title">
+        <div></div>
+        <div>
+            <p>My Planes</p>
+        </div>
+        <div><button (click)="planes()">Add Plane</button> </div>
+    </div>
+    <div class="my-planes">
+        <table>
+            <thead>
+                <th>Plan Name</th>
+                <th>Purchased Date & Time</th>
+                <th>Duration</th>
+                <th>Price</th>
+                <th>Chat</th>
+                <th>Status</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let plan of data">
+                    <td>{{plan.planName}}</td>
+                    <td>{{plan.createdAt|date:"dd-MM-YYYY hh:mm a"}}</td>
+                    <td>{{plan.Duration}} Min</td>
+                    <td> ₹ {{plan.totalAmount}}</td>
+                    <td> {{plan.chat_Option}} </td>
+                    <td> {{plan.status == 'Created'?'Pending':plan.status }} </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

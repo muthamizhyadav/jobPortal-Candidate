@@ -173,21 +173,58 @@ select {
 .edu-Detials .Details div label {
   width: 55%;
 }
-.mt-5{
+.mt-5 {
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
 }
-.mt-5 .content-box{
+.mt-5 .content-box {
   display: flex;
   justify-content: space-between;
 }
 
-.mt-5 .content-box .sub-btn{
+.mt-5 .content-box .sub-btn {
   width: 130px;
   height: 35px;
   border: #0a2647;
   border-radius: 4px;
   background-color: #0a2647;
   color: #fff;
+}
+
+
+.popup-2 {
+  height: 100%;
+  z-index: 100000000000000;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+}
+
+.popup-container-2 {
+  z-index: 1;
+  background-color: #e7e9ed !important;
+  min-width: 50%;
+  max-width: 50%;
+  height: 600px;
+  overflow: auto;
+  border-radius: 25px;
+}
+
+.popup-container-2::-webkit-scrollbar {
+  display: none;
+}
+
+.popup-close-2 {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  z-index: 0.5;
 }

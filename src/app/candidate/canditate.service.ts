@@ -445,4 +445,44 @@ export class CanditateService {
       this.baseUrl + '/v1/educationDetails/specializations/' + id
     );
   }
+
+  getPlanes() {
+    return this.http.get(this.baseUrl + '/v1/plan/all/candidate');
+  }
+
+  purchasePlan(data: any) {
+    return this.http.post(this.baseUrl + '/v1/plan/purchase/plan', data, {
+      headers: { auth: Cookie.get('candtokens') },
+    });
+  }
+
+  getPurchasedPlanes() {
+    return this.http.get(this.baseUrl + '/v1/plan/purchas/plan/user', {
+      headers: { auth: Cookie.get('candtokens') },
+    });
+  }
+
+  getAllPurchasedPlanes() {
+    return this.http.get(
+      this.baseUrl + '/v1/plan/getPurchased/PlanesByUser/request/Stream',
+      {
+        headers: { auth: Cookie.get('candtokens') },
+      }
+    );
+  }
+
+  RequestStream(data: any) {
+    return this.http.post(this.baseUrl + '/v1/requeststream/', data, {
+      headers: { auth: Cookie.get('candtokens') },
+    });
+  }
+
+  getRequestStream() {
+    return this.http.get(
+      this.baseUrl + '/v1/requeststream/candidate/request/Stream',
+      {
+        headers: { auth: Cookie.get('candtokens') },
+      }
+    );
+  }
 }

@@ -40,7 +40,7 @@ export class UpdateprofileComponent implements OnInit {
       experienceYear: new FormControl(0, Validators.required),
       experienceMonth: new FormControl(0),
       expectedctc: new FormControl('', Validators.required),
-      currentctc: new FormControl(0, Validators.required), //display only experience
+      currentctc: new FormControl('', Validators.required), //display only experience
       locationCurrent: new FormControl('', Validators.required),
       locationNative: new FormControl('', Validators.required),
       noticeperiod: new FormControl('', Validators.required),
@@ -57,6 +57,8 @@ export class UpdateprofileComponent implements OnInit {
       currentctc_th: new FormControl(0),
       update: new FormControl(),
       location: new FormControl(),
+      faceBookId: new FormControl(),
+      linkedInId: new FormControl(),
     });
   }
 
@@ -108,6 +110,8 @@ export class UpdateprofileComponent implements OnInit {
         searchbox: this.viewAll[0].keyskill,
         preferredLocation: this.viewAll[0].preferredLocation,
         update: new FormControl('advance details'),
+        linkedInId: this.viewAll[0].linkedInId,
+        faceBookId: this.viewAll[0].faceBookId,
 
         // languages: this.viewAll[0].keyskill
       });
@@ -329,7 +333,7 @@ export class UpdateprofileComponent implements OnInit {
     this.isSubmitted = true;
     let expYear = Number(this.experienceYear);
     let expMonth = Number(this.experienceMonth);
-    let curCtc = Number(this.currentCtc);
+    let curCtc = this.profileForm.get('currentctc')?.value;
     let curTh = Number(this.currentTh);
     this.profileForm.patchValue({
       experienceYear: expYear,

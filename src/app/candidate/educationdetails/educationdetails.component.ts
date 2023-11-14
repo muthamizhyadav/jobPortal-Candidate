@@ -80,236 +80,12 @@ export class EducationdetailsComponent implements OnInit {
         // this.addPhase();
       }
     });
-    // this.Qualification.controls.forEach((res: any) => {
-    // this.getAlldata();
-    // if (!this.data) {
-    //   this.addPhase();
-    // }
-    // })
     console.log(this.educationForm.get('educationArray').controls[0].status);
     this.candidate.getLanguages().subscribe((res: any) => {
       this.lang = res;
     });
   }
   q: any;
-  /**
-  qualifiacation(val: any, index: any, phase: any) {
-    let allcontrols = [
-      'drQualification',
-      'drSpecialization',
-      'drCourseType',
-      'drCourse',
-      'drCourseDurationFrom',
-      'drCourseDurationTo',
-      'drGradingSystem',
-      'drMarks',
-      'drUniversity',
-      'pgQualification',
-      'pgCourse',
-      'pgSpecialization',
-      'pgCourseType',
-      'pgCourseDurationFrom',
-      'pgCourseDurationTo',
-      'pgGradingSystem',
-      'pgMarks',
-      'pgUniversity',
-      'ugQualification',
-      'ugSpecialization',
-      'ugCourse',
-      'ugCourseType',
-      'ugCourseDurationFrom',
-      'ugCourseDurationTo',
-      'ugGradingSystem',
-      'ugUniversity',
-      'ugMarks',
-      'hsBoard',
-      'hsQualification',
-      'hsPassedYear',
-      'hsMedium',
-      'hstotalmarks',
-      'sslcQualification',
-      'sslcBoard',
-      'sslcPassedYear',
-      'sslcMedium',
-      'sslctotalmarks',
-    ];
-    let ss: any = {
-      'Doctorate/phD': [
-        'drQualification',
-        'drSpecialization',
-        'drCourseType',
-        'drCourse',
-        'drCourseDurationFrom',
-        'drCourseDurationTo',
-        'drGradingSystem',
-        'drMarks',
-        'drUniversity',
-      ],
-      'Masters/Post-Graduation': [
-        'pgQualification',
-        'pgCourse',
-        'pgSpecialization',
-        'pgCourseType',
-        'pgCourseDurationFrom',
-        'pgCourseDurationTo',
-        'pgGradingSystem',
-        'pgMarks',
-        'pgUniversity',
-      ],
-      'Graduation/Diploma': [
-        'ugCourse',
-        'ugQualification',
-        'ugSpecialization',
-        'ugCourseType',
-        'ugCourseDurationFrom',
-        'ugCourseDurationTo',
-        'ugGradingSystem',
-        'ugMarks',
-        'ugUniversity',
-      ],
-      HSC: [
-        'hsBoard',
-        'hsQualification',
-        'hsPassedYear',
-        'hsMedium',
-        'hstotalmarks',
-      ],
-      SSLC: [
-        'sslcQualification',
-        'sslcBoard',
-        'sslcPassedYear',
-        'sslcMedium',
-        'sslctotalmarks',
-      ],
-    };
-    let value = val.target.value;
-    console.log(val.target.value, 'target');
-    allcontrols.forEach((a: any) => {
-      <FormArray>phase.removeControl(a);
-    });
-    ss[value].forEach((a: any) => {
-      <FormArray>phase.addControl(a, new FormControl('', Validators.required));
-    });
-    phase.get('Education')?.setValue(value);
-    let q = this.qualification.find(
-      (data: any) => data.qualification == val.target.value
-    );
-    console.log(phase.get('Education')?.setValue(value), 'ssss');
-    // dr
-    if (val.target.value == 'Doctorate/phD') {
-      phase.get('drQualification')?.setValue(q._id);
-      phase.get('drQualificationval')?.setValue(val.target.value);
-      this.candidate.getdoctorate(q._id).subscribe((res: any) => {
-        this.drCourse = res;
-      });
-    }
-    // pg
-    if (val.target.value == 'Masters/Post-Graduation') {
-      phase.get('pgQualification')?.setValue(q._id);
-      // phase.get('pgQualificationval')?.setValue(val.target.value);
-      this.candidate.getPgcourses(q._id).subscribe((res: any) => {
-        this.pgCourse = res;
-      });
-    }
-    // ug
-    if (val.target.value == 'Graduation/Diploma') {
-      phase.get('ugQualification')?.setValue(q._id);
-      phase.get('ugQualificationval')?.setValue(val.target.value);
-      this.candidate.grtUgcou(q._id).subscribe((res: any) => {
-        this.ugcourse = res;
-      });
-    }
-    // hsc
-    if (val.target.value == 'HSC') {
-      phase.get('hsQualification')?.setValue(q._id);
-      this.candidate.hsccourse(q._id).subscribe((res: any) => {
-        this.hscCourse = res;
-      });
-    }
-    // sslc
-    if (val.target.value == 'SSLC') {
-      phase.get('sslcQualification')?.setValue(q._id);
-      this.candidate.sslcSpecial(q._id).subscribe((res: any) => {
-        this.sslcspe = res;
-      });
-    }
-  }
-   */
-
-  // qualifiacation(e: any, i: any, phase: any) {
-  //   let inde = parseInt(e.target.value);
-  //   let val = this.qualification[inde].qualification;
-  //   let id = this.qualification[inde]._id;
-
-  //   if (val == 'Doctorate/phD') {
-  //     phase.get('drQualification')?.setValue(id);
-  //     phase.get('drQualificationval')?.setValue(val);
-  //     this.candidate.getdoctorate(id).subscribe((res: any) => {
-  //       this.drCourse = res;
-  //       this.course = res;
-  //     });
-  //   }
-
-  //   if (val == 'Masters/Post-Graduation') {
-  //     phase.get('pgQualification')?.setValue(id);
-  //     phase.get('pgQualificationval')?.setValue(val);
-  //     this.candidate.getPgcourses(id).subscribe((res: any) => {
-  //       this.pgCourse = res;
-  //       this.course = res;
-  //     });
-  //   }
-
-  //   if (val == 'Graduation/Diploma') {
-  //     phase.get('ugQualification')?.setValue(id);
-  //     phase.get('ugQualificationval')?.setValue(val);
-  //     this.candidate.grtUgcou(id).subscribe((res: any) => {
-  //       this.ugcourse = res;
-  //       this.course = res;
-  //     });
-  //   }
-
-  //   if (val == 'HSC') {
-  //     phase.get('hsQualification')?.setValue(id);
-  //     this.candidate.hsccourse(id).subscribe((res: any) => {
-  //       this.hscCourse = res;
-  //       this.course = res;
-  //     });
-  //   }
-
-  //   if (val == 'SSLC') {
-  //     phase.get('sslcQualification')?.setValue(id);
-  //     this.candidate.sslcSpecial(id).subscribe((res: any) => {
-  //       this.sslcspe = res;
-  //       this.course = res;
-  //     });
-  //   }
-  // }
-
-  // specialization(val: any, qali: any) {
-  //   console.log(qali.value);
-  //   if (qali.get('Education')?.value == 'Masters/Post-Graduation') {
-  //     this.candidate
-  //       .getPgSpecial(val.target.value._id)
-  //       .subscribe((res: any) => {
-  //         this.pgSpe = res;
-  //         qali.get('pgCourse')?.setValue(val.target.value);
-  //       });
-  //   }
-  //   if (qali.get('Education')?.value == 'Graduation/Diploma') {
-  //     console.log('wokin');
-  //     this.candidate.ugSepcial(val.target.value).subscribe((res: any) => {
-  //       this.ugSpe = res;
-  //       qali.get('ugCourse')?.setValue(val.target.value);
-  //     });
-  //   }
-
-  //   if (qali.get('Education')?.value == 'Doctorate/phD') {
-  //     this.candidate.getDrSped(val.target.value).subscribe((res: any) => {
-  //       this.drsep = res;
-  //       qali.get('drCourse')?.setValue(val.target.value);
-  //     });
-  //   }
-  // }
 
   educationFormAll = new FormGroup({
     Qualification: new FormControl('', Validators.required),
@@ -328,6 +104,7 @@ export class EducationdetailsComponent implements OnInit {
     PassedYear: new FormControl('', Validators.required),
     Medium: new FormControl('', Validators.required),
     totalmarks: new FormControl('', Validators.required),
+    institutionName: new FormControl('', Validators.required),
   });
 
   Qlf: any = null;
@@ -355,6 +132,7 @@ export class EducationdetailsComponent implements OnInit {
       this.educationFormAll.get('GradingSystem')?.setErrors(null);
       this.educationFormAll.get('University')?.setErrors(null);
       this.educationFormAll.get('Marks')?.setErrors(null);
+      this.educationFormAll.get('institutionName')?.setErrors(null);
     } else {
       this.educationFormAll.get('totalmarks')?.setErrors(null);
       this.educationFormAll.get('Medium')?.setErrors(null);
@@ -381,31 +159,6 @@ export class EducationdetailsComponent implements OnInit {
     this.educationFormAll.get('SpecializationName')?.setValue(val);
   }
 
-  // hasPhaseValue1At(index: any) {
-  //   console.log(
-  //     (<FormGroup>this.Qualification.at(index)).get('drCourse') ? true : false,
-  //     'dhsdhsdbh'
-  //   );
-  //   return (<FormGroup>this.Qualification.at(index)).get('drCourse')
-  //     ? true
-  //     : false;
-  // }
-  // get Qualification() {
-  //   return this.educationForm.controls['educationArray'] as FormArray;
-  // }
-
-  // addPhase() {
-  //   this.msgquery = null;
-  //   let conrols = this.fb.group({
-  //     Education: new FormControl('', [Validators.required]),
-  //   });
-  //   this.Qualification.push(conrols);
-  // }
-
-  // addQualification() {
-  //   this.addPhase();
-  // }
-
   dataToSubmit: any = {};
   qualify(type: any) {
     if (type == 'Masters/Post-Graduation') {
@@ -427,6 +180,7 @@ export class EducationdetailsComponent implements OnInit {
         SpecializationName:
           this.educationFormAll.get('SpecializationName')?.value,
         CourseName: this.educationFormAll.get('CourseName')?.value,
+        institutionNamePg: this.educationFormAll.get('institutionName')?.value,
       };
     }
 
@@ -449,6 +203,7 @@ export class EducationdetailsComponent implements OnInit {
         SpecializationName:
           this.educationFormAll.get('SpecializationName')?.value,
         CourseName: this.educationFormAll.get('CourseName')?.value,
+        institutionNameDr: this.educationFormAll.get('institutionName')?.value,
       };
     }
 
@@ -471,6 +226,7 @@ export class EducationdetailsComponent implements OnInit {
         SpecializationName:
           this.educationFormAll.get('SpecializationName')?.value,
         CourseName: this.educationFormAll.get('CourseName')?.value,
+        institutionNameUg: this.educationFormAll.get('institutionName')?.value,
       };
     }
 
@@ -496,10 +252,6 @@ export class EducationdetailsComponent implements OnInit {
       };
     }
   }
-
-  // this.router.navigate(['/can-proffesinal'], {
-  //   queryParams: { id: this.userID },
-  // });
 
   submit() {
     console.log(this.educationFormAll.value);
@@ -533,227 +285,6 @@ export class EducationdetailsComponent implements OnInit {
     });
   }
 
-  // getAlldata() {
-  //   this.candidate.viewDetails().subscribe((res: any) => {
-  //     if (res.user.length != 0) {
-  //       let value = res.user[0];
-  //       this.data = res;
-  //       if (value.drQualification == 'Doctorate/phD') {
-  //         this.candidate
-  //           .getdoctorate(value.candidateDetails.drQualification)
-  //           .subscribe((res: any) => {
-  //             this.drCourse = res;
-  //           });
-  //         this.candidate
-  //           .getDrSped(value.candidateDetails.drCourse)
-  //           .subscribe((res: any) => {
-  //             this.drsep = res;
-  //           });
-  //         this.addAllcontrol = this.fb.group({
-  //           Education: new FormControl(value.drQualification, [
-  //             Validators.required,
-  //           ]),
-  //           drQualification: new FormControl(
-  //             value.candidateDetails.drQualification,
-  //             [Validators.required]
-  //           ),
-  //           drCourseDurationFrom: new FormControl(
-  //             value.candidateDetails.drCourseDurationFrom,
-  //             [Validators.required]
-  //           ),
-  //           drCourseDurationTo: new FormControl(
-  //             value.candidateDetails.drCourseDurationTo,
-  //             [Validators.required]
-  //           ),
-  //           drCourseType: new FormControl(value.candidateDetails.drCourseType, [
-  //             Validators.required,
-  //           ]),
-  //           drGradingSystem: new FormControl(
-  //             value.candidateDetails.drGradingSystem,
-  //             [Validators.required]
-  //           ),
-  //           drMarks: new FormControl(value.candidateDetails.drMarks, [
-  //             Validators.required,
-  //           ]),
-  //           drSpecialization: new FormControl(
-  //             value.candidateDetails.drSpecialization,
-  //             [Validators.required]
-  //           ),
-  //           drUniversity: new FormControl(value.candidateDetails.drUniversity, [
-  //             Validators.required,
-  //           ]),
-  //           drCourse: new FormControl(value.candidateDetails.drCourse, [
-  //             Validators.required,
-  //           ]),
-  //         });
-  //       }
-  //       if (value.pgQualification == 'Masters/Post-Graduation') {
-  //         console.log('working');
-  //         this.candidate
-  //           .getPgcourses(value.candidateDetails.pgQualification)
-  //           .subscribe((res: any) => {
-  //             this.pgCourse = res;
-  //           });
-  //         this.candidate
-  //           .getPgSpecial(value.candidateDetails.pgCourse)
-  //           .subscribe((res: any) => {
-  //             this.pgSpe = res;
-  //           });
-
-  //         this.addAllcontrol = this.fb.group({
-  //           Education: new FormControl(value.pgQualification, [
-  //             Validators.required,
-  //           ]),
-  //           pgQualification: new FormControl(
-  //             value.candidateDetails.pgQualification,
-  //             [Validators.required]
-  //           ),
-  //           pgCourseDurationFrom: new FormControl(
-  //             value.candidateDetails.pgCourseDurationFrom,
-  //             [Validators.required]
-  //           ),
-  //           pgCourseDurationTo: new FormControl(
-  //             value.candidateDetails.pgCourseDurationTo,
-  //             [Validators.required]
-  //           ),
-  //           pgCourseType: new FormControl(value.candidateDetails.pgCourseType, [
-  //             Validators.required,
-  //           ]),
-  //           pgGradingSystem: new FormControl(
-  //             value.candidateDetails.pgGradingSystem,
-  //             [Validators.required]
-  //           ),
-  //           pgMarks: new FormControl(value.candidateDetails.pgMarks, [
-  //             Validators.required,
-  //           ]),
-  //           pgSpecialization: new FormControl(
-  //             value.candidateDetails.pgSpecialization,
-  //             [Validators.required]
-  //           ),
-  //           pgUniversity: new FormControl(value.candidateDetails.pgUniversity, [
-  //             Validators.required,
-  //           ]),
-  //           pgCourse: new FormControl(value.candidateDetails.pgCourse, [
-  //             Validators.required,
-  //           ]),
-  //         });
-  //       }
-  //       if (value.ugQualification == 'Graduation/Diploma') {
-  //         console.log('working');
-  //         this.candidate
-  //           .grtUgcou(value.candidateDetails.ugQualification)
-  //           .subscribe((res: any) => {
-  //             this.ugcourse = res;
-  //           });
-  //         this.candidate
-  //           .ugSepcial(value.candidateDetails.ugCourse)
-  //           .subscribe((res: any) => {
-  //             this.ugSpe = res;
-  //           });
-
-  //         this.addAllcontrol = this.fb.group({
-  //           Education: new FormControl(value.ugQualification, [
-  //             Validators.required,
-  //           ]),
-  //           ugQualification: new FormControl(
-  //             value.candidateDetails.ugQualification,
-  //             [Validators.required]
-  //           ),
-  //           ugCourseDurationFrom: new FormControl(
-  //             value.candidateDetails.ugCourseDurationFrom,
-  //             [Validators.required]
-  //           ),
-  //           ugCourseDurationTo: new FormControl(
-  //             value.candidateDetails.ugCourseDurationTo,
-  //             [Validators.required]
-  //           ),
-  //           ugCourseType: new FormControl(value.candidateDetails.ugCourseType, [
-  //             Validators.required,
-  //           ]),
-  //           ugGradingSystem: new FormControl(
-  //             value.candidateDetails.ugGradingSystem,
-  //             [Validators.required]
-  //           ),
-  //           ugMarks: new FormControl(value.candidateDetails.ugMarks, [
-  //             Validators.required,
-  //           ]),
-  //           ugSpecialization: new FormControl(
-  //             value.candidateDetails.ugSpecialization,
-  //             [Validators.required]
-  //           ),
-  //           ugUniversity: new FormControl(value.candidateDetails.ugUniversity, [
-  //             Validators.required,
-  //           ]),
-  //           ugCourse: new FormControl(value.candidateDetails.ugCourse, [
-  //             Validators.required,
-  //           ]),
-  //         });
-  //       }
-  //       if (value.hsQualification == 'HSC') {
-  //         console.log('working');
-  //         this.candidate
-  //           .hsccourse(value.candidateDetails.hsQualification)
-  //           .subscribe((res: any) => {
-  //             this.hscCourse = res;
-  //           });
-  //         this.addAllcontrol = this.fb.group({
-  //           Education: new FormControl(value.hsQualification, [
-  //             Validators.required,
-  //           ]),
-  //           hsQualification: new FormControl(
-  //             value.candidateDetails.hsQualification,
-  //             [Validators.required]
-  //           ),
-  //           hsBoard: new FormControl(value.candidateDetails.hsBoard, [
-  //             Validators.required,
-  //           ]),
-  //           hsMedium: new FormControl(value.candidateDetails.hsMedium, [
-  //             Validators.required,
-  //           ]),
-  //           hstotalmarks: new FormControl(value.candidateDetails.hstotalmarks, [
-  //             Validators.required,
-  //           ]),
-  //           hsPassedYear: new FormControl(value.candidateDetails.hsPassedYear, [
-  //             Validators.required,
-  //           ]),
-  //         });
-  //       }
-  //       if (value.sslcQualification == 'SSLC') {
-  //         console.log('working');
-  //         this.candidate
-  //           .hsccourse(value.candidateDetails.sslcQualification)
-  //           .subscribe((res: any) => {
-  //             this.hscCourse = res;
-  //           });
-  //         this.addAllcontrol = this.fb.group({
-  //           Education: new FormControl(value.sslcQualification, [
-  //             Validators.required,
-  //           ]),
-  //           sslcQualification: new FormControl(
-  //             value.candidateDetails.sslcQualification,
-  //             [Validators.required]
-  //           ),
-  //           sslcBoard: new FormControl(value.candidateDetails.sslcBoard, [
-  //             Validators.required,
-  //           ]),
-  //           sslcMedium: new FormControl(value.candidateDetails.sslcMedium, [
-  //             Validators.required,
-  //           ]),
-  //           sslctotalmarks: new FormControl(
-  //             value.candidateDetails.sslctotalmarks,
-  //             [Validators.required]
-  //           ),
-  //           sslcPassedYear: new FormControl(
-  //             value.candidateDetails.sslcPassedYear,
-  //             [Validators.required]
-  //           ),
-  //         });
-  //       }
-  //     }
-  //     console.log(res, 'working');
-  //   });
-  // }
-
   dropdown_disable(val: any) {
     if (
       this.qualification.find(
@@ -775,5 +306,305 @@ export class EducationdetailsComponent implements OnInit {
   }
   popupOpen() {
     this.popup = true;
+  }
+  popupCLose2() {
+    this.popup1 = false;
+  }
+
+  popup1: any = false;
+
+  QualificationChangeEdit(i: any) {
+    let val = this.qualification[i];
+    this.Qlf = this.qualification[i].qualification;
+    console.log(this.Qlf);
+    let id = this.qualification[i]._id;
+
+    this.educationFormAll.get('Qualification')?.setValue(id);
+    this.educationFormAll.get('QualificationName')?.setValue(this.Qlf);
+
+    if (this.Qlf == 'SSLC' || this.Qlf == 'HSC') {
+      this.educationFormAll.get('Course')?.setErrors(null);
+      this.educationFormAll.get('Specialization')?.setErrors(null);
+      this.educationFormAll.get('CourseType')?.setErrors(null);
+      this.educationFormAll.get('CourseDurationFrom')?.setErrors(null);
+      this.educationFormAll.get('CourseDurationTo')?.setErrors(null);
+      this.educationFormAll.get('GradingSystem')?.setErrors(null);
+      this.educationFormAll.get('University')?.setErrors(null);
+      this.educationFormAll.get('Marks')?.setErrors(null);
+      this.educationFormAll.get('institutionName')?.setErrors(null);
+    } else {
+      this.educationFormAll.get('totalmarks')?.setErrors(null);
+      this.educationFormAll.get('Medium')?.setErrors(null);
+      this.educationFormAll.get('PassedYear')?.setErrors(null);
+      this.educationFormAll.get('Board')?.setErrors(null);
+    }
+  }
+
+  courseChangeEdit(i: any) {
+    let val = this.courses[i].Course;
+    let id = this.courses[i]._id;
+    this.educationFormAll.get('Course')?.setValue(id);
+    this.educationFormAll.get('CourseName')?.setValue(val);
+    this.candidate.getSpecByQualification(id).subscribe((e: any) => {
+      this.spec = e;
+    });
+  }
+  courseind: any;
+  specind: any;
+  backendindex: any;
+  Edite(e: any, i: any) {
+    this.backendindex = i;
+    console.log(e, 'lll');
+
+    if (e.Type != 'SSLC' && e.Type != 'HSC') {
+      let ind = this.qualification.findIndex((a: any) => {
+        return a.qualification === e.QualificationName;
+      });
+      console.log(this.qualification);
+      this.QualificationChangeEdit(ind);
+      let id = this.qualification[ind]._id;
+      this.candidate.getCoursesByQualification(id).subscribe((res: any) => {
+        this.courses = res;
+        console.log(this.courses, 'QQQQ');
+        this.courseind = this.courses.findIndex((c: any) => {
+          return c.Course == e.CourseName;
+        });
+        let qid = this.courses[this.courseind];
+        this.candidate
+          .getSpecByQualification(qid._id)
+          .subscribe((res2: any) => {
+            this.spec = res2;
+            console.log(res2);
+            console.log(this.spec, 'spec');
+            this.popup1 = true;
+
+            this.specind = this.spec.findIndex((spec: any) => {
+              return spec.Specialization == e.SpecializationName;
+            });
+            if (e.Type == 'Doctorate/phD') {
+              this.educationFormAll.patchValue({
+                Qualification: e.drQualification,
+                QualificationName: ind,
+                Course: this.courseind,
+                CourseName: e.CourseName,
+                Specialization: e.drSpecialization,
+                SpecializationName: this.specind,
+                CourseType: e.drCourseType,
+                CourseDurationFrom: e.drCourseDurationFrom,
+                CourseDurationTo: e.drCourseDurationTo,
+                GradingSystem: e.drGradingSystem,
+                University: e.drUniversity,
+                Marks: e.drMarks,
+                institutionName: e.institutionNameDr,
+              });
+            }
+
+            if (e.Type == 'Masters/Post-Graduation') {
+              this.educationFormAll.patchValue({
+                Qualification: e.pgQualification,
+                QualificationName: ind,
+                Course: this.courseind,
+                CourseName: e.CourseName,
+                Specialization: e.pgSpecialization,
+                SpecializationName: this.specind,
+                CourseType: e.pgCourseType,
+                CourseDurationFrom: e.pgCourseDurationFrom,
+                CourseDurationTo: e.pgCourseDurationTo,
+                GradingSystem: e.pgGradingSystem,
+                University: e.pgUniversity,
+                Marks: e.pgMarks,
+                institutionName: e.institutionNamePg,
+              });
+            }
+
+            if (e.Type == 'Graduation/Diploma') {
+              this.educationFormAll.patchValue({
+                Qualification: e.ugQualification,
+                QualificationName: ind,
+                Course: this.courseind,
+                CourseName: e.CourseName,
+                Specialization: e.ugSpecialization,
+                SpecializationName: this.specind,
+                CourseType: e.ugCourseType,
+                CourseDurationFrom: e.ugCourseDurationFrom,
+                CourseDurationTo: e.ugCourseDurationTo,
+                GradingSystem: e.ugGradingSystem,
+                University: e.ugUniversity,
+                Marks: e.ugMarks,
+                institutionName: e.institutionNameUg,
+              });
+            }
+          });
+      });
+    } else {
+      this.popup1 = true;
+      if (e.Type == 'SSLC') {
+        let ind = this.qualification.findIndex((a: any) => {
+          return a._id === e.sslcQualification;
+        });
+        this.Qlf = 'SSLC';
+        this.educationFormAll.patchValue({
+          QualificationName: ind,
+          Board: e.sslcBoard,
+          PassedYear: e.sslcPassedYear,
+          Medium: e.sslcMedium,
+          totalmarks: e.sslctotalmarks,
+        });
+      }
+      if (e.Type == 'HSC') {
+        let ind = this.qualification.findIndex((a: any) => {
+          return a._id === e.hsQualification;
+        });
+        this.Qlf = 'HSC';
+        this.educationFormAll.patchValue({
+          QualificationName: ind,
+          Board: e.hsBoard,
+          PassedYear: e.hsPassedYear,
+          Medium: e.hsMedium,
+          totalmarks: e.hstotalmarks,
+        });
+      }
+    }
+  }
+
+  editSubmit() {
+    this.isSubmitted = true;
+    if (this.Qlf == 'SSLC' || this.Qlf == 'HSC') {
+      this.educationFormAll.get('Course')?.setErrors(null);
+      this.educationFormAll.get('Specialization')?.setErrors(null);
+      this.educationFormAll.get('CourseType')?.setErrors(null);
+      this.educationFormAll.get('CourseDurationFrom')?.setErrors(null);
+      this.educationFormAll.get('CourseDurationTo')?.setErrors(null);
+      this.educationFormAll.get('GradingSystem')?.setErrors(null);
+      this.educationFormAll.get('University')?.setErrors(null);
+      this.educationFormAll.get('Marks')?.setErrors(null);
+      this.educationFormAll.get('institutionName')?.setErrors(null);
+    } else {
+      this.educationFormAll.get('totalmarks')?.setErrors(null);
+      this.educationFormAll.get('Medium')?.setErrors(null);
+      this.educationFormAll.get('PassedYear')?.setErrors(null);
+      this.educationFormAll.get('Board')?.setErrors(null);
+    }
+    if (this.Qlf != 'SSLC' && this.Qlf != 'HSC') {
+      let courind: any = this.educationFormAll.get('Course')?.value;
+      let qlfId: any = this.educationFormAll.get('QualificationName')?.value;
+      let specId: any = this.educationFormAll.get('SpecializationName')?.value;
+
+      let course = this.courses[courind];
+      let qualify = this.qualification[qlfId];
+      let spec = this.spec[specId];
+
+      if (this.Qlf == 'Masters/Post-Graduation') {
+        this.dataToSubmit = {
+          pgQualification: qualify._id,
+          pgCourse: course._id,
+          pgSpecialization: spec._id,
+          pgCourseType: this.educationFormAll.get('CourseType')?.value,
+          pgCourseDurationFrom:
+            this.educationFormAll.get('CourseDurationFrom')?.value,
+          pgCourseDurationTo:
+            this.educationFormAll.get('CourseDurationTo')?.value,
+          pgGradingSystem: this.educationFormAll.get('GradingSystem')?.value,
+          pgMarks: this.educationFormAll.get('Marks')?.value,
+          pgUniversity: this.educationFormAll.get('University')?.value,
+          Type: this.Qlf,
+          QualificationName: this.Qlf,
+          SpecializationName: spec.Specialization,
+          CourseName: course.Course,
+          indexDel: this.backendindex,
+          sert: 4,
+          institutionNamePg: this.educationFormAll.get('institutionName')?.value,
+        };
+      }
+
+      if (this.Qlf == 'Graduation/Diploma') {
+        this.dataToSubmit = {
+          ugQualification: qualify._id,
+          ugCourse: course._id,
+          ugSpecialization: spec._id,
+          ugCourseType: this.educationFormAll.get('CourseType')?.value,
+          ugCourseDurationFrom:
+            this.educationFormAll.get('CourseDurationFrom')?.value,
+          ugCourseDurationTo:
+            this.educationFormAll.get('CourseDurationTo')?.value,
+          ugGradingSystem: this.educationFormAll.get('GradingSystem')?.value,
+          ugMarks: this.educationFormAll.get('Marks')?.value,
+          ugUniversity: this.educationFormAll.get('University')?.value,
+          Type: this.Qlf,
+          QualificationName: this.Qlf,
+          SpecializationName: spec.Specialization,
+          CourseName: course.Course,
+          indexDel: this.backendindex,
+          sert: 3,
+          institutionNameUg: this.educationFormAll.get('institutionName')?.value,
+
+        };
+        console.log(this.dataToSubmit, 'Under Graduate');
+      }
+
+      if (this.Qlf == 'Doctorate/phD') {
+        this.dataToSubmit = {
+          drQualification: qualify._id,
+          drCourse: course._id,
+          drSpecialization: spec._id,
+          drCourseType: this.educationFormAll.get('CourseType')?.value,
+          drCourseDurationFrom:
+            this.educationFormAll.get('CourseDurationFrom')?.value,
+          drCourseDurationTo:
+            this.educationFormAll.get('CourseDurationTo')?.value,
+          drGradingSystem: this.educationFormAll.get('GradingSystem')?.value,
+          drMarks: this.educationFormAll.get('Marks')?.value,
+          drUniversity: this.educationFormAll.get('University')?.value,
+          Type: this.Qlf,
+          QualificationName: this.Qlf,
+          SpecializationName: spec.Specialization,
+          CourseName: course.Course,
+          indexDel: this.backendindex,
+          sert: 5,
+          institutionNameDr: this.educationFormAll.get('institutionName')?.value,
+
+        };
+      }
+    } else {
+      if (this.Qlf == 'SSLC') {
+        let qlfId: any = this.educationFormAll.get('QualificationName')?.value;
+        let qualify = this.qualification[qlfId];
+        this.dataToSubmit = {
+          sslcQualification: qualify._id,
+          sslcBoard: this.educationFormAll.get('Board')?.value,
+          sslcPassedYear: this.educationFormAll.get('PassedYear')?.value,
+          sslcMedium: this.educationFormAll.get('Medium')?.value,
+          sslctotalmarks: this.educationFormAll.get('totalmarks')?.value,
+          Type: this.Qlf,
+          indexDel: this.backendindex,
+          sert: 1,
+        };
+      }
+      if (this.Qlf == 'HSC') {
+        let qlfId: any = this.educationFormAll.get('QualificationName')?.value;
+        let qualify = this.qualification[qlfId];
+        this.dataToSubmit = {
+          hsQualification: qualify._id,
+          hsBoard: this.educationFormAll.get('Board')?.value,
+          hsPassedYear: this.educationFormAll.get('PassedYear')?.value,
+          hsMedium: this.educationFormAll.get('Medium')?.value,
+          hstotalmarks: this.educationFormAll.get('totalmarks')?.value,
+          Type: this.Qlf,
+          indexDel: this.backendindex,
+          sert: 2,
+        };
+      }
+    }
+
+    if (this.educationFormAll.valid) {
+      console.log(this.dataToSubmit, this.backendindex);
+      let data = { ...this.dataToSubmit, ...{ edit: true } };
+      this.candidate.eduction(data).subscribe((res: any) => {
+        this.dataToSubmit = {};
+        this.isSubmitted = false;
+        this.getAllDetails();
+        this.popupCLose2();
+      });
+    }
   }
 }

@@ -1,0 +1,81 @@
+<div class="page-container">
+    <div class="page-title">
+        <p> Request Stream </p>
+    </div>
+    <div class="body-content">
+        <div class="forms" [formGroup]="streamRequest">
+            <div>
+                <label> Choose Plan:</label>
+                <select class="form-control select-type" formControlName="planId">
+                    <option [value]="p._id" *ngFor="let p of planes">{{p.planName}}</option>
+                </select>
+            </div>
+
+            <div>
+                <label>Stream Name :</label>
+                <input type="text" placeholder="Enter Stream Name" formControlName="streamName">
+            </div>
+            <div>
+                <label>Stream Post :</label>
+                <input type="text" placeholder="Your Profile (no need to select)" readonly>
+            </div>
+            <div>
+                <label>Stream Date :</label>
+                <input type="date" placeholder="Date" (change)="dateCHange($event)">
+            </div>
+
+            <div>
+                <label>Stream TIme :</label>
+                <input type="time" (change)="timeChange($event)">
+            </div>
+            <div>
+                <label>Primary Language:</label>
+                <select class="form-control select-type" formControlName="primarycommunication">
+                    <option [ngValue]="null" disabled selected>Select</option>
+                    <option>Tamil</option>
+                    <option>English</option>
+                    <option>Hindi</option>
+                    <option>Telugu</option>
+                    <option>Malayalam</option>
+                    <option>Kannada</option>
+                </select>
+            </div>
+            <div>
+                <label>Secondary Language:</label>
+                <select class="form-control select-type" formControlName="secondarycommunication">
+                    <option [ngValue]="null" disabled selected>Select</option>
+                    <option>Tamil</option>
+                    <option>English</option>
+                    <option>Hindi</option>
+                    <option>Telugu</option>
+                    <option>Malayalam</option>
+                    <option>Kannada</option>
+                </select>
+            </div>
+            <div>
+                <label>Image Upload:</label>
+                <button class="file">Choose File</button>
+            </div>
+            <div>
+                <label>Broucher Upload:</label>
+                <button class="file">Choose File</button>
+            </div>
+            <div>
+                <label>Teaser Upload:</label>
+                <button class="file">Choose File</button>
+            </div>
+
+            <div>
+                <label>Location :</label>
+                <input type="text" placeholder="Enter Location" formControlName="Location" />
+            </div>
+            <div>
+                <label>Description :</label>
+                <textarea placeholder="Type Here..." cols="3" rows="1" formControlName="discription"></textarea>
+            </div>
+        </div>
+        <div class="btns-submit">
+            <button (click)="submitRequest()">Submit</button>
+        </div>
+    </div>
+</div>

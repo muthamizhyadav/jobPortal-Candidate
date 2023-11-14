@@ -1,0 +1,61 @@
+.page-title {
+  width: 95%;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.page-title button {
+  width: 140px;
+  border: none;
+  height: 40px;
+  background-color: #0a2647;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.page-title p {
+  font-size: 20px;
+  color: #fd841f;
+  font-family: "Poppins";
+  font-weight: 700;
+}
+
+.my-planes {
+  width: 90%;
+  margin: auto;
+}
+
+.my-planes table {
+  width: 100%;
+}
+
+.my-planes table thead {
+  background-color: #0a2647;
+  color: #ffff;
+  /* padding: 20px; */
+}
+
+.my-planes table thead th {
+  padding: 10px;
+  box-shadow: 0px 2px 8px 0px #00000040;
+}
+
+.my-planes table thead th:first-child {
+  border-top-left-radius: 5px;
+}
+
+.my-planes table thead th:last-child {
+  border-top-right-radius: 5px;
+}
+
+.my-planes table tbody tr {
+  background-color: #82c3ec;
+}
+
+.my-planes table tbody tr td{
+    padding: 10px;
+    border-bottom: 1px solid #FFFF;
+}

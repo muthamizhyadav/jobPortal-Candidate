@@ -473,6 +473,15 @@
               </div>
 
               <div class="col-12 d-flex">
+                <label class="col-5">Previous Company Name : </label>
+                <p class="col-7">{{details.prevCompany}}</p>
+              </div>
+              <div class="col-12 d-flex">
+                <label class="col-5">Previous Company Role : </label>
+                <p class="col-7">{{details.prevCompanyRole}}</p>
+              </div>
+
+              <div class="col-12 d-flex">
                 <label class="col-5">Native Address : </label>
                 <p class="col-7">{{details.locationNative}}</p>
               </div>
@@ -640,9 +649,13 @@
                 </div>
 
                 <div class="col-12 d-flex">
+                  <label class="col-5">institutionName:</label>
+                  <p class="col-7">{{details.institutionNameDr?details.institutionNameDr:'null'}}</p>
+                </div>
+                <!-- <div class="col-12 d-flex">
                   <label class="col-5">Specification : </label>
                   <p class="col-7">{{details.drSpecialization}}</p>
-                </div>
+                </div> -->
 
                 <div class="col-12 d-flex">
                   <label class="col-5">Course : </label>
@@ -655,7 +668,7 @@
                 </div>
 
                 <div class="col-12 d-flex">
-                  <label class="col-5">Grade : </label>
+                  <label class="col-5">Grade/Score : </label>
                   <p class="col-7">{{details.drMarks}}</p>
                 </div>
 
@@ -665,7 +678,7 @@
                 </div>
 
                 <div class="col-12 d-flex">
-                  <label class="col-5">Passed Out Year :</label>
+                  <label class="col-5">Duration :</label>
                   <p class="col-7">{{details.drCourseDurationFrom}} To {{details.drCourseDurationTo}}</p>
                 </div>
               </div>
@@ -680,11 +693,15 @@
                   <label class="col-5">University : </label>
                   <p class="col-7">{{details.pgUniversity}}</p>
                 </div>
-
                 <div class="col-12 d-flex">
+                  <label class="col-5">institutionName:</label>
+                  <p class="col-7">{{details.institutionNamePg?details.institutionNamePg:'null'}}</p>
+                </div>
+
+                <!-- <div class="col-12 d-flex">
                   <label class="col-5">Specification : </label>
                   <p class="col-7">{{details.pgSpecialization }}</p>
-                </div>
+                </div> -->
 
                 <div class="col-12 d-flex">
                   <label class="col-5">Course : </label>
@@ -697,7 +714,7 @@
                 </div>
 
                 <div class="col-12 d-flex">
-                  <label class="col-5">Grade : </label>
+                  <label class="col-5">Grade/Score : </label>
                   <p class="col-7">{{details.pgMarks}}</p>
                 </div>
 
@@ -707,7 +724,7 @@
                 </div>
 
                 <div class="col-12 d-flex">
-                  <label class="col-5">Passed Out Year :</label>
+                  <label class="col-5">Duration :</label>
                   <p class="col-7">{{details.pgCourseDurationFrom}} To {{details.pgCourseDurationTo}}</p>
                 </div>
               </div>
@@ -722,11 +739,15 @@
                   <label class="col-5">University : </label>
                   <p class="col-7">{{details.ugUniversity}}</p>
                 </div>
-
                 <div class="col-12 d-flex">
+                  <label class="col-5">institutionName:</label>
+                  <p class="col-7">{{details.institutionNameUg?details.institutionNameUg:'null'}}</p>
+                </div>
+
+                <!-- <div class="col-12 d-flex">
                   <label class="col-5">Specification : </label>
                   <p class="col-7">{{details.ugSpecialization}}</p>
-                </div>
+                </div> -->
 
                 <div class="col-12 d-flex">
                   <label class="col-5">Course : </label>
@@ -739,7 +760,7 @@
                 </div>
 
                 <div class="col-12 d-flex">
-                  <label class="col-5">Grade : </label>
+                  <label class="col-5">Grade/Score : </label>
                   <p class="col-7">{{details.ugMarks}}</p>
                 </div>
 
@@ -749,7 +770,7 @@
                 </div>
 
                 <div class="col-12 d-flex">
-                  <label class="col-5">Passed Out Year :</label>
+                  <label class="col-5">Duration:</label>
                   <p class="col-7">{{details.ugCourseDurationFrom}} To {{details.ugCourseDurationTo}}</p>
                 </div>
               </div>
@@ -938,13 +959,21 @@
           </div>
 
           <div class="col-12 d-flex">
-            <label class="col-5">Salary Range : </label>
-            <p class="col-7">{{details.salaryFrom}}</p>
+            <label class="col-5">Expected CTC : </label>
+            <p class="col-7">{{details.expectedctc}}</p>
           </div>
 
           <div class="col-12 d-flex">
             <label class="col-5">Experience : </label>
             <p class="col-7">{{details.experienceYear}} Year {{details.experienceMonth}} Month</p>
+          </div>
+          <div class="col-12 d-flex">
+            <label class="col-5">Previous Company Name : </label>
+            <p class="col-7">{{details.prevCompany}}</p>
+          </div>
+          <div class="col-12 d-flex">
+            <label class="col-5">Previous Company Role : </label>
+            <p class="col-7">{{details.prevCompanyRole}}</p>
           </div>
 
           <div class="col-12 d-flex">
@@ -1101,7 +1130,7 @@
 
               <div class="title-edu">
                 <p class="tit">{{details.Type}}</p>
-                <div class="dr" *ngIf="details.Type == 'Doctorate/Mphil' ">
+                <div class="Details" *ngIf="details.Type == 'Doctorate/phD' ">
                   <div>
                     <label>Course</label>
                     <p>{{details.CourseName}}</p>
@@ -1123,7 +1152,11 @@
                     <p>{{details.drUniversity }}</p>
                   </div>
                   <div>
-                    <label>Grade:</label>
+                    <label>institutionName:</label>
+                    <p>{{details.institutionNameDr }}</p>
+                  </div>
+                  <div>
+                    <label>Grade/Score:</label>
                     <p>{{details.drMarks + " " +details.drGradingSystem }}</p>
                   </div>
                 </div>
@@ -1149,7 +1182,11 @@
                     <p>{{details.ugUniversity }}</p>
                   </div>
                   <div>
-                    <label>Grade:</label>
+                    <label>institutionName:</label>
+                    <p>{{details.institutionNameUg }}</p>
+                  </div>
+                  <div>
+                    <label>Grade/Score:</label>
                     <p>{{details.ugMarks + " " +details.ugGradingSystem }}</p>
                   </div>
                 </div>
@@ -1175,7 +1212,11 @@
                     <p>{{details.pgUniversity }}</p>
                   </div>
                   <div>
-                    <label>Grade:</label>
+                    <label>institutionName :</label>
+                    <p>{{details.institutionNamePg }}</p>
+                  </div>
+                  <div>
+                    <label>Grade/Score:</label>
                     <p>{{details.pgMarks + " " +details.pgGradingSystem }}</p>
                   </div>
                 </div>
@@ -1194,7 +1235,7 @@
                   </div>
                   <div>
                     <label>Marks:</label>
-                    <p>{{details.sslcctotalmarks }}</p>
+                    <p>{{details.sslctotalmarks+'%' }}</p>
                   </div>
                 </div>
                 <div class="Details" *ngIf=" details.Type == 'HSC' ">
@@ -1212,7 +1253,7 @@
                   </div>
                   <div>
                     <label>Marks:</label>
-                    <p>{{details.hslctotalmarks }}</p>
+                    <p>{{details.hstotalmarks+'%'}}</p>
                   </div>
                 </div>
 

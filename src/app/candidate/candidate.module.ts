@@ -26,6 +26,11 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { ReportPopupComponent } from './report-popup/report-popup.component';
 import { EmailverificationComponent } from './emailverification/emailverification.component';
 import { MobileverificationComponent } from './mobileverification/mobileverification.component';
+import { CandidatePlanesComponent } from './candidate-planes/candidate-planes.component';
+import { GstCurrencyPipe } from './gst.pipe';
+import { MyPlanesComponent } from './my-planes/my-planes.component';
+import { MyStreamsComponent } from './my-streams/my-streams.component';
+import { RequestStreamsComponent } from './request-streams/request-streams.component';
 
 
 
@@ -50,7 +55,12 @@ import { MobileverificationComponent } from './mobileverification/mobileverifica
     NewpasswordComponent,
     ReportPopupComponent,
     EmailverificationComponent,
-    MobileverificationComponent
+    MobileverificationComponent,
+    CandidatePlanesComponent,
+    GstCurrencyPipe,
+    MyPlanesComponent,
+    MyStreamsComponent,
+    RequestStreamsComponent,
   ],
   imports: [
     CommonModule,

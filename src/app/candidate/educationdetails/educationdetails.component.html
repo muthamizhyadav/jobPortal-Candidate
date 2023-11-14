@@ -36,10 +36,10 @@
                 </div>
 
                 <div class="edu-Detials">
-                  <div class="edu" *ngFor=" let cand of candDettails">
+                  <div class="edu" *ngFor=" let cand of candDettails; let i =  index ">
                     <div class="edu-title">
                       <p> {{cand.Type}} </p>
-                      <button>
+                      <button (click)="Edite(cand, i)">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path
                             d="M8.81431 3.4089L12.5911 7.18659L3.7768 16H0V12.2223L8.81431 3.4089ZM10.0732 2.14997L11.9616 0.260678C12.1286 0.093766 12.355 0 12.5911 0C12.8272 0 13.0536 0.093766 13.2206 0.260678L15.7393 2.77943C15.9062 2.94639 16 3.17281 16 3.4089C16 3.64498 15.9062 3.8714 15.7393 4.03836L13.85 5.92676L10.0732 2.14997Z"
@@ -70,7 +70,11 @@
                         <p>{{cand.ugUniversity }}</p>
                       </div>
                       <div>
-                        <label>Grade:</label>
+                        <label>Institution Name:</label>
+                        <p>{{cand.institutionNameUg }}</p>
+                      </div>
+                      <div>
+                        <label>Grade/Score:</label>
                         <p>{{cand.ugMarks + " " +cand.ugGradingSystem }}</p>
                       </div>
                     </div>
@@ -97,7 +101,11 @@
                         <p>{{cand.pgUniversity }}</p>
                       </div>
                       <div>
-                        <label>Grade:</label>
+                        <label>Institution Name:</label>
+                        <p>{{cand.institutionNamePg }}</p>
+                      </div>
+                      <div>
+                        <label>Grade/Score:</label>
                         <p>{{cand.pgMarks + " " +cand.pgGradingSystem }}</p>
                       </div>
                     </div>
@@ -124,7 +132,11 @@
                         <p>{{cand.drUniversity }}</p>
                       </div>
                       <div>
-                        <label>Grade:</label>
+                        <label>Institution Name:</label>
+                        <p>{{cand.institutionNameDr }}</p>
+                      </div>
+                      <div>
+                        <label>Grade/Score:</label>
                         <p>{{cand.drMarks + " " +cand.drGradingSystem }}</p>
                       </div>
                     </div>
@@ -139,12 +151,12 @@
                         <p>{{cand.sslcMedium}}</p>
                       </div>
                       <div>
-                        <label>PassedYear</label>
+                        <label>Passed out Year</label>
                         <p>{{cand.sslcPassedYear}}</p>
                       </div>
                       <div>
-                        <label>Marks:</label>
-                        <p>{{cand.sslcctotalmarks }}</p>
+                        <label>Aggregate:</label>
+                        <p>{{cand.sslctotalmarks }}</p>
                       </div>
                     </div>
                     <div class="Details" *ngIf=" cand.Type == 'HSC' ">
@@ -157,12 +169,12 @@
                         <p>{{cand.hsMedium}}</p>
                       </div>
                       <div>
-                        <label>PassedYear</label>
+                        <label>Passed out Year</label>
                         <p>{{cand.hsPassedYear}}</p>
                       </div>
                       <div>
-                        <label>Marks:</label>
-                        <p>{{cand.hslctotalmarks }}</p>
+                        <label>Aggregate:</label>
+                        <p>{{cand.hstotalmarks }}</p>
                       </div>
                     </div>
 
@@ -280,6 +292,15 @@
     <div class="err">
       <p *ngIf="isSubmitted && educationFormAll.get('University')?.invalid">Enter University Name!</p>
     </div>
+    <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
+      <label for="">Institution Name :</label>
+      <div class="content-box">
+        <input type="text" class="form-control" placeholder="Enter Institution Name" formControlName="institutionName">
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('institutionName')?.invalid">Enter Institution Name!</p>
+    </div>
 
     <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
       <label for="">Education Type :</label>
@@ -362,6 +383,193 @@
     <div class="single-row">
       <div class="btn">
         <button (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="popup-2" *ngIf="popup1">
+  <div class="popup-close-2" (click)="popupCLose2()"></div>
+  <div class="popup-container-2" [formGroup]="educationFormAll">
+    <div class="content-title">
+      <p>Edite ({{Qlf}})</p>
+    </div>
+    <div class="single-row">
+      <label for="">Qualification :</label>
+      <div class="content-box errorCondent1">
+        <select class="form-control select-type" (change)="QualificationChange($event)"
+          formControlName="QualificationName">
+          <option [ngValue]="null" disabled selected>Select</option>
+          <option value="{{ind}}" *ngFor="let quli of qualification;let ind = index">{{quli.qualification}}
+        </select>
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('Qualification')?.invalid">Select Qualification!</p>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
+      <label for="">Course :</label>
+      <div class="content-box errorCondent1">
+        <select class="form-control select-type" (change)="courseChange($event)" formControlName="Course">
+          <option [ngValue]="null" disabled selected>Select</option>
+          <option value="{{i}}" *ngFor="let course of courses;let i = index ">{{course.Course}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('Course')?.invalid"> select Course! </p>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
+      <label for="">Specialization :</label>
+      <div class="content-box errorCondent1">
+        <select class="form-control select-type" (change)="SpecChange($event)" formControlName="SpecializationName">
+          <option [ngValue]="null" disabled selected>Select</option>
+          <option value="{{i}}" *ngFor="let spec of spec; let i = index">{{spec.Specialization}}</option>
+        </select>
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('Specialization')?.invalid">Select Specialization</p>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
+      <label for="">Course Duration :</label>
+      <div class="content-box">
+        <select class="form-control select-type douple-input-first" formControlName="CourseDurationFrom">
+          <option value="option1" disabled selected>From</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+        <select class="form-control select-type douple-input-second" formControlName="CourseDurationTo">
+          <option value="option1" disabled selected>To</option>
+          <option value="2016">2016</option>
+          <option value="2017">2017</option>
+          <option value="2018">2018</option>
+          <option value="2019">2019</option>
+          <option value="2020">2020</option>
+          <option value="2021">2021</option>
+          <option value="2022">2022</option>
+          <option value="2023">2023</option>
+        </select>
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('CourseDurationTo')?.invalid">Select Year!</p>
+      <p *ngIf="isSubmitted && educationFormAll.get('CourseDurationFrom')?.invalid" style="padding-left: 73px;">Select
+        Year!</p>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
+      <label for="">University Name :</label>
+      <div class="content-box">
+        <input type="text" class="form-control" placeholder="Enter University Name" formControlName="University">
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('University')?.invalid">Enter University Name!</p>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
+      <label for="">Institution Name :</label>
+      <div class="content-box">
+        <input type="text" class="form-control" placeholder="Enter Institution Name" formControlName="institutionName">
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('institutionName')?.invalid">Enter Institution Name!</p>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
+      <label for="">Education Type :</label>
+      <div class="content-box errorCondent1">
+        <select class="form-control select-type" formControlName="CourseType">
+          <option value="option1" disabled selected>Select</option>
+          <option value="Full Time">Full Time</option>
+          <option value="Part Time">Part Time</option>
+          <option value="Distance">Distance</option>
+        </select>
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('CourseType')?.invalid">Select Course Type!</p>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
+      <label for="">Grading System :</label>
+      <div class="content-box errorCondent1">
+        <select class="form-control select-type" formControlName="GradingSystem">
+          <option value="option1" disabled selected>Select</option>
+          <option value="CGPA">CGPA</option>
+          <option value="Percentage">Percentage</option>
+        </select>
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('GradingSystem')?.invalid">Select Grading System</p>
+    </div>
+
+
+
+    <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
+      <label for="">Marks :</label>
+      <div class="content-box">
+        <input type="number" class="form-control" placeholder="Enter Marks" formControlName="Marks">
+      </div>
+    </div>
+    <div class="err">
+      <p *ngIf="isSubmitted && educationFormAll.get('Marks')?.invalid">Enter Marks!</p>
+    </div>
+
+
+    <!-- HSC && SSLC -->
+
+    <div class="single-row" *ngIf="Qlf === 'HSC' || Qlf ==='SSLC' ">
+      <label for="">Board :</label>
+      <div class="content-box">
+        <input type="text" class="form-control" placeholder="Enter Board" formControlName="Board">
+      </div>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf === 'HSC' || Qlf ==='SSLC' ">
+      <label for="">Passed Out Year :</label>
+      <div class="content-box errorCondent1">
+        <select class="form-control select-type" formControlName="PassedYear">
+          <option value="option1" disabled selected>Select</option>
+          <option *ngFor="let year of yearsArray">{{year}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf === 'HSC' || Qlf ==='SSLC' ">
+      <label for="">School Medium :</label>
+      <div class="content-box errorCondent1">
+        <select class="form-control select-type" formControlName="Medium">
+          <option value="option1" disabled selected>Select</option>
+          <option *ngFor="let medium of schoolMediums">{{medium}}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="single-row" *ngIf="Qlf === 'HSC' || Qlf ==='SSLC' ">
+      <label for="">Total Marks :</label>
+      <div class="content-box">
+        <input type="text" class="form-control" placeholder="Enter Marks" formControlName="totalmarks">
+      </div>
+    </div>
+
+    <div class="single-row">
+      <div class="btn">
+        <button (click)="editSubmit()">Submit</button>
       </div>
     </div>
   </div>

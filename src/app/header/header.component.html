@@ -49,7 +49,8 @@
     </a>
     <div class="nav-menu px-3">
       <button type="button" *ngIf="!idShow && !empshow" class="btn btn-light m-3" routerLink="/canlogin">Login</button>
-      <button type="button" *ngIf="!idShow && !empshow" class="btn btn-warning" routerLink="/can-register">Register</button>
+      <button type="button" *ngIf="!idShow && !empshow" class="btn btn-warning"
+        routerLink="/can-register">Register</button>
       <div class="dropdown" *ngIf="!idShow && !empshow">
         <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
           For Employers
@@ -64,7 +65,8 @@
         <div class="nav-menu  col-3 ">
           <button type="button" class="btn  ms-5 register invisible">Register</button>
           <div class="dropdown" style="margin-right: 22%;">
-            <button class="btn  dropdown-toggle icon" type="button" style="margin-right: 38px;width: 170px;" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn  dropdown-toggle icon" type="button" style="margin-right: 38px;width: 170px;"
+              data-bs-toggle="dropdown" aria-expanded="false">
               {{empusername}}
             </button>
             <ul class="dropdown-menu">
@@ -83,12 +85,29 @@
         <div class="nav-menu  col-3 ">
           <button type="button" class="btn  ms-5 register invisible">Register</button>
           <div class="dropdown" style="margin-right: 22%;">
-            <button class="btn  dropdown-toggle icon" type="button" style="margin-right: 38px;width: 185px;" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn  dropdown-toggle" type="button" style="margin-right: 38px;width: 185px;"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              <span class="sicon"><svg width="24" height="18" viewBox="0 0 24 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M16.3636 0C16.9661 0 17.4545 0.503685 17.4545 1.125V4.8724C17.4545 5.28023 17.9165 5.51651 18.2472 5.27781L23.1418 1.74455C23.3885 1.56639 23.7287 1.62829 23.9014 1.8828C23.9655 1.97735 24 2.08996 24 2.20537V15.7947C24 16.1053 23.7557 16.3572 23.4545 16.3572C23.3426 16.3572 23.2334 16.3216 23.1418 16.2555L18.2472 12.7222C17.9165 12.4835 17.4545 12.7198 17.4545 13.1276V16.875C17.4545 17.4963 16.9661 18 16.3636 18H1.09091C0.488422 18 0 17.4963 0 16.875V1.125C0 0.503685 0.488422 0 1.09091 0H16.3636ZM15.2727 2.75C15.2727 2.47386 15.0489 2.25 14.7727 2.25H2.68182C2.40568 2.25 2.18182 2.47386 2.18182 2.75V15.25C2.18182 15.5261 2.40568 15.75 2.68182 15.75H14.7727C15.0489 15.75 15.2727 15.5261 15.2727 15.25V2.75ZM6.98182 5.43225C7.0648 5.43225 7.14608 5.45666 7.21609 5.5026L11.9669 8.62031C12.1703 8.75374 12.2302 9.03195 12.1008 9.24165C12.0665 9.29711 12.0208 9.34425 11.9669 9.37969L7.21609 12.4974C7.01277 12.6308 6.74306 12.5691 6.61368 12.3594C6.56912 12.2871 6.54545 12.2033 6.54545 12.1177V5.88225C6.54545 5.63373 6.74083 5.43225 6.98182 5.43225ZM21.8182 6.42401C21.8182 6.01619 21.3562 5.77991 21.0256 6.01859L17.6619 8.44645C17.5317 8.54044 17.4545 8.69127 17.4545 8.85187V9.14813C17.4545 9.30873 17.5317 9.45956 17.6619 9.55355L21.0256 11.9814C21.3562 12.2201 21.8182 11.9838 21.8182 11.576V6.42401Z"
+                    fill="#0A2647" />
+                </svg>
+              </span> Streams
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item home" routerLink="/my-stream">My Streams</a></li>
+              <li><a class="dropdown-item myplans">Watch Streams</a></li>
+              <li><a class="dropdown-item upcominglive">Stream history</a></li>
+            </ul>
+          </div>
+          <div class="dropdown" style="margin-right: 22%;">
+            <button class="btn  dropdown-toggle icon" type="button" style="margin-right: 38px;width: 185px;"
+              data-bs-toggle="dropdown" aria-expanded="false">
               {{userNAme}}
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item home" routerLink="/getAllprofile">My Profile</a></li>
-              <li><a class="dropdown-item myplans">My Plan</a></li>
+              <li><a class="dropdown-item myplans" routerLink="/my-plan">My Plan</a></li>
               <li><a class="dropdown-item upcominglive">UpComing live</a></li>
               <li><a class="dropdown-item upcominglive" routerLink="/changePassword">Change Password</a></li>
               <li><a class="dropdown-item upcominglive" (click)="logOut()">Log Out</a></li>
