@@ -12,13 +12,12 @@
       <div class="row register-content-row height-register-content">
         <div class="col register-content">
           <div class="row">
-            <div class="col-2"></div>
             <div class="col">
               <h3>Professional Details</h3>
             </div>
 
           </div>
-          <div class="row" [formGroup]="proffesonalForm">
+          <!-- <div class="row" [formGroup]="proffesonalForm">
             <div class="register-form">
               <div class="single-row">
                 <label for="">Current Industry :</label>
@@ -33,6 +32,20 @@
                   </div>
                 </div>
               </div>
+
+              <div class="single-row">
+                <label for="">Is this your current employment? :</label>
+                <div class="content-box conten1" style="display: flex; flex-direction: row;">
+                  <input type="radio" id="html" name="fav_language" value="HTML">
+                  <label for="html">HTML</label><br>
+                  <input type="radio" id="css" name="fav_language" value="CSS">
+                  <label for="css">CSS</label><br>
+                  <div class="text-danger" *ngIf="isSubmit&&proffesonalForm.get('industry').invalid">
+                    <small>Current Industry required</small>
+                  </div>
+                </div>
+              </div>
+
               <div class="single-row">
                 <label for="">Current Department :</label>
                 <div class="content-box conten1">
@@ -78,12 +91,210 @@
                 </div>
               </div>
             </div>
+          </div> -->
+          <div class="form-container" [formGroup]="professionalForms">
+            <div>
+              <p> Is this your current employment? :</p>
+              <input type="radio" id="html" value="Yes" (change)="employmentChange($event)"
+                formControlName="current_employment">
+              <label for="html" style="padding-right: 20px; padding-left: 5px;">Yes</label><br>
+              <input type="radio" id="css" value="No" (change)="employmentChange($event)"
+                formControlName="current_employment">
+              <label for="css" style="padding-left: 5px;">No</label><br>
+            </div>
+            <span class="err" *ngIf="professionalForms.get('current_employment')?.invalid && submitted">Select Current
+              Employment</span>
+
+            <div>
+              <p> Employment type :</p>
+              <select formControlName="Employment_type">
+                <option [value]="null">Select</option>
+                <option [value]="'Full Time'">Full Time</option>
+                <option [value]="'Part Time'">Part Time</option>
+                <option [value]="'Internship'">Part Time</option>
+              </select>
+            </div>
+            <span class="err" *ngIf="professionalForms.get('Employment_type')?.invalid && submitted">Select Employment
+              Type</span>
+            <div>
+              <p> Experience :</p>
+              <select style="width: 190px;" formControlName="ExperienceYear">
+                <option [value]="null">Year</option>
+                <option [value]="y" *ngFor="let y of yearsArray">{{y}} Years</option>
+              </select>
+              <select style="width: 190px; margin-left: 20px;" formControlName="ExperienceMonth">
+                <option [value]="null">Month</option>
+                <option [value]="m" *ngFor="let m of monthsArray">{{m}} Months</option>
+              </select>
+            </div>
+            <span class="err" *ngIf="professionalForms.get('ExperienceYear')?.invalid && submitted"
+              style=" padding-right: 20px;">Select
+              ExperienceYear</span>
+            <span class="err" *ngIf="professionalForms.get('ExperienceMonth')?.invalid && submitted">Select
+              ExperienceMonth</span>
+            <div>
+              <p>Company Name :</p>
+              <input type="text" placeholder="Enter Company Name" formControlName="Company_Name">
+            </div>
+            <span class="err" *ngIf="professionalForms.get('Company_Name')?.invalid && submitted">Enter
+              CompanyName</span>
+            <div>
+              <p>Designation :</p>
+              <input type="text" placeholder="Enter Designation" formControlName="Designation">
+            </div>
+            <span class="err" *ngIf="professionalForms.get('Designation')?.invalid && submitted">Enter
+              Designation</span>
+
+            <div>
+              <p>Current Salary :</p>
+              <input type="text" placeholder="Enter Current Salary" formControlName="Current_Salary">
+            </div>
+            <span class="err" *ngIf="professionalForms.get('Current_Salary')?.invalid && submitted">Enter Current
+              Salary</span>
+            <div>
+              <p>Skill Used :</p>
+              <div style="display: grid;">
+                <div class="" *ngIf="professionalForms.get('Skill_Used')?.valid">
+                  <ol>
+                    <li *ngFor="let item of professionalForms.get('Skill_Used')?.value">{{item}}</li>
+                  </ol>
+                </div>
+                <div  class="auto-suggetion">
+                  <input type="text" placeholder="Enter Skill Used" list="skills" [formControl]="skils"
+                    (keyup)="getSkill($event)">
+
+                  <div class="list-option">
+                    <ul>
+                      <li *ngFor="let data of skilldata" (click)="select_skils(data)">{{data.Skill_Title}}</li>
+                    </ul>
+
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div>
+            </div>
+            <span class="err" *ngIf="professionalForms.get('Skill_Used')?.invalid && submitted">Enter Skills</span>
+
+            <div *ngIf="employment == 'Yes' ">
+              <p>Notice Period :</p>
+              <input type="text" placeholder="Enter Notice Period" formControlName="Notice_Period">
+            </div>
+            <span class="err" *ngIf="professionalForms.get('Notice_Period')?.invalid && submitted">Enter Notice
+              Period</span>
+          </div>
+          <div class="btn-submit">
+            <button (click)="submit()">Submit</button>
           </div>
         </div>
+
       </div>
     </div>
     <div class="col-2 ad-image">
       <img src="../../assets/image/ad.png" alt="">
     </div>
+  </div>
+</div>
+
+
+
+
+<div class="popup-2" *ngIf="false">
+  <div class="popup-close-2" (click)="popupCLose2()"></div>
+  <div class="popup-container-2" [formGroup]="professionalForms">
+    <div class="content-title">
+      <p>Professional Details</p>
+    </div>
+
+    <div>
+      <div class="form-container" [formGroup]="professionalForms">
+        <div>
+          <p> Is this your current employment? :</p>
+          <input type="radio" id="html" value="Yes" (change)="employmentChange($event)"
+            formControlName="current_employment">
+          <label for="html" style="padding-right: 20px; padding-left: 5px;">Yes</label><br>
+          <input type="radio" id="css" value="No" (change)="employmentChange($event)"
+            formControlName="current_employment">
+          <label for="css" style="padding-left: 5px;">No</label><br>
+        </div>
+        <span class="err" *ngIf="professionalForms.get('current_employment')?.invalid && submitted">Select Current
+          Employment</span>
+        <div>
+          <p> Employment type :</p>
+          <select formControlName="Employment_type">
+            <option [value]="null">Select</option>
+            <option [value]="'Full Time'">Full Time</option>
+            <option [value]="'Part Time'">Part Time</option>
+            <option [value]="'Internship'">Part Time</option>
+          </select>
+        </div>
+        <span class="err" *ngIf="professionalForms.get('Employment_type')?.invalid && submitted">Select Employment
+          Type</span>
+        <div>
+          <p> Experience :</p>
+          <select style="width: 190px;" formControlName="ExperienceYear">
+            <option [value]="null">Year</option>
+            <option [value]="y" *ngFor="let y of yearsArray">{{y}} Years</option>
+          </select>
+          <select style="width: 190px; margin-left: 20px;" formControlName="ExperienceMonth">
+            <option [value]="null">Month</option>
+            <option [value]="m" *ngFor="let m of monthsArray">{{m}} Months</option>
+          </select>
+        </div>
+        <span class="err" *ngIf="professionalForms.get('ExperienceYear')?.invalid && submitted"
+          style=" padding-right: 20px;">Select
+          ExperienceYear</span>
+        <span class="err" *ngIf="professionalForms.get('ExperienceMonth')?.invalid && submitted">Select
+          ExperienceMonth</span>
+        <div>
+          <p>Company Name :</p>
+          <input type="text" placeholder="Enter Company Name" formControlName="Company_Name">
+        </div>
+        <span class="err" *ngIf="professionalForms.get('Company_Name')?.invalid && submitted">Enter Company
+          Name</span>
+
+
+        <div>
+          <p>Designation :</p>
+          <input type="text" placeholder="Enter Designation" formControlName="Designation">
+        </div>
+        <span class="err" *ngIf="professionalForms.get('Designation')?.invalid && submitted">Enter
+          Designation</span>
+
+        <div>
+          <p>Current Salary :</p>
+          <input type="text" placeholder="Enter Current Salary" formControlName="Current_Salary">
+        </div>
+        <span class="err" *ngIf="professionalForms.get('Current_Salary')?.invalid && submitted">Enter Current
+          Salary</span>
+        <div>
+          <p>Skill Used :</p>
+          <div>
+            <input type="text" placeholder="Enter Skill Used" list="skills" (keyup)="getSkill($event)">
+            <datalist id="skills" style="max-height: 100px;">
+              <option *ngFor="let data of skilldata" [value]="data.Skill_Title">{{data.Skill_Title}}</option>
+            </datalist>
+
+          </div>
+
+        </div>
+        <div>
+        </div>
+        <span class="err" *ngIf="professionalForms.get('Skill_Used')?.invalid && submitted">Enter Skills</span>
+
+        <div *ngIf="employment == 'Yes' ">
+          <p>Notice Period :</p>
+          <input type="text" placeholder="Enter Notice Period" formControlName="Notice_Period">
+        </div>
+        <span class="err" *ngIf="professionalForms.get('Notice_Period')?.invalid && submitted">Enter Notice
+          Period</span>
+      </div>
+      <div class="btn-submit">
+        <button (click)="submit()">Submit</button>
+      </div>
+
+    </div>
+
   </div>
 </div>

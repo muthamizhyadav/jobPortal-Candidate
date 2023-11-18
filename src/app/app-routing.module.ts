@@ -222,6 +222,7 @@ const routes: Routes = [
       { path: 'email-verification', component: EmailverificationComponent },
       { path: 'mobile-verification', component: MobileverificationComponent },
       { path: 'cand-planes', component: CandidatePlanesComponent },
+      { path: 'climb-event', component: ClimbEventRegisterComponent },
       {
         path: 'my-plan',
         component: MyPlanesComponent,
@@ -236,7 +237,6 @@ const routes: Routes = [
       },
     ],
   },
-  { path: 'climb-event', component: ClimbEventRegisterComponent },
 ];
 
 @NgModule({

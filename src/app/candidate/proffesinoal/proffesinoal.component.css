@@ -1,42 +1,228 @@
-.login-content a{
+.login-content a {
   color: #000;
   text-decoration: none;
 }
 
-
-.button{
+.button {
   margin-top: 10px;
   width: 180px;
 }
 
-.btn-bg-brand-blue{
-  background-color: #0A2647;
+.btn-bg-brand-blue {
+  background-color: #0a2647;
   color: #fff;
 }
 
-.forgot-pass{
+.forgot-pass {
   text-align: right;
   font-size: 10px;
-  color: #0A2647;
+  color: #0a2647;
 }
 
-.ad-image img{
+.ad-image img {
   width: 100%;
 }
 
-
-.btn-brand-blue{
+.btn-brand-blue {
   min-width: 150px;
 }
 
-.login-main .col-2 img{
+.login-main .col-2 img {
   width: 100%;
-
 }
 select {
   -webkit-appearance: listbox !important;
-  }
+}
 
-  .conten1{
-    display: block !important;
-  }
+.conten1 {
+  display: block !important;
+}
+
+.form-container {
+  width: 80%;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.form-container div {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.form-container div p {
+  width: 40%;
+  font-family: "Poppins";
+  color: #0a2647;
+  font-weight: 500;
+}
+
+.form-container div label {
+  text-align: center;
+  display: flex;
+  align-items: center;
+}
+
+select {
+  background-color: #fff;
+  width: 400px;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px 0px #00000040;
+  padding-left: 10px;
+}
+
+select:focus-visible {
+  outline: none;
+}
+
+input[type="text"] {
+  background-color: #fff;
+  width: 400px;
+  height: 45px;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0px 2px 8px 0px #00000040;
+  padding-left: 10px;
+  font-family: "Poppins";
+}
+
+input[type="text"]:focus {
+  outline: none;
+}
+
+.btn-submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.btn-submit button {
+  width: 200px;
+  height: 50px;
+  border: none;
+  background-color: #0a2647;
+  border-radius: 5px;
+  color: #ffff;
+}
+
+.err {
+  color: red;
+}
+datalist {
+  position: absolute;
+  max-height: 20em;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+datalist option {
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+/* option active styles */
+datalist option:hover,
+datalist option:focus {
+  color: #fff;
+  background-color: #036;
+  outline: 0 none;
+}
+
+#skills option {
+  font-size: 1.8em;
+  padding: 0.3em 1em;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.popup-2 {
+  height: 100%;
+  z-index: 100000000000000;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow: auto;
+}
+
+.popup-container-2 {
+  z-index: 1;
+  background-color: #e7e9ed !important;
+  min-width: 50%;
+  max-width: 50%;
+  height: 600px;
+  overflow: auto;
+  border-radius: 25px;
+}
+
+.popup-container-2::-webkit-scrollbar {
+  display: none;
+}
+
+.popup-close-2 {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  position: fixed;
+  z-index: 0.5;
+}
+.content-title {
+  background: #ffff;
+  position: sticky;
+  top: 0px;
+}
+.content-title p {
+  font-weight: 500;
+  color: #fd841f;
+  text-align: center;
+  font-size: 30px;
+  padding-top: 10px;
+}
+
+.auto-suggetion{
+  position: relative;
+}
+
+.list-option{
+  position: absolute;
+  background: white;
+  width: 100%;
+  margin-top: 46px;
+  max-height: 200px;
+  overflow: auto;
+  display: none!important;
+  /* background-color: gray; */
+}
+.list-option ul{
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 0;
+
+}
+.list-option ul li{
+  padding: 4px 10px;
+  width: 100%;
+  font-size: 12px;
+  
+}
+.list-option ul li:hover{
+  background: #6a6565;
+  color: white;
+  cursor: pointer;
+}
+.auto-suggetion:focus-within > .list-option {
+  display: block!important;
+}
+.list-option:hover{
+  display: block!important;
+}

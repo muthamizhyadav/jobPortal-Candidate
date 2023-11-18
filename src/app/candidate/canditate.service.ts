@@ -485,4 +485,14 @@ export class CanditateService {
       }
     );
   }
+
+  updateProfessionalDetails(data: any) {
+    return this.http.post(
+      this.baseUrl + '/v1/candidateDetail/update/Profesional/Details',
+      data,
+      {
+        headers: { auth: Cookie.get('candtokens') },
+      }
+    );
+  }
 }

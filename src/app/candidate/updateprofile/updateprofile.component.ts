@@ -173,7 +173,6 @@ export class UpdateprofileComponent implements OnInit {
   isDisplay = false;
   dispalye(data: any) {
     let value = data.target.value.split(',');
-
     if (data.target.value) {
       this.isDisplay = true;
     } else {
