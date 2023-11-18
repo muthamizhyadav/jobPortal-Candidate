@@ -19,7 +19,7 @@ export class ClimbEventRegisterComponent implements OnInit {
 
   clim_form: any = new FormGroup({
     name: new FormControl(null, [Validators.required]),
-    mail: new FormControl(null, [Validators.required, Validators.email]),
+    mail: new FormControl(null, [Validators.required, Validators.email, Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$")]),
     gender: new FormControl(null, [Validators.required]),
     mobileNumber: new FormControl(null, [Validators.required, Validators.pattern('^[6-9]\\d{9}$')]),
     currentLocation: new FormControl(null, [Validators.required]),
@@ -46,12 +46,16 @@ export class ClimbEventRegisterComponent implements OnInit {
     let file = event.target.files;
     if (file != null) {
       if (file.length != 0) {
-        let fileName = file[0].name;
-        this.resume_files = file[0];
-        console.log(fileName)
-        this.clim_form.patchValue({
-          resumeName: fileName
-        })
+        console.log(file[0], 7863583468)
+        if (file[0].type == 'application/pdf') {
+          let fileName = file[0].name;
+          this.resume_files = file[0];
+          console.log(fileName)
+          this.clim_form.patchValue({
+            resumeName: fileName
+          })
+        }
+
       }
     }
     console.log(file)
@@ -99,4 +103,34 @@ export class ClimbEventRegisterComponent implements OnInit {
   }
 
   submited_success: any = false;
+
+
+
+  _keyDown(event: any) {
+    if (event.repeat) event.preventDefault();
+  }
+  inputkeyUp(event: any) {
+    let cost = this.clim_form.get('mobileNumber').value;
+    const pattern = /^[-]?([0-9]*[.])?[0-9]+$/;
+
+    if ((event.key == "-" || event.key == ".") && (cost.indexOf(event.key) == cost.lastIndexOf(event.key))
+    ) return true;
+
+    if (!pattern.test(cost) || cost.length > 10) {
+      this.clim_form.get('mobileNumber').setValue(cost.slice(0, -1));
+    }
+    return
+  }
+  _OnBlur(event: any) {
+    let cost = this.clim_form.get('mobileNumber').value;
+    if (cost != null) {
+      if (cost.length > 0) {
+        if (cost.slice(-1) == "." || cost.slice(-1) == "-") {
+          this.clim_form.get('mobileNumber').setValue(cost.slice(0, -1));
+
+        }
+        if (cost.slice(0, 1) == ".") cost = "0" + cost
+      }
+    }
+  }
 }
