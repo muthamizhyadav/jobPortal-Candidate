@@ -4,24 +4,33 @@ import { Cookie } from 'ng2-cookies';
 import { Env } from './environment.dev';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CanditService {
-  baseUrl=Env.baseAPi;
-  constructor(private http:HttpClient) { }
+  baseUrl = Env.baseAPi;
+  constructor(private http: HttpClient) {}
 
-
-  jobs(data:any){
-    return this.http.post(this.baseUrl+'/v1/candidateDetail/candidateSearch',data,{headers:{auth:Cookie.get('candtokens')}})
+  jobs(data: any) {
+    return this.http.post(
+      this.baseUrl + '/v1/candidateDetail/candidateSearch',
+      data,
+      { headers: { auth: Cookie.get('candtokens') } }
+    );
   }
   @Output() get_token: EventEmitter<String> = new EventEmitter();
   @Output() name: EventEmitter<String> = new EventEmitter();
-    set_current_token(token:any)
-    {
-        this.get_token.emit(token);
-    }
-    get_usename(name:any){
-      console.log(name,"sds")
-      this.name.emit(name)
-    }
+  set_current_token(token: any) {
+    this.get_token.emit(token);
+  }
+  get_usename(name: any) {
+    console.log(name, 'sds');
+    this.name.emit(name);
+  }
+
+  getCandidateDetails(token: any) {
+    return this.http.get(
+      this.baseUrl + '/v1/candidateRegistration/userDetails',
+      { headers: { auth: token } }
+    );
+  }
 }

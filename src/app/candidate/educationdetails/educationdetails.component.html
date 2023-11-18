@@ -394,14 +394,14 @@
   <div class="popup-close-2" (click)="popupCLose2()"></div>
   <div class="popup-container-2" [formGroup]="educationFormAll">
     <div class="content-title">
-      <p>Edite ({{Qlf}})</p>
+      <p>Edite Education Details</p>
     </div>
     <div class="single-row">
       <label for="">Qualification :</label>
       <div class="content-box errorCondent1">
-        <select class="form-control select-type" (change)="QualificationChange($event)"
+        <select class="form-control select-type" (change)="check($event)"
           formControlName="QualificationName">
-          <option [ngValue]="null" disabled selected>Select</option>
+          <!-- <option [ngValue]="null" disabled selected>Select</option> -->
           <option value="{{ind}}" *ngFor="let quli of qualification;let ind = index">{{quli.qualification}}
         </select>
       </div>
@@ -413,7 +413,7 @@
     <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
       <label for="">Course :</label>
       <div class="content-box errorCondent1">
-        <select class="form-control select-type" (change)="courseChange($event)" formControlName="Course">
+        <select class="form-control select-type" (change)="courseChangeEdit($event)" formControlName="CourseName">
           <option [ngValue]="null" disabled selected>Select</option>
           <option value="{{i}}" *ngFor="let course of courses;let i = index ">{{course.Course}}</option>
         </select>
@@ -426,7 +426,7 @@
     <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
       <label for="">Specialization :</label>
       <div class="content-box errorCondent1">
-        <select class="form-control select-type" (change)="SpecChange($event)" formControlName="SpecializationName">
+        <select class="form-control select-type" (change)="SpecChangeEdit($event)" formControlName="SpecializationName">
           <option [ngValue]="null" disabled selected>Select</option>
           <option value="{{i}}" *ngFor="let spec of spec; let i = index">{{spec.Specialization}}</option>
         </select>

@@ -19,6 +19,8 @@ import { CookieModule } from 'ngx-cookie';
 import { LoaderComponent } from './loader/loader.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ExampleInterceptor } from './interceptor';
+import { ClimbEventRegisterComponent } from './climb-event-register/climb-event-register.component';
+import { JobHomeComponent } from './job-home/job-home.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { ExampleInterceptor } from './interceptor';
     FooterComponent,
     RedirectComponent,
     LoaderComponent,
+    ClimbEventRegisterComponent,
+    JobHomeComponent,
   ],
   imports: [
     BrowserModule,

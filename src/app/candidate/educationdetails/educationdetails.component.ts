@@ -181,6 +181,7 @@ export class EducationdetailsComponent implements OnInit {
           this.educationFormAll.get('SpecializationName')?.value,
         CourseName: this.educationFormAll.get('CourseName')?.value,
         institutionNamePg: this.educationFormAll.get('institutionName')?.value,
+        sert: 4,
       };
     }
 
@@ -204,6 +205,7 @@ export class EducationdetailsComponent implements OnInit {
           this.educationFormAll.get('SpecializationName')?.value,
         CourseName: this.educationFormAll.get('CourseName')?.value,
         institutionNameDr: this.educationFormAll.get('institutionName')?.value,
+        sert: 5,
       };
     }
 
@@ -227,6 +229,7 @@ export class EducationdetailsComponent implements OnInit {
           this.educationFormAll.get('SpecializationName')?.value,
         CourseName: this.educationFormAll.get('CourseName')?.value,
         institutionNameUg: this.educationFormAll.get('institutionName')?.value,
+        sert: 3,
       };
     }
 
@@ -238,6 +241,7 @@ export class EducationdetailsComponent implements OnInit {
         hsMedium: this.educationFormAll.get('Medium')?.value,
         hstotalmarks: this.educationFormAll.get('totalmarks')?.value,
         Type: type,
+        sert: 2,
       };
     }
 
@@ -249,6 +253,7 @@ export class EducationdetailsComponent implements OnInit {
         sslcMedium: this.educationFormAll.get('Medium')?.value,
         sslctotalmarks: this.educationFormAll.get('totalmarks')?.value,
         Type: type,
+        sert: 1,
       };
     }
   }
@@ -280,7 +285,8 @@ export class EducationdetailsComponent implements OnInit {
   candDettails: any = [];
   getAllDetails() {
     this.candidate.viewDetails().subscribe((e: any) => {
-      this.candDettails = e.user ? e.user[0].candidateDetails.eduDetails : [];
+      this.candDettails = e.user ? e.user[0].eduDetails : [];
+      this.candDettails.sort((a:any,b:any)=>a.sert - b.sert)
       console.log(this.candDettails, 'userDetails');
     });
   }
@@ -312,15 +318,54 @@ export class EducationdetailsComponent implements OnInit {
   }
 
   popup1: any = false;
+  qlfName = null;
+
+  check(i: any) {
+    console.log(i.target.value, 'adsf');
+    let ind = i.target.value;
+    console.log(i.target.value, 'check');
+    // console.log("ELSE")
+    let gg = Number(i.target.value);
+    // console.log(i.target.value,"check",gg)
+    this.Qlf = this.qualification[gg].qualification;
+    console.log(this.Qlf, 'QLF');
+    let id = this.qualification[gg]._id;
+    this.educationFormAll.reset();
+
+    this.educationFormAll.get('QualificationName')?.setValue(String(gg));
+    this.educationFormAll.get('Qualification')?.setValue(id);
+    this.candidate.getCoursesByQualification(id).subscribe((e: any) => {
+      this.courses = e;
+    });
+  }
 
   QualificationChangeEdit(i: any) {
-    let val = this.qualification[i];
-    this.Qlf = this.qualification[i].qualification;
-    console.log(this.Qlf);
-    let id = this.qualification[i]._id;
+    // console.log(typeof i, typeof i == 'number');
+    console.log(this.qualification, 'QLF');
+    this.educationFormAll.reset();
+    let id;
+    if (typeof i === 'number') {
+      console.log('IF');
+      let val = i;
+      this.Qlf = this.qualification[val].qualification;
+      id = this.qualification[val]._id;
+      this.educationFormAll.get('QualificationName')?.setValue(String(val));
+    } else {
+      console.log(i.target.value, 'check');
+      // console.log("ELSE")
+      let gg = Number(i.target.value);
+      // console.log(i.target.value,"check",gg)
+      // this.Qlf = this.qualification[gg].qualification;
+      // id = this.qualification[gg]._id;
+      this.educationFormAll.get('QualificationName')?.setValue(String(gg));
+    }
+
+    this.candidate.getCoursesByQualification(id).subscribe((e: any) => {
+      this.courses = e;
+    });
 
     this.educationFormAll.get('Qualification')?.setValue(id);
-    this.educationFormAll.get('QualificationName')?.setValue(this.Qlf);
+    this.qlfName = this.Qlf;
 
     if (this.Qlf == 'SSLC' || this.Qlf == 'HSC') {
       this.educationFormAll.get('Course')?.setErrors(null);
@@ -341,14 +386,27 @@ export class EducationdetailsComponent implements OnInit {
   }
 
   courseChangeEdit(i: any) {
-    let val = this.courses[i].Course;
-    let id = this.courses[i]._id;
+    let ind = parseInt(i.target.value);
+    let id = this.courses[ind]._id;
+    let val = this.courses[ind].Course;
+    console.log(val, 'Course change edit');
     this.educationFormAll.get('Course')?.setValue(id);
-    this.educationFormAll.get('CourseName')?.setValue(val);
+    this.educationFormAll.get('CourseName')?.setValue(i.target.value);
     this.candidate.getSpecByQualification(id).subscribe((e: any) => {
       this.spec = e;
     });
   }
+
+  SpecChangeEdit(i: any) {
+    let ind = parseInt(i.target.value);
+    let id = this.spec[ind]._id;
+    console.log(this.courses);
+    let val = this.spec[ind].Specialization;
+    console.log(val);
+    this.educationFormAll.get('Specialization')?.setValue(id);
+    this.educationFormAll.get('SpecializationName')?.setValue(i.target.value);
+  }
+
   courseind: any;
   specind: any;
   backendindex: any;
@@ -374,10 +432,7 @@ export class EducationdetailsComponent implements OnInit {
           .getSpecByQualification(qid._id)
           .subscribe((res2: any) => {
             this.spec = res2;
-            console.log(res2);
-            console.log(this.spec, 'spec');
             this.popup1 = true;
-
             this.specind = this.spec.findIndex((spec: any) => {
               return spec.Specialization == e.SpecializationName;
             });
@@ -386,7 +441,7 @@ export class EducationdetailsComponent implements OnInit {
                 Qualification: e.drQualification,
                 QualificationName: ind,
                 Course: this.courseind,
-                CourseName: e.CourseName,
+                CourseName: this.courseind,
                 Specialization: e.drSpecialization,
                 SpecializationName: this.specind,
                 CourseType: e.drCourseType,
@@ -404,7 +459,7 @@ export class EducationdetailsComponent implements OnInit {
                 Qualification: e.pgQualification,
                 QualificationName: ind,
                 Course: this.courseind,
-                CourseName: e.CourseName,
+                CourseName: this.courseind,
                 Specialization: e.pgSpecialization,
                 SpecializationName: this.specind,
                 CourseType: e.pgCourseType,
@@ -422,7 +477,7 @@ export class EducationdetailsComponent implements OnInit {
                 Qualification: e.ugQualification,
                 QualificationName: ind,
                 Course: this.courseind,
-                CourseName: e.CourseName,
+                CourseName: this.courseind,
                 Specialization: e.ugSpecialization,
                 SpecializationName: this.specind,
                 CourseType: e.ugCourseType,
@@ -490,14 +545,19 @@ export class EducationdetailsComponent implements OnInit {
       let qlfId: any = this.educationFormAll.get('QualificationName')?.value;
       let specId: any = this.educationFormAll.get('SpecializationName')?.value;
 
-      let course = this.courses[courind];
+      let course = courind;
+      let ind = this.courses.findIndex((e: any) => {
+        return e._id == course;
+      });
+      ind = ind == -1 ? courind : ind;
+      console.log(course, 'dddd');
       let qualify = this.qualification[qlfId];
       let spec = this.spec[specId];
 
       if (this.Qlf == 'Masters/Post-Graduation') {
         this.dataToSubmit = {
           pgQualification: qualify._id,
-          pgCourse: course._id,
+          pgCourse: this.courses[ind]._id,
           pgSpecialization: spec._id,
           pgCourseType: this.educationFormAll.get('CourseType')?.value,
           pgCourseDurationFrom:
@@ -510,17 +570,18 @@ export class EducationdetailsComponent implements OnInit {
           Type: this.Qlf,
           QualificationName: this.Qlf,
           SpecializationName: spec.Specialization,
-          CourseName: course.Course,
+          CourseName: this.courses[ind].Course,
           indexDel: this.backendindex,
           sert: 4,
-          institutionNamePg: this.educationFormAll.get('institutionName')?.value,
+          institutionNamePg:
+            this.educationFormAll.get('institutionName')?.value,
         };
       }
 
       if (this.Qlf == 'Graduation/Diploma') {
         this.dataToSubmit = {
           ugQualification: qualify._id,
-          ugCourse: course._id,
+          ugCourse: this.courses[ind]._id,
           ugSpecialization: spec._id,
           ugCourseType: this.educationFormAll.get('CourseType')?.value,
           ugCourseDurationFrom:
@@ -533,11 +594,11 @@ export class EducationdetailsComponent implements OnInit {
           Type: this.Qlf,
           QualificationName: this.Qlf,
           SpecializationName: spec.Specialization,
-          CourseName: course.Course,
+          CourseName: this.courses[ind].Course,
           indexDel: this.backendindex,
           sert: 3,
-          institutionNameUg: this.educationFormAll.get('institutionName')?.value,
-
+          institutionNameUg:
+            this.educationFormAll.get('institutionName')?.value,
         };
         console.log(this.dataToSubmit, 'Under Graduate');
       }
@@ -545,7 +606,7 @@ export class EducationdetailsComponent implements OnInit {
       if (this.Qlf == 'Doctorate/phD') {
         this.dataToSubmit = {
           drQualification: qualify._id,
-          drCourse: course._id,
+          drCourse: this.courses[ind]._id,
           drSpecialization: spec._id,
           drCourseType: this.educationFormAll.get('CourseType')?.value,
           drCourseDurationFrom:
@@ -558,11 +619,11 @@ export class EducationdetailsComponent implements OnInit {
           Type: this.Qlf,
           QualificationName: this.Qlf,
           SpecializationName: spec.Specialization,
-          CourseName: course.Course,
+          CourseName: this.courses[ind].Course,
           indexDel: this.backendindex,
           sert: 5,
-          institutionNameDr: this.educationFormAll.get('institutionName')?.value,
-
+          institutionNameDr:
+            this.educationFormAll.get('institutionName')?.value,
         };
       }
     } else {
