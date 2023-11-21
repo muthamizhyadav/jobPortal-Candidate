@@ -18,6 +18,7 @@ export class ProffesinoalComponent implements OnInit {
 
   ngOnInit(): void {
     this.years();
+    this.candidateDetails();
   }
 
   years() {
@@ -84,4 +85,21 @@ export class ProffesinoalComponent implements OnInit {
     this.skilldata = [];
   }
   skils: any = new FormControl();
+  alreadyEXP: any = false;
+  showEntryField: any = false;
+  profData: any = [];
+  candidateDetails() {
+    this.api.getCandidateById().subscribe((e: any) => {
+      console.log(e);
+      this.alreadyEXP = e.exper;
+      this.profData = e.professionalDetails;
+      if (e.professionalDetails.length > 0) {
+        this.showEntryField = true;
+      }
+    });
+  }
+
+  addProf() {
+    this.popup1 = true;
+  }
 }

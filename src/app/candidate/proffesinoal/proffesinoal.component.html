@@ -12,7 +12,7 @@
       <div class="row register-content-row height-register-content">
         <div class="col register-content">
           <div class="row">
-            <div class="col">
+            <div class="col" style="margin-bottom: 20px;">
               <h3>Professional Details</h3>
             </div>
 
@@ -92,7 +92,7 @@
               </div>
             </div>
           </div> -->
-          <div class="form-container" [formGroup]="professionalForms">
+          <div class="form-container" [formGroup]="professionalForms" *ngIf="showEntryField ==false ">
             <div>
               <p> Is this your current employment? :</p>
               <input type="radio" id="html" value="Yes" (change)="employmentChange($event)"
@@ -159,7 +159,7 @@
                     <li *ngFor="let item of professionalForms.get('Skill_Used')?.value">{{item}}</li>
                   </ol>
                 </div>
-                <div  class="auto-suggetion">
+                <div class="auto-suggetion">
                   <input type="text" placeholder="Enter Skill Used" list="skills" [formControl]="skils"
                     (keyup)="getSkill($event)">
 
@@ -167,7 +167,6 @@
                     <ul>
                       <li *ngFor="let data of skilldata" (click)="select_skils(data)">{{data.Skill_Title}}</li>
                     </ul>
-
                   </div>
                 </div>
               </div>
@@ -184,11 +183,55 @@
             <span class="err" *ngIf="professionalForms.get('Notice_Period')?.invalid && submitted">Enter Notice
               Period</span>
           </div>
-          <div class="btn-submit">
+          <div class="view-container" *ngFor="let prof of profData">
+            <p><button> <svg _ngcontent-ewv-c64="" width="16" height="16" viewBox="0 0 16 16" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path _ngcontent-ewv-c64=""
+                    d="M8.81431 3.4089L12.5911 7.18659L3.7768 16H0V12.2223L8.81431 3.4089ZM10.0732 2.14997L11.9616 0.260678C12.1286 0.093766 12.355 0 12.5911 0C12.8272 0 13.0536 0.093766 13.2206 0.260678L15.7393 2.77943C15.9062 2.94639 16 3.17281 16 3.4089C16 3.64498 15.9062 3.8714 15.7393 4.03836L13.85 5.92676L10.0732 2.14997Z"
+                    fill="white"></path>
+                </svg> </button></p>
+            <div>
+              <p class="label">Company Name:</p>
+              <p class="text">{{prof.Company_Name}}</p>
+            </div>
+            <div>
+              <p class="label">Current Salary:</p>
+              <p class="text">{{prof.Current_Salary}}</p>
+            </div>
+            <div>
+              <p class="label">Designation:</p>
+              <p class="text">{{prof.Designation}}</p>
+            </div>
+            <div>
+              <p class="label">Employment Type:</p>
+              <p class="text">{{prof.Employment_type}}</p>
+            </div>
+            <div>
+              <p class="label">Experience:</p>
+              <p class="text">{{prof.ExperienceYear}} Year, {{prof.ExperienceMonth}} months</p>
+            </div>
+
+            <div>
+              <p class="label">Skills:</p>
+              <p class="text" *ngFor="let skill of prof.Skill_Used">{{skill}},</p>
+            </div>
+            <div *ngIf="prof.current_employment">
+              <p class="label">Current Employment:</p>
+              <p class="text">{{prof.current_employment}}</p>
+            </div>
+          </div>
+          <div class="btn-submit" *ngIf="showEntryField== false ">
             <button (click)="submit()">Submit</button>
           </div>
+          <div class="add-btn" *ngIf="showEntryField== true ">
+            <button (click)="addProf()"><svg width="15" height="15" viewBox="0 0 20 20" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 11.8824H12.0784V20H7.92157V11.8824H0V8.11765H7.92157V0H12.0784V8.11765H20V11.8824Z"
+                  fill="#0A2647" />
+              </svg>
+              Add</button>
+          </div>
         </div>
-
       </div>
     </div>
     <div class="col-2 ad-image">
@@ -200,7 +243,7 @@
 
 
 
-<div class="popup-2" *ngIf="false">
+<div class="popup-2" *ngIf="popup1">
   <div class="popup-close-2" (click)="popupCLose2()"></div>
   <div class="popup-container-2" [formGroup]="professionalForms">
     <div class="content-title">
@@ -209,14 +252,14 @@
 
     <div>
       <div class="form-container" [formGroup]="professionalForms">
-        <div>
+        <div *ngIf="alreadyEXP == false ">
           <p> Is this your current employment? :</p>
-          <input type="radio" id="html" value="Yes" (change)="employmentChange($event)"
+          <input type="radio" id="html1" value="Yes" (change)="employmentChange($event)"
             formControlName="current_employment">
-          <label for="html" style="padding-right: 20px; padding-left: 5px;">Yes</label><br>
-          <input type="radio" id="css" value="No" (change)="employmentChange($event)"
+          <label for="html1" style="padding-right: 20px; padding-left: 5px;">Yes</label><br>
+          <input type="radio" id="css1" value="No" (change)="employmentChange($event)"
             formControlName="current_employment">
-          <label for="css" style="padding-left: 5px;">No</label><br>
+          <label for="css1" style="padding-left: 5px;">No</label><br>
         </div>
         <span class="err" *ngIf="professionalForms.get('current_employment')?.invalid && submitted">Select Current
           Employment</span>
@@ -270,14 +313,23 @@
           Salary</span>
         <div>
           <p>Skill Used :</p>
-          <div>
-            <input type="text" placeholder="Enter Skill Used" list="skills" (keyup)="getSkill($event)">
-            <datalist id="skills" style="max-height: 100px;">
-              <option *ngFor="let data of skilldata" [value]="data.Skill_Title">{{data.Skill_Title}}</option>
-            </datalist>
+          <div style="display: grid;">
+            <div class="" *ngIf="professionalForms.get('Skill_Used')?.valid">
+              <ol>
+                <li *ngFor="let item of professionalForms.get('Skill_Used')?.value">{{item}}</li>
+              </ol>
+            </div>
+            <div class="auto-suggetion">
+              <input type="text" placeholder="Enter Skill Used" list="skills" [formControl]="skils"
+                (keyup)="getSkill($event)" style="width: 380px;">
 
+              <div class="list-option">
+                <ul>
+                  <li *ngFor="let data of skilldata" (click)="select_skils(data)">{{data.Skill_Title}}</li>
+                </ul>
+              </div>
+            </div>
           </div>
-
         </div>
         <div>
         </div>

@@ -188,41 +188,79 @@ datalist option:focus {
   padding-top: 10px;
 }
 
-.auto-suggetion{
+.auto-suggetion {
   position: relative;
 }
 
-.list-option{
+.list-option {
   position: absolute;
   background: white;
   width: 100%;
   margin-top: 46px;
   max-height: 200px;
   overflow: auto;
-  display: none!important;
-  /* background-color: gray; */
+  display: none !important;
+  z-index: 100000000000000;
 }
-.list-option ul{
+.list-option ul {
   list-style-type: none;
   padding: 0;
   width: 100%;
   margin-bottom: 0;
-
 }
-.list-option ul li{
+.list-option ul li {
   padding: 4px 10px;
   width: 100%;
   font-size: 12px;
-  
 }
-.list-option ul li:hover{
+.list-option ul li:hover {
   background: #6a6565;
   color: white;
   cursor: pointer;
 }
 .auto-suggetion:focus-within > .list-option {
-  display: block!important;
+  display: block !important;
 }
-.list-option:hover{
-  display: block!important;
+.list-option:hover {
+  display: block !important;
+}
+
+.view-container {
+  width: 65%;
+  margin: auto;
+}
+
+.view-container div {
+  display: flex;
+}
+
+.view-container div .label {
+  width: 40%;
+}
+
+.view-container button {
+  background-color: #0a2647;
+  margin-right: 100px;
+  height: 30px;
+  width: 30px;
+  display: grid;
+  place-content: center;
+  border-radius: 5px;
+  border: none;
+  margin-left: 40%;
+}
+
+.add-btn {
+  display: flex;
+  justify-content: center;
+  margin-right: 200px;
+  margin-top: 30px;
+}
+
+.add-btn button {
+  width: 150px;
+  height: 40px;
+  background-color: #ffff;
+  border: none;
+  border-radius: 5px;
 }

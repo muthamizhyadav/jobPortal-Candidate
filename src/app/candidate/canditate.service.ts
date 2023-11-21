@@ -495,4 +495,13 @@ export class CanditateService {
       }
     );
   }
+
+  getCandidateById() {
+    return this.http.get(
+      this.baseUrl + '/v1/candidateDetail/getCandidateById',
+      {
+        headers: { auth: Cookie.get('candtokens') },
+      }
+    );
+  }
 }
