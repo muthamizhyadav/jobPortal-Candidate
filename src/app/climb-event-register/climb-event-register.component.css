@@ -53,6 +53,13 @@
   font-weight: 500;
   margin-left: 11px;
 }
+.auto-suggetion1 input[type="text"] {
+  border: none;
+  padding: 8px 18px;
+  border-radius: 7px;
+  box-shadow: 0 0 5px -1px #00000040;
+  margin-top: 7px;
+}
 
 .file-upload-box {
   display: flex;
@@ -146,4 +153,123 @@
   justify-content: center;
   align-items: center;
   background: #80808057;
+}
+
+.finish-msg {
+  width: 50%;
+  height: 85vh;
+  margin: auto;
+  background-color: #0a26471c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+.finish-msg h1 {
+  font-family: "Raleway", sans-serif;
+  text-align: center;
+  font-weight: 600;
+  color: #fd841f;
+  font-size: 55px;
+}
+
+.finish-msg p {
+  padding-top: 20px;
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 600px) {
+  .finish-msg {
+    width: 95%;
+    height: 85vh;
+    margin: auto;
+    background-color: #0a26471c;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+  }
+  .finish-msg h1 {
+    font-family: "Raleway", sans-serif;
+    text-align: center;
+    font-weight: 600;
+    color: #fd841f;
+    font-size: 35px;
+  }
+  .finish-msg p {
+    padding-top: 20px;
+    font-size: 14px;
+    text-align: center;
+  }
+  .finish-msg a {
+    font-size: 16px !important;
+  }
+}
+
+.auto-suggetion1 {
+  position: relative;
+}
+
+.list-option1 {
+  position: absolute;
+  background: white;
+  width: 70%;
+  margin-top: 71px;
+  max-height: 200px;
+  overflow: auto;
+  display: none !important;
+  top: 0;
+}
+.list-option1 ul {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  margin-bottom: 0;
+}
+.list-option1 ul li {
+  padding: 4px 10px;
+  width: 100%;
+  font-size: 12px;
+  overflow: auto;
+}
+.list-option1 ul li:hover {
+  background: #6a6565;
+  color: white;
+  cursor: pointer;
+}
+.auto-suggetion1:focus-within > .list-option1 {
+  display: block !important;
+}
+.list-option1:hover {
+  display: block !important;
+}
+.output {
+  display: flex;
+  flex-direction: row;
+}
+.output ol {
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.output ol::-webkit-scrollbar {
+  display: none;
+}
+
+.output ol li {
+  background: grey;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  border-radius: 3px;
+  color: white;
+  width: fit-content;
+}
+
+.sugg-row {
+  display: flex;
+  flex-direction: column;
 }

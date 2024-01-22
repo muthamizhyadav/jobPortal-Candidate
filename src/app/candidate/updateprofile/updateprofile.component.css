@@ -118,8 +118,8 @@ ul li {
   background: white;
   position: absolute;
   width: 357px;
-  left: 615px;
-  top: 569px;
+  left: 708px;
+  top: 519px;
   border-radius: 4px;
 }
 .drop-data ul {
@@ -175,4 +175,39 @@ close-mark {
 .view-image img {
   width: 96px;
   height: 77px;
+  position: relative;
+}
+
+.cancel {
+  position: absolute;
+  bottom: 48% !important;
+  left: 52% !important;
+  cursor: pointer;
+}
+/* .pre-data[_ngcontent-jhm-c177] {
+  background: white;
+  position: absolute;
+  left: 702px;
+  width: 365px;
+  top: 911px;
+  border-radius: 7px;
+} */
+
+.current-data {
+  background: white;
+  position: absolute;
+  width: 368px;
+  top: 912px;
+  left: 702px;
+  border-radius: 7px;
+}
+
+.pre-data {
+  background: white;
+  position: absolute;
+  left: 705px;
+  width: 360px;
+  top: 960px;
+  border-radius: 7px;
+  z-index: 100;
 }

@@ -35,20 +35,20 @@ export class UpdateprofileComponent implements OnInit {
   ) {
     this.profileForm = this.fb.group({
       // image: new FormControl('',[Validators.required]),
-      keyskill: new FormControl(null, [Validators.required]),
+      keyskill: new FormControl(null),
       dob: new FormControl('', Validators.required),
-      experienceYear: new FormControl(0, Validators.required),
-      experienceMonth: new FormControl(0),
+      experienceYear: new FormControl(null, Validators.required),
+      experienceMonth: new FormControl(null, Validators.required),
       expectedctc: new FormControl('', Validators.required),
       currentctc: new FormControl('', Validators.required), //display only experience
       locationCurrent: new FormControl('', Validators.required),
       locationNative: new FormControl('', Validators.required),
-      noticeperiod: new FormControl('', Validators.required),
+      noticeperiod: new FormControl(null, Validators.required),
       currentSkill: new FormControl(null, Validators.required),
       currentbox: new FormControl(''),
       preferredSkill: new FormControl(null, Validators.required),
       prefredBox: new FormControl(''),
-      gender: new FormControl('', Validators.required),
+      gender: new FormControl(null, Validators.required),
       maritalStatus: new FormControl(null, Validators.required),
       relocate: new FormControl(null, Validators.required),
       preferredLocation: new FormControl([], Validators.required),
@@ -144,16 +144,14 @@ export class UpdateprofileComponent implements OnInit {
   selectImg2: any;
   imagesrc: any = '';
   selectedImg1(event: any) {
-    // get the selected file
     const file = event.target.files[0];
     this.selectImg1 = file;
-
-    // var reader = new FileReader();
-    // reader.readAsDataURL(this.selectImg1);
-    // reader.onload = (event) => {
-    //   this.selectImg2.push((<FileReader>event.target).result);
-    // };
     this.displayImage();
+  }
+
+  removeImg() {
+    this.imagesrc = '';
+    this.selectImg1 = null;
   }
 
   displayImage() {

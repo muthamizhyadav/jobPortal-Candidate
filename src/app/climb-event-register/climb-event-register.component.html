@@ -8,33 +8,22 @@
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
             <label for="full-name">Full Name :</label>
-            <input
-              type="text"
-              id="full-name"
-              placeholder="Enter Your Full Name"
-              name="name"
-              formControlName="name"
+            <input type="text" id="full-name" placeholder="Enter Your Full Name" name="name" formControlName="name"
               [ngClass]="
                 submitted && clim_form.get('name')?.invalid
                   ? 'error-active'
                   : ''
-              "
-            />
+              " />
           </div>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
             <label for="gender">Gender :</label>
-            <select
-              name="gender"
-              id="gender"
-              [ngClass]="
+            <select name="gender" id="gender" [ngClass]="
                 submitted && clim_form.get('gender')?.invalid
                   ? 'error-active'
                   : ''
-              "
-              formControlName="gender"
-            >
+              " formControlName="gender">
               <option [ngValue]="null" [disabled]="true">Select</option>
               <option [value]="'male'">Male</option>
               <option [value]="'female'">Female</option>
@@ -45,259 +34,252 @@
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
             <label for="mail">Email ID :</label>
-            <input
-              type="email"
-              id="mail"
-              placeholder="Enter Your Email ID"
-              name="mail"
-              formControlName="mail"
+            <input type="email" id="mail" placeholder="Enter Your Email ID" name="mail" formControlName="mail"
               [ngClass]="
                 submitted && clim_form.get('mail')?.invalid
                   ? 'error-active'
                   : ''
-              "
-            />
+              " />
           </div>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
             <label for="mobileNumber">Mobile Number :</label>
-            <input
-              type="tel"
-              id="mobileNumber"
-              placeholder="Enter Your Mobile Number"
-              name="mobileNumber"
-              formControlName="mobileNumber"
-              [ngClass]="
+            <input type="tel" id="mobileNumber" placeholder="Enter Your Mobile Number" name="mobileNumber"
+              formControlName="mobileNumber" [ngClass]="
                 submitted && clim_form.get('mobileNumber')?.invalid
                   ? 'error-active'
                   : ''
-              "
-              (keyup)="inputkeyUp($event)"
-              (keydown)="_keyDown($event)"
-              (blur)="_OnBlur($event)"
-            />
+              " (keyup)="inputkeyUp($event)" (keydown)="_keyDown($event)" (blur)="_OnBlur($event)" />
           </div>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="currentLocation">Current Location :</label>
-            <input
-              type="text"
-              id="currentLocation"
-              placeholder="Enter Your Current Location"
-              name="currentLocation"
-              formControlName="currentLocation"
-              [ngClass]="
-                submitted && clim_form.get('currentLocation')?.invalid
+            <label for="institution">Institution Name :</label>
+            <input type="text" id="institution" placeholder="Enter Institution Name" name="institution"
+              formControlName="institution" [ngClass]="
+                submitted && clim_form.get('institution')?.invalid
                   ? 'error-active'
                   : ''
-              "
-            />
+              " />
           </div>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="education">Education :</label>
-            <select
-              name="education"
-              id="education"
-              [ngClass]="
-                submitted && clim_form.get('education')?.invalid
-                  ? 'error-active'
-                  : ''
-              "
-              formControlName="education"
-            >
-              <option [ngValue]="null" [disabled]="true">Select</option>
-              <option [value]="'B.E/B.Tech'">B.E/B.Tech</option>
-              <option [value]="'M.C.A'">M.C.A</option>
-              <option [value]="'M.E/M.Tech'">M.E/M.Tech</option>
-              <option [value]="'Others'">Others</option>
-            </select>
+            <label for="education">Course Name :</label>
+            <input type="text" id="courseName" placeholder="Enter course Name" name="courseName"
+              formControlName="courseName" [ngClass]="
+              submitted && clim_form.get('courseName')?.invalid
+                ? 'error-active'
+                : ''
+            " />
           </div>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
             <label for="year_of_passedout">Year Of Pass Out :</label>
-            <select
-              name="year_of_passedout"
-              id="year_of_passedout"
-              [ngClass]="
+            <select name="year_of_passedout" id="year_of_passedout" [ngClass]="
                 submitted && clim_form.get('year_of_passedout')?.invalid
                   ? 'error-active'
                   : ''
-              "
-              formControlName="year_of_passedout"
-            >
+              " formControlName="year_of_passedout">
               <option [ngValue]="null" [disabled]="true">Select</option>
-              <option [value]="'2022'">2022</option>
-              <option [value]="'2023'">2023</option>
-              <option [value]="'Others'">Others</option>
+              <option [value]="'2024'">2024</option>
+              <option [value]="'2025'">2025</option>
+              <option [value]="'2026'">2026</option>
+              <option [value]="'2027'">2027</option>
             </select>
           </div>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
+            <label for="courseTiming">Course Timing :</label>
+            <select name="courseTiming" id="courseTiming" [ngClass]="
+                submitted && clim_form.get('courseTiming')?.invalid
+                  ? 'error-active'
+                  : ''
+              " formControlName="courseTiming">
+              <option [ngValue]="null" [disabled]="true">Select</option>
+              <option [value]="'Morning Shift'">Morning Shift</option>
+              <option [value]="'Evening Shift'">Evening Shift</option>
+              <option [value]="'General Shift'">General Shift</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
+          <div class="single-row-form">
+            <label for="do_you_work">Do You Work? :</label>
+            <select name="do_you_work" id="do_you_work" [ngClass]="
+                submitted && clim_form.get('do_you_work')?.invalid
+                  ? 'error-active'
+                  : ''
+              " formControlName="do_you_work">
+              <option [ngValue]="null" [disabled]="true">Select</option>
+              <option [value]="'Part Time'">Part Time</option>
+              <option [value]="'Full Time'">Full Time</option>
+              <option [value]="'No'">No</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
+          <div class="single-row-form">
+            <label for="pincode"> In Which Area Do You Work? :</label>
+            <input type="text" placeholder="pincode ex:(621717) " formControlName="pincode" [ngClass]="submitted && clim_form.get('pincode')?.invalid? 'error-active': ''">
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
+          <div class="single-row-form">
             <label for="Upload">Upload Resume :</label>
-            <p
-              *ngIf="clim_form.get('resumeName')?.valid"
-              style="
+            <p *ngIf="clim_form.get('resumeName')?.valid" style="
                 margin-bottom: 0;
                 padding: 12px 11px;
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-              "
-            >
+              ">
               <span>{{ clim_form.get("resumeName")?.value }}</span>
-              <span
-                style="
+              <span style="
                   background: red;
                   padding: 0 6px;
                   border-radius: 50%;
                   color: white;
                   font-size: 12px;
                   cursor: pointer;
-                "
-                (click)="remove_file()"
-                >x</span
-              >
+                " (click)="remove_file()">x</span>
             </p>
-            <div
-              class="file-upload-box"
-              *ngIf="clim_form.get('resumeName')?.invalid"
-            >
-              <label
-                class="file-upload"
-                for="Upload"
-                style="margin-left: 0"
-                [ngClass]="
+            <div class="file-upload-box" *ngIf="clim_form.get('resumeName')?.invalid">
+              <label class="file-upload" for="Upload" style="margin-left: 0" [ngClass]="
                   submitted && clim_form.get('resumeName')?.invalid
                     ? 'error-active'
                     : ''
-                "
-              >
-                Choose File</label
-              >
+                ">
+                Choose File</label>
               <p style="margin-left: 5px">.pdf</p>
             </div>
-            <input
-              type="file"
-              style="display: none"
-              id="Upload"
-              placeholder="Enter Your Full Name"
-              (change)="resume_file($event)"
-              accept=".pdf"
-            />
+            <input type="file" style="display: none" id="Upload" placeholder="Enter Your Full Name"
+              (change)="resume_file($event)" accept=".pdf" />
           </div>
-        </div>   
-        <div class="col-12">
-          <p
-            style="
+        </div>
+        <!-- <div class="col-12">
+          <p style="
               color: #0a2647;
               font-weight: 500;
               margin-left: 11px;
               letter-spacing: 1px;
-            "
-          >
+            ">
             Choose Preferred Date/ Time For Participating In Pre-Placement Talk
           </p>
-        </div>
-        <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
-          <div class="single-row-form">
-            <select
-              name="date"
-              id="date"
-              [ngClass]="
+        </div> -->
+        <!-- <div class="col-12" > -->
+        <!-- <div class="single-row-form">
+            <select name="date" id="date" [ngClass]="
                 submitted && clim_form.get('date')?.invalid
                   ? 'error-active'
                   : ''
-              "
-              formControlName="date"
-              style="text-align: center"
-              (change)="date_change($event)"
-            >
+              " formControlName="date" style="text-align: center" (change)="date_change($event)">
               <option [ngValue]="null" [disabled]="true">Date</option>
 
-              <option
-                [value]="item.date"
-                style="text-align: left"
-                *ngFor="let item of date"
-              >
+              <option [value]="item.date" style="text-align: left" *ngFor="let item of date">
+                {{ item.date }}
+              </option>
+            </select>
+          </div> -->
+        <!-- <div class="auto-suggetion1 sugg-row">
+            <label>Skills :</label>
+            <div>
+              <input type="text" placeholder="Skills" [formControl]="skils2" (keyup)="getSkill1($event)"
+                style="width: 70%;" [ngClass]="submitted && clim_form.get('coreSkill')?.invalid? 'error-active': '' " />
+              <span style="padding-left: 3%;">(Upto Any 3 Skills)</span>
+            </div>
+
+            <div class="list-option1">
+              <ul>
+                <li *ngFor="let data of skilldata1" (click)="select_skils2(data)">{{data.Skill_Title}}
+                </li>
+              </ul>
+            </div>
+          </div> -->
+        <!-- </div> -->
+        <!-- <div style="height: auto;" *ngIf=" clim_form.get('coreSkill')?.value.length > 0">
+          <div class="output" *ngIf="clim_form.get('coreSkill')?.valid">
+            <ol style=" display: flex;flex-wrap: wrap;width: 100%;height: auto;">
+              <li *ngFor="let item of clim_form.get('coreSkill')?.value"><span
+                  style="padding-left: 5px; color: rgb(221, 82, 82);cursor: pointer;"
+                  (click)="removeCorekill(item)">X</span>{{item}} </li>
+            </ol>
+          </div>
+        </div> -->
+        <!-- <div class="col-12">
+          <p style="
+              color: #0a2647;
+              font-weight: 500;
+              margin-left: 11px;
+              letter-spacing: 1px;
+              margin-top: 10px;
+              text-align: center;
+            ">
+             Date & Time - Pre-Placement Talk
+          </p>
+        </div> -->
+        <!-- <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
+          <div class="single-row-form">
+            <select name="date" id="date" [ngClass]="
+                submitted && clim_form.get('date')?.invalid
+                  ? 'error-active'
+                  : ''
+              " formControlName="date" style="text-align: center" (change)="date_change($event)">
+              <option [ngValue]="null" [disabled]="true">Date</option>
+
+              <option [value]="item.date" style="text-align: left" *ngFor="let item of date">
                 {{ item.date }}
               </option>
             </select>
           </div>
-        </div>
-        <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
+        </div> -->
+        <!-- <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <select
-              name="slot"
-              id="slot"
-              [ngClass]="
+            <select name="slot" id="slot" [ngClass]="
                 submitted && clim_form.get('slot')?.invalid
                   ? 'error-active'
                   : ''
-              "
-              formControlName="slot"
-              style="text-align: center"
-            >
+              " formControlName="slot" style="text-align: center">
               <option [ngValue]="null" [disabled]="true">Slot</option>
-              <option
-                [value]="item"
-                style="text-align: left"
-                *ngFor="let item of slots"
-              >
+              <option [value]="item" style="text-align: left" *ngFor="let item of slots">
                 {{ item }}
               </option>
             </select>
           </div>
-        </div>
+        </div> -->
         <div class="col-12">
-          <p
-            style="
+          <p style="
               text-align: right;
               color: red;
               height: 26px;
               margin-bottom: 0;
               font-size: 12px;
-            "
-            *ngIf="clim_form.invalid && submitted"
-          >
+            " *ngIf="clim_form.invalid && submitted">
             *Please Fill All Required Field
           </p>
-          <p
-            style="
+          <p style="
               text-align: right;
               color: red;
               height: 26px;
               margin-bottom: 0;
               font-size: 12px;
-            "
-            *ngIf="errro_message != null"
-          >
+            " *ngIf="errro_message != null">
             {{ errro_message }}
           </p>
         </div>
         <div class="col-12">
           <div class="accept-contion">
-            <input
-              type="checkbox"
-              name=""
-              id="accept-contion"
-              formControlName="terms"
-            /><label
-              for="accept-contion"
+            <input type="checkbox" name="" id="accept-contion" formControlName="terms" /><label for="accept-contion"
               [ngClass]="
                 submitted &&
                 (clim_form.get('terms')?.invalid ||
                   clim_form.get('terms')?.value == false)
                   ? 'error-active'
                   : ''
-              "
-              >I Accept The Terms & Conditions</label
-            >
+              ">I Accept The Terms & Conditions</label>
           </div>
         </div>
         <div class="col-12">
@@ -308,52 +290,55 @@
       </div>
     </form>
   </div>
-  <div
-    class="alert alert-success"
-    style="text-align: center"
-    *ngIf="submited_success"
-  >
-    <b>Thank You for The Registration Kindly Check your Email Inbox (Spam) 10 Minutes prior to your selected Time Slot for the meeting link. You may however join the MEET at the exact time as chosen. </b>
+  <div class="alert alert-success" style="text-align: center" *ngIf="submited_success">
+    <b>Thank you for your registration for the position of 'Associate Software Engineer' advertised in TCSION.You shall
+      receive an acknowledgement mail in your registered mail id.
+    </b>
+    <br />
+    <br />
+    <b>
+      You will receive the meeting link in your MAIL INBOX anytime before 10-45 minutes prior to the meeting
+      time.However,check your SPAM folder too for the meeting link.
+    </b>
   </div>
 </div>
 
-<button
-  type="button"
-  class="btn btn-primary"
-  data-bs-toggle="modal"
-  data-bs-target="#myModal"
-  style="display: none"
-  id="open-popup"
->
+
+<div class="finish-msg" *ngIf="false">
+  <h1>
+    Slots are full
+  </h1>
+
+  <p>
+    Registrations disabled.
+
+    You shall mail your resume to
+  </p>
+
+  <a href="mailto:recruit5@warmy.co.in" style="font-size: 20px;"> recruit5@warmy.co.in</a>
+
+
+
+</div>
+
+
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal" style="display: none"
+  id="open-popup">
   Open modal
 </button>
-
 <!-- The Modal -->
 <div class="modal fade" id="myModal">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header" style="border: none">
-        <h4
-          class="modal-title"
-          style="text-align: center; color: #fd841f; width: 100%"
-        >
-          Preview
+        <h4 class="modal-title" style="text-align: center; color: #fd841f; width: 100%">
+          Registration - Preview
         </h4>
         <button type="button" class="btn" data-bs-dismiss="modal">
-          <svg
-            width="22"
-            height="22"
-            viewBox="0 0 22 22"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path
               d="M8.5 8.5L13.5 13.5M13.5 8.5L8.5 13.5M21 11C21 12.3132 20.7413 13.6136 20.2388 14.8268C19.7363 16.0401 18.9997 17.1425 18.0711 18.0711C17.1425 18.9997 16.0401 19.7363 14.8268 20.2388C13.6136 20.7413 12.3132 21 11 21C9.68678 21 8.38642 20.7413 7.17317 20.2388C5.95991 19.7363 4.85752 18.9997 3.92893 18.0711C3.00035 17.1425 2.26375 16.0401 1.7612 14.8268C1.25866 13.6136 1 12.3132 1 11C1 8.34784 2.05357 5.8043 3.92893 3.92893C5.8043 2.05357 8.34784 1 11 1C13.6522 1 16.1957 2.05357 18.0711 3.92893C19.9464 5.8043 21 8.34784 21 11Z"
-              stroke="#B73E3E"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
+              stroke="#B73E3E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
           </svg>
         </button>
       </div>
@@ -378,36 +363,45 @@
               <td>{{ clim_form.get("mobileNumber").value }}</td>
             </tr>
             <tr>
-              <td>Current Location :</td>
-              <td>{{ clim_form.get("currentLocation").value }}</td>
+              <td>Institution Name :</td>
+              <td>{{ clim_form.get("institution").value }}</td>
             </tr>
             <tr>
-              <td>Education :</td>
-              <td>{{ clim_form.get("education").value }}</td>
+              <td>Course Name :</td>
+              <td>{{ clim_form.get("courseName").value }}</td>
             </tr>
             <tr>
-              <td>Year Of Passed Out :</td>
+              <td>Course Timing :</td>
+              <td>{{ clim_form.get("courseTiming").value }}</td>
+            </tr>
+            <tr>
+              <td>Work :</td>
+              <td>{{ clim_form.get("do_you_work").value }}</td>
+            </tr>
+            <tr>
+              <td>In Which Area Are You Work? :</td>
+              <td>{{ clim_form.get("pincode").value }}</td>
+            </tr>
+            <tr>
+              <td>Year Of Pass Out :</td>
               <td>{{ clim_form.get("year_of_passedout").value }}</td>
             </tr>
             <tr>
               <td>Resume :</td>
               <td>{{ clim_form.get("resumeName").value }}</td>
             </tr>
-            <tr>
+            <!-- <tr>
               <td>Date :</td>
               <td>{{ clim_form.get("date").value }}</td>
             </tr>
             <tr>
               <td>Time :</td>
               <td>{{ clim_form.get("slot").value }}</td>
-            </tr>
+            </tr> -->
           </tbody>
         </table>
       </div>
-      <div
-        class="modal-footer submit-button"
-        style="justify-content: center; border: none"
-      >
+      <div class="modal-footer submit-button" style="justify-content: center; border: none">
         <button type="button" data-bs-dismiss="modal" (click)="inser_now()">
           Submit
         </button>

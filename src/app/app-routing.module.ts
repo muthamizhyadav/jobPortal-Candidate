@@ -34,9 +34,12 @@ import { ClimbEventRegisterComponent } from './climb-event-register/climb-event-
 import { JobHomeComponent } from './job-home/job-home.component';
 
 const routes: Routes = [
+  { path: '', component: ClimbEventRegisterComponent },
+
   {
-    path: '',
+    path: 'kajshkahdskasdhkasdh',
     component: JobHomeComponent,
+
     children: [
       { path: '', component: CanHomeComponent },
       { path: 'register', component: RegisterComponent },
@@ -222,7 +225,6 @@ const routes: Routes = [
       { path: 'email-verification', component: EmailverificationComponent },
       { path: 'mobile-verification', component: MobileverificationComponent },
       { path: 'cand-planes', component: CandidatePlanesComponent },
-      { path: 'climb-event', component: ClimbEventRegisterComponent },
       {
         path: 'my-plan',
         component: MyPlanesComponent,

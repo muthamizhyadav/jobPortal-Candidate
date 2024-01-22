@@ -1,5 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormControl,
+  ValidationErrors,
+  ValidatorFn,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { Address } from 'ngx-google-places-autocomplete/objects/address';
 import { CanditateService } from '../canditate.service';
@@ -23,8 +30,9 @@ export class CanRegisterComponent implements OnInit {
     ]),
     password: new FormControl('', Validators.required),
     confirmpassword: new FormControl('', Validators.required),
+
     resume: new FormControl('', Validators.required),
-    workStatus: new FormControl('', Validators.required),
+    workStatus: new FormControl(null, Validators.required),
     mobileNumber: new FormControl('', Validators.required),
     lat: new FormControl('', Validators.required),
     long: new FormControl('', Validators.required),
@@ -54,8 +62,14 @@ export class CanRegisterComponent implements OnInit {
     console.log('workChange', this.workExp);
     if (this.workExp == 'Experience') {
       console.log('Added');
-      this.Candidateform.addControl('prevCompany', new  FormControl('',Validators.required)),
-        this.Candidateform.addControl('prevCompanyRole', new FormControl('',Validators.required));
+      this.Candidateform.addControl(
+        'prevCompany',
+        new FormControl('', Validators.required)
+      ),
+        this.Candidateform.addControl(
+          'prevCompanyRole',
+          new FormControl('', Validators.required)
+        );
     } else {
       this.Candidateform.removeControl('prevCompany');
       this.Candidateform.removeControl('prevCompanyRole');
@@ -64,7 +78,7 @@ export class CanRegisterComponent implements OnInit {
   // File upload
   file_name: any = '';
   addresume(file: any) {
-    console.log('sbdhsbdhj');
+    this.file_name = '';
     this.candidateFile = null;
     const res = file.target.files[0] as File;
     if (res != null) {
@@ -79,10 +93,25 @@ export class CanRegisterComponent implements OnInit {
       }
     }
   }
+
   // rgister api
+  serError: any = null;
+  pswMismatch: any = null;
   submit() {
+    if (
+      this.Candidateform.get('password').value !=
+      this.Candidateform.get('confirmpassword').value
+    ) {
+      this.pswMismatch = 'Password mismatch';
+      console.log(
+        this.Candidateform.get('password').value !=
+          this.Candidateform.get('confirmpassword').value
+      );
+    } else {
+      this.pswMismatch = null;
+    }
+
     this.isSubmitted = true;
-    console.log(this.Candidateform.value, 'sbdjshdbh');
     var jobForm = new FormData();
     jobForm.append('name', this.Candidateform.get('name')?.value);
     jobForm.append('email', this.Candidateform.get('email')?.value);
@@ -99,10 +128,15 @@ export class CanRegisterComponent implements OnInit {
     jobForm.append('lat', this.Candidateform.get('lat')?.value);
     jobForm.append('long', this.Candidateform.get('long')?.value);
     jobForm.append('location', this.Candidateform.get('location')?.value);
-    if(this.workExp =='Experience' ){
-    jobForm.append('prevCompany', this.Candidateform.get('prevCompany')?.value);
-    jobForm.append('prevCompanyRole', this.Candidateform.get('prevCompanyRole')?.value);
-
+    if (this.workExp == 'Experience') {
+      jobForm.append(
+        'prevCompany',
+        this.Candidateform.get('prevCompany')?.value
+      );
+      jobForm.append(
+        'prevCompanyRole',
+        this.Candidateform.get('prevCompanyRole')?.value
+      );
     }
     jobForm.append('resume', this.candidateFile);
     if (this.Candidateform.valid) {
@@ -112,8 +146,7 @@ export class CanRegisterComponent implements OnInit {
           this.workExp = null;
         },
         (error) => {
-          error.error.message;
-          console.log(error.error.message, 'ppppp');
+          this.serError = error.error.message;
         }
       );
       this.isSubmitted = false;

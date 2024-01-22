@@ -237,7 +237,6 @@
     <div class="err">
       <p *ngIf="isSubmitted && educationFormAll.get('Course')?.invalid"> select Course! </p>
     </div>
-
     <div class="single-row" *ngIf="Qlf !== 'HSC' && Qlf !=='SSLC' ">
       <label for="">Specialization :</label>
       <div class="content-box errorCondent1">
@@ -394,13 +393,12 @@
   <div class="popup-close-2" (click)="popupCLose2()"></div>
   <div class="popup-container-2" [formGroup]="educationFormAll">
     <div class="content-title">
-      <p>Edite Education Details</p>
+      <p>Edit Education Details</p>
     </div>
     <div class="single-row">
       <label for="">Qualification :</label>
       <div class="content-box errorCondent1">
-        <select class="form-control select-type" (change)="check($event)"
-          formControlName="QualificationName">
+        <select class="form-control select-type" (change)="check($event)" formControlName="QualificationName">
           <!-- <option [ngValue]="null" disabled selected>Select</option> -->
           <option value="{{ind}}" *ngFor="let quli of qualification;let ind = index">{{quli.qualification}}
         </select>
