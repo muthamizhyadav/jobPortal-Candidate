@@ -1,6 +1,8 @@
 <div class="main-form">
   <div *ngIf="!submited_success">
     <div class="title-page">
+      <p style="text-align: center; font-size: 14px; color: #0a2647;font-weight: 700;">COURAGE( Cultivating
+        Optimism/Understanding/Reasoning to Augment Gritty Entrepreneurship)</p>
       <h5>Registration</h5>
     </div>
     <form [formGroup]="clim_form" (submit)="SUBMIT_FROM()">
@@ -77,7 +79,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="year_of_passedout">Year Of Pass Out :</label>
+            <label for="year_of_passedout">Year Of Passing Out :</label>
             <select name="year_of_passedout" id="year_of_passedout" [ngClass]="
                 submitted && clim_form.get('year_of_passedout')?.invalid
                   ? 'error-active'
@@ -123,8 +125,9 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="pincode"> In Which Area Do You Work? :</label>
-            <input type="text" placeholder="pincode ex:(621717) " formControlName="pincode" [ngClass]="submitted && clim_form.get('pincode')?.invalid? 'error-active': ''">
+            <label for="pincode"> In Which Area Do You Reside? :</label>
+            <input type="text" placeholder="Pincode eg:621717 " formControlName="pincode"
+              [ngClass]="submitted && clim_form.get('pincode')?.invalid? 'error-active': ''">
           </div>
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
@@ -291,14 +294,10 @@
     </form>
   </div>
   <div class="alert alert-success" style="text-align: center" *ngIf="submited_success">
-    <b>Thank you for your registration for the position of 'Associate Software Engineer' advertised in TCSION.You shall
-      receive an acknowledgement mail in your registered mail id.
-    </b>
-    <br />
-    <br />
-    <b>
-      You will receive the meeting link in your MAIL INBOX anytime before 10-45 minutes prior to the meeting
-      time.However,check your SPAM folder too for the meeting link.
+    <h4 style="text-align: center; color: #fd841f;">THANK YOU</h4>
+    <b>Thank you for your registration to participate in the pathbreaking entrepreneurship workshop COURAGE( Cultivating
+      Optimism/Understanding/Reasoning to Augment Gritty Entrepreneurship).You shall receive an acknowledgement mail in
+      your regitered mail ID.
     </b>
   </div>
 </div>
