@@ -9,7 +9,7 @@
       <div class="body-form row" style="margin: 0">
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="full-name">Full Name :</label>
+            <label for="full-name">Full Name <sup style="color: red;">*</sup> :</label>
             <input type="text" id="full-name" placeholder="Enter Your Full Name" name="name" formControlName="name"
               [ngClass]="
                 submitted && clim_form.get('name')?.invalid
@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="gender">Gender :</label>
+            <label for="gender">Gender<sup style="color: red;">*</sup> :</label>
             <select name="gender" id="gender" [ngClass]="
                 submitted && clim_form.get('gender')?.invalid
                   ? 'error-active'
@@ -35,7 +35,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="mail">Email ID :</label>
+            <label for="mail">Email ID<sup style="color: red;">*</sup> :</label>
             <input type="email" id="mail" placeholder="Enter Your Email ID" name="mail" formControlName="mail"
               [ngClass]="
                 submitted && clim_form.get('mail')?.invalid
@@ -46,7 +46,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="mobileNumber">Mobile Number :</label>
+            <label for="mobileNumber">Mobile Number<sup style="color: red;">*</sup> :</label>
             <input type="tel" id="mobileNumber" placeholder="Enter Your Mobile Number" name="mobileNumber"
               formControlName="mobileNumber" [ngClass]="
                 submitted && clim_form.get('mobileNumber')?.invalid
@@ -57,7 +57,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="institution">Institution Name :</label>
+            <label for="institution">Institution Name<sup style="color: red;">*</sup> :</label>
             <input type="text" id="institution" placeholder="Enter Institution Name" name="institution"
               formControlName="institution" [ngClass]="
                 submitted && clim_form.get('institution')?.invalid
@@ -68,7 +68,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="education">Course Name :</label>
+            <label for="education">Course Name<sup style="color: red;">*</sup> :</label>
             <input type="text" id="courseName" placeholder="Enter course Name" name="courseName"
               formControlName="courseName" [ngClass]="
               submitted && clim_form.get('courseName')?.invalid
@@ -79,7 +79,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="year_of_passedout">Year Of Passing Out :</label>
+            <label for="year_of_passedout">Year Of Passing Out<sup style="color: red;">*</sup> :</label>
             <select name="year_of_passedout" id="year_of_passedout" [ngClass]="
                 submitted && clim_form.get('year_of_passedout')?.invalid
                   ? 'error-active'
@@ -95,7 +95,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="courseTiming">Course Timing :</label>
+            <label for="courseTiming">Course Timing<sup style="color: red;">*</sup> :</label>
             <select name="courseTiming" id="courseTiming" [ngClass]="
                 submitted && clim_form.get('courseTiming')?.invalid
                   ? 'error-active'
@@ -110,7 +110,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="do_you_work">Do You Work? :</label>
+            <label for="do_you_work">Do You Work?<sup style="color: red;">*</sup> :</label>
             <select name="do_you_work" id="do_you_work" [ngClass]="
                 submitted && clim_form.get('do_you_work')?.invalid
                   ? 'error-active'
@@ -125,7 +125,7 @@
         </div>
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
-            <label for="pincode"> In Which Area Do You Reside? :</label>
+            <label for="pincode"> In Which Area Do You Reside?<sup style="color: red;">*</sup> :</label>
             <input type="text" placeholder="Pincode eg:621717 " formControlName="pincode"
               [ngClass]="submitted && clim_form.get('pincode')?.invalid? 'error-active': ''">
           </div>
@@ -133,7 +133,7 @@
         <div class="col-md-6 col-sm-12 col-lg-6 col-xl-6 col-xs-12">
           <div class="single-row-form">
             <label for="Upload">Upload Resume :</label>
-            <p *ngIf="clim_form.get('resumeName')?.valid" style="
+            <p *ngIf="clim_form.get('resumeName')?.value != null" style="
                 margin-bottom: 0;
                 padding: 12px 11px;
                 display: flex;
@@ -150,12 +150,8 @@
                   cursor: pointer;
                 " (click)="remove_file()">x</span>
             </p>
-            <div class="file-upload-box" *ngIf="clim_form.get('resumeName')?.invalid">
-              <label class="file-upload" for="Upload" style="margin-left: 0" [ngClass]="
-                  submitted && clim_form.get('resumeName')?.invalid
-                    ? 'error-active'
-                    : ''
-                ">
+            <div class="file-upload-box" *ngIf="clim_form.get('resumeName')?.value == null " >
+              <label class="file-upload" for="Upload" style="margin-left: 0">
                 Choose File</label>
               <p style="margin-left: 5px">.pdf</p>
             </div>

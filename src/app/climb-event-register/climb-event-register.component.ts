@@ -69,7 +69,7 @@ export class ClimbEventRegisterComponent implements OnInit {
     // currentLocation: new FormControl(null, [Validators.required]),
     // education: new FormControl(null, [Validators.required]),
     year_of_passedout: new FormControl(null, [Validators.required]),
-    resumeName: new FormControl(null, [Validators.required]),
+    resumeName: new FormControl(null),
     institution: new FormControl(null, [Validators.required]),
     courseName: new FormControl(null, [Validators.required]),
     courseTiming: new FormControl(null, [Validators.required]),
